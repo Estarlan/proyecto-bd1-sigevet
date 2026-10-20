@@ -1,10 +1,20 @@
-$ python (python-oracledb modo thin) — conexión desde el equipo anfitrión a localhost:1521/FREEPDB1 como VET_APP
-Versión del servidor: 23.26.3.0.0 | modo thin: True
-SELECT COUNT(*) FROM VETDB.MASCOTA -> 59
-SELECT COUNT(*) FROM VETDB.CITA -> 144
-SELECT COUNT(*) FROM VETDB.FACTURA -> 109
-Texto con tildes: ['Bogotá D.C.', 'Chía']
+$ sqlplus -s VET_APP/********@localhost:1521/FREEPDB1 @vm/scripts/prueba_vet_app.sql
+
+USUARIO    PDB
+---------- ----------
+VET_APP    FREEPDB1
+
+  MASCOTAS	CITAS	FACTURAS
+---------- ---------- ----------
+	59	  144	     109
+
+NOMBRE
+--------------------
+Bogotá D.C.
+Chía
 RECHAZADO: DELETE FROM VETDB.MASCOTA -> ORA-41900: missing DELETE privilege on "VETDB"."MASCOTA"
-RECHAZADO: UPDATE VETDB.SERVICIO SET precio = 1 -> ORA-41900: missing UPDATE privilege on "VETDB"."SERVICIO"
-RECHAZADO: INSERT INTO VETDB.ESPECIE VALUES (99, 'Prueba') -> ORA-41900: missing INSERT privilege on "VETDB"."ESPECIE"
+RECHAZADO: UPDATE VETDB.SERVICIO SET precio = 1 -> ORA-41900: missing UPDATE privilege on
+"VETDB"."SERVICIO"
+RECHAZADO: INSERT INTO VETDB.ESPECIE VALUES (99, 'Prueba') -> ORA-41900: missing INSERT privilege on
+"VETDB"."ESPECIE"
 RECHAZADO: DROP TABLE VETDB.CITA -> ORA-01031: insufficient privileges

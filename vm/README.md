@@ -77,7 +77,7 @@ Lima monta el proyecto en `/proyecto` y reenvía los puertos 1521 y 5000, así q
 |---|---|
 | `instalar_oracle.sh` | Instala el paquete de preinstalación y el RPM, crea la base FREE/FREEPDB1, deja Oracle con arranque automático y abre el puerto 1521 |
 | `cargar_bd.sh [--reiniciar]` | Crea los usuarios VETDB y VET_APP y ejecuta `database/instalar_esquema.sql`. Con `--reiniciar` borra todo y lo vuelve a cargar |
-| `instalar_app.sh` | Instala Python, Flask y python-oracledb, crea el servicio `sigevet-web` y abre el puerto 5000 |
+| `instalar_app.sh` | Instala Java 21, compila la app con Maven, crea el servicio `sigevet-web` y abre el puerto 5000 |
 | `resumen_bd.sh` | Muestra la versión de Oracle, los objetos del esquema y los ingresos por sede |
 | `evidencias.sh vm\|rdbms` | Saca las evidencias que usamos en los documentos de implementación |
 

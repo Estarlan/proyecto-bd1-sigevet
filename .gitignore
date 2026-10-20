@@ -1,12 +1,13 @@
-# Python
+# Java / Maven
+app/target/
+*.class
+
+# Python (herramientas locales)
 __pycache__/
-*.pyc
 .venv/
-.pytest_cache/
 
 # Claves locales (cada uno crea las suyas a partir de los archivos de ejemplo)
 vm/claves.env
-app/config.ini
 .env
 
 # Instalador de Oracle (1,5 GB) y archivos temporales de la VM
