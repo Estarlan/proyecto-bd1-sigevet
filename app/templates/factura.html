@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Factura · {{ datos.datos.numero_factura }}{% endblock %}
+{% block content %}
+{% set factura = datos.datos %}
+<div class="pagina-heading"><p><a href="{{ url_for('facturas') }}">← Facturas</a></p><p class="eyebrow">Detalle de facturación</p><h2>Factura {{ factura.numero_factura }}</h2></div>
+<section class="card"><h3>Datos de la factura</h3><dl>
+  <dt>Cliente</dt><dd><a href="{{ url_for('cliente', id=factura.id_cliente) }}">{{ factura.cliente }}</a></dd><dt>Sede</dt><dd>{{ factura.sede }}</dd>
+  <dt>Fecha de emisión</dt><dd>{{ factura.fecha_emision|fecha }}</dd><dt>Método de pago</dt><dd>{{ factura.metodo_pago|fecha }}</dd>
+  <dt>Estado</dt><dd><span class="badge badge-{{ factura.estado|lower }}">{{ factura.estado }}</span></dd>
+</dl></section>
+<section class="card"><h3>Conceptos facturados</h3>
+{% if datos.lineas %}<div class="table-wrap" role="region" aria-label="Detalle de la factura" tabindex="0"><table>
+  <thead><tr><th scope="col">Línea</th><th scope="col">Servicio o medicamento</th><th scope="col">Cantidad</th><th scope="col">Precio unitario</th><th scope="col">Descuento</th><th scope="col">Subtotal</th></tr></thead>
+  <tbody>{% for fila in datos.lineas %}<tr><td>{{ fila.num_linea }}</td><td>{{ fila.concepto|fecha }}</td><td>{{ fila.cantidad|fecha }}</td><td>{{ fila.precio_unitario|pesos }}</td><td>{{ fila.descuento_pct|fecha }} %</td><td>{{ fila.subtotal|pesos }}</td></tr>{% endfor %}</tbody>
+</table></div>{% else %}<div class="empty-state">Esta factura no tiene conceptos registrados.</div>{% endif %}
+<p class="muted">Subtotal = cantidad × precio unitario × (1 − descuento / 100).</p><p>Total de la factura <strong class="stat-value">{{ datos.total|pesos }}</strong></p>
+</section>
+{% endblock %}

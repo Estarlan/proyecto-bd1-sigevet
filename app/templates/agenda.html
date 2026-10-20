@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import tabla %}
+{% block title %}Agenda{% endblock %}
+{% block content %}
+<div class="pagina-heading"><p class="eyebrow">Atención veterinaria</p><h2>Agenda de citas</h2><p>Consulta las citas por sede, veterinario, estado y fechas.</p></div>
+<form method="get" class="filters">
+  <label for="sede">Sede<select id="sede" name="sede"><option value="">Todas las sedes</option>{% for sede in opciones.sedes %}<option value="{{ sede.id_sede }}" {% if (sede.id_sede|string) == request.args.get('sede') %}selected{% endif %}>{{ sede.nombre }}</option>{% endfor %}</select></label>
+  <label for="veterinario">Veterinario<select id="veterinario" name="veterinario"><option value="">Todos los veterinarios</option>{% for vet in opciones.veterinarios %}<option value="{{ vet.id_empleado }}" {% if (vet.id_empleado|string) == request.args.get('veterinario') %}selected{% endif %}>{{ vet.nombre }}</option>{% endfor %}</select></label>
+  <label for="estado">Estado<select id="estado" name="estado"><option value="">Todos los estados</option>{% for estado in estados %}<option value="{{ estado }}" {% if estado == request.args.get('estado') %}selected{% endif %}>{{ estado }}</option>{% endfor %}</select></label>
+  <label for="desde">Desde<input id="desde" name="desde" type="date" value="{{ request.args.get('desde', '') }}"></label>
+  <label for="hasta">Hasta (incluido)<input id="hasta" name="hasta" type="date" value="{{ request.args.get('hasta', '') }}"></label>
+  <button type="submit">Filtrar</button><a href="{{ url_for('agenda') }}">Limpiar</a>
+</form>
+<section class="card"><h3>Citas encontradas</h3>{{ tabla(filas, [('fecha_hora','Fecha y hora'),('mascota','Mascota'),('servicio','Servicio'),('veterinario','Veterinario'),('sede','Sede'),('estado','Estado'),('motivo','Motivo')]) }}</section>
+{% endblock %}

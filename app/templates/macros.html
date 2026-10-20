@@ -1,0 +1,14 @@
+{% macro tabla(filas, columnas, enlace=None, clave=None, moneda=[]) %}
+{% if filas %}
+<div class="table-wrap"><table>
+  <thead><tr>{% for campo, titulo in columnas %}<th>{{ titulo }}</th>{% endfor %}</tr></thead>
+  <tbody>{% for fila in filas %}<tr>
+    {% for campo, titulo in columnas %}<td>
+      {% if loop.first and enlace %}<a href="{{ url_for(enlace, id=fila[clave]) }}">{{ fila[campo]|fecha }}</a>
+      {% elif campo in moneda %}{{ fila[campo]|pesos }}
+      {% else %}{{ fila[campo]|fecha }}{% endif %}
+    </td>{% endfor %}
+  </tr>{% endfor %}</tbody>
+</table></div>
+{% else %}<p>No hay registros para mostrar.</p>{% endif %}
+{% endmacro %}

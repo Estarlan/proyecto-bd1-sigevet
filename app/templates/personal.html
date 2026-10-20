@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import tabla %}
+{% block title %}Personal{% endblock %}
+{% block content %}
+<div class="pagina-heading"><p class="eyebrow">Equipo Huella Sana</p><h2>Personal</h2><p>Directores de sede, empleados y especialidades veterinarias.</p></div>
+<form method="get" class="filters">
+  <label for="sede">Sede<select id="sede" name="sede"><option value="">Todas las sedes</option>{% for sede in datos.sedes %}<option value="{{ sede.id_sede }}" {% if (sede.id_sede|string) == request.args.get('sede') %}selected{% endif %}>{{ sede.nombre }}</option>{% endfor %}</select></label>
+  <button type="submit">Filtrar</button><a href="{{ url_for('personal') }}">Limpiar</a>
+</form>
+<section class="card"><h3>Sedes y directores</h3>{{ tabla(datos.sedes, [('nombre','Sede'),('director','Director')]) }}</section>
+<section class="card"><h3>Empleados por sede</h3><p class="muted">VET: veterinario · AUX: auxiliar · ADM: administrativo.</p>
+{% if datos.empleados %}<div class="table-wrap" role="region" aria-label="Personal de las sedes" tabindex="0"><table>
+  <thead><tr><th scope="col">Nombres</th><th scope="col">Apellidos</th><th scope="col">Sede</th><th scope="col">Tipo</th><th scope="col">Especialidades</th><th scope="col">Estado</th><th scope="col">Teléfono</th><th scope="col">Correo electrónico</th></tr></thead>
+  <tbody>{% for fila in datos.empleados %}<tr>
+    <td>{{ fila.nombres }}</td><td>{{ fila.apellidos }}</td><td>{{ fila.sede }}</td><td><span class="badge badge-{{ fila.tipo_empleado|lower }}">{{ fila.tipo_empleado }}</span></td>
+    <td>{% if fila.tipo_empleado == 'VET' %}{{ fila.especialidades|join(', ') or 'Sin especialidades registradas' }}{% else %}—{% endif %}</td>
+    <td><span class="badge">{{ fila.estado|fecha }}</span></td><td>{{ fila.telefono|fecha }}</td><td>{{ fila.email|fecha }}</td>
+  </tr>{% endfor %}</tbody>
+</table></div>{% else %}<div class="empty-state">No hay empleados registrados para esta sede.</div>{% endif %}
+</section>
+{% endblock %}

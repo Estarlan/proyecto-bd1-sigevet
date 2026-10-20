@@ -1,0 +1,50 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #f6f4ef; color: #292d30; font-family: Arial, sans-serif; line-height: 1.5; }
+a { color: #925000; }
+a:hover { color: #292d30; }
+.container { width: 94%; max-width: 1250px; margin: auto; }
+.site-header { background: #292d30; color: white; border-top: 5px solid #c86a00; }
+.brand { display: flex; align-items: center; gap: 20px; padding: 20px 0; }
+h1 { font-size: 24px; margin: 0; }
+h2 { font-size: 25px; }
+h3 { font-size: 19px; }
+.readonly { margin-left: auto; white-space: nowrap; }
+.nav { display: flex; flex-wrap: wrap; }
+.nav a { padding: 10px 16px; color: white; text-decoration: none; }
+.nav a:hover, .nav a[aria-current] { background: #925000; }
+.pagina { min-height: 65vh; padding: 25px 0; }
+.eyebrow, .muted, .pagina-heading p { color: #626262; }
+.site-header .eyebrow { color: #efb779; margin: 0 0 8px; }
+.card { background: white; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; }
+.grid { display: flex; flex-wrap: wrap; gap: 20px; }
+.grid .card { flex: 1; min-width: 260px; }
+.filters { display: flex; flex-wrap: wrap; align-items: end; gap: 15px; padding: 16px; background: #eeece6; margin-bottom: 20px; }
+.filters label { display: flex; flex-direction: column; gap: 5px; }
+input, select, button, .button { font: inherit; padding: 8px; border: 1px solid #999; }
+button, .button { background: #925000; color: white; cursor: pointer; text-decoration: none; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 10px; border: 1px solid #ddd; text-align: left; vertical-align: top; }
+th { background: #eeece6; }
+.badge { padding: 2px 5px; background: #eeece6; }
+.low-stock { background: #fff0d9; }
+.empty-state { padding: 20px; color: #626262; text-align: center; }
+.pagination { display: flex; justify-content: space-between; margin-top: 20px; }
+dl { display: grid; grid-template-columns: 150px 1fr; gap: 8px; }
+dt { color: #626262; }
+dd { margin: 0; overflow-wrap: anywhere; }
+pre { padding: 15px; background: #f1f1f1; overflow: auto; }
+.stat-value { font-size: 24px; }
+.exercise-list li { margin: 12px 0; }
+.site-footer { padding: 20px 0; background: #eeece6; }
+.site-footer span { float: right; }
+.skip-link { position: absolute; top: -100px; background: white; padding: 10px; }
+.skip-link:focus { top: 0; }
+@media (max-width: 700px) {
+  h1 { font-size: 20px; }
+  .readonly { display: none; }
+  .card { padding: 12px; }
+  dl { grid-template-columns: 1fr; }
+  dd { margin-bottom: 10px; }
+  .site-footer span { float: none; display: block; }
+}

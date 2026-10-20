@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import tabla %}
+{% block title %}Cliente · {{ datos.datos.nombres }} {{ datos.datos.apellidos }}{% endblock %}
+{% block content %}
+{% set cliente = datos.datos %}
+<div class="pagina-heading"><p><a href="{{ url_for('clientes') }}">← Clientes</a></p><p class="eyebrow">Cliente {{ cliente.id_cliente }}</p><h2>{{ cliente.nombres }} {{ cliente.apellidos }}</h2></div>
+<div class="grid">
+  <section class="card"><h3>Datos del cliente</h3><dl>
+    <dt>Documento</dt><dd>{{ cliente.tipo_documento|fecha }} {{ cliente.num_documento|fecha }}</dd>
+    <dt>Correo electrónico</dt><dd>{{ cliente.email|fecha }}</dd>
+    <dt>Dirección</dt><dd>{{ cliente.direccion|fecha }}</dd>
+    <dt>Ciudad</dt><dd>{{ cliente.ciudad|fecha }}</dd>
+    <dt>Departamento</dt><dd>{{ cliente.departamento|fecha }}</dd>
+    <dt>Fecha de registro</dt><dd>{{ cliente.fecha_registro|fecha }}</dd>
+  </dl></section>
+  <section class="card"><h3>Teléfonos</h3>{{ tabla(datos.telefonos, [('telefono','Teléfono'),('tipo','Tipo')]) }}</section>
+</div>
+<section class="card"><h3>Mascotas</h3>{{ tabla(datos.mascotas, [('nombre','Mascota'),('raza','Raza'),('especie','Especie'),('estado','Estado')], 'mascota', 'id_mascota') }}</section>
+<section class="card"><h3>Facturas</h3>{{ tabla(datos.facturas, [('numero_factura','Número'),('fecha_emision','Fecha de emisión'),('sede','Sede'),('estado','Estado'),('total','Total')], 'factura', 'id_factura', moneda=['total']) }}</section>
+{% endblock %}

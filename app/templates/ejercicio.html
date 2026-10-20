@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Ejercicio {{ ejercicio.numero }}{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('algebra') }}">Volver a álgebra relacional</a></p>
+<h2>Ejercicio {{ ejercicio.numero }}. {{ ejercicio.titulo }}</h2>
+<p>{{ ejercicio.grupo }}</p>
+<section class="card"><h3>Enunciado</h3><p>{{ ejercicio.enunciado }}</p>
+<h3>Consulta SQL</h3><pre><code>{{ ejercicio.sql }}</code></pre></section>
+<section class="card"><h3>Resultados</h3><p>{{ filas|length }} filas obtenidas.</p>
+{% if filas %}<div class="table-wrap"><table>
+  <thead><tr>{% for columna in columnas %}<th>{{ columna }}</th>{% endfor %}</tr></thead>
+  <tbody>{% for fila in filas %}<tr>{% for columna in columnas %}
+    <td>{% if columna in ['precio', 'precio_venta', 'salario', 'promedio', 'minimo', 'maximo', 'total', 'ingresos', 'ticket_promedio', 'valor_inventario'] %}{{ fila[columna]|pesos }}{% else %}{{ fila[columna]|fecha }}{% endif %}</td>
+  {% endfor %}</tr>{% endfor %}</tbody>
+</table></div>{% else %}<p>La consulta no devolvió registros.</p>{% endif %}
+</section>
+{% endblock %}
