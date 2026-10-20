@@ -1,0 +1,29 @@
+# Simulación de la VM en macOS con Lima (la VM definitiva va en VirtualBox, ver vm/README.md).
+# Crear:   limactl start --name=sigevet --tty=false vm/sigevet-ol9.yaml
+# Entrar:  limactl shell sigevet
+minimumLimaVersion: 2.0.0
+
+base:
+- template:_images/oraclelinux-9   # Imagen oficial Oracle Linux 9 (KVM template de yum.oracle.com)
+
+vmType: vz          # Hipervisor nativo de macOS (Virtualization.framework)
+cpus: 4
+memory: 6GiB        # Oracle Database Free usa como máximo 2 GB de SGA+PGA; el resto queda para el SO
+disk: 40GiB
+
+# El repositorio del proyecto se monta dentro de la VM (solo lectura) para ejecutar los scripts SQL.
+mounts:
+- location: "~/Developer/proyecto-bd1-sigevet"
+  mountPoint: /proyecto
+  writable: false
+
+# Puertos hacia el anfitrión: 1521 (Oracle) y 5000 (aplicación web)
+portForwards:
+- guestPort: 1521
+  hostPort: 1521
+- guestPort: 5000
+  hostPort: 5000
+# Sin containerd/nerdctl: el proyecto no usa contenedores
+containerd:
+  system: false
+  user: false
