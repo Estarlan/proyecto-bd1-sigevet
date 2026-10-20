@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza(~{::title})}"><title>Agenda · SIGEVET</title></head>
+<body>
+<th:block th:replace="~{fragmentos :: cabecera}"></th:block>
+<main id="contenido" class="container pagina" tabindex="-1">
+
+<div class="pagina-heading"><p class="eyebrow">Atención veterinaria</p><h2>Agenda de citas</h2><p>Consulta las citas por sede, veterinario, estado y fechas.</p></div>
+<form method="get" class="filters">
+  <label for="sede">Sede<select id="sede" name="sede"><option value="">Todas las sedes</option><th:block th:each="sede : ${opciones.sedes}"><option th:value="${sede.id_sede}" th:selected="${sede.id_sede.toString() == filtros['sede']}"><th:block th:text="${sede.nombre}"></th:block></option></th:block></select></label>
+  <label for="veterinario">Veterinario<select id="veterinario" name="veterinario"><option value="">Todos los veterinarios</option><th:block th:each="vet : ${opciones.veterinarios}"><option th:value="${vet.id_empleado}" th:selected="${vet.id_empleado.toString() == filtros['veterinario']}"><th:block th:text="${vet.nombre}"></th:block></option></th:block></select></label>
+  <label for="estado">Estado<select id="estado" name="estado"><option value="">Todos los estados</option><th:block th:each="estado : ${estados}"><option th:value="${estado}" th:selected="${estado == filtros['estado']}"><th:block th:text="${estado}"></th:block></option></th:block></select></label>
+  <label for="desde">Desde<input id="desde" name="desde" type="date" th:value="${filtros['desde']}"></label>
+  <label for="hasta">Hasta (incluido)<input id="hasta" name="hasta" type="date" th:value="${filtros['hasta']}"></label>
+  <button type="submit">Filtrar</button><a th:href="@{/agenda}">Limpiar</a>
+</form>
+<section class="card"><h3>Citas encontradas</h3><div class="table-wrap" th:if="${!#lists.isEmpty(filas)}"><table>
+<thead><tr><th>Fecha y hora</th><th>Mascota</th><th>Servicio</th><th>Veterinario</th><th>Sede</th><th>Estado</th><th>Motivo</th></tr></thead>
+<tbody><tr th:each="fila : ${filas}">
+<td th:text="${@formato.fecha(fila.fecha_hora)}"></td>
+<td th:text="${@formato.fecha(fila.mascota)}"></td>
+<td th:text="${@formato.fecha(fila.servicio)}"></td>
+<td th:text="${@formato.fecha(fila.veterinario)}"></td>
+<td th:text="${@formato.fecha(fila.sede)}"></td>
+<td th:text="${@formato.fecha(fila.estado)}"></td>
+<td th:text="${@formato.fecha(fila.motivo)}"></td>
+</tr></tbody></table></div>
+<p th:if="${#lists.isEmpty(filas)}">No hay registros para mostrar.</p></section>
+
+</main>
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

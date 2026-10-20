@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza(~{::title})}"><title>Página no encontrada · SIGEVET</title></head>
+<body>
+<th:block th:replace="~{fragmentos :: cabecera}"></th:block>
+<main id="contenido" class="container pagina" tabindex="-1">
+  <section class="card">
+    <h2>Página no encontrada</h2>
+    <p>No existe ese registro o ejercicio.</p>
+    <a th:href="@{/}">Volver al inicio</a>
+  </section>
+</main>
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

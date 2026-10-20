@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza(~{::title})}"><title>Cliente · <th:block th:text="${datos.datos.nombres}"></th:block> <th:block th:text="${datos.datos.apellidos}"></th:block> · SIGEVET</title></head>
+<body>
+<th:block th:replace="~{fragmentos :: cabecera}"></th:block>
+<main id="contenido" class="container pagina" tabindex="-1">
+
+
+<div class="pagina-heading"><p><a th:href="@{/clientes}">← Clientes</a></p><p class="eyebrow">Cliente <th:block th:text="${datos.datos.id_cliente}"></th:block></p><h2><th:block th:text="${datos.datos.nombres}"></th:block> <th:block th:text="${datos.datos.apellidos}"></th:block></h2></div>
+<div class="grid">
+  <section class="card"><h3>Datos del cliente</h3><dl>
+    <dt>Documento</dt><dd><th:block th:text="${@formato.fecha(datos.datos.tipo_documento)}"></th:block> <th:block th:text="${@formato.fecha(datos.datos.num_documento)}"></th:block></dd>
+    <dt>Correo electrónico</dt><dd><th:block th:text="${@formato.fecha(datos.datos.email)}"></th:block></dd>
+    <dt>Dirección</dt><dd><th:block th:text="${@formato.fecha(datos.datos.direccion)}"></th:block></dd>
+    <dt>Ciudad</dt><dd><th:block th:text="${@formato.fecha(datos.datos.ciudad)}"></th:block></dd>
+    <dt>Departamento</dt><dd><th:block th:text="${@formato.fecha(datos.datos.departamento)}"></th:block></dd>
+    <dt>Fecha de registro</dt><dd><th:block th:text="${@formato.fecha(datos.datos.fecha_registro)}"></th:block></dd>
+  </dl></section>
+  <section class="card"><h3>Teléfonos</h3><div class="table-wrap" th:if="${!#lists.isEmpty(datos.telefonos)}"><table>
+<thead><tr><th>Teléfono</th><th>Tipo</th></tr></thead>
+<tbody><tr th:each="fila : ${datos.telefonos}">
+<td th:text="${@formato.fecha(fila.telefono)}"></td>
+<td th:text="${@formato.fecha(fila.tipo)}"></td>
+</tr></tbody></table></div>
+<p th:if="${#lists.isEmpty(datos.telefonos)}">No hay registros para mostrar.</p></section>
+</div>
+<section class="card"><h3>Mascotas</h3><div class="table-wrap" th:if="${!#lists.isEmpty(datos.mascotas)}"><table>
+<thead><tr><th>Mascota</th><th>Raza</th><th>Especie</th><th>Estado</th></tr></thead>
+<tbody><tr th:each="fila : ${datos.mascotas}">
+<td><a th:href="@{/mascotas/{id}(id=${fila.id_mascota})}" th:text="${@formato.fecha(fila.nombre)}"></a></td>
+<td th:text="${@formato.fecha(fila.raza)}"></td>
+<td th:text="${@formato.fecha(fila.especie)}"></td>
+<td th:text="${@formato.fecha(fila.estado)}"></td>
+</tr></tbody></table></div>
+<p th:if="${#lists.isEmpty(datos.mascotas)}">No hay registros para mostrar.</p></section>
+<section class="card"><h3>Facturas</h3><div class="table-wrap" th:if="${!#lists.isEmpty(datos.facturas)}"><table>
+<thead><tr><th>Número</th><th>Fecha de emisión</th><th>Sede</th><th>Estado</th><th>Total</th></tr></thead>
+<tbody><tr th:each="fila : ${datos.facturas}">
+<td><a th:href="@{/facturas/{id}(id=${fila.id_factura})}" th:text="${@formato.fecha(fila.numero_factura)}"></a></td>
+<td th:text="${@formato.fecha(fila.fecha_emision)}"></td>
+<td th:text="${@formato.fecha(fila.sede)}"></td>
+<td th:text="${@formato.fecha(fila.estado)}"></td>
+<td th:text="${@formato.pesos(fila.total)}"></td>
+</tr></tbody></table></div>
+<p th:if="${#lists.isEmpty(datos.facturas)}">No hay registros para mostrar.</p></section>
+
+</main>
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza(~{::title})}"><title>Ejercicio <th:block th:text="${ejercicio.numero}"></th:block> · SIGEVET</title></head>
+<body>
+<th:block th:replace="~{fragmentos :: cabecera}"></th:block>
+<main id="contenido" class="container pagina" tabindex="-1">
+
+<p><a th:href="@{/algebra}">Volver a álgebra relacional</a></p>
+<h2>Ejercicio <th:block th:text="${ejercicio.numero}"></th:block>. <th:block th:text="${ejercicio.titulo}"></th:block></h2>
+<p><th:block th:text="${ejercicio.grupo}"></th:block></p>
+<section class="card"><h3>Enunciado</h3><p><th:block th:text="${ejercicio.enunciado}"></th:block></p>
+<h3>Consulta SQL</h3><pre><code><th:block th:text="${ejercicio.sql}"></th:block></code></pre></section>
+<section class="card"><h3>Resultados</h3><p><th:block th:text="${#lists.size(filas)}"></th:block> filas obtenidas.</p>
+<th:block th:if="${!#lists.isEmpty(filas)}"><div class="table-wrap"><table>
+  <thead><tr><th:block th:each="columna : ${columnas}"><th><th:block th:text="${columna}"></th:block></th></th:block></tr></thead>
+  <tbody><th:block th:each="fila : ${filas}"><tr><th:block th:each="columna : ${columnas}">
+    <td><th:block th:if="${#lists.contains({'precio', 'precio_venta', 'salario', 'promedio', 'minimo', 'maximo', 'total', 'ingresos', 'ticket_promedio', 'valor_inventario'}, columna)}"><th:block th:text="${@formato.pesos(fila[columna])}"></th:block></th:block><th:block th:if="${!(#lists.contains({'precio', 'precio_venta', 'salario', 'promedio', 'minimo', 'maximo', 'total', 'ingresos', 'ticket_promedio', 'valor_inventario'}, columna))}"><th:block th:text="${@formato.fecha(fila[columna])}"></th:block></th:block></td>
+  </th:block></tr></th:block></tbody>
+</table></div></th:block><th:block th:if="${!(!#lists.isEmpty(filas))}"><p>La consulta no devolvió registros.</p></th:block>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>
