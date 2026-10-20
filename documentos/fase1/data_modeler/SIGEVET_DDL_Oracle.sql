@@ -1,10 +1,6 @@
--- Created: 00:12 09-Oct-2026
--- =====================================================================
--- SIGEVET - Sistema Integral de Gestión Veterinaria
+-- SIGEVET - Proyecto final Bases de Datos 1
 -- Script de creación de tablas y restricciones
--- Motor: Oracle AI Database 26ai Free (23.26) | Esquema: VETDB | PDB: FREEPDB1
--- ARCHIVO GENERADO por database/tools/gen_ddl.py a partir del modelo. No editar a mano.
--- =====================================================================
+-- Oracle Database Free, esquema VETDB (PDB FREEPDB1)
 
 -- DEPARTAMENTO: Departamentos de Colombia donde la red tiene sedes o clientes (codificación DANE).
 CREATE TABLE DEPARTAMENTO (

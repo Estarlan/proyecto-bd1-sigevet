@@ -75,6 +75,7 @@ BEGIN
   probar('RN-09 subtipo VET', 'INSERT INTO VETERINARIO VALUES ((SELECT MIN(id_empleado) FROM EMPLEADO WHERE tipo_empleado = ''ADM''), ''TP-X'', ''U'', 2020)', -20001);
   probar('RN-08 veterinario de otra sede', 'UPDATE CITA SET id_sede = CASE id_sede WHEN 1 THEN 5 ELSE 1 END WHERE id_cita = 1', -20003);
   probar('Consulta de cita no atendida', 'INSERT INTO CONSULTA (id_consulta, id_cita, fecha_hora_inicio, peso_kg, diagnostico) SELECT 9999, MIN(id_cita), SYSDATE, 5, ''X'' FROM CITA WHERE estado = ''CANCELADA''', -20004);
+  probar('Mover consulta a cita cancelada', 'UPDATE CONSULTA SET id_cita = (SELECT MIN(id_cita) FROM CITA WHERE estado = ''CANCELADA'') WHERE id_consulta = 1', -20004);
   probar('Cambio de tipo con subtipo', 'UPDATE EMPLEADO SET tipo_empleado = ''ADM'' WHERE id_empleado = (SELECT MIN(id_empleado) FROM VETERINARIO)', -20005);
   probar('Cita con consulta deja ATENDIDA', 'UPDATE CITA SET estado = ''CANCELADA'' WHERE id_cita = (SELECT MIN(id_cita) FROM CONSULTA)', -20006);
 END;

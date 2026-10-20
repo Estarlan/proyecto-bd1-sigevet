@@ -2,7 +2,7 @@
 {% from 'macros.html' import tabla %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-<div class="pagina-heading"><p class="eyebrow">Panorama de la red</p><h2>Inicio</h2><p>Actividad de las clínicas y datos disponibles para consulta.</p></div>
+<div class="pagina-heading"><p class="eyebrow">Huella Sana</p><h2>Inicio</h2><p>Resumen de citas, ingresos e inventario.</p></div>
 <section class="card"><h3>Próximas 10 citas programadas</h3>{{ tabla(datos.proximas, [('fecha_hora','Fecha y hora'),('mascota','Mascota'),('servicio','Servicio'),('veterinario','Veterinario'),('sede','Sede'),('estado','Estado')]) }}</section>
 <div class="grid">
   <section class="card"><h3>Ingresos por sede</h3><p class="muted">Total de facturas pagadas, incluidos los descuentos.</p>{{ tabla(datos.ingresos, [('sede','Sede'),('total','Ingresos')], moneda=['total']) }}</section>

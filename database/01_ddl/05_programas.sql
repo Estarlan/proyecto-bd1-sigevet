@@ -73,7 +73,7 @@ END;
 
 -- Solo se registra una consulta para citas en estado ATENDIDA.
 CREATE OR REPLACE TRIGGER TRG_CONSULTA_CITA_ATENDIDA
-BEFORE INSERT ON CONSULTA
+BEFORE INSERT OR UPDATE OF id_cita ON CONSULTA
 FOR EACH ROW
 DECLARE
   v_estado CITA.estado%TYPE;
@@ -86,7 +86,7 @@ BEGIN
 END;
 /
 
--- Revisión cruzada (Codex): impide eludir RN-09 cambiando el tipo de un empleado que ya tiene fila de subtipo.
+-- No se puede cambiar el tipo de un empleado que ya tiene fila en VETERINARIO o AUXILIAR (RN-09).
 CREATE OR REPLACE TRIGGER TRG_EMPLEADO_TIPO
 BEFORE UPDATE OF tipo_empleado ON EMPLEADO
 FOR EACH ROW
@@ -104,7 +104,7 @@ BEGIN
 END;
 /
 
--- Revisión cruzada (Codex): una cita que ya generó consulta no puede dejar de estar ATENDIDA.
+-- Una cita que ya tiene consulta debe seguir en estado ATENDIDA.
 CREATE OR REPLACE TRIGGER TRG_CITA_ESTADO_CONSULTA
 BEFORE UPDATE OF estado ON CITA
 FOR EACH ROW

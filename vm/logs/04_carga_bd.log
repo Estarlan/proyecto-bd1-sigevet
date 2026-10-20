@@ -71,6 +71,7 @@ OK     Arco exclusivo del detalle	 ORA-02290: check constraint (VETDB.CK_DETALLE
 OK     RN-09 subtipo VET		 ORA-20001: El empleado 6 no es de tipo VET.
 OK     RN-08 veterinario de otra sede	 ORA-20003: El veterinario 1 labora en la sede 1, no en la sede 5.
 OK     Consulta de cita no atendida      ORA-20004: La cita 22 está en estado CANCELADA; solo las citas ATENDIDAS generan consulta.
+OK     Mover consulta a cita cancelada   ORA-20004: La cita 22 está en estado CANCELADA; solo las citas ATENDIDAS generan consulta.
 OK     Cambio de tipo con subtipo        ORA-20005: El empleado 1 tiene registro de subtipo; elimínelo antes de cambiar tipo_emplea
 OK     Cita con consulta deja ATENDIDA	 ORA-20006: La cita 4 ya tiene consulta registrada; no puede cambiar a CANCELADA.
 
@@ -82,6 +83,6 @@ FV-000001	    364000
 FV-000002	     80500
 FV-000003	    400000
 timing for: instalacion
-Elapsed: 00:00:10.10
+Elapsed: 00:00:04.31
 == Instalación del esquema terminada
 EXIT 0

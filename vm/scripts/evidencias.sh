@@ -19,8 +19,9 @@ else
   paso "rpm -qa | grep -iE 'database-free|preinstall'"
   paso "echo ORACLE_HOME=\$ORACLE_HOME"
   paso "ls /etc/init.d/ | grep -i oracle"
-  paso "systemctl is-enabled oracle-free-26ai"
-  paso "sudo /etc/init.d/oracle-free-26ai status"
+  SERVICIO=$(basename "$(ls /etc/init.d/oracle-free-* | head -1)")
+  paso "systemctl is-enabled $SERVICIO"
+  paso "sudo /etc/init.d/$SERVICIO status"
   paso "ps -eo user,pid,cmd | grep -E 'pmon|tnslsnr' | grep -v grep"
   paso "sudo -u oracle env ORACLE_HOME=\$ORACLE_HOME \$ORACLE_HOME/bin/lsnrctl status | grep -E 'Version|Uptime|Listening|Service \"(free|freepdb1)'"
   paso "ss -ltn | grep 1521"

@@ -27,7 +27,7 @@ python3 probar_conexion.py
 python3 app.py
 ```
 
-En la máquina virtual no hace falta nada de esto: `sudo bash vm/scripts/instalar_app.sh` la deja
+En la máquina virtual no hace falta nada de esto: desde la raíz del proyecto, `sudo bash vm/scripts/instalar_app.sh` la deja
 instalada como servicio (`sigevet-web`) que arranca sola con la VM.
 
 Flask escucha en `0.0.0.0:5000`. Para abrirlo en el mismo equipo usamos
