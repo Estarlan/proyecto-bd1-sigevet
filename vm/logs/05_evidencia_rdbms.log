@@ -1,0 +1,55 @@
+
+$ rpm -qa | grep -iE 'database-free|preinstall'
+oracle-ai-database-preinstall-26ai-1.0-3.el9.x86_64
+oracle-ai-database-free-26ai-23.26.3-1.x86_64
+
+$ echo ORACLE_HOME=$ORACLE_HOME
+ORACLE_HOME=/opt/oracle/product/26ai/dbhomeFree
+
+$ ls /etc/init.d/ | grep -i oracle
+oracle-free-26ai
+
+$ systemctl is-enabled oracle-free-26ai
+oracle-free-26ai.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install is-enabled oracle-free-26ai
+enabled
+
+$ sudo /etc/init.d/oracle-free-26ai status
+Status of the Oracle FREE 26ai service:
+
+LISTENER status: RUNNING
+FREE Database status:   RUNNING
+
+$ ps -eo user,pid,cmd | grep -E 'pmon|tnslsnr' | grep -v grep
+oracle     32339 /opt/oracle/product/26ai/dbhomeFree/bin/tnslsnr LISTENER -inherit
+oracle     34356 db_pmon_FREE
+
+$ sudo -u oracle env ORACLE_HOME=$ORACLE_HOME $ORACLE_HOME/bin/lsnrctl status | grep -E 'Version|Uptime|Listening|Service "(free|freepdb1)'
+LSNRCTL for Linux: Version 23.26.3.0.0 - Production on 19-OCT-2026 18:35:28
+Version                   TNSLSNR for Linux: Version 23.26.3.0.0 - Production
+Uptime                    0 days 0 hr. 7 min. 22 sec
+Listening Endpoints Summary...
+Service "freepdb1" has 1 instance(s).
+
+$ ss -ltn | grep 1521
+LISTEN 0      1024               *:1521             *:*   
+
+$ sqlplus -s VETDB/********@localhost:1521/FREEPDB1 @evidencia_rdbms.sql
+
+BANNER_FULL
+------------------------------------------------------------------------------------------
+Oracle AI Database 26ai Free Release 23.26.3.0.0 - Develop, Learn, and Run for Free
+Version 23.26.3.0.0
+
+
+PDB	     USUARIO
+------------ ----------
+FREEPDB1     VETDB
+
+MB_ESQUEMA_VETDB
+----------------
+	    5.81
+
+CHARSET
+------------
+AL32UTF8

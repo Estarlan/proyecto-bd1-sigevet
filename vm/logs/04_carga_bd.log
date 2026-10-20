@@ -1,0 +1,87 @@
+== Eliminando objetos anteriores de VETDB
+Esquema VETDB vacío.
+
+PL/SQL procedure successfully completed.
+
+== Instalando el esquema SIGEVET
+== 1/8 Tablas y restricciones (22 tablas, 113 restricciones con nombre)
+== 2/8 Comentarios de tablas y columnas (diccionario de datos en el catálogo)
+== 3/8 Secuencias e índices
+== 4/8 Funciones y disparadores
+== 5/8 Datos de prueba (1.091 registros)
+== 6/8 Vistas
+== 7/8 Permisos de solo lectura para VET_APP
+Permisos SELECT otorgados a ROL_SIGEVET_LECTURA sobre 28 objetos.
+== 8/8 Verificación
+
+== Objetos del esquema VETDB
+
+OBJECT_TYPE	       CANTIDAD
+-------------------- ----------
+FUNCTION		      2
+INDEX			     71
+SEQUENCE		     15
+TABLE			     22
+TRIGGER 		      6
+VIEW			      6
+
+== Restricciones por tipo (P = llave primaria, R = llave foránea, U = única, C = CHECK y NOT NULL)
+
+TIPO				 CANTIDAD
+------------------------------ ----------
+C - CHECK / NOT NULL		      154
+P - Llave primaria		       22
+R - Llave foránea                      30
+U - Única                              25
+
+== Objetos inválidos (debe salir vacío)
+
+== Registros por tabla
+
+TABLA			      REGISTROS
+---------------------------- ----------
+DEPARTAMENTO			      6
+CIUDAD				     11
+SEDE				      5
+EMPLEADO			     27
+VETERINARIO			     12
+AUXILIAR			      8
+ESPECIALIDAD			      8
+VETERINARIO_ESPECIALIDAD	     12
+CLIENTE 			     45
+TELEFONO_CLIENTE		     66
+ESPECIE 			      5
+RAZA				     20
+MASCOTA 			     59
+HISTORIA_CLINICA		     59
+SERVICIO			     14
+CITA				    144
+CONSULTA			     95
+MEDICAMENTO			     18
+PRESCRIPCION			     88
+INVENTARIO			     79
+FACTURA 			    109
+DETALLE_FACTURA 		    201
+
+== Prueba de reglas de negocio (cada intento debe ser RECHAZADO con el código de error esperado)
+OK     FK a departamento inexistente	 ORA-02291: integrity constraint (VETDB.FK_CIUDAD_DEPARTAMENTO) violated - parent key not f
+OK     CHECK sexo de mascota		 ORA-02290: check constraint (VETDB.CK_MASCOTA_SEXO) violated
+OK     UNIQUE documento de cliente	 ORA-00001: unique constraint (VETDB.UQ_CLIENTE_TIPO_DOCUMENTO_NUM_DOCUMENTO) violated on t
+OK     Arco exclusivo del detalle	 ORA-02290: check constraint (VETDB.CK_DETALLE_FACTURA_ITEM) violated
+OK     RN-09 subtipo VET		 ORA-20001: El empleado 6 no es de tipo VET.
+OK     RN-08 veterinario de otra sede	 ORA-20003: El veterinario 1 labora en la sede 1, no en la sede 5.
+OK     Consulta de cita no atendida      ORA-20004: La cita 22 está en estado CANCELADA; solo las citas ATENDIDAS generan consulta.
+OK     Cambio de tipo con subtipo        ORA-20005: El empleado 1 tiene registro de subtipo; elimínelo antes de cambiar tipo_emplea
+OK     Cita con consulta deja ATENDIDA	 ORA-20006: La cita 4 ya tiene consulta registrada; no puede cambiar a CANCELADA.
+
+== Atributos derivados (funciones)
+
+NUMERO_FACTURA	     TOTAL
+--------------- ----------
+FV-000001	    364000
+FV-000002	     80500
+FV-000003	    400000
+timing for: instalacion
+Elapsed: 00:00:10.10
+== Instalación del esquema terminada
+EXIT 0
