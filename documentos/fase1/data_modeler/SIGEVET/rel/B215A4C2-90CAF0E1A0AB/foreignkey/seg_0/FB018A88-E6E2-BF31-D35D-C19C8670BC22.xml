@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="FB018A88-E6E2-BF31-D35D-C19C8670BC22" containerWithKeyObject="6E9D471D-CAE1-1740-68C9-332647CC962A" localFKIndex="0C54FAF7-A90A-8857-4824-5D69A7A14E5E" name="FK_CITA_MASCOTA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>31F709FC-C4ED-3964-4AE0-95D61A1C1E5F</importedID>
+<referredTableLongName>MASCOTA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>636FFFD0-8BD4-EC6E-0EE3-68B05F9FAC5D</referredTableID>
+<keyObject>5BE7D94C-B29D-8B5E-A320-0AAEB5EB4C18</keyObject>
+<referredKeyID>5BE7D94C-B29D-8B5E-A320-0AAEB5EB4C18</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_mascota</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

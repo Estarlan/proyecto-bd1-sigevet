@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="CONSULTA" directorySegmentName="seg_0" id="7B4771EC-DF2D-8B24-6510-EEF5CB4B49A4">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="observaciones" id="040ACD85-BE93-4600-4F28-53845AE8275B">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_cita" id="2C308F95-9118-FCC1-0EC0-CE42D80B63ED">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="sintomas" id="3E869A17-DE75-6FA2-98AC-3468D8AD4F4B">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="diagnostico" id="3F46F9EC-4840-EC1B-9EA5-7BE31EB97910">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="peso_kg" id="3F4E1642-E37E-CF25-9DBC-A8F9C82EBD64">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_consulta" id="64EBC2F9-1754-477C-D9BC-2D788C852FE2">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="fecha_hora_inicio" id="6F05D347-1302-23FE-4919-159F454EF5F1">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="temperatura_c" id="A67A502D-C4EC-7132-3F4D-FE4B7FADC8D4">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_auxiliar" id="AB56D7CF-AAFB-E6C5-3EF8-318057357E7A">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="frecuencia_cardiaca" id="D1689AA4-2500-8B26-9FFF-AAF3EB72E6FD">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_CONSULTA_AUXILIAR" id="4EA155F5-D2A8-904D-AAC0-3EBCB18BA282">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_CONSULTA_CITA" id="D7BBDF20-C1B8-8E06-ADEA-9E469CE3341D">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_CONSULTA" id="DEBA02B3-EC90-6AC6-60D6-8C56D392FCA8">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.storage.oracle.TableCheckConstraintOracle">
+<TableCheckConstraint name="CK_CONSULTA_TEMPERATURA_C" id="0FFF9AC3-DDEB-014B-FAEE-3D31631482AF">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<nameChanged>true</nameChanged>
+</TableCheckConstraint>
+<TableCheckConstraint name="CK_CONSULTA_FRECUENCIA_CARDIACA" id="20496354-3504-91CA-E809-8D946826FCC3">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<nameChanged>true</nameChanged>
+</TableCheckConstraint>
+<TableCheckConstraint name="CK_CONSULTA_PESO_KG" id="EC557481-AD28-76C0-A852-FAF015096CB4">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<nameChanged>true</nameChanged>
+</TableCheckConstraint>
+</tableCheckConstraints>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="UQ_CONSULTA_CITA" id="2C8098B4-892A-9CC3-CB69-23D50CD16019">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev20c>

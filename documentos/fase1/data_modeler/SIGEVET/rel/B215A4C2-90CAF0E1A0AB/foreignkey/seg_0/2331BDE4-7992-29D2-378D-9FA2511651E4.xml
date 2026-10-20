@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="2331BDE4-7992-29D2-378D-9FA2511651E4" containerWithKeyObject="7B4771EC-DF2D-8B24-6510-EEF5CB4B49A4" localFKIndex="4EA155F5-D2A8-904D-AAC0-3EBCB18BA282" name="FK_CONSULTA_AUXILIAR">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>3EC02BB2-4E1A-A984-40BA-B67EB170C9BC</importedID>
+<referredTableLongName>AUXILIAR</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>66A94AF3-90B4-CF2E-E3A3-33888B95E6EA</referredTableID>
+<keyObject>18F06345-2AB5-0427-5074-0325C9333E2C</keyObject>
+<referredKeyID>18F06345-2AB5-0427-5074-0325C9333E2C</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_empleado</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,198 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="992929EF-A481-F7C9-F510-6D85CDB70664" name="MASCOTA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>636FFFD0-8BD4-EC6E-0EE3-68B05F9FAC5D</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id mascota" id="0CBCFE5A-9E95-E5F7-8A6E-69B306752808">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>6D50CC6C-7A2E-D248-8B6D-624AC65DD6EF</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>9AF27208-05DA-1048-5C0E-F02C193760B8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="FC106747-D78D-AB94-4AF3-126A89C9FA92">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>DC951641-6473-CD6C-DF5B-758D8437D9D1</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>949BE797-688D-6848-33DA-C1301C43AE11</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha nacimiento" id="004CA8BB-E646-1213-BE0F-5F22264A031B">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>84F5F626-5797-EE8E-9983-29978EB2B678</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="sexo" id="BBF1A18D-53EC-7641-DFB3-30F610BE6EA0">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>FBDDB351-A30C-2357-2B4E-7F9FB6AA4AD9</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>7F74EF50-A63D-DA67-6485-0959234E0905</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="color" id="FB455155-7AA2-4248-D5B2-5E0C6D82751A">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>1977148A-C06C-E2BE-1CAD-3232B0E62F23</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>949BE797-688D-6848-33DA-C1301C43AE11</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="microchip" id="65B9ED4C-ACE4-B2AD-4C6D-C292F5FA3A21">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>AF41043E-36B4-C29B-FCA6-9EFC6F004EA1</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>96ADC1D9-990D-5E83-D252-2170960FB911</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="esterilizado" id="C9BAD51D-37BB-B5AF-91BF-2A57B54076A2">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>7580A6DB-43A8-9FEA-A432-3759661F3D0C</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>7F74EF50-A63D-DA67-6485-0959234E0905</domain>
+<defaultValue>&apos;N&apos;</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="estado" id="0B879F50-65C2-37E0-01B4-A30DACC08726">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>6E7356DD-1BED-B167-40EF-75CFD4C443BC</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>64A99F89-4B56-34E4-6EF4-8D3E3B53B6CA</domain>
+<defaultValue>&apos;ACTIVA&apos;</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id raza" id="F2F97372-1C27-D805-40CC-761472C79260">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>DBD25355-CDE6-6A7B-F3E2-AE54E17EBBAB</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<referedAttribute>45F13FB9-77D9-D5C2-F544-5C9C93498D77</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>8DA4861E-253F-FA53-DE5B-D4D1EBBC13EC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id cliente" id="F7888E35-058E-08DC-6547-42017A3A3C55">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>25028F61-B0B3-E4BE-33E7-80D82E2BA3C2</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<referedAttribute>82B4E510-D974-748B-E02E-C0EB900AAD9E</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>9AF27208-05DA-1048-5C0E-F02C193760B8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha registro" id="B2FF491F-89A8-334F-0FF1-4C9664FF146F">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>D5BF4AE7-CC9D-1B1D-AEE2-8F3062B45313</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<defaultValue>SYSDATE</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="DDA37D8C-41CD-FFAB-E429-E2E55CACE414" name="PK MASCOTA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>5BE7D94C-B29D-8B5E-A320-0AAEB5EB4C18</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>0CBCFE5A-9E95-E5F7-8A6E-69B306752808</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="DEFF728A-507A-65D5-A5BC-AB876F0CD57C" name="UQ MASCOTA MICROCHIP">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>76CC56DD-6FE6-5DA7-91EE-1E6E2172ED2A</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>65B9ED4C-ACE4-B2AD-4C6D-C292F5FA3A21</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

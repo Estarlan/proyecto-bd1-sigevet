@@ -1,0 +1,194 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2E0C5BF8-1045-76C4-137A-1592BA40EE00" name="FACTURA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>AC6E95F2-E190-3120-6DE5-2CAC8545EE57</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_factura" id="1296212B-3E66-E585-F0F0-EBFF271F89AF">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>52059A22-6AC3-2E70-F49E-C17B3A309190</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>938FE0CA-FBC6-F907-4BB8-8CD9626CAAED</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="numero_factura" id="524511B9-3912-788C-BBE8-B0F4A67A4D14">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>CEC4167A-9D69-ADC8-81B6-ACC2E5AC1726</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>96ADC1D9-990D-5E83-D252-2170960FB911</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_emision" id="5633B623-C024-B25A-7085-CEFA07E44DBA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>E03550D6-8BB8-8EE3-DF65-D738F6959D06</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="metodo_pago" id="29C441DC-72E6-FA3F-B5AB-61ADBC5DF3B0">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>910D0960-6412-D298-5CC9-6F51D7ADC147</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>DAFDD403-971A-DBE1-83BC-A71DC9B5F81A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estado" id="C9E02613-564F-77A5-5713-D7C0B0219587">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>39464F21-01BE-318E-246C-FB02CA953DEB</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>64A99F89-4B56-34E4-6EF4-8D3E3B53B6CA</domain>
+<defaultValue>&apos;PAGADA&apos;</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_cliente" id="7C57EAE7-3A37-4D00-951C-BE2D5373A407">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>5AE87AA4-9D46-86D6-4B34-3EAB6F4C76A3</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>9AF27208-05DA-1048-5C0E-F02C193760B8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E41C7E68-7B25-0868-D5DB-A2ECA246489A" referredColumn="4D805508-62EA-41BD-8847-F0B87FFFB589"/>
+</associations>
+</Column>
+<Column name="id_sede" id="76526B37-A4A0-8F53-107A-A680FAACE6DF">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>95037C61-C45D-C5F5-EB4B-81C35FECDA50</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4CDFDBE1-70E0-05F5-7F92-4366D53DF22C" referredColumn="87872E04-667E-38A5-480D-D757C240CFD1"/>
+</associations>
+</Column>
+<Column name="id_empleado" id="242D7439-9795-2E83-5824-31CB17DA202E">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>0084A7A9-C516-FB47-58C2-BA24F5620B5F</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="357B2896-1057-99BA-55AC-FD1BA6702DB0" referredColumn="034CC324-F12C-4DF9-E575-8D1C227DB6D4"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BF4F8073-7B13-319A-D602-46F8A697B07E" name="PK_FACTURA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>4E481147-C197-F7B8-009B-B03C6F2BA55F</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1296212B-3E66-E585-F0F0-EBFF271F89AF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B771C701-8730-9048-EB7C-D6208D32684C" name="UQ_FACTURA_NUMERO_FACTURA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>ED12FDE2-662D-C6CA-9287-FA26BFF0A095</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="524511B9-3912-788C-BBE8-B0F4A67A4D14"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5D7268DF-2952-A4A6-51C8-E403F5AEB08C" name="FK_FACTURA_CLIENTE">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7C57EAE7-3A37-4D00-951C-BE2D5373A407"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0E5CD4E0-E0E1-5018-36A0-896641A7ABDB" name="FK_FACTURA_EMPLEADO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="242D7439-9795-2E83-5824-31CB17DA202E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8E3C90BE-B324-EC95-6845-67DE8B940EF9" name="FK_FACTURA_SEDE">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="76526B37-A4A0-8F53-107A-A680FAACE6DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_FACTURA_METODO_PAGO" directorySegmentName="seg_0" id="9080B9D5-BAAA-10FC-7902-5CB5317E0CCA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>80DF123F-54C5-4DBE-BDD8-DEC868D9B3CE</importedID>
+<rule><![CDATA[metodo_pago IN ('EFECTIVO','TARJETA_DEBITO','TARJETA_CREDITO','TRANSFERENCIA')]]></rule>
+</tableCheckConstraint>
+<tableCheckConstraint name="CK_FACTURA_ESTADO" directorySegmentName="seg_0" id="2832F5DB-A809-0CF1-9F68-176BF836B707">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>536A9BC9-B872-CE0B-1C27-D836F446A4EA</importedID>
+<rule><![CDATA[estado IN ('PAGADA','PENDIENTE','ANULADA')]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

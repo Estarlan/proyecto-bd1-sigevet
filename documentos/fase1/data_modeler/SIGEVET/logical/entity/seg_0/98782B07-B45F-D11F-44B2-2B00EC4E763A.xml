@@ -1,0 +1,113 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="98782B07-B45F-D11F-44B2-2B00EC4E763A" name="CIUDAD">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>1CA9AB60-D2AC-4269-DF91-F34123AAF226</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id ciudad" id="0A400B6E-7924-A1E1-34E2-EEFA5E52AF36">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>E92D7930-E773-4B39-29B9-78BFE2B7C70E</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="codigo dane" id="E1873F16-FFE0-68A8-978C-FB53F44F8EB0">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>B626DE85-CF8F-C03E-2903-206A175FEEED</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>2F21178B-3280-8EDD-8638-17B01340EC56</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="D5AD300E-4D5C-A05D-D4B0-00949E1735B0">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>B454C86A-F2F4-D92D-1D8C-FBFC9DA15A37</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>39FD9F33-1487-942A-EEFE-AB62E2DAADA8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id departamento" id="814998DC-DC0A-CA52-4D95-C79FF5DCEE6E">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>100CF10A-6310-47B5-FB7D-41FF411758A1</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<referedAttribute>4272E6B3-F5EB-E1D7-7A1C-72814E02AEDC</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="1C2761C5-E83B-8BF4-9C2B-5572318925B5" name="PK CIUDAD">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>3AF98588-8394-4AB5-30F6-F064AFE5D5F7</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>0A400B6E-7924-A1E1-34E2-EEFA5E52AF36</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="3614F013-677C-FF57-F7ED-2CC0B27087C5" name="UQ CIUDAD CODIGO DANE">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>F71588BD-BEE8-88F1-ED8F-C1D16DB2AD6F</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>E1873F16-FFE0-68A8-978C-FB53F44F8EB0</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="A1EC7732-325D-C2BA-5108-4EB25FDC8059" name="UQ CIUDAD NOMBRE DEPARTAMENTO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>622A85B0-E1D8-4639-670A-405CE79D75E8</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>D5AD300E-4D5C-A05D-D4B0-00949E1735B0</attributeRef>
+<attributeRef>814998DC-DC0A-CA52-4D95-C79FF5DCEE6E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

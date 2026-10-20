@@ -1,0 +1,231 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="C950E6EE-151B-2E61-E22D-2967B1311124" name="EMPLEADO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>9CF59622-F58C-A05A-3F57-97133FC1B87D</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id empleado" id="738ABA33-9F30-49C5-86A0-A5C210D3E395">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>034CC324-F12C-4DF9-E575-8D1C227DB6D4</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tipo documento" id="2341E3A8-1D3E-C816-C6F9-3B4806CBE531">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>4726BE32-1862-C0D9-702C-011D2A154676</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>A1BF2177-4A69-DE63-F2D5-4C5EA5D443ED</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="num documento" id="02D8B01B-A6F7-D37E-926F-0986618149DF">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>E1FC287C-2C36-64F9-3FCD-19AE11BAD3A3</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>96ADC1D9-990D-5E83-D252-2170960FB911</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombres" id="4C9B8FA9-9429-3E58-91C4-5AD380A101DC">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>14BCECA5-3B44-C4C5-5829-DA8578F75C78</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>4AE70549-AB73-7295-F22B-8E64476A6A04</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="apellidos" id="DEDF9A80-7008-3B99-C93B-FE90811C9564">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>3744F972-ECE2-038B-20CA-E4589CF00080</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>4AE70549-AB73-7295-F22B-8E64476A6A04</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha nacimiento" id="9F6B7C40-6ACA-98C2-F8D0-A457D0F0C805">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>BBAB880D-FC0D-0CD1-3CE3-95625732A606</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="telefono" id="110CE7E8-4BFC-2899-20BE-02EE7EC3E9FA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>F1359355-8EB3-8EEF-0DC7-38BE53C56F6C</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>9039810E-AD50-AED9-8412-88280FDAF7CC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="email" id="94CE23F8-C468-9388-E1E6-1D0786DC6700">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>6CAAFAB0-D284-7298-F47F-85F56FB4B2DE</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>DA85A207-910B-B9A8-35BC-39E8CA871663</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tipo empleado" id="42D77123-1102-1E3F-9A61-7A3053029DB4">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>9A991531-FB28-A848-2D81-8B5AA2034D14</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>4D26F677-8110-8B69-7E64-C0C99E5FF6F6</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha ingreso" id="9FFAE7C6-B7D7-5378-69EA-9AD1697FF6D1">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>47F0805D-6F59-706B-3634-330A47B26FDE</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="salario" id="C992908C-32E9-0015-79B4-DBA093EBEEC1">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>A51B6345-1C8F-1333-E79A-76994A192464</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>ECFD6157-F5BC-6382-2697-ADDF6F90031B</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="estado" id="0DC0E97F-CE68-6395-EF82-4235DB873E19">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>35728669-F86D-2582-6D76-868A22BE1040</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>64A99F89-4B56-34E4-6EF4-8D3E3B53B6CA</domain>
+<defaultValue>&apos;ACTIVO&apos;</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id sede" id="836FFA72-57AC-BCAB-8A3D-3FCD80281C1A">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>2540AECE-5DF9-FA06-CFB5-47BB94197FB6</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<referedAttribute>948F2EB6-85DE-42E7-B73A-8B1C4776E6D7</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="604D896E-08ED-5B95-573B-A875770BE9AF" name="PK EMPLEADO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>D350FBC9-88C6-EB32-A13B-9C0D2D147231</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>738ABA33-9F30-49C5-86A0-A5C210D3E395</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="46E39B4E-EB3B-810D-3FBF-145D4FA00A6C" name="UQ EMPLEADO TIPO DOCUMENTO NUM DOCUMENTO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>9455E114-0591-CF8B-E780-F5938B119B58</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>2341E3A8-1D3E-C816-C6F9-3B4806CBE531</attributeRef>
+<attributeRef>02D8B01B-A6F7-D37E-926F-0986618149DF</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="226CB755-D4E2-2437-B746-C58AD7CE6804" name="UQ EMPLEADO EMAIL">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>FCADCCF1-4D91-A772-E21A-DBD381F4B4F6</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>94CE23F8-C468-9388-E1E6-1D0786DC6700</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

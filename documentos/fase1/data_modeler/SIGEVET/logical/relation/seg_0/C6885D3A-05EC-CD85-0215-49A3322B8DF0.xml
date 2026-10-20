@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FK_CITA_SEDE" directorySegmentName="seg_0" id="C6885D3A-05EC-CD85-0215-49A3322B8DF0">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>DD922945-0735-50D3-E5EB-28A4C8CF2A76</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<sourcePk>B989ECAA-234F-10C7-F3AD-F40BE52EF7E2</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>EB74FD6C-8A49-2094-90DD-597CB06D61D0</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>26E7EA8D-CE77-9574-5B22-8EF1EFCAE9F6</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

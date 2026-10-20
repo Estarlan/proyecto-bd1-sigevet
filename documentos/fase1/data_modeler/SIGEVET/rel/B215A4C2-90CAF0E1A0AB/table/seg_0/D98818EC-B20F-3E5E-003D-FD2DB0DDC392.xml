@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D98818EC-B20F-3E5E-003D-FD2DB0DDC392" name="DEPARTAMENTO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>A85DD59F-4226-A661-029E-57232B8623DB</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_departamento" id="90E50DC8-E74A-2692-EF74-3B468CB1E978">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>7AB3889F-10CC-3B92-5C54-EBDAA5B0681C</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="codigo_dane" id="5D7E7091-6EEB-E2F1-A5DA-25ABAE071916">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>786F7B1F-94EB-AB4D-A1C4-F098FF2C4FBB</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>06B2C2B9-2180-A175-FCD8-69366EDA10FF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="5A3F34A9-730E-E289-297D-FA69A5D754DA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>E5C8FF8D-8660-C727-68C4-2F1EF35B6BD4</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>4AE70549-AB73-7295-F22B-8E64476A6A04</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D6A8B549-DFFB-0D1E-61E0-0DF116238915" name="PK_DEPARTAMENTO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>310AE82B-651A-1C48-9C0D-072C4A498C9E</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="90E50DC8-E74A-2692-EF74-3B468CB1E978"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="67B6A4ED-1D8C-2226-CFA1-C4D84ED92187" name="UQ_DEPARTAMENTO_CODIGO_DANE">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>BF084731-B3BD-B9D8-01AE-E424FAF4B456</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5D7E7091-6EEB-E2F1-A5DA-25ABAE071916"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1422AFC3-4EE3-EE6D-A5B1-7D420A5946FF" name="UQ_DEPARTAMENTO_NOMBRE">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>5724E93A-30DF-479C-9FDE-2A02934B246F</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5A3F34A9-730E-E289-297D-FA69A5D754DA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_DEPARTAMENTO_CODIGO_DANE" directorySegmentName="seg_0" id="D150BEC7-4FD7-385B-2680-312D63609FDB">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>8418C4AA-B955-9069-9D61-30BEE7F3FCAB</importedID>
+<rule><![CDATA[REGEXP_LIKE(codigo_dane, '^[0-9]{2}$')]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

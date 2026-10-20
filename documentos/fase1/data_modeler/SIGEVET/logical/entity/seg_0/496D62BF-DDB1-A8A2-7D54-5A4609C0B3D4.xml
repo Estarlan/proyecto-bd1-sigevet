@@ -1,0 +1,168 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="496D62BF-DDB1-A8A2-7D54-5A4609C0B3D4" name="HISTORIA CLINICA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>654BEAB3-7F1E-3D5A-CF6E-E82F0BCC91CE</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id historia" id="D24958ED-D58E-2C65-31F7-7D3C54DFDB8D">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>CCB821A7-6D23-1DFA-6B5C-43ED8EC92396</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>9AF27208-05DA-1048-5C0E-F02C193760B8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="numero historia" id="66BD7DE0-4E7D-051B-5C20-04575123C8D2">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>EC4DBFDA-8AAF-1D82-5236-24AD60C20CA8</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>3A574936-FA31-0D47-30CB-7F84FEF9DBF5</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id mascota" id="F9EBA26A-4C39-DDF1-39E0-5B06D9488199">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>3B2FAA12-6075-DA63-F24A-C3FC7A87E75A</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<referedAttribute>0CBCFE5A-9E95-E5F7-8A6E-69B306752808</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>9AF27208-05DA-1048-5C0E-F02C193760B8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha apertura" id="645FB7F2-3398-4C73-0CBA-071F8003DC24">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>B9C5EFF5-9481-AA7C-98FA-539992BDFE3C</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="grupo sanguineo" id="E824BF60-42CE-6879-8198-08A517A3D606">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>959400E1-BB16-72CE-571D-3575B0753CF2</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>64A99F89-4B56-34E4-6EF4-8D3E3B53B6CA</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="alergias" id="C2598B1B-B481-9B90-09F7-AB87749A5B33">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>F9AF857C-8F02-104D-4037-2165D3B374BC</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>63BC388B-6C88-E565-1CCB-AB580CAC7281</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="enfermedades cronicas" id="DB1D68CF-CF00-A117-B520-A709D3B94C54">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>E6D1A7D2-FE08-0F26-464D-D0DC1E4547F3</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>63BC388B-6C88-E565-1CCB-AB580CAC7281</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="observaciones" id="2A0C0F3B-C1B3-1904-E777-FE131638C560">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>745EDC17-9C26-72EB-5AAC-72F4B93725CB</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>E1BAF957-C631-5BEF-B464-0471B2F24F73</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7568F99E-57D1-D64F-B29F-2D00752ACCEF" name="PK HISTORIA CLINICA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>17A06893-EE61-895F-7785-DD5334CA5276</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>D24958ED-D58E-2C65-31F7-7D3C54DFDB8D</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="8E4A7AB4-FC13-BA8A-B79D-3013E28B2762" name="UQ HISTORIA CLINICA NUMERO HISTORIA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>0066057C-5BD9-1EAA-D1A4-53B9C0155B5F</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>66BD7DE0-4E7D-051B-5C20-04575123C8D2</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="8A203582-52DB-CF28-5F73-FBCD1AF11B9B" name="UQ HISTORIA CLINICA MASCOTA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:58:10 UTC</createdTime>
+<generatorID>8B13B22E-E06C-281A-AD80-92251A02E692</generatorID>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<engineerTo>
+<item key="B215A4C2-B224-2800-CEE7-90CAF0E1A0AB" value="true"/>
+</engineerTo>
+<usedAttributes>
+<attributeRef>F9EBA26A-4C39-DDF1-39E0-5B06D9488199</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

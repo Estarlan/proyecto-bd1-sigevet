@@ -1,0 +1,217 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7B4771EC-DF2D-8B24-6510-EEF5CB4B49A4" name="CONSULTA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>A66E435C-C5FD-56B7-9010-E5222D5354AF</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_consulta" id="64EBC2F9-1754-477C-D9BC-2D788C852FE2">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>DDE08DD2-CEF6-AF2D-82B5-4A2555EEA680</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>938FE0CA-FBC6-F907-4BB8-8CD9626CAAED</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_cita" id="2C308F95-9118-FCC1-0EC0-CE42D80B63ED">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>EFBC1B5E-E244-C373-7903-43471FFC8E50</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>938FE0CA-FBC6-F907-4BB8-8CD9626CAAED</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3E49045D-50BD-EEED-6B30-6287AFDA23D5" referredColumn="59FEB1E1-86C3-5618-11D3-F4D80BF4FDC4"/>
+</associations>
+</Column>
+<Column name="id_auxiliar" id="AB56D7CF-AAFB-E6C5-3EF8-318057357E7A">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>1839E140-854E-FF60-8E27-63AD811D73F7</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2331BDE4-7992-29D2-378D-9FA2511651E4" referredColumn="9E9B44FA-C5B6-BC1A-43FA-D9D625A4EF83"/>
+</associations>
+</Column>
+<Column name="fecha_hora_inicio" id="6F05D347-1302-23FE-4919-159F454EF5F1">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>B628FB3D-E627-4268-AA4F-422F90220C62</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="peso_kg" id="3F4E1642-E37E-CF25-9DBC-A8F9C82EBD64">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>5E46FBF7-1607-157D-73FE-5AD02B7FB32E</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>41966A43-2F01-DC1E-2BF3-2A887B10CBE3</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="temperatura_c" id="A67A502D-C4EC-7132-3F4D-FE4B7FADC8D4">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>0A27A8DE-E63D-7857-2AF8-2B10625AA678</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>7D0AC88D-CD20-B1BD-34CE-5337208813BE</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="frecuencia_cardiaca" id="D1689AA4-2500-8B26-9FFF-AAF3EB72E6FD">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>AC3EC974-2BE3-071C-C541-89160575DAD5</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>2E7CACB6-7819-07AD-3038-256C12E7D44A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="sintomas" id="3E869A17-DE75-6FA2-98AC-3468D8AD4F4B">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>A5767824-2EC0-0E06-375B-216993B53723</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>E1BAF957-C631-5BEF-B464-0471B2F24F73</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="diagnostico" id="3F46F9EC-4840-EC1B-9EA5-7BE31EB97910">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>3197A2F7-6C52-8EE1-52A5-608043200256</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>E1BAF957-C631-5BEF-B464-0471B2F24F73</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="observaciones" id="040ACD85-BE93-4600-4F28-53845AE8275B">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>BA5F2198-2114-1654-2BB2-BABB8216DBE5</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>E1BAF957-C631-5BEF-B464-0471B2F24F73</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DEBA02B3-EC90-6AC6-60D6-8C56D392FCA8" name="PK_CONSULTA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>21B043E1-9275-8B07-CE1A-DC1D73EAA580</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="64EBC2F9-1754-477C-D9BC-2D788C852FE2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2C8098B4-892A-9CC3-CB69-23D50CD16019" name="UQ_CONSULTA_CITA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>58323085-5AD4-999E-E7F4-3BCDA0824B4A</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2C308F95-9118-FCC1-0EC0-CE42D80B63ED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4EA155F5-D2A8-904D-AAC0-3EBCB18BA282" name="FK_CONSULTA_AUXILIAR">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AB56D7CF-AAFB-E6C5-3EF8-318057357E7A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D7BBDF20-C1B8-8E06-ADEA-9E469CE3341D" name="FK_CONSULTA_CITA">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2C308F95-9118-FCC1-0EC0-CE42D80B63ED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_CONSULTA_PESO_KG" directorySegmentName="seg_0" id="EC557481-AD28-76C0-A852-FAF015096CB4">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>553575DC-89FB-C51C-9B7B-A1335D2FFF0A</importedID>
+<rule><![CDATA[peso_kg > 0]]></rule>
+</tableCheckConstraint>
+<tableCheckConstraint name="CK_CONSULTA_TEMPERATURA_C" directorySegmentName="seg_0" id="0FFF9AC3-DDEB-014B-FAEE-3D31631482AF">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>3C2BA489-610B-B8DA-98FE-FFDF91D5B644</importedID>
+<rule><![CDATA[temperatura_c BETWEEN 30 AND 45]]></rule>
+</tableCheckConstraint>
+<tableCheckConstraint name="CK_CONSULTA_FRECUENCIA_CARDIACA" directorySegmentName="seg_0" id="20496354-3504-91CA-E809-8D946826FCC3">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>2A53EF85-B7E4-213E-53BB-1BCB495F1CEE</importedID>
+<rule><![CDATA[frecuencia_cardiaca BETWEEN 20 AND 300]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

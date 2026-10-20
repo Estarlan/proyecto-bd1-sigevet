@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKArc class="oracle.dbtools.crest.model.design.relational.FKArc" directorySegmentName="seg_0" id="1CA62098-C310-CC54-4F5E-B3CFE3F20E3A" name="CK_DETALLE_FACTURA_ITEM">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:16 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>4D93816F-7BE7-9289-E26D-A8B7C2CD5D8D</importedID>
+<mandatory>true</mandatory>
+<table>22C35F00-4DE8-5C05-A9C0-727F87346F85</table>
+<fkeys>
+<fkeyID>3F0F67B7-089C-7D9E-0A1F-C1778A33EFBC</fkeyID>
+<fkeyID>28A62CF8-ED8F-E287-0952-8737587B6EE4</fkeyID>
+</fkeys>
+</FKArc>

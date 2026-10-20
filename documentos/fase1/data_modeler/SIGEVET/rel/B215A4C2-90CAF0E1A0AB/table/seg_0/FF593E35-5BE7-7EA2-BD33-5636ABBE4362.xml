@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FF593E35-5BE7-7EA2-BD33-5636ABBE4362" name="VETERINARIO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>0DC0BF39-E2D7-2F81-AADF-B171BD60D784</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_empleado" id="C33A5A41-7BF1-7081-D9C2-C2692E0605EF">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>DA704E93-AD10-3BB2-F71B-1B19A59C65A1</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="20C5A7C7-821E-CC7C-9833-1689156D4614" referredColumn="034CC324-F12C-4DF9-E575-8D1C227DB6D4"/>
+</associations>
+</Column>
+<Column name="tarjeta_profesional" id="1BF53AA9-C7A2-1D70-190B-A2B1E9053629">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>58A4EFC4-1571-BEC9-F1C0-EFFCAC787E6C</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>9039810E-AD50-AED9-8412-88280FDAF7CC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="universidad" id="0D822FEC-E8D7-B8B3-8E4C-B66DAB5FF723">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>33C990DB-B263-EE65-2B1E-DE0A026DB72F</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>DA85A207-910B-B9A8-35BC-39E8CA871663</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="anio_graduacion" id="6B06E7CD-5F15-07C2-B07C-69FB1B85DD09">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>AE07297F-8572-BD42-5AB4-22D8E90A8EF6</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5CA3E294-3286-5FFD-A2F5-8786FCD201E0" name="PK_VETERINARIO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>BFB90EA0-D206-ECDA-1793-DDCDCAA71560</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C33A5A41-7BF1-7081-D9C2-C2692E0605EF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="321F3DAA-8F4C-6334-AA38-442BCEC3A6C3" name="UQ_VETERINARIO_TARJETA_PROFESIONAL">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>6EFEDCD3-DFB5-A3E6-4901-7A078EB054F3</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1BF53AA9-C7A2-1D70-190B-A2B1E9053629"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EE48BEC4-9AFC-AC29-1701-A3F5EF17D9E5" name="FK_VETERINARIO_EMPLEADO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C33A5A41-7BF1-7081-D9C2-C2692E0605EF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_VETERINARIO_ANIO_GRADUACION" directorySegmentName="seg_0" id="295D1D72-91A9-2BB3-488C-08E43353F346">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>30E43FD5-59B9-C875-F8A4-DE092DDF5DA9</importedID>
+<rule><![CDATA[anio_graduacion BETWEEN 1970 AND 2026]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

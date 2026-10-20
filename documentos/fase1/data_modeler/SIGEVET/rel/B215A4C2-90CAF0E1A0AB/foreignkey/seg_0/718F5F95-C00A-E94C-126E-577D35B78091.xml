@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="718F5F95-C00A-E94C-126E-577D35B78091" containerWithKeyObject="636FFFD0-8BD4-EC6E-0EE3-68B05F9FAC5D" localFKIndex="187E9C68-C0A4-E1BE-E316-81DC7DD75A4F" name="FK_MASCOTA_CLIENTE">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>12D8EA8E-08F9-763D-D1FE-AFE5A968C970</importedID>
+<referredTableLongName>CLIENTE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0FBF1DB0-EFE1-EFB1-BD67-836E91EEF22A</referredTableID>
+<keyObject>3D78890C-2D3F-0DB6-5A6D-09EB14E609DD</keyObject>
+<referredKeyID>3D78890C-2D3F-0DB6-5A6D-09EB14E609DD</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_cliente</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

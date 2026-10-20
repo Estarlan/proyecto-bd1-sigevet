@@ -1,0 +1,134 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B2E8DCE0-7856-785E-DE0A-F9605629DED6" name="INVENTARIO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>1D6A8EE9-B3F2-18B8-54CA-A4072CE08220</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_sede" id="7D9BBDDB-5B27-207E-AFA6-0F7D29425619">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>2CB4EF36-902E-E51E-2C46-3DE34CD497C4</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="284203DD-C256-C8FC-3D2A-97F1962CADA2" referredColumn="87872E04-667E-38A5-480D-D757C240CFD1"/>
+</associations>
+</Column>
+<Column name="id_medicamento" id="728D060C-DA69-0DC5-D59F-324B8F0BA7F0">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>24DE53DC-0351-09CC-FF89-583AE00FE40F</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7C25C72C-7784-FF4B-EB74-780CF1544C01" referredColumn="418CB68D-0872-D339-4AB6-895AC5DB02E5"/>
+</associations>
+</Column>
+<Column name="stock_actual" id="040B7559-5166-1225-1A15-37BBB3CFE4DF">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>878098EE-66B3-30F5-8EDB-20A054E400E5</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="stock_minimo" id="A44ADD37-BA5A-8B4E-8E5C-63AD6052CEFC">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>B1265601-04EF-4DE2-7566-0B8B5E00D51A</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_actualizacion" id="5D2324A9-F6EF-BD9E-61B5-C565F71FEDBC">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>29678DBB-464C-7B98-916F-69406FE2659A</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>35CA9067-9031-7354-971C-7FDE955FDEFC</domain>
+<defaultValue>SYSDATE</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B6BAB447-5FA6-5F8D-4D90-6C125EA0D6D8" name="PK_INVENTARIO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>13EA8B34-E7CA-9132-444B-1421A0F3922A</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7D9BBDDB-5B27-207E-AFA6-0F7D29425619"/>
+<colUsage columnID="728D060C-DA69-0DC5-D59F-324B8F0BA7F0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="798D2949-57E4-B9CA-D064-5FFC0EB39662" name="FK_INVENTARIO_MEDICAMENTO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="728D060C-DA69-0DC5-D59F-324B8F0BA7F0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DB8D84FA-9060-740B-4D00-1DD499804C2E" name="FK_INVENTARIO_SEDE">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7D9BBDDB-5B27-207E-AFA6-0F7D29425619"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_INVENTARIO_STOCK_ACTUAL" directorySegmentName="seg_0" id="5BDA950F-A5B3-C1EB-AEFB-841AFD07FCB3">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>F5B63BFB-2179-41E7-C956-37F9BC6E841A</importedID>
+<rule><![CDATA[stock_actual >= 0]]></rule>
+</tableCheckConstraint>
+<tableCheckConstraint name="CK_INVENTARIO_STOCK_MINIMO" directorySegmentName="seg_0" id="76F27426-A5F6-699E-1D9A-822918AE2533">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>77E79DC5-BAA5-2E1F-2041-AD60DC32F2AD</importedID>
+<rule><![CDATA[stock_minimo >= 0]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

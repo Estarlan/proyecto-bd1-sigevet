@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="264E1D7C-B36E-7AF3-90A1-C0396AC502E5" containerWithKeyObject="34D91A81-6B3D-77CD-68D7-8543E662583D" localFKIndex="08E4D9BE-F7F2-A4D1-F93A-2C1334835D67" name="FK_RAZA_ESPECIE">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>8916AD0F-9529-37C1-A2A0-41B837D22DA4</importedID>
+<referredTableLongName>ESPECIE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3B8B37FB-D82E-8D74-1CED-2B9EC4933643</referredTableID>
+<keyObject>60526A37-8FF7-D043-1DCA-7F90D777D29C</keyObject>
+<referredKeyID>60526A37-8FF7-D043-1DCA-7F90D777D29C</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_especie</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

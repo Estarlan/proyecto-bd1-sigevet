@@ -1,0 +1,124 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1CA9AB60-D2AC-4269-DF91-F34123AAF226" name="CIUDAD">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>A78F12E5-E101-FCEA-D1AC-66E83A270033</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_ciudad" id="E92D7930-E773-4B39-29B9-78BFE2B7C70E">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>34205F24-82BA-9DB7-F2C4-5CBCD01219C1</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="codigo_dane" id="B626DE85-CF8F-C03E-2903-206A175FEEED">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>42236AD8-630B-B6A7-4E3E-93C387AA1E89</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>2F21178B-3280-8EDD-8638-17B01340EC56</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="B454C86A-F2F4-D92D-1D8C-FBFC9DA15A37">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>994626F1-8F46-0ECA-461C-0C9ABF5C0B6A</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>39FD9F33-1487-942A-EEFE-AB62E2DAADA8</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_departamento" id="DB0FCCF9-FAEE-DC5B-B684-6EC41921CD66">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>AC9A2B2E-8989-361A-3215-B885FDB7B527</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>74D1AA17-9EBE-F1A9-2CE1-1E518BFD25B4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A52D382D-7399-A148-7DD4-0D69269B8198" referredColumn="90E50DC8-E74A-2692-EF74-3B468CB1E978"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3AF98588-8394-4AB5-30F6-F064AFE5D5F7" name="PK_CIUDAD">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>36F5D199-E4F5-F93B-97AA-73C615DB0AA3</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E92D7930-E773-4B39-29B9-78BFE2B7C70E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F71588BD-BEE8-88F1-ED8F-C1D16DB2AD6F" name="UQ_CIUDAD_CODIGO_DANE">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>EFB70532-CDFD-4760-7207-4EC6AB0D4FAA</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B626DE85-CF8F-C03E-2903-206A175FEEED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="622A85B0-E1D8-4639-670A-405CE79D75E8" name="UQ_CIUDAD_NOMBRE_DEPARTAMENTO">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>4953EDD2-B524-17C6-2AF0-7D019B525314</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B454C86A-F2F4-D92D-1D8C-FBFC9DA15A37"/>
+<colUsage columnID="DB0FCCF9-FAEE-DC5B-B684-6EC41921CD66"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D357BB1F-FBA8-7D88-6495-D9B0D9F3A519" name="FK_CIUDAD_DEPARTAMENTO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DB0FCCF9-FAEE-DC5B-B684-6EC41921CD66"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_CIUDAD_CODIGO_DANE" directorySegmentName="seg_0" id="1B7160BF-AC07-D3B3-1701-C34D804C6359">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>9B064E07-2ACA-A2EA-528B-0458A79CCBF3</importedID>
+<rule><![CDATA[REGEXP_LIKE(codigo_dane, '^[0-9]{5}$')]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

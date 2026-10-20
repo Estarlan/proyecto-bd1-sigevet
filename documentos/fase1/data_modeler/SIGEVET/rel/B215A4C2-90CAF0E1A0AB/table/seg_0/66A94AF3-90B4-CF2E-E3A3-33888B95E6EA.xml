@@ -1,0 +1,108 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="66A94AF3-90B4-CF2E-E3A3-33888B95E6EA" name="AUXILIAR">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>B56EA40E-3B39-2F3B-0611-93EA7E1BCF21</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_empleado" id="9E9B44FA-C5B6-BC1A-43FA-D9D625A4EF83">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>BF84FC1B-45BE-3A37-721E-87321E47C2A8</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>D5978E2B-6B1D-CC4E-6F4D-8BF5CC48C8D0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5D81DCAD-3959-1536-BBE6-5A363A58E3EA" referredColumn="034CC324-F12C-4DF9-E575-8D1C227DB6D4"/>
+</associations>
+</Column>
+<Column name="area" id="662E7B8A-9275-2E6B-1242-B33008F515C5">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>EFDC7F97-D397-24FF-A1DC-2FAC14F6D434</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>9039810E-AD50-AED9-8412-88280FDAF7CC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="certificacion" id="BE1542E3-E725-3157-2DC6-9F7B55B933A2">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>7AE346E9-0C92-2AE1-9581-F1F5CE2108E1</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>DA85A207-910B-B9A8-35BC-39E8CA871663</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="turno" id="EDD2657C-7A79-21F8-F39A-4456027C30C3">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>1FD35089-7837-C2C8-EA94-D7835790EDA9</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>64A99F89-4B56-34E4-6EF4-8D3E3B53B6CA</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="18F06345-2AB5-0427-5074-0325C9333E2C" name="PK_AUXILIAR">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>0F387C43-3A2A-88C1-E9FA-7377D94DA137</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9E9B44FA-C5B6-BC1A-43FA-D9D625A4EF83"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="961404CC-E2BE-0E6F-7CD7-245C295D071F" name="FK_AUXILIAR_EMPLEADO">
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9E9B44FA-C5B6-BC1A-43FA-D9D625A4EF83"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="CK_AUXILIAR_AREA" directorySegmentName="seg_0" id="6612B6B5-1D65-1AD8-4F7C-526A1D563382">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>D477A95F-8006-97FB-CBAE-428957CF88B7</importedID>
+<rule><![CDATA[area IN ('CLINICA','CIRUGIA','LABORATORIO','ESTETICA','HOSPITALIZACION')]]></rule>
+</tableCheckConstraint>
+<tableCheckConstraint name="CK_AUXILIAR_TURNO" directorySegmentName="seg_0" id="3E45FBC0-98C7-2513-0D90-B8185000ED06">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>3FA2FAF5-9DC2-489D-FEE9-467FA2C665AF</importedID>
+<rule><![CDATA[turno IN ('MANANA','TARDE','NOCHE')]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

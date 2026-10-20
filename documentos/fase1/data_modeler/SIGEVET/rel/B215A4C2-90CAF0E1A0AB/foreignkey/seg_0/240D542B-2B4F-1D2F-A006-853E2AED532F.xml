@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="240D542B-2B4F-1D2F-A006-853E2AED532F" containerWithKeyObject="636FFFD0-8BD4-EC6E-0EE3-68B05F9FAC5D" localFKIndex="98FB808F-92AE-3C25-5312-0E0491B9F605" name="FK_MASCOTA_RAZA">
+<sourceDDLFile>01_crear_tablas.sql</sourceDDLFile>
+<createdBy>juan</createdBy>
+<createdTime>2026-10-10 18:48:15 UTC</createdTime>
+<ownerDesignName>SIGEVET</ownerDesignName>
+<importedID>F01C6E41-22A3-E836-3106-B63C48836006</importedID>
+<referredTableLongName>RAZA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>34D91A81-6B3D-77CD-68D7-8543E662583D</referredTableID>
+<keyObject>972E98B7-29E9-813C-7BE2-D0767D1070CD</keyObject>
+<referredKeyID>972E98B7-29E9-813C-7BE2-D0767D1070CD</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_raza</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
