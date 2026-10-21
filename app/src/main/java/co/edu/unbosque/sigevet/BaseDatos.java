@@ -13,19 +13,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.sql.DataSource;
-import org.springframework.stereotype.Component;
 
-@Component
 public class BaseDatos {
-    private final DataSource fuente;
-
-    public BaseDatos(DataSource fuente) {
-        this.fuente = fuente;
-    }
-
-    public List<Map<String, Object>> consultar(String sql, Object... parametros) throws SQLException {
-        try (Connection conexion = fuente.getConnection();
+    public static List<Map<String, Object>> consultar(String sql, Object... parametros) throws SQLException {
+        try (Connection conexion = Conexion.obtener();
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
             for (int i = 0; i < parametros.length; i++) {
                 Object valor = parametros[i];
@@ -57,7 +48,7 @@ public class BaseDatos {
         }
     }
 
-    public Map<String, Object> consultarUno(String sql, Object... parametros) throws SQLException {
+    public static Map<String, Object> consultarUno(String sql, Object... parametros) throws SQLException {
         List<Map<String, Object>> filas = consultar(sql, parametros);
         return filas.isEmpty() ? null : filas.get(0);
     }

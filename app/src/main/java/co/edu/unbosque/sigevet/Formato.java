@@ -8,14 +8,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import org.springframework.stereotype.Component;
 
-@Component("formato")
 public class Formato {
     private static final DateTimeFormatter FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter FECHA_HORA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    public String fecha(Object valor) {
+    public static String fecha(Object valor) {
         if (valor == null) {
             return "-";
         }
@@ -28,7 +26,7 @@ public class Formato {
         return valor.toString();
     }
 
-    public String pesos(Object valor) {
+    public static String pesos(Object valor) {
         DecimalFormat formato = new DecimalFormat("#,##0", DecimalFormatSymbols.getInstance(Locale.GERMANY));
         formato.setRoundingMode(RoundingMode.HALF_EVEN);
         return "$ " + formato.format(valor == null ? 0 : valor);

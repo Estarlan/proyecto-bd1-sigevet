@@ -1,0 +1,29 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="f" uri="/WEB-INF/sigevet.tld" %>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><c:out value="${tituloPagina}"/></title>
+  <link rel="stylesheet" href="<c:url value='/estilos.css'/>">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <header class="site-header">
+    <div class="container brand"><div>
+      <p class="eyebrow">Gestión veterinaria · Consulta de datos</p>
+      <h1>SIGEVET — Red de Clínicas Veterinarias Huella Sana</h1>
+    </div><span class="readonly">Solo lectura</span></div>
+    <nav class="container nav" aria-label="Navegación principal">
+      <a href="<c:url value='/'/>" ${ruta == '/' ? 'aria-current="pagina"' : ''}>Inicio</a>
+      <a href="<c:url value='/clientes'/>" ${ruta == '/clientes' ? 'aria-current="pagina"' : ''}>Clientes</a>
+      <a href="<c:url value='/agenda'/>" ${ruta == '/agenda' ? 'aria-current="pagina"' : ''}>Agenda</a>
+      <a href="<c:url value='/inventario'/>" ${ruta == '/inventario' ? 'aria-current="pagina"' : ''}>Inventario</a>
+      <a href="<c:url value='/facturas'/>" ${ruta == '/facturas' ? 'aria-current="pagina"' : ''}>Facturas</a>
+      <a href="<c:url value='/personal'/>" ${ruta == '/personal' ? 'aria-current="pagina"' : ''}>Personal</a>
+      <a href="<c:url value='/algebra'/>" ${ruta == '/algebra' ? 'aria-current="pagina"' : ''}>Álgebra relacional</a>
+    </nav>
+  </header>

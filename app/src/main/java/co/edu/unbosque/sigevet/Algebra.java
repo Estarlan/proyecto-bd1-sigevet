@@ -12,15 +12,15 @@ import java.util.Map;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
 public class Algebra {
     private final List<Map<String, Object>> ejercicios = new ArrayList<>();
 
-    public Algebra(@Value("${sigevet.algebra:../database/03_varios/01_consultas_algebra_relacional.sql}") String archivo)
-            throws IOException {
+    public Algebra() throws IOException {
+        String archivo = System.getenv("SIGEVET_ALGEBRA");
+        if (archivo == null || archivo.isBlank()) {
+            archivo = "../database/03_varios/01_consultas_algebra_relacional.sql";
+        }
         String texto = Files.readString(Path.of(archivo), StandardCharsets.UTF_8);
         Pattern encabezado = Pattern.compile("^--\\s*Ejercicio\\s+(\\d+)\\.\\s*(.+)$", Pattern.MULTILINE);
         Pattern separador = Pattern.compile("^-- =+\\R-- (.+)\\R-- =+", Pattern.MULTILINE);
