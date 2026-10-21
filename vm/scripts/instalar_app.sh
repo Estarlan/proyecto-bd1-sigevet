@@ -42,8 +42,8 @@ chown "$USUARIO" /opt/tomcat/webapps/ROOT.war
 echo "== 4/5 Servicio sigevet-web (Tomcat)"
 cat > /opt/sigevet/app.env <<FIN
 JAVA_HOME=/usr/lib/jvm/java-21-openjdk
-SIGEVET_DB_URL=jdbc:oracle:thin:@//localhost:1521/FREEPDB1
-SIGEVET_DB_USER=VET_APP
+SIGEVET_DB_URL=jdbc:mysql://localhost:3306/sigevet
+SIGEVET_DB_USER=vet_app
 SIGEVET_DB_PASSWORD=$VET_APP_PWD
 SIGEVET_ALGEBRA=/opt/sigevet/algebra.sql
 FIN
@@ -53,7 +53,7 @@ chown "$USUARIO" /opt/sigevet/app.env
 cat > /etc/systemd/system/sigevet-web.service <<FIN
 [Unit]
 Description=SIGEVET aplicacion web (Tomcat)
-After=network-online.target oracle-free-26ai.service
+After=network-online.target mysqld.service
 
 [Service]
 User=$USUARIO

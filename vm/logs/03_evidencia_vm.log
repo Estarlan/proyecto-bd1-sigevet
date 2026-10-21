@@ -1,6 +1,3 @@
-$ limactl list   (en el equipo anfitrión)
-NAME       STATUS     SSH                VMTYPE    ARCH      CPUS    MEMORY    DISK     DIR
-sigevet    Running    127.0.0.1:57929    vz        x86_64    4       6GiB      40GiB    ~/.lima/sigevet
 
 $ cat /etc/oracle-release
 Oracle Linux Server release 9.8
@@ -22,16 +19,12 @@ Model name:                              Intel(R) Core(TM) i7-9750H CPU @ 2.60GH
 
 $ free -h
                total        used        free      shared  buff/cache   available
-Mem:           5.8Gi       807Mi       1.4Gi        16Mi       3.9Gi       5.0Gi
+Mem:           5.8Gi       1.2Gi       3.8Gi        16Mi       1.0Gi       4.6Gi
 Swap:          4.0Gi          0B       4.0Gi
 
-$ df -h / /proyecto
+$ df -h /
 Filesystem                   Size  Used Avail Use% Mounted on
-/dev/mapper/vg_main-lv_root   32G  4.0G   28G  13% /
-lima-1db7a855c85ceb42        466G  215G  251G  47% /proyecto
-
-$ mount | grep /proyecto
-lima-1db7a855c85ceb42 on /proyecto type virtiofs (ro,relatime,seclabel)
+/dev/mapper/vg_main-lv_root   32G   13G   20G  39% /
 
 $ ip -brief address
 lo               UNKNOWN        127.0.0.1/8 ::1/128 

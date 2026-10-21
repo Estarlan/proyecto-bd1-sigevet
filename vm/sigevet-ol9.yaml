@@ -8,7 +8,7 @@ base:
 
 vmType: vz          # Hipervisor nativo de macOS (Virtualization.framework)
 cpus: 4
-memory: 6GiB        # Oracle Database Free usa como máximo 2 GB de SGA+PGA; el resto queda para el SO
+memory: 6GiB        # MySQL y Tomcat usan poco; queda espacio de sobra
 disk: 40GiB
 
 # El repositorio del proyecto se monta dentro de la VM (solo lectura) para ejecutar los scripts SQL.
@@ -17,10 +17,10 @@ mounts:
   mountPoint: /proyecto
   writable: false
 
-# Puertos hacia el anfitrión: 1521 (Oracle) y 5000 (aplicación web)
+# Puertos hacia el anfitrión: 3306 (MySQL, para Workbench) y 5000 (aplicación web)
 portForwards:
-- guestPort: 1521
-  hostPort: 1521
+- guestPort: 3306
+  hostPort: 3306
 - guestPort: 5000
   hostPort: 5000
 # Sin containerd/nerdctl: el proyecto no usa contenedores

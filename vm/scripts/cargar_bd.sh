@@ -1,23 +1,25 @@
 #!/bin/bash
-# Crea los usuarios y carga el esquema SIGEVET (dentro de la VM).
+# Crea la base sigevet, los usuarios y carga todo (dentro de la VM).
 # Uso: bash vm/scripts/cargar_bd.sh              instala
-#      bash vm/scripts/cargar_bd.sh --reiniciar  borra los objetos de VETDB y vuelve a cargar
+#      bash vm/scripts/cargar_bd.sh --reiniciar  borra la base y la vuelve a cargar
 set -euo pipefail
 RAIZ="$(cd "$(dirname "$0")/../.." && pwd)"
 source "$RAIZ/vm/claves.env"
-export ORACLE_HOME=$(ls -d /opt/oracle/product/*/dbhomeFree | head -1)
-export PATH="$ORACLE_HOME/bin:$PATH"
-export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
-CONEXION=localhost:1521/FREEPDB1
 cd "$RAIZ/database"
 
-if ! echo "SELECT 1 FROM dual;" | sqlplus -s -L "VETDB/${VETDB_PWD}@${CONEXION}" >/dev/null 2>&1; then
-  echo "== Creando usuarios VETDB y VET_APP (como SYSTEM)"
-  sqlplus -s -L "system/${ORACLE_PWD}@${CONEXION}" @01_ddl/00_crear_usuarios.sql "$VETDB_PWD" "$VET_APP_PWD"
+# las claves van en un archivo de opciones temporal para no escribirlas en la línea de comandos
+como_root() { mysql --defaults-extra-file=<(printf '[client]\nuser=root\npassword=%s\n' "$MYSQL_ROOT_PWD") "$@"; }
+como_vetdb() { mysql --defaults-extra-file=<(printf '[client]\nuser=vetdb\npassword=%s\n' "$VETDB_PWD") "$@"; }
+
+if ! como_vetdb -e "SELECT 1" >/dev/null 2>&1; then
+  echo "== Creando la base sigevet y los usuarios vetdb y vet_app (como root)"
+  como_root -e "SET @clave_vetdb = '$VETDB_PWD'; SET @clave_vet_app = '$VET_APP_PWD'; SOURCE 01_ddl/00_crear_usuarios.sql;"
 fi
 if [ "${1:-}" = "--reiniciar" ]; then
-  echo "== Eliminando objetos anteriores de VETDB"
-  sqlplus -s -L "VETDB/${VETDB_PWD}@${CONEXION}" @03_varios/04_eliminar_objetos.sql </dev/null
+  echo "== Borrando la base sigevet"
+  como_vetdb < 03_varios/03_reiniciar_base.sql
 fi
 echo "== Instalando el esquema SIGEVET"
-sqlplus -s -L "VETDB/${VETDB_PWD}@${CONEXION}" @instalar_esquema.sql
+inicio=$(date +%s)
+como_vetdb --default-character-set=utf8mb4 -t < instalar_esquema.sql
+echo "Tiempo: $(( $(date +%s) - inicio )) s"

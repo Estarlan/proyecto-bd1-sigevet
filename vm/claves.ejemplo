@@ -1,5 +1,5 @@
 # Copiar este archivo como vm/claves.env y poner las claves reales.
 # vm/claves.env NO se sube a GitHub.
-ORACLE_PWD=cambiar
+MYSQL_ROOT_PWD=cambiar
 VETDB_PWD=cambiar
 VET_APP_PWD=cambiar
