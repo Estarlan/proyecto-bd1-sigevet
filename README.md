@@ -6,7 +6,7 @@ Docente: Ing., Esp., M.Ed. Christian Felipe Duarte Arévalo.
 Hicimos la base de datos de una red de clínicas veterinarias que nos inventamos, *Huella Sana S.A.S.*, con 5 sedes.
 Cubre clientes, mascotas con su historia clínica, citas, consultas y fórmulas, inventario de medicamentos por sede y
 facturación. La base corre en **Oracle Database Free** sobre una máquina virtual con **Oracle Linux 9**. Encima hay
-una aplicación web sencilla en **Java con Spring Boot** que solo lee datos.
+una aplicación web sencilla en **Java (Servlets y JSP sobre Tomcat)** que solo lee datos, sin frameworks.
 
 | Integrante | Rol |
 |---|---|
@@ -18,7 +18,7 @@ una aplicación web sencilla en **Java con Spring Boot** que solo lee datos.
 
 ```text
 database/      scripts SQL: creación de objetos, inserción de registros y varios (ver database/README.md)
-app/           aplicación web en Java (Spring Boot); el SQL está escrito a mano con JDBC, sin ORM (ver app/README.md)
+app/           aplicación web en Java (Servlets + JSP); el SQL está escrito a mano con JDBC, sin ORM (ver app/README.md)
 vm/            scripts de la máquina virtual: instalar Oracle, cargar la base, instalar la app (ver vm/README.md)
 documentos/    documentos de la Fase 1, la Fase 2 y los transversales, el modelo de Data Modeler y los diagramas
 ```
