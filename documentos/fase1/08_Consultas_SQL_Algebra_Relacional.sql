@@ -1,5 +1,6 @@
 -- SIGEVET - Consultas SQL de los 55 ejercicios de álgebra relacional (Fase 1)
--- Ejecutar conectado al esquema VETDB.
+-- MySQL 8.4, base de datos sigevet.
+USE sigevet;
 
 -- ======================================================================
 -- Selección (σ) y proyección (π)
@@ -119,7 +120,7 @@ FROM VETERINARIO NATURAL JOIN EMPLEADO;
 -- Ejercicio 18. Existencias de la sede Usaquén
 -- Listar los medicamentos que maneja la sede 1 (Usaquén) con su presentación y stock actual.
 SELECT nombre, presentacion, stock_actual
-FROM (SELECT * FROM INVENTARIO WHERE id_sede = 1) NATURAL JOIN MEDICAMENTO;
+FROM (SELECT * FROM INVENTARIO WHERE id_sede = 1) i NATURAL JOIN MEDICAMENTO;
 
 -- Ejercicio 19. Mascotas con alergias
 -- Obtener el nombre de la mascota, el número de historia clínica y las alergias registradas.
@@ -203,8 +204,12 @@ ORDER BY ci.id_cita;
 SELECT a.id_medicamento AS med_usaquen, a.stock_actual AS stock_usaquen,
        b.id_medicamento AS med_chia, b.stock_actual AS stock_chia
 FROM (SELECT * FROM INVENTARIO WHERE id_sede = 1) a
-  FULL OUTER JOIN (SELECT * FROM INVENTARIO WHERE id_sede = 3) b ON a.id_medicamento = b.id_medicamento
-ORDER BY COALESCE(a.id_medicamento, b.id_medicamento);
+  LEFT JOIN (SELECT * FROM INVENTARIO WHERE id_sede = 3) b ON a.id_medicamento = b.id_medicamento
+UNION
+SELECT a.id_medicamento, a.stock_actual, b.id_medicamento, b.stock_actual
+FROM (SELECT * FROM INVENTARIO WHERE id_sede = 1) a
+  RIGHT JOIN (SELECT * FROM INVENTARIO WHERE id_sede = 3) b ON a.id_medicamento = b.id_medicamento
+ORDER BY COALESCE(med_usaquen, med_chia);
 
 -- ======================================================================
 -- Semirreunión (⋉) y antirreunión (▷)
@@ -274,7 +279,7 @@ SELECT m.id_medicamento, m.nombre, m.presentacion
 FROM MEDICAMENTO m
 WHERE m.id_medicamento IN (
   SELECT id_medicamento FROM MEDICAMENTO
-  MINUS
+  EXCEPT
   SELECT id_medicamento FROM PRESCRIPCION);
 
 -- Ejercicio 38. Veterinarios sin especialidad
@@ -283,7 +288,7 @@ SELECT e.id_empleado, e.nombres, e.apellidos
 FROM EMPLEADO e
 WHERE e.id_empleado IN (
   SELECT id_empleado FROM VETERINARIO
-  MINUS
+  EXCEPT
   SELECT id_empleado FROM VETERINARIO_ESPECIALIDAD);
 
 -- Ejercicio 39. Medicamentos que no maneja la sede Chía
@@ -299,7 +304,7 @@ SELECT c.id_cliente, c.nombres, c.apellidos
 FROM CLIENTE c
 WHERE c.id_cliente IN (
   SELECT id_cliente FROM FACTURA
-  MINUS
+  EXCEPT
   SELECT id_cliente FROM MASCOTA);
 
 -- ======================================================================
@@ -381,7 +386,7 @@ FROM CITA ci JOIN EMPLEADO e ON e.id_empleado = ci.id_veterinario
 WHERE ci.estado = 'ATENDIDA'
 GROUP BY e.id_empleado, e.nombres, e.apellidos
 HAVING COUNT(ci.id_cita) = (
-  SELECT MAX(n) FROM (SELECT COUNT(*) AS n FROM CITA WHERE estado = 'ATENDIDA' GROUP BY id_veterinario));
+  SELECT MAX(n) FROM (SELECT COUNT(*) AS n FROM CITA WHERE estado = 'ATENDIDA' GROUP BY id_veterinario) t);
 
 -- Ejercicio 49. Medicamentos más formulados
 -- Obtener las unidades formuladas de cada medicamento, de mayor a menor (se muestran los 5 primeros).
@@ -389,7 +394,7 @@ SELECT m.nombre, SUM(p.cantidad) AS unidades
 FROM PRESCRIPCION p JOIN MEDICAMENTO m ON m.id_medicamento = p.id_medicamento
 GROUP BY m.nombre
 ORDER BY unidades DESC
-FETCH FIRST 5 ROWS ONLY;
+LIMIT 5;
 
 -- Ejercicio 50. Clientes con más de dos mascotas
 -- Listar los clientes que tienen más de dos mascotas registradas (selección sobre un resultado agregado).
@@ -400,12 +405,12 @@ HAVING COUNT(m.id_mascota) > 2;
 
 -- Ejercicio 51. Facturación mensual de 2026
 -- Calcular el valor facturado (facturas pagadas) por mes durante 2026.
-SELECT TO_CHAR(f.fecha_emision, 'YYYY-MM') AS mes,
+SELECT DATE_FORMAT(f.fecha_emision, '%Y-%m') AS mes,
        ROUND(SUM(d.cantidad * d.precio_unitario * (1 - d.descuento_pct / 100.0)), 2) AS facturado,
        COUNT(DISTINCT f.id_factura) AS facturas
 FROM FACTURA f JOIN DETALLE_FACTURA d ON d.id_factura = f.id_factura
 WHERE f.estado = 'PAGADA' AND EXTRACT(YEAR FROM f.fecha_emision) = 2026
-GROUP BY TO_CHAR(f.fecha_emision, 'YYYY-MM')
+GROUP BY DATE_FORMAT(f.fecha_emision, '%Y-%m')
 ORDER BY mes;
 
 -- Ejercicio 52. Valor del inventario por sede
@@ -419,7 +424,7 @@ ORDER BY valor_inventario DESC;
 
 -- Ejercicio 53. Edad promedio por especie
 -- Calcular la edad promedio (en años) de las mascotas activas por especie al 9 de octubre de 2026. La edad es un atributo derivado de fecha_nacimiento.
-SELECT e.nombre AS especie, ROUND(AVG((DATE '2026-10-09' - m.fecha_nacimiento) / 365.25), 1) AS edad_promedio
+SELECT e.nombre AS especie, ROUND(AVG(DATEDIFF(DATE '2026-10-09', m.fecha_nacimiento) / 365.25), 1) AS edad_promedio
 FROM MASCOTA m
   JOIN RAZA r ON r.id_raza = m.id_raza
   JOIN ESPECIE e ON e.id_especie = r.id_especie
@@ -449,4 +454,4 @@ FROM FACTURA f
 WHERE f.estado = 'PAGADA'
 GROUP BY s.nombre
 ORDER BY ingresos DESC
-FETCH FIRST 5 ROWS ONLY;
+LIMIT 5;
