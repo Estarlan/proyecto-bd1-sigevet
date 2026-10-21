@@ -5,7 +5,8 @@ Docente: Ing., Esp., M.Ed. Christian Felipe Duarte Arévalo.
 
 Hicimos la base de datos de una red de clínicas veterinarias que nos inventamos, *Huella Sana S.A.S.*, con 5 sedes.
 Cubre clientes, mascotas con su historia clínica, citas, consultas y fórmulas, inventario de medicamentos por sede y
-facturación. La base corre en **Oracle Database Free** sobre una máquina virtual con **Oracle Linux 9**. Encima hay
+facturación. La base corre en **MySQL 8.4** sobre una máquina virtual con **Oracle Linux 9** y se administra con
+**MySQL Workbench**. Encima hay
 una aplicación web sencilla en **Java (Servlets y JSP sobre Tomcat)** que solo lee datos, sin frameworks.
 
 | Integrante | Rol |
@@ -19,8 +20,8 @@ una aplicación web sencilla en **Java (Servlets y JSP sobre Tomcat)** que solo 
 ```text
 database/      scripts SQL: creación de objetos, inserción de registros y varios (ver database/README.md)
 app/           aplicación web en Java (Servlets + JSP); el SQL está escrito a mano con JDBC, sin ORM (ver app/README.md)
-vm/            scripts de la máquina virtual: instalar Oracle, cargar la base, instalar la app (ver vm/README.md)
-documentos/    documentos de la Fase 1, la Fase 2 y los transversales, el modelo de Data Modeler y los diagramas
+vm/            scripts de la máquina virtual: instalar MySQL, cargar la base, instalar la app (ver vm/README.md)
+documentos/    documentos de la Fase 1, la Fase 2 y los transversales, los modelos de MySQL Workbench y los diagramas
 ```
 
 ## Algunos números
@@ -29,7 +30,7 @@ documentos/    documentos de la Fase 1, la Fase 2 y los transversales, el modelo
   EMPLEADO en VETERINARIO y AUXILIAR.
 - **Modelo físico:** 22 tablas en 3FN, 113 restricciones con nombre, 6 vistas, 2 funciones, 6 disparadores y 1.091
   registros de prueba.
-- **Álgebra relacional:** 55 ejercicios. Los probamos en Oracle y dan el mismo resultado que en la Fase 1.
+- **Álgebra relacional:** 55 ejercicios. Los probamos en MySQL y dan el mismo resultado que en la Fase 1.
 
 ## Cómo montarlo
 
@@ -37,10 +38,10 @@ Dentro de una VM con Oracle Linux 9 y desde la carpeta del proyecto (el paso a p
 
 ```bash
 cp vm/claves.ejemplo vm/claves.env         # y poner las claves
-sudo bash vm/scripts/instalar_oracle.sh    # Oracle Database Free
-bash vm/scripts/cargar_bd.sh               # usuarios, tablas, datos y verificación
+sudo bash vm/scripts/instalar_mysql.sh     # MySQL 8.4
+bash vm/scripts/cargar_bd.sh               # base, usuarios, tablas, datos y verificación
 sudo bash vm/scripts/instalar_app.sh       # app web en el puerto 5000
 ```
 
 Luego se abre `http://127.0.0.1:5000` en el equipo anfitrión, o `http://<ip-de-la-vm>:5000` si la VM está en modo
-puente.
+puente. MySQL Workbench se conecta a `127.0.0.1:3306` (ver `vm/README.md`).
