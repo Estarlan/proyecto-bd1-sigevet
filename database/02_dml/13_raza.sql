@@ -1,8 +1,8 @@
 -- SIGEVET - Datos de RAZA (20 registros)
--- Ejecutar conectado como VETDB en FREEPDB1.
-SET DEFINE OFF
-SET FEEDBACK OFF
+-- MySQL 8.4, base de datos sigevet
+USE sigevet;
 
+START TRANSACTION;
 INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (1, 'Labrador Retriever', 'GRANDE', 1);
 INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (2, 'Golden Retriever', 'GRANDE', 1);
 INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (3, 'Pastor Alemán', 'GRANDE', 1);
@@ -23,5 +23,4 @@ INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (17, 'Cacatúa nin
 INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (18, 'Belier', 'NA', 4);
 INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (19, 'Cabeza de león', 'NA', 4);
 INSERT INTO RAZA (id_raza, nombre, tamano, id_especie) VALUES (20, 'Sirio', 'NA', 5);
-
 COMMIT;

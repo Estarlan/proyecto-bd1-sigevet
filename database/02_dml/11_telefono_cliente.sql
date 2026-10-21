@@ -1,8 +1,8 @@
 -- SIGEVET - Datos de TELEFONO_CLIENTE (66 registros)
--- Ejecutar conectado como VETDB en FREEPDB1.
-SET DEFINE OFF
-SET FEEDBACK OFF
+-- MySQL 8.4, base de datos sigevet
+USE sigevet;
 
+START TRANSACTION;
 INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (1, '3171476760', 'MOVIL');
 INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (2, '3179033657', 'MOVIL');
 INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (3, '3086716215', 'MOVIL');
@@ -69,5 +69,4 @@ INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (43, '308727868
 INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (44, '3118834573', 'MOVIL');
 INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (45, '3052099053', 'MOVIL');
 INSERT INTO TELEFONO_CLIENTE (id_cliente, telefono, tipo) VALUES (45, '6054432612', 'FIJO');
-
 COMMIT;

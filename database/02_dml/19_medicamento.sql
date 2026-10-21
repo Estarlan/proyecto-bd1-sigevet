@@ -1,8 +1,8 @@
 -- SIGEVET - Datos de MEDICAMENTO (18 registros)
--- Ejecutar conectado como VETDB en FREEPDB1.
-SET DEFINE OFF
-SET FEEDBACK OFF
+-- MySQL 8.4, base de datos sigevet
+USE sigevet;
 
+START TRANSACTION;
 INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, presentacion, laboratorio, precio_venta, requiere_formula) VALUES (1, 'MED-0001', 'Amoxivet', 'Amoxicilina', 'Tableta 500 mg', 'Lab. Andino Vet', 1800, 'S');
 INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, presentacion, laboratorio, precio_venta, requiere_formula) VALUES (2, 'MED-0002', 'Meloxivet', 'Meloxicam', 'Suspensión oral 15 ml', 'Farmavet Colombia', 32000, 'S');
 INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, presentacion, laboratorio, precio_venta, requiere_formula) VALUES (3, 'MED-0003', 'Dewormin Plus', 'Praziquantel + Pirantel', 'Tableta', 'Lab. Andino Vet', 9500, 'N');
@@ -21,5 +21,4 @@ INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, prese
 INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, presentacion, laboratorio, precio_venta, requiere_formula) VALUES (16, 'MED-0016', 'Calmapet', 'Extracto de valeriana', 'Gotas 30 ml', 'NutriAnimal', 22000, 'N');
 INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, presentacion, laboratorio, precio_venta, requiere_formula) VALUES (17, 'MED-0017', 'Ivermec', 'Ivermectina', 'Solución inyectable 50 ml', 'BioPet Labs', 45000, 'S');
 INSERT INTO MEDICAMENTO (id_medicamento, codigo, nombre, principio_activo, presentacion, laboratorio, precio_venta, requiere_formula) VALUES (18, 'MED-0018', 'Hepatovet', 'Silimarina', 'Tableta 100 mg', 'Farmavet Colombia', 1900, 'N');
-
 COMMIT;

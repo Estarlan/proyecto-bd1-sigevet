@@ -1,8 +1,8 @@
 -- SIGEVET - Datos de DETALLE_FACTURA (201 registros)
--- Ejecutar conectado como VETDB en FREEPDB1.
-SET DEFINE OFF
-SET FEEDBACK OFF
+-- MySQL 8.4, base de datos sigevet
+USE sigevet;
 
+START TRANSACTION;
 INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento, cantidad, precio_unitario, descuento_pct) VALUES (1, 1, 7, NULL, 1, 380000, 10);
 INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento, cantidad, precio_unitario, descuento_pct) VALUES (1, 2, NULL, 16, 1, 22000, 0);
 INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento, cantidad, precio_unitario, descuento_pct) VALUES (2, 1, 1, NULL, 1, 65000, 10);
@@ -204,5 +204,4 @@ INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento,
 INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento, cantidad, precio_unitario, descuento_pct) VALUES (108, 2, NULL, 10, 5, 1200, 0);
 INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento, cantidad, precio_unitario, descuento_pct) VALUES (109, 1, NULL, 3, 3, 9500, 0);
 INSERT INTO DETALLE_FACTURA (id_factura, num_linea, id_servicio, id_medicamento, cantidad, precio_unitario, descuento_pct) VALUES (109, 2, NULL, 16, 2, 22000, 0);
-
 COMMIT;

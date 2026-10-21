@@ -1,8 +1,8 @@
 -- SIGEVET - Datos de PRESCRIPCION (88 registros)
--- Ejecutar conectado como VETDB en FREEPDB1.
-SET DEFINE OFF
-SET FEEDBACK OFF
+-- MySQL 8.4, base de datos sigevet
+USE sigevet;
 
+START TRANSACTION;
 INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, duracion_dias, cantidad, indicaciones) VALUES (1, 16, 'Según peso', 12, 3, 1, 'No suspender antes de tiempo');
 INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, duracion_dias, cantidad, indicaciones) VALUES (2, 16, 'Según peso', 12, 7, 1, NULL);
 INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, duracion_dias, cantidad, indicaciones) VALUES (3, 2, 'Según peso', 24, 5, 1, NULL);
@@ -91,5 +91,4 @@ INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, 
 INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, duracion_dias, cantidad, indicaciones) VALUES (94, 6, '1 unidad', 24, 3, 3, 'Administrar con comida');
 INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, duracion_dias, cantidad, indicaciones) VALUES (94, 13, 'Según peso', 12, 7, 1, 'Administrar con comida');
 INSERT INTO PRESCRIPCION (id_consulta, id_medicamento, dosis, frecuencia_horas, duracion_dias, cantidad, indicaciones) VALUES (95, 10, '1 unidad', 24, 5, 5, 'Administrar con comida');
-
 COMMIT;
