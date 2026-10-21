@@ -11,7 +11,7 @@ public class Consultas {
         FROM CLIENTE c JOIN CIUDAD ci ON ci.id_ciudad = c.id_ciudad
         WHERE UPPER(c.num_documento) LIKE ? OR UPPER(c.apellidos) LIKE ?
         ORDER BY c.apellidos, c.nombres, c.id_cliente
-        OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+        LIMIT ?, ?
         """;
 
     static final String SQL_CLIENTE = """
@@ -34,7 +34,7 @@ public class Consultas {
         """;
 
     static final String SQL_FACTURAS_CLIENTE = """
-        SELECT f.id_factura, f.numero_factura, f.fecha_emision, f.estado, s.nombre AS sede, NVL(SUM(df.cantidad * df.precio_unitario * (1 - df.descuento_pct / 100)), 0) AS total
+        SELECT f.id_factura, f.numero_factura, f.fecha_emision, f.estado, s.nombre AS sede, IFNULL(SUM(df.cantidad * df.precio_unitario * (1 - df.descuento_pct / 100)), 0) AS total
         FROM FACTURA f JOIN SEDE s ON s.id_sede = f.id_sede
         LEFT JOIN DETALLE_FACTURA df ON df.id_factura = f.id_factura
         WHERE f.id_cliente = ?
@@ -43,7 +43,7 @@ public class Consultas {
         """;
 
     static final String SQL_MASCOTA = """
-        SELECT m.*, r.nombre AS raza, e.nombre AS especie, c.nombres || ' ' || c.apellidos AS cliente
+        SELECT m.*, r.nombre AS raza, e.nombre AS especie, CONCAT(c.nombres, ' ', c.apellidos) AS cliente
         FROM MASCOTA m JOIN RAZA r ON r.id_raza = m.id_raza
         JOIN ESPECIE e ON e.id_especie = r.id_especie
         JOIN CLIENTE c ON c.id_cliente = m.id_cliente
@@ -55,7 +55,7 @@ public class Consultas {
         """;
 
     static final String SQL_CONSULTAS = """
-        SELECT co.*, ci.fecha_hora, e.nombres || ' ' || e.apellidos AS veterinario, s.nombre AS sede
+        SELECT co.*, ci.fecha_hora, CONCAT(e.nombres, ' ', e.apellidos) AS veterinario, s.nombre AS sede
         FROM CONSULTA co JOIN CITA ci ON ci.id_cita = co.id_cita
         JOIN EMPLEADO e ON e.id_empleado = ci.id_veterinario
         JOIN SEDE s ON s.id_sede = ci.id_sede
@@ -78,13 +78,13 @@ public class Consultas {
         """;
 
     static final String SQL_VETERINARIOS = """
-        SELECT e.id_empleado, e.id_empleado AS id_veterinario, e.nombres || ' ' || e.apellidos AS nombre, e.id_sede
+        SELECT e.id_empleado, e.id_empleado AS id_veterinario, CONCAT(e.nombres, ' ', e.apellidos) AS nombre, e.id_sede
         FROM EMPLEADO e JOIN VETERINARIO v ON v.id_empleado = e.id_empleado
         ORDER BY e.apellidos, e.nombres, e.id_empleado
         """;
 
     static final String SQL_AGENDA = """
-        SELECT c.id_cita, c.fecha_hora, c.estado, c.id_mascota, c.motivo, m.nombre AS mascota, sv.nombre AS servicio, s.nombre AS sede, e.nombres || ' ' || e.apellidos AS veterinario
+        SELECT c.id_cita, c.fecha_hora, c.estado, c.id_mascota, c.motivo, m.nombre AS mascota, sv.nombre AS servicio, s.nombre AS sede, CONCAT(e.nombres, ' ', e.apellidos) AS veterinario
         FROM CITA c JOIN MASCOTA m ON m.id_mascota = c.id_mascota
         JOIN SERVICIO sv ON sv.id_servicio = c.id_servicio
         JOIN EMPLEADO e ON e.id_empleado = c.id_veterinario
@@ -106,7 +106,7 @@ public class Consultas {
         """;
 
     static final String SQL_FACTURAS = """
-        SELECT f.id_factura, f.numero_factura, f.fecha_emision, f.estado, c.nombres || ' ' || c.apellidos AS cliente, s.nombre AS sede, NVL(t.total, 0) AS total
+        SELECT f.id_factura, f.numero_factura, f.fecha_emision, f.estado, CONCAT(c.nombres, ' ', c.apellidos) AS cliente, s.nombre AS sede, IFNULL(t.total, 0) AS total
         FROM FACTURA f JOIN CLIENTE c ON c.id_cliente = f.id_cliente
         JOIN SEDE s ON s.id_sede = f.id_sede
         LEFT JOIN (
@@ -118,7 +118,7 @@ public class Consultas {
         """;
 
     static final String SQL_FACTURA = """
-        SELECT f.*, c.nombres || ' ' || c.apellidos AS cliente, s.nombre AS sede, NVL(t.total, 0) AS total
+        SELECT f.*, CONCAT(c.nombres, ' ', c.apellidos) AS cliente, s.nombre AS sede, IFNULL(t.total, 0) AS total
         FROM FACTURA f JOIN CLIENTE c ON c.id_cliente = f.id_cliente
         JOIN SEDE s ON s.id_sede = f.id_sede
         LEFT JOIN (
@@ -136,7 +136,7 @@ public class Consultas {
         """;
 
     static final String SQL_DIRECTORES = """
-        SELECT s.id_sede, s.nombre, s.direccion, s.telefono, e.nombres || ' ' || e.apellidos AS director
+        SELECT s.id_sede, s.nombre, s.direccion, s.telefono, CONCAT(e.nombres, ' ', e.apellidos) AS director
         FROM SEDE s LEFT JOIN EMPLEADO e ON e.id_empleado = s.id_director
         ORDER BY s.nombre
         """;
@@ -158,7 +158,7 @@ public class Consultas {
         """;
 
     static final String SQL_INGRESOS = """
-        SELECT s.nombre AS sede, NVL(SUM(d.cantidad*d.precio_unitario*(1-d.descuento_pct/100)),0) AS total
+        SELECT s.nombre AS sede, IFNULL(SUM(d.cantidad*d.precio_unitario*(1-d.descuento_pct/100)),0) AS total
         FROM SEDE s LEFT JOIN FACTURA f ON f.id_sede=s.id_sede AND f.estado='PAGADA'
         LEFT JOIN DETALLE_FACTURA d ON d.id_factura=f.id_factura
         GROUP BY s.id_sede,s.nombre ORDER BY s.nombre
@@ -176,13 +176,13 @@ public class Consultas {
         """;
 
     static final String SQL_PROXIMAS_CITAS = """
-        SELECT c.id_cita,c.fecha_hora,c.estado,m.id_mascota,m.nombre AS mascota, sv.nombre AS servicio,e.nombres||' '||e.apellidos AS veterinario,s.nombre AS sede
+        SELECT c.id_cita,c.fecha_hora,c.estado,m.id_mascota,m.nombre AS mascota, sv.nombre AS servicio,CONCAT(e.nombres, ' ', e.apellidos) AS veterinario,s.nombre AS sede
         FROM CITA c JOIN MASCOTA m ON m.id_mascota=c.id_mascota
         JOIN SERVICIO sv ON sv.id_servicio=c.id_servicio
         JOIN EMPLEADO e ON e.id_empleado=c.id_veterinario
         JOIN SEDE s ON s.id_sede=c.id_sede
-        WHERE c.estado='PROGRAMADA' AND c.fecha_hora>=SYSDATE
-        ORDER BY c.fecha_hora,c.id_cita FETCH FIRST 10 ROWS ONLY
+        WHERE c.estado='PROGRAMADA' AND c.fecha_hora>=NOW()
+        ORDER BY c.fecha_hora,c.id_cita LIMIT 10
         """;
 
     static final String SQL_CONTEOS = """

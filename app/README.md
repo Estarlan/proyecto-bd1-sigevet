@@ -1,8 +1,8 @@
 # SIGEVET
 
 Aplicación de consulta de la base de datos de la red veterinaria Huella Sana.
-Usamos Java 21, Tomcat 10.1 y Oracle. No se usa ningún framework ni ORM:
-Servlets, JSP y JDBC con PreparedStatement. Los comandos se ejecutan desde `app/`.
+Usamos Java 21, Tomcat 10.1 y MySQL 8.4. No se usa ningún framework ni ORM:
+Servlets, JSP y JDBC (MySQL Connector/J) con PreparedStatement. Los comandos se ejecutan desde `app/`.
 
 Configura la conexión con estas variables:
 
@@ -11,8 +11,8 @@ export SIGEVET_DB_PASSWORD='tu clave'
 ```
 
 Opcionalmente puedes definir `SIGEVET_DB_URL` (por defecto
-`jdbc:oracle:thin:@//localhost:1521/FREEPDB1`) y `SIGEVET_DB_USER` (por defecto
-`VET_APP`). La conexión usa el esquema `VETDB`.
+`jdbc:mysql://localhost:3306/sigevet`) y `SIGEVET_DB_USER` (por defecto
+`vet_app`, el usuario de solo lectura).
 
 Compila:
 
