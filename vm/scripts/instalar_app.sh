@@ -33,7 +33,7 @@ mkdir -p /opt/sigevet
 rm -rf /opt/sigevet/fuente
 cp -r "$RAIZ/app" /opt/sigevet/fuente
 cd /opt/sigevet/fuente
-./mvnw -q package
+sh ./mvnw -q package
 cp "$RAIZ/database/03_varios/01_consultas_algebra_relacional.sql" /opt/sigevet/algebra.sql
 rm -rf /opt/tomcat/webapps/ROOT /opt/tomcat/webapps/ROOT.war
 cp target/ROOT.war /opt/tomcat/webapps/ROOT.war
