@@ -4,13 +4,37 @@ La base de datos corre en una VM con **Oracle Linux 9** y **MySQL 8.4 LTS**. Ah�
 (Tomcat) como servicio. En el equipo anfitrión solo hacen falta el navegador y **MySQL Workbench** para administrar
 la base.
 
-Hay dos formas de montar la VM:
+Hay tres formas de montar la VM:
 
-- **A. VirtualBox**: es la VM definitiva, la que se usa en cualquier PC con Windows, Linux o Mac Intel.
-- **B. Lima**: la usamos para hacer pruebas en un MacBook Intel mientras definíamos el equipo final.
+- **Lenovo con Linux (la definitiva)**: un solo comando, `bash vm/migrar_linux.sh`. Ver abajo.
+- **A. VirtualBox**: a mano, para un equipo con Windows.
+- **B. Lima en macOS**: la usamos para hacer las pruebas en un MacBook Intel.
 
 Los scripts de `vm/scripts/` sirven para las dos formas. Ubican la carpeta del proyecto por sí solos, así que no
 importa en qué ruta quede dentro de la VM.
+
+## Computador con Linux: un solo comando
+
+1. Copiar la carpeta del proyecto al computador (USB, Drive o `git clone`) y abrir una terminal en ella.
+2. Ejecutar como usuario normal (pide la clave de sudo para instalar QEMU):
+
+   ```bash
+   bash vm/migrar_linux.sh
+   ```
+
+3. Si dice que agregó el usuario al grupo `kvm`, cerrar sesión, volver a entrar y ejecutarlo otra vez.
+4. Al final muestra las direcciones: la app en `http://127.0.0.1:5000` (o `http://<ip-del-lenovo>:5000` desde otro
+   equipo de la red) y MySQL Workbench en el puerto 3306 con el usuario `vetdb`. Las claves quedan en `vm/claves.env`.
+
+El script instala QEMU y Lima, crea la VM `sigevet` con Oracle Linux 9, copia el proyecto adentro e instala MySQL,
+la base y la aplicación. Tarda de 10 a 20 minutos según el internet. Requisitos: Linux de 64 bits, virtualización
+activada en la BIOS (`/dev/kvm`), 8 GB de RAM y 20 GB libres.
+
+Después de reiniciar el computador:
+
+```bash
+limactl start sigevet
+```
 
 ## Requisitos del equipo anfitrión
 
@@ -21,7 +45,7 @@ importa en qué ruta quede dentro de la VM.
 | Disco libre | 20 GB | 40 GB |
 | Virtualización (VT-x / AMD-V) | activada en la BIOS | |
 
-## A. VirtualBox (equipo definitivo)
+## A. VirtualBox (alternativa para Windows)
 
 1. Instalar VirtualBox 7 y descargar la ISO de **Oracle Linux 9** (x86_64, "Full ISO") de
    <https://yum.oracle.com/oracle-linux-isos.html>.
@@ -91,6 +115,7 @@ volver a encenderla `limactl start sigevet`.
 
 | Script | Qué hace |
 |---|---|
+| `vm/migrar_linux.sh` | Crea la VM completa en un computador con Linux (o macOS) con un solo comando |
 | `instalar_mysql.sh` | Instala MySQL 8.4 (módulo `mysql:8.4` de Oracle Linux), lo configura para aceptar conexiones de Workbench, le pone clave a root, lo deja con arranque automático y abre el puerto 3306 |
 | `cargar_bd.sh [--reiniciar]` | Crea la base `sigevet` y los usuarios `vetdb` y `vet_app` y ejecuta `database/instalar_esquema.sql`. Con `--reiniciar` borra la base y la vuelve a cargar |
 | `instalar_app.sh` | Instala Java 21 y Tomcat 10.1, compila la app (`ROOT.war`) con Maven, crea el servicio `sigevet-web` y abre el puerto 5000 |

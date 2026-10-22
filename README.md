@@ -34,7 +34,14 @@ documentos/    documentos de la Fase 1, la Fase 2 y los transversales, los model
 
 ## Cómo montarlo
 
-Dentro de una VM con Oracle Linux 9 y desde la carpeta del proyecto (el paso a paso completo está en `vm/README.md`):
+En un computador con Linux todo se hace con un solo comando desde la carpeta del proyecto (crea la VM, instala MySQL,
+carga la base y deja la app funcionando):
+
+```bash
+bash vm/migrar_linux.sh
+```
+
+O paso a paso, ya dentro de una VM con Oracle Linux 9:
 
 ```bash
 cp vm/claves.ejemplo vm/claves.env         # y poner las claves
