@@ -1,3 +1,6 @@
+<!-- Created: [unknown] -->
+<!-- Updated: 18:55 24-Oct-2026 -->
+<!-- Updated: 18:55 24-Oct-2026 -->
 # SIGEVET - Sistema Integral de Gestión Veterinaria
 
 Proyecto final de **Bases de Datos 1**, Universidad El Bosque, Ingeniería de Sistemas.
@@ -31,6 +34,20 @@ documentos/    documentos de la Fase 1, la Fase 2 y los transversales, los model
 - **Modelo físico:** 22 tablas en 3FN, 113 restricciones con nombre, 6 vistas, 2 funciones, 6 disparadores y 1.091
   registros de prueba.
 - **Álgebra relacional:** 55 ejercicios. Los probamos en MySQL y dan el mismo resultado que en la Fase 1.
+
+## Modelos editables en Draw.io
+
+La versión vigente de los modelos contiene **28 láminas**: Chen y catálogos completos de atributos, EER,
+transformación de multivaluados y relaciones N:M, entidad débil, Barker, Crow's Foot, modelo relacional y normalización.
+Las vistas globales se complementan con ampliaciones por área para facilitar la lectura.
+
+- [Abrir o descargar el archivo completo de Draw.io](documentos/fase1/diagramas_drawio/SIGEVET_Modelos_drawio_Completo.drawio).
+- [Índice de láminas, notación y reproducción](diagramas/README.md).
+- [Documentos de la Fase 1](documentos/fase1/) e [informe final actualizado](documentos/final/Documento_Final_SIGEVET.docx).
+
+Los `.drawio` contienen formas y conexiones editables. Las figuras PNG, SVG y PDF se exportan con el motor de
+Draw.io; los modelos anteriores de Workbench permanecen como respaldo. El esquema físico refleja las 22 tablas,
+138 columnas y 30 FK del SQL actual, incluida la nulabilidad del director y las claves compuestas.
 
 ## Cómo montarlo
 

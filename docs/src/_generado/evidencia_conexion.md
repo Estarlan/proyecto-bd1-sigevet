@@ -1,0 +1,37 @@
+<!-- Created: 18:15 19-Oct-2026 -->
+
+**Conexión y privilegios del usuario vet_app** (salida real, archivo `vm/logs/07_prueba_conexion.log`):
+
+```text
+$ mysql -u vet_app -p -t --force < vm/scripts/prueba_vet_app.sql
++-----------+---------------------------+
+| usuario   | rol                       |
++-----------+---------------------------+
+| vet_app@% | `rol_sigevet_lectura`@`%` |
++-----------+---------------------------+
++----------+-------+----------+
+| mascotas | citas | facturas |
++----------+-------+----------+
+|       59 |   144 |      109 |
++----------+-------+----------+
++--------------+
+| nombre       |
++--------------+
+| Bogotá D.C.  |
+| Chía         |
++--------------+
++---------------------------------------------------------+
+| Grants for vet_app@%                                    |
++---------------------------------------------------------+
+| GRANT USAGE ON *.* TO `vet_app`@`%`                     |
+| GRANT SELECT, SHOW VIEW ON `sigevet`.* TO `vet_app`@`%` |
+| GRANT `rol_sigevet_lectura`@`%` TO `vet_app`@`%`        |
++---------------------------------------------------------+
+ERROR 1142 (42000) at line 10: DELETE command denied to user 'vet_app'@'localhost' for table 'MASCOTA'
+$ UPDATE sigevet.SERVICIO SET precio = 1
+ERROR 1142 (42000) at line 1: UPDATE command denied to user 'vet_app'@'localhost' for table 'SERVICIO'
+$ INSERT INTO sigevet.ESPECIE VALUES (99, 'Prueba')
+ERROR 1142 (42000) at line 1: INSERT command denied to user 'vet_app'@'localhost' for table 'ESPECIE'
+$ DROP TABLE sigevet.CITA
+ERROR 1142 (42000) at line 1: DROP command denied to user 'vet_app'@'localhost' for table 'CITA'
+```

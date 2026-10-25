@@ -1,0 +1,43 @@
+<!-- Created: 18:15 19-Oct-2026 -->
+
+**Estado de la máquina virtual** (salida real, archivo `vm/logs/03_evidencia_vm.log`):
+
+```text
+
+$ cat /etc/oracle-release
+Oracle Linux Server release 9.8
+
+$ uname -srm
+Linux 6.12.0-204.92.4.2.el9uek.x86_64 x86_64
+
+$ hostnamectl | grep -E 'Static hostname|Operating System|Kernel|Architecture|Virtualization'
+ Static hostname: lima-sigevet
+  Virtualization: apple
+Operating System: Oracle Linux Server 9.8
+          Kernel: Linux 6.12.0-204.92.4.2.el9uek.x86_64
+    Architecture: x86-64
+  Hardware Model: Apple Virtualization Generic Platform
+
+$ lscpu | grep -E '^CPU\(s\)|Model name|Hypervisor vendor|Virtualization type'
+CPU(s):                                  4
+Model name:                              Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           5.8Gi       1.2Gi       3.8Gi        16Mi       1.0Gi       4.6Gi
+Swap:          4.0Gi          0B       4.0Gi
+
+$ df -h /
+Filesystem                   Size  Used Avail Use% Mounted on
+/dev/mapper/vg_main-lv_root   32G   13G   20G  39% /
+
+$ ip -brief address
+lo               UNKNOWN        127.0.0.1/8 ::1/128
+eth0             UP             192.168.5.15/24 fe80::5055:55ff:fece:8c7e/64
+
+$ getenforce
+Enforcing
+
+$ systemctl is-active sshd
+active
+```
