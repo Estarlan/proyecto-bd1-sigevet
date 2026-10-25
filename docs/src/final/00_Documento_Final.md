@@ -9,6 +9,7 @@ version: "1.0"
 <!-- Updated: 18:55 24-Oct-2026 -->
 <!-- Updated: 18:55 24-Oct-2026 -->
 <!-- Updated: 18:55 24-Oct-2026 -->
+<!-- Updated: 18:55 24-Oct-2026 -->
 
 # Resumen del proyecto
 
@@ -38,6 +39,10 @@ Table: Resultados principales
 
 Este documento reúne, en orden, todos los entregables. Cada capítulo conserva el contenido del documento entregado
 por separado.
+
+Los modelos vigentes se entregan en Draw.io con 28 láminas editables y exportaciones PNG, SVG y PDF.
+Los modelos Workbench del proceso anterior se conservan para trazabilidad. Las menciones de esa herramienta
+en actas y planes documentan dicho proceso; MySQL Workbench continúa utilizándose para administrar la base.
 
 
 # Parte I. Fase 1: análisis y modelado
@@ -250,7 +255,7 @@ Table: Roles del equipo
 
 | Necesidad | Herramienta |
 |---|---|
-| Modelado | MySQL Workbench; Graphviz para diagramas de documentación |
+| Modelado | Draw.io para los modelos de datos; MySQL Workbench para administrar y consultar el esquema |
 | Sistema operativo (VM) | Oracle Linux 9 |
 | RDBMS | MySQL 8.4 LTS (Community), administrado con MySQL Workbench |
 | Aplicación web | Java 21 + Servlets/JSP (Tomcat 10.1) + JDBC (MySQL Connector/J) |

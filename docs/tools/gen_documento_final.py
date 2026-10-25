@@ -1,5 +1,6 @@
 # Created: 22:40 21-Oct-2026
 # Updated: 18:55 24-Oct-2026
+# Updated: 18:55 24-Oct-2026
 """Une los 22 documentos (Fase 1, Fase 2 y transversales) en el documento final del proyecto.
 
 Escribe docs/src/final/00_Documento_Final.md; luego build_docs.py lo convierte en Word.
@@ -52,6 +53,10 @@ Table: Resultados principales
 
 Este documento reúne, en orden, todos los entregables. Cada capítulo conserva el contenido del documento entregado
 por separado.
+
+Los modelos vigentes se entregan en Draw.io con 28 láminas editables y exportaciones PNG, SVG y PDF.
+Los modelos Workbench del proceso anterior se conservan para trazabilidad. Las menciones de esa herramienta
+en actas y planes documentan dicho proceso; MySQL Workbench continúa utilizándose para administrar la base.
 """
 CONCLUSIONES = """
 # Conclusiones

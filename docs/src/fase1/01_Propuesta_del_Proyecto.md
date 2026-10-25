@@ -8,6 +8,7 @@ version: "1.0"
 <!-- Updated: 13:03 10-Oct-2026 -->
 <!-- Updated: 13:25 10-Oct-2026 -->
 <!-- Updated: 18:55 24-Oct-2026 -->
+<!-- Updated: 18:55 24-Oct-2026 -->
 
 # Introducción
 
@@ -212,7 +213,7 @@ Table: Roles del equipo
 
 | Necesidad | Herramienta |
 |---|---|
-| Modelado | MySQL Workbench; Graphviz para diagramas de documentación |
+| Modelado | Draw.io para los modelos de datos; MySQL Workbench para administrar y consultar el esquema |
 | Sistema operativo (VM) | Oracle Linux 9 |
 | RDBMS | MySQL 8.4 LTS (Community), administrado con MySQL Workbench |
 | Aplicación web | Java 21 + Servlets/JSP (Tomcat 10.1) + JDBC (MySQL Connector/J) |
