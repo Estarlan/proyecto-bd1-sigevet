@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<div class="pagina-heading"><p class="eyebrow">Huella Sana</p>
+<h2>Inicio</h2><p>Resumen de citas, ingresos e inventario.</p></div>
+<section class="card"><h3>Próximas 10 citas programadas</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(proximas)}"><table>
+<thead><tr><th scope="col">Fecha y hora</th><th scope="col">Mascota</th><th scope="col">Servicio</th><th scope="col">Veterinario</th><th scope="col">Sede</th><th scope="col">Estado</th></tr></thead>
+<tbody><tr th:each="fila : ${proximas}">
+<td><span th:text="${fila.fechaHora}"></span></td>
+<td><a th:href="@{/mascotas/{id}(id=${fila.idMascota})}" th:text="${fila.mascota}"></a></td>
+<td><span th:text="${fila.servicio}"></span></td>
+<td><span th:text="${fila.veterinario}"></span></td>
+<td><span th:text="${fila.sede}"></span></td>
+<td><span th:text="${fila.estado}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(proximas)}">No hay registros para mostrar.</p>
+</section>
+<div class="grid">
+<section class="card"><h3>Ingresos por sede</h3>
+<p>Facturas pagadas, incluidos los descuentos.</p>
+<div class="table-wrap" th:if="${!#lists.isEmpty(ingresos)}"><table>
+<thead><tr><th scope="col">Sede</th><th scope="col">Ingresos</th></tr></thead>
+<tbody><tr th:each="fila : ${ingresos}">
+<td><span th:text="${fila.nombre}"></span></td>
+<td><span th:text="${fila.total == null ? '—' : '$ ' + #numbers.formatDecimal(fila.total, 1, 'POINT', 2, 'COMMA')}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(ingresos)}">No hay registros para mostrar.</p>
+</section>
+<section class="card"><h3>Citas por estado</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(estadosCitas)}"><table>
+<thead><tr><th scope="col">Estado</th><th scope="col">Citas</th></tr></thead>
+<tbody><tr th:each="fila : ${estadosCitas}">
+<td><span th:text="${fila.nombre}"></span></td>
+<td><span th:text="${fila.total}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(estadosCitas)}">No hay registros para mostrar.</p>
+</section>
+</div>
+<section class="card"><h3>Medicamentos por debajo del mínimo</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(stockBajo)}"><table>
+<thead><tr><th scope="col">Sede</th><th scope="col">Medicamento</th><th scope="col">Stock actual</th><th scope="col">Stock mínimo</th></tr></thead>
+<tbody><tr th:each="fila : ${stockBajo}">
+<td><span th:text="${fila.sede}"></span></td>
+<td><span th:text="${fila.medicamento}"></span></td>
+<td><span th:text="${fila.stockActual}"></span></td>
+<td><span th:text="${fila.stockMinimo}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(stockBajo)}">No hay registros para mostrar.</p>
+</section>
+<section class="card"><h3>Registros de las 22 tablas</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(conteos)}"><table>
+<thead><tr><th scope="col">Tabla</th><th scope="col">Registros</th></tr></thead>
+<tbody><tr th:each="fila : ${conteos}">
+<td><span th:text="${fila.nombre}"></span></td>
+<td><span th:text="${fila.total}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(conteos)}">No hay registros para mostrar.</p>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

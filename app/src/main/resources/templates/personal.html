@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<h2>Personal</h2>
+<form method="get" class="filters">
+<label for="sede">Sede<select id="sede" name="sede">
+<option value="">Todas las sedes</option>
+<option th:each="opcion : ${sedes}" th:value="${opcion.idSede}"
+        th:text="${opcion.nombre}" th:selected="${opcion.idSede == sedeSeleccionada}"></option>
+</select></label>
+<button type="submit">Filtrar</button><a th:href="@{/personal}">Limpiar</a>
+</form>
+<section class="card"><h3>Sedes y directores</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(sedes)}"><table>
+<thead><tr><th scope="col">Sede</th><th scope="col">Director</th></tr></thead>
+<tbody><tr th:each="fila : ${sedes}">
+<td><span th:text="${fila.nombre}"></span></td>
+<td><span th:text="${fila.director}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(sedes)}">No hay registros para mostrar.</p>
+</section>
+<section class="card"><h3>Empleados por sede</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(empleados)}"><table>
+<thead><tr><th scope="col">Nombre</th><th scope="col">Sede</th><th scope="col">Tipo</th><th scope="col">Descripción</th><th scope="col">Especialidades</th><th scope="col">Fecha de ingreso</th><th scope="col">Salario</th><th scope="col">Estado</th><th scope="col">Teléfono</th><th scope="col">Correo</th></tr></thead>
+<tbody><tr th:each="fila : ${empleados}">
+<td><span th:text="${fila.nombreCompleto}"></span></td>
+<td><span th:text="${fila.sede}"></span></td>
+<td><span th:text="${fila.tipoEmpleado}"></span></td>
+<td><span th:text="${fila.getDescripcion()}"></span></td>
+<td><span th:if="${fila.tipoEmpleado == 'VET'}" th:text="${#lists.isEmpty(fila.especialidades) ? 'Sin especialidades registradas' : #strings.listJoin(fila.especialidades, ', ')}"></span></td>
+<td><span th:text="${fila.fechaIngreso}"></span></td>
+<td><span th:text="${fila.salario == null ? '—' : '$ ' + #numbers.formatDecimal(fila.salario, 1, 'POINT', 2, 'COMMA')}"></span></td>
+<td><span th:text="${fila.estado}"></span></td>
+<td><span th:text="${fila.telefono}"></span></td>
+<td><span th:text="${fila.email}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(empleados)}">No hay registros para mostrar.</p>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

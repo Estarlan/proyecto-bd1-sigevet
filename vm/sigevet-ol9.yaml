@@ -8,7 +8,7 @@ base:
 
 vmType: vz          # Hipervisor nativo de macOS (Virtualization.framework)
 cpus: 4
-memory: 6GiB        # MySQL y Tomcat usan poco; queda espacio de sobra
+memory: 6GiB        # MySQL y la app usan poco; queda espacio de sobra
 disk: 40GiB
 
 # El repositorio del proyecto se monta dentro de la VM (solo lectura) para ejecutar los scripts SQL.

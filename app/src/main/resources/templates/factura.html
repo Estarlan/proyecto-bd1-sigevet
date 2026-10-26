@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factura · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<p><a th:href="@{/facturas}">Volver a facturas</a></p>
+<h2 th:text="${'Factura ' + factura.numeroFactura}"></h2>
+<section class="card"><h3>Datos de la factura</h3>
+<p>Cliente: <a th:href="@{/clientes/{id}(id=${factura.idCliente})}" th:text="${factura.cliente}"></a></p>
+<dl>
+<dt>Sede</dt><dd><span th:text="${factura.sede}"></span></dd>
+<dt>Fecha de emisión</dt><dd><span th:text="${factura.fechaEmision}"></span></dd>
+<dt>Método de pago</dt><dd><span th:text="${factura.metodoPago}"></span></dd>
+<dt>Estado</dt><dd><span th:text="${factura.estado}"></span></dd>
+</dl>
+</section>
+<section class="card"><h3>Conceptos facturados</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(lineas)}"><table>
+<thead><tr><th scope="col">Línea</th><th scope="col">Servicio o medicamento</th><th scope="col">Cantidad</th><th scope="col">Precio unitario</th><th scope="col">Descuento (%)</th><th scope="col">Subtotal</th></tr></thead>
+<tbody><tr th:each="fila : ${lineas}">
+<td><span th:text="${fila.numLinea}"></span></td>
+<td><span th:text="${fila.concepto}"></span></td>
+<td><span th:text="${fila.cantidad}"></span></td>
+<td><span th:text="${fila.precioUnitario == null ? '—' : '$ ' + #numbers.formatDecimal(fila.precioUnitario, 1, 'POINT', 2, 'COMMA')}"></span></td>
+<td><span th:text="${fila.descuentoPct}"></span></td>
+<td><span th:text="${fila.subtotal == null ? '—' : '$ ' + #numbers.formatDecimal(fila.subtotal, 1, 'POINT', 2, 'COMMA')}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(lineas)}">No hay registros para mostrar.</p>
+<p>Subtotal = cantidad × precio unitario × (1 − descuento / 100).</p>
+<p>Total de la factura: <strong class="stat-value"><span th:text="${factura.total == null ? '—' : '$ ' + #numbers.formatDecimal(factura.total, 1, 'POINT', 2, 'COMMA')}"></span></strong></p></section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

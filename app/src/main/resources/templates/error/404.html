@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página no encontrada · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<section class="card"><h2>404 · Página no encontrada</h2>
+<p>El registro o la página solicitada no existe.</p><a th:href="@{/}">Volver al inicio</a></section>
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

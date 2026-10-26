@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<h2>Agenda de citas</h2>
+<form method="get" class="filters">
+<label for="sede">Sede<select id="sede" name="sede">
+<option value="">Todas las sedes</option>
+<option th:each="opcion : ${sedes}" th:value="${opcion.idSede}"
+        th:text="${opcion.nombre}" th:selected="${opcion.idSede == sedeSeleccionada}"></option>
+</select></label>
+<label for="estado">Estado<select id="estado" name="estado">
+<option value="">Todos los estados</option>
+<option th:each="opcion : ${estados}" th:value="${opcion}" th:text="${opcion}"
+        th:selected="${opcion == estadoSeleccionado}"></option>
+</select></label>
+<button type="submit">Filtrar</button><a th:href="@{/agenda}">Limpiar</a>
+</form>
+<section class="card"><h3>Citas encontradas</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(citas)}"><table>
+<thead><tr><th scope="col">Fecha y hora</th><th scope="col">Mascota</th><th scope="col">Servicio</th><th scope="col">Veterinario</th><th scope="col">Sede</th><th scope="col">Estado</th><th scope="col">Motivo</th></tr></thead>
+<tbody><tr th:each="fila : ${citas}">
+<td><span th:text="${fila.fechaHora}"></span></td>
+<td><a th:href="@{/mascotas/{id}(id=${fila.idMascota})}" th:text="${fila.mascota}"></a></td>
+<td><span th:text="${fila.servicio}"></span></td>
+<td><span th:text="${fila.veterinario}"></span></td>
+<td><span th:text="${fila.sede}"></span></td>
+<td><span th:text="${fila.estado}"></span></td>
+<td><span th:text="${fila.motivo}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(citas)}">No hay registros para mostrar.</p>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

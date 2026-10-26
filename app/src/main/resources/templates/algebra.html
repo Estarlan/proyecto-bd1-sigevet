@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Álgebra relacional · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<h2>Álgebra relacional</h2>
+<p>Los 55 ejercicios del proyecto. Abre uno para ver el enunciado, el SQL y los resultados.</p>
+<section class="card" th:each="grupo : ${grupos}">
+<h3 th:text="${grupo}"></h3>
+<ol class="exercise-list">
+<li th:each="ejercicio : ${ejercicios}" th:if="${ejercicio.grupo == grupo}" th:value="${ejercicio.numero}">
+<a th:href="@{/algebra/{numero}(numero=${ejercicio.numero})}" th:text="${ejercicio.titulo}"></a>
+</li></ol></section>
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

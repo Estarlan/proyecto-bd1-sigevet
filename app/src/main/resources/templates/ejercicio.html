@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio de álgebra · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<p><a th:href="@{/algebra}">Volver a álgebra relacional</a></p>
+<h2 th:text="${'Ejercicio ' + ejercicio.numero + '. ' + ejercicio.titulo}"></h2>
+<p th:text="${ejercicio.grupo}"></p>
+<section class="card"><h3>Enunciado</h3><p th:text="${ejercicio.enunciado}"></p>
+<h3>Consulta SQL</h3><pre><code th:text="${ejercicio.sql}"></code></pre></section>
+<section class="card"><h3>Resultados</h3>
+<p th:text="${resultado.filas.size() + ' filas obtenidas.'}"></p>
+<div class="table-wrap"><table>
+<thead><tr><th th:each="columna : ${resultado.columnas}" th:text="${columna}" scope="col"></th></tr></thead>
+<tbody><tr th:each="fila : ${resultado.filas}"><td th:each="valor : ${fila}" th:text="${valor}"></td></tr></tbody>
+</table></div>
+<p th:if="${#lists.isEmpty(resultado.filas)}">La consulta no devolvió registros.</p>
+</section>
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

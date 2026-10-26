@@ -37,7 +37,7 @@ CREATE TABLE SEDE (
     email           VARCHAR(100) NOT NULL COMMENT 'Correo electrónico de la sede.',
     fecha_apertura  DATE NOT NULL COMMENT 'Fecha en que la sede inició operación.',
     id_ciudad       INT NOT NULL COMMENT 'Ciudad donde se ubica la sede.',
-    id_director     INT COMMENT 'Empleado que dirige la sede (relación 1:1 DIRIGIR).',
+    id_director     INT COMMENT 'Empleado que dirige la sede (relación 1:1 DIRIGE).',
     CONSTRAINT PK_SEDE PRIMARY KEY (id_sede),
     CONSTRAINT UQ_SEDE_NOMBRE UNIQUE (nombre),
     CONSTRAINT UQ_SEDE_EMAIL UNIQUE (email),
@@ -59,7 +59,7 @@ CREATE TABLE EMPLEADO (
     fecha_ingreso     DATE NOT NULL COMMENT 'Fecha de vinculación a la red.',
     salario           DECIMAL(12,2) NOT NULL COMMENT 'Salario mensual en pesos colombianos.',
     estado            VARCHAR(10) NOT NULL DEFAULT 'ACTIVO' COMMENT 'Estado laboral.',
-    id_sede           INT NOT NULL COMMENT 'Sede donde labora el empleado (relación LABORAR).',
+    id_sede           INT NOT NULL COMMENT 'Sede donde labora el empleado (relación LABORA_EN).',
     CONSTRAINT PK_EMPLEADO PRIMARY KEY (id_empleado),
     CONSTRAINT UQ_EMPLEADO_TIPO_DOCUMENTO_NUM_DOCUMENTO UNIQUE (tipo_documento, num_documento),
     CONSTRAINT UQ_EMPLEADO_EMAIL UNIQUE (email),
@@ -103,7 +103,7 @@ CREATE TABLE ESPECIALIDAD (
     CONSTRAINT UQ_ESPECIALIDAD_NOMBRE UNIQUE (nombre)
 ) ENGINE=InnoDB COMMENT='Áreas de especialización médica veterinaria.';
 
--- VETERINARIO_ESPECIALIDAD: Resuelve la relación N:M CERTIFICAR entre VETERINARIO y ESPECIALIDAD.
+-- VETERINARIO_ESPECIALIDAD: Resuelve la relación N:M CERTIFICADO_EN entre VETERINARIO y ESPECIALIDAD.
 CREATE TABLE VETERINARIO_ESPECIALIDAD (
     id_empleado          INT NOT NULL COMMENT 'Veterinario certificado.',
     id_especialidad      INT NOT NULL COMMENT 'Especialidad certificada.',
@@ -111,7 +111,7 @@ CREATE TABLE VETERINARIO_ESPECIALIDAD (
     CONSTRAINT PK_VETERINARIO_ESPECIALIDAD PRIMARY KEY (id_empleado, id_especialidad),
     CONSTRAINT FK_VETERINARIO_ESPECIALIDAD_VETERINARIO FOREIGN KEY (id_empleado) REFERENCES VETERINARIO (id_empleado) ON DELETE CASCADE,
     CONSTRAINT FK_VETERINARIO_ESPECIALIDAD_ESPECIALIDAD FOREIGN KEY (id_especialidad) REFERENCES ESPECIALIDAD (id_especialidad)
-) ENGINE=InnoDB COMMENT='Resuelve la relación N:M CERTIFICAR entre VETERINARIO y ESPECIALIDAD.';
+) ENGINE=InnoDB COMMENT='Resuelve la relación N:M CERTIFICADO_EN entre VETERINARIO y ESPECIALIDAD.';
 
 -- CLIENTE: Persona propietaria de una o más mascotas; es quien paga los servicios.
 CREATE TABLE CLIENTE (
@@ -183,7 +183,7 @@ CREATE TABLE MASCOTA (
     CONSTRAINT FK_MASCOTA_CLIENTE FOREIGN KEY (id_cliente) REFERENCES CLIENTE (id_cliente)
 ) ENGINE=InnoDB COMMENT='Paciente de la red. La edad es un atributo derivado de fecha_nacimiento (no se almacena).';
 
--- HISTORIA_CLINICA: Historia clínica única de cada mascota (relación 1:1 TENER), compartida por todas las sedes.
+-- HISTORIA_CLINICA: Historia clínica única de cada mascota (relación 1:1 TIENE), compartida por todas las sedes.
 CREATE TABLE HISTORIA_CLINICA (
     id_historia            INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la historia clínica.',
     numero_historia        VARCHAR(12) NOT NULL COMMENT 'Número legible de la historia.',
@@ -197,7 +197,7 @@ CREATE TABLE HISTORIA_CLINICA (
     CONSTRAINT UQ_HISTORIA_CLINICA_NUMERO_HISTORIA UNIQUE (numero_historia),
     CONSTRAINT UQ_HISTORIA_CLINICA_MASCOTA UNIQUE (id_mascota),
     CONSTRAINT FK_HISTORIA_CLINICA_MASCOTA FOREIGN KEY (id_mascota) REFERENCES MASCOTA (id_mascota) ON DELETE CASCADE
-) ENGINE=InnoDB COMMENT='Historia clínica única de cada mascota (relación 1:1 TENER), compartida por todas las sedes.';
+) ENGINE=InnoDB COMMENT='Historia clínica única de cada mascota (relación 1:1 TIENE), compartida por todas las sedes.';
 
 -- SERVICIO: Catálogo de servicios ofrecidos con su precio vigente y duración estimada.
 CREATE TABLE SERVICIO (
@@ -234,7 +234,7 @@ CREATE TABLE CITA (
     CONSTRAINT FK_CITA_SERVICIO FOREIGN KEY (id_servicio) REFERENCES SERVICIO (id_servicio)
 ) ENGINE=InnoDB COMMENT='Reserva de atención de una mascota con un veterinario, en una sede, para un servicio.';
 
--- CONSULTA: Registro clínico de una cita atendida (relación 1:1 GENERAR con CITA).
+-- CONSULTA: Registro clínico de una cita atendida (relación 1:1 GENERA con CITA).
 CREATE TABLE CONSULTA (
     id_consulta          BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la consulta.',
     id_cita              BIGINT NOT NULL COMMENT 'Cita que originó la consulta (UNIQUE: garantiza 1:1).',
@@ -253,7 +253,7 @@ CREATE TABLE CONSULTA (
     CONSTRAINT CK_CONSULTA_FRECUENCIA_CARDIACA CHECK (frecuencia_cardiaca BETWEEN 20 AND 300),
     CONSTRAINT FK_CONSULTA_CITA FOREIGN KEY (id_cita) REFERENCES CITA (id_cita),
     CONSTRAINT FK_CONSULTA_AUXILIAR FOREIGN KEY (id_auxiliar) REFERENCES AUXILIAR (id_empleado)
-) ENGINE=InnoDB COMMENT='Registro clínico de una cita atendida (relación 1:1 GENERAR con CITA).';
+) ENGINE=InnoDB COMMENT='Registro clínico de una cita atendida (relación 1:1 GENERA con CITA).';
 
 -- MEDICAMENTO: Catálogo de medicamentos e insumos veterinarios con su precio de venta vigente.
 CREATE TABLE MEDICAMENTO (
@@ -272,7 +272,7 @@ CREATE TABLE MEDICAMENTO (
     CONSTRAINT CK_MEDICAMENTO_REQUIERE_FORMULA CHECK (requiere_formula IN ('S','N'))
 ) ENGINE=InnoDB COMMENT='Catálogo de medicamentos e insumos veterinarios con su precio de venta vigente.';
 
--- PRESCRIPCION: Resuelve la relación N:M PRESCRIBIR entre CONSULTA y MEDICAMENTO (fórmula médica).
+-- PRESCRIPCION: Resuelve la relación N:M PRESCRIBE entre CONSULTA y MEDICAMENTO (fórmula médica).
 CREATE TABLE PRESCRIPCION (
     id_consulta       BIGINT NOT NULL COMMENT 'Consulta en la que se formula.',
     id_medicamento    INT NOT NULL COMMENT 'Medicamento formulado.',
@@ -287,9 +287,9 @@ CREATE TABLE PRESCRIPCION (
     CONSTRAINT CK_PRESCRIPCION_CANTIDAD CHECK (cantidad > 0),
     CONSTRAINT FK_PRESCRIPCION_CONSULTA FOREIGN KEY (id_consulta) REFERENCES CONSULTA (id_consulta) ON DELETE CASCADE,
     CONSTRAINT FK_PRESCRIPCION_MEDICAMENTO FOREIGN KEY (id_medicamento) REFERENCES MEDICAMENTO (id_medicamento)
-) ENGINE=InnoDB COMMENT='Resuelve la relación N:M PRESCRIBIR entre CONSULTA y MEDICAMENTO (fórmula médica).';
+) ENGINE=InnoDB COMMENT='Resuelve la relación N:M PRESCRIBE entre CONSULTA y MEDICAMENTO (fórmula médica).';
 
--- INVENTARIO: Resuelve la relación N:M ALMACENAR entre SEDE y MEDICAMENTO: existencias por sede.
+-- INVENTARIO: Resuelve la relación N:M ALMACENA entre SEDE y MEDICAMENTO: existencias por sede.
 CREATE TABLE INVENTARIO (
     id_sede              INT NOT NULL COMMENT 'Sede que almacena.',
     id_medicamento       INT NOT NULL COMMENT 'Medicamento almacenado.',
@@ -301,7 +301,7 @@ CREATE TABLE INVENTARIO (
     CONSTRAINT CK_INVENTARIO_STOCK_MINIMO CHECK (stock_minimo >= 0),
     CONSTRAINT FK_INVENTARIO_SEDE FOREIGN KEY (id_sede) REFERENCES SEDE (id_sede),
     CONSTRAINT FK_INVENTARIO_MEDICAMENTO FOREIGN KEY (id_medicamento) REFERENCES MEDICAMENTO (id_medicamento)
-) ENGINE=InnoDB COMMENT='Resuelve la relación N:M ALMACENAR entre SEDE y MEDICAMENTO: existencias por sede.';
+) ENGINE=InnoDB COMMENT='Resuelve la relación N:M ALMACENA entre SEDE y MEDICAMENTO: existencias por sede.';
 
 -- FACTURA: Documento de venta emitido a un cliente en una sede. El total es derivado (vista V_FACTURA_TOTAL).
 CREATE TABLE FACTURA (

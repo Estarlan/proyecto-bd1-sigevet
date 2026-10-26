@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="encabezado" class="site-header">
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <div class="container brand"><div>
+    <p class="eyebrow">Gestión veterinaria · Consulta de datos</p>
+    <h1>SIGEVET — Red de Clínicas Veterinarias Huella Sana</h1>
+  </div><span class="readonly">Solo lectura</span></div>
+  <nav class="container nav" aria-label="Navegación principal">
+      <a th:href="@{/}">Inicio</a>
+      <a th:href="@{/clientes}">Clientes</a>
+      <a th:href="@{/agenda}">Agenda</a>
+      <a th:href="@{/inventario}">Inventario</a>
+      <a th:href="@{/facturas}">Facturas</a>
+      <a th:href="@{/personal}">Personal</a>
+      <a th:href="@{/algebra}">Álgebra relacional</a>
+  </nav>
+</header>
+<footer th:fragment="pie" class="site-footer">
+  <div class="container">SIGEVET · Bases de Datos 1 <span>Huella Sana · Solo lectura</span></div>
+</footer>
+</body>
+</html>

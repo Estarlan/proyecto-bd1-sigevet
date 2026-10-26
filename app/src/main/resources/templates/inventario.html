@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventario · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<h2>Inventario por sede</h2>
+<form method="get" class="filters">
+<label for="sede">Sede<select id="sede" name="sede">
+<option value="">Todas las sedes</option>
+<option th:each="opcion : ${sedes}" th:value="${opcion.idSede}"
+        th:text="${opcion.nombre}" th:selected="${opcion.idSede == sedeSeleccionada}"></option>
+</select></label>
+<button type="submit">Filtrar</button><a th:href="@{/inventario}">Limpiar</a>
+</form>
+<section class="card"><h3>Medicamentos y existencias</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(inventario)}"><table>
+<thead><tr><th scope="col">Sede</th><th scope="col">Medicamento</th><th scope="col">Presentación</th><th scope="col">Stock actual</th><th scope="col">Stock mínimo</th><th scope="col">Disponibilidad</th><th scope="col">Actualización</th></tr></thead>
+<tbody><tr th:each="fila : ${inventario}" th:classappend="${fila.stockBajo ? 'low-stock' : ''}">
+<td><span th:text="${fila.sede}"></span></td>
+<td><span th:text="${fila.medicamento}"></span></td>
+<td><span th:text="${fila.presentacion}"></span></td>
+<td><span th:text="${fila.stockActual}"></span></td>
+<td><span th:text="${fila.stockMinimo}"></span></td>
+<td><span class="badge" th:text="${fila.stockBajo ? 'Stock bajo' : 'Stock suficiente'}"></span></td>
+<td><span th:text="${fila.fechaActualizacion}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(inventario)}">No hay registros para mostrar.</p>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

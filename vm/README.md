@@ -1,7 +1,7 @@
 # Máquina virtual de SIGEVET
 
 La base de datos corre en una VM con **Oracle Linux 9** y **MySQL 8.4 LTS**. Ahí mismo instalamos la aplicación web
-(Tomcat) como servicio. En el equipo anfitrión solo hacen falta el navegador y **MySQL Workbench** para administrar
+(Spring Boot) como servicio. En el equipo anfitrión solo hacen falta el navegador y **MySQL Workbench** para administrar
 la base.
 
 Hay tres formas de montar la VM:
@@ -73,7 +73,7 @@ limactl start sigevet
    ```bash
    sudo bash vm/scripts/instalar_mysql.sh       # MySQL 8.4 desde los repositorios de Oracle Linux (~2 minutos)
    bash vm/scripts/cargar_bd.sh                 # base, usuarios, tablas, datos y verificación (~2 s)
-   sudo bash vm/scripts/instalar_app.sh         # Java 21, Tomcat y la app web como servicio en el puerto 5000
+   sudo bash vm/scripts/instalar_app.sh         # Java 21 y la app web (Spring Boot) como servicio en el puerto 5000
    ```
 
 7. Abrir en el anfitrión <http://127.0.0.1:5000> si se usa NAT, o `http://<ip-de-la-vm>:5000` si se usa puente.
@@ -118,7 +118,7 @@ volver a encenderla `limactl start sigevet`.
 | `vm/migrar_linux.sh` | Crea la VM completa en un computador con Linux (o macOS) con un solo comando |
 | `instalar_mysql.sh` | Instala MySQL 8.4 (módulo `mysql:8.4` de Oracle Linux), lo configura para aceptar conexiones de Workbench, le pone clave a root, lo deja con arranque automático y abre el puerto 3306 |
 | `cargar_bd.sh [--reiniciar]` | Crea la base `sigevet` y los usuarios `vetdb` y `vet_app` y ejecuta `database/instalar_esquema.sql`. Con `--reiniciar` borra la base y la vuelve a cargar |
-| `instalar_app.sh` | Instala Java 21 y Tomcat 10.1, compila la app (`ROOT.war`) con Maven, crea el servicio `sigevet-web` y abre el puerto 5000 |
+| `instalar_app.sh` | Instala Java 21, compila la app (`sigevet.jar`) con Maven, crea el servicio `sigevet-web` y abre el puerto 5000 |
 | `resumen_bd.sh` | Muestra la versión de MySQL, los objetos de la base y los ingresos por sede |
 | `evidencias.sh vm\|rdbms\|vet_app` | Saca las evidencias que usamos en los documentos de implementación |
 | `prueba_vet_app.sql` | Prueba que `vet_app` puede leer pero no modificar |
@@ -129,5 +129,5 @@ volver a encenderla `limactl start sigevet`.
   VM. MySQL escucha en todas las interfaces por `bind-address = 0.0.0.0` (`/etc/my.cnf.d/sigevet.cnf`).
 - **`Access denied for user 'vetdb'@'...'`.** La clave no coincide con la de `vm/claves.env`.
 - **La app no abre desde el anfitrión.** Revisar el reenvío del puerto 5000 y `systemctl status sigevet-web`.
-- **SELinux bloqueaba Tomcat.** Como Tomcat se descomprime en `/tmp`, `instalar_app.sh` corrige su etiqueta con
-  `restorecon` antes de crear el servicio.
+- **SELinux bloqueaba la app.** Los archivos copiados a `/opt/sigevet` pueden quedar con una etiqueta que SELinux no
+  deja ejecutar; `instalar_app.sh` la corrige con `restorecon` antes de crear el servicio.

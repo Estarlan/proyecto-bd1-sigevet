@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mascota · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<p><a th:href="@{/clientes/{id}(id=${mascota.idCliente})}">Volver al cliente:
+<span th:text="${mascota.cliente}"></span></a></p>
+<h2 th:text="${mascota.nombre}"></h2>
+<div class="grid">
+<section class="card"><h3>Datos de la mascota</h3>
+<dl>
+<dt>Especie</dt><dd><span th:text="${mascota.especie}"></span></dd>
+<dt>Raza</dt><dd><span th:text="${mascota.raza}"></span></dd>
+<dt>Sexo</dt><dd><span th:text="${mascota.sexo}"></span></dd>
+<dt>Fecha de nacimiento</dt><dd><span th:text="${mascota.fechaNacimiento}"></span></dd>
+<dt>Color</dt><dd><span th:text="${mascota.color}"></span></dd>
+<dt>Microchip</dt><dd><span th:text="${mascota.microchip}"></span></dd>
+<dt>Esterilizado (S/N)</dt><dd><span th:text="${mascota.esterilizado}"></span></dd>
+<dt>Estado</dt><dd><span th:text="${mascota.estado}"></span></dd>
+</dl>
+</section>
+<section class="card"><h3>Historia clínica</h3>
+<div th:if="${historia != null}">
+<dl>
+<dt>Número de historia</dt><dd><span th:text="${historia.numeroHistoria}"></span></dd>
+<dt>Fecha de apertura</dt><dd><span th:text="${historia.fechaApertura}"></span></dd>
+<dt>Grupo sanguíneo</dt><dd><span th:text="${historia.grupoSanguineo}"></span></dd>
+<dt>Alergias</dt><dd><span th:text="${historia.alergias}"></span></dd>
+<dt>Enfermedades crónicas</dt><dd><span th:text="${historia.enfermedadesCronicas}"></span></dd>
+<dt>Observaciones</dt><dd><span th:text="${historia.observaciones}"></span></dd>
+</dl>
+</div>
+<p th:if="${historia == null}">No hay historia clínica registrada.</p>
+</section></div>
+<h3>Consultas</h3>
+<article class="card" th:each="consulta : ${consultas}">
+<h3 th:text="${'Consulta ' + consulta.idConsulta + ' · ' + consulta.fechaHoraInicio}"></h3>
+<dl>
+<dt>Veterinario</dt><dd><span th:text="${consulta.veterinario}"></span></dd>
+<dt>Sede</dt><dd><span th:text="${consulta.sede}"></span></dd>
+<dt>Peso (kg)</dt><dd><span th:text="${consulta.pesoKg}"></span></dd>
+<dt>Temperatura (°C)</dt><dd><span th:text="${consulta.temperaturaC}"></span></dd>
+<dt>Frecuencia cardíaca (lpm)</dt><dd><span th:text="${consulta.frecuenciaCardiaca}"></span></dd>
+<dt>Síntomas</dt><dd><span th:text="${consulta.sintomas}"></span></dd>
+<dt>Diagnóstico</dt><dd><span th:text="${consulta.diagnostico}"></span></dd>
+<dt>Observaciones</dt><dd><span th:text="${consulta.observaciones}"></span></dd>
+</dl>
+<h3>Prescripciones</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(consulta.prescripciones)}"><table>
+<thead><tr><th scope="col">Medicamento</th><th scope="col">Presentación</th><th scope="col">Dosis</th><th scope="col">Frecuencia (horas)</th><th scope="col">Duración (días)</th><th scope="col">Cantidad</th><th scope="col">Indicaciones</th></tr></thead>
+<tbody><tr th:each="fila : ${consulta.prescripciones}">
+<td><span th:text="${fila.medicamento}"></span></td>
+<td><span th:text="${fila.presentacion}"></span></td>
+<td><span th:text="${fila.dosis}"></span></td>
+<td><span th:text="${fila.frecuenciaHoras}"></span></td>
+<td><span th:text="${fila.duracionDias}"></span></td>
+<td><span th:text="${fila.cantidad}"></span></td>
+<td><span th:text="${fila.indicaciones}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(consulta.prescripciones)}">No hay registros para mostrar.</p>
+</article>
+<p class="empty-state" th:if="${#lists.isEmpty(consultas)}">No hay consultas registradas para esta mascota.</p>
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

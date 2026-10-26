@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clientes · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<h2>Clientes</h2>
+<form method="get" class="filters">
+<label for="buscar">Documento o apellido<input id="buscar" type="search" name="buscar" th:value="${buscar}"></label>
+<button type="submit">Buscar</button><a th:href="@{/clientes}">Limpiar</a>
+</form>
+<p>Se muestran como máximo 100 clientes.</p>
+<section class="card"><h3>Clientes encontrados</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(clientes)}"><table>
+<thead><tr><th scope="col">Código</th><th scope="col">Nombres</th><th scope="col">Apellidos</th><th scope="col">Documento</th><th scope="col">Correo</th></tr></thead>
+<tbody><tr th:each="fila : ${clientes}">
+<td><a th:href="@{/clientes/{id}(id=${fila.idPersona})}" th:text="${fila.idPersona}"></a></td>
+<td><span th:text="${fila.nombres}"></span></td>
+<td><span th:text="${fila.apellidos}"></span></td>
+<td><span th:text="${fila.numDocumento}"></span></td>
+<td><span th:text="${fila.email}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(clientes)}">No hay registros para mostrar.</p>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>

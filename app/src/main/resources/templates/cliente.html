@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cliente · SIGEVET</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/menu :: encabezado}"></header>
+<main id="contenido" class="container pagina" tabindex="-1">
+<p><a th:href="@{/clientes}">Volver a clientes</a></p>
+<h2 th:text="${cliente.nombreCompleto}"></h2>
+<div class="grid">
+<section class="card"><h3>Datos del cliente</h3>
+<dl>
+<dt>Tipo de documento</dt><dd><span th:text="${cliente.tipoDocumento}"></span></dd>
+<dt>Documento</dt><dd><span th:text="${cliente.numDocumento}"></span></dd>
+<dt>Correo electrónico</dt><dd><span th:text="${cliente.email}"></span></dd>
+<dt>Dirección</dt><dd><span th:text="${cliente.direccion}"></span></dd>
+<dt>Ciudad</dt><dd><span th:text="${cliente.ciudad}"></span></dd>
+<dt>Departamento</dt><dd><span th:text="${cliente.departamento}"></span></dd>
+<dt>Fecha de registro</dt><dd><span th:text="${cliente.fechaRegistro}"></span></dd>
+</dl>
+</section>
+<section class="card"><h3>Teléfonos</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(telefonos)}"><table>
+<thead><tr><th scope="col">Teléfono</th><th scope="col">Tipo</th></tr></thead>
+<tbody><tr th:each="fila : ${telefonos}">
+<td><span th:text="${fila.telefono}"></span></td>
+<td><span th:text="${fila.tipo}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(telefonos)}">No hay registros para mostrar.</p>
+</section>
+</div>
+<section class="card"><h3>Mascotas</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(mascotas)}"><table>
+<thead><tr><th scope="col">Mascota</th><th scope="col">Raza</th><th scope="col">Especie</th><th scope="col">Estado</th></tr></thead>
+<tbody><tr th:each="fila : ${mascotas}">
+<td><a th:href="@{/mascotas/{id}(id=${fila.idMascota})}" th:text="${fila.nombre}"></a></td>
+<td><span th:text="${fila.raza}"></span></td>
+<td><span th:text="${fila.especie}"></span></td>
+<td><span th:text="${fila.estado}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(mascotas)}">No hay registros para mostrar.</p>
+</section>
+<section class="card"><h3>Facturas</h3>
+<div class="table-wrap" th:if="${!#lists.isEmpty(facturas)}"><table>
+<thead><tr><th scope="col">Número</th><th scope="col">Fecha</th><th scope="col">Sede</th><th scope="col">Estado</th><th scope="col">Total</th></tr></thead>
+<tbody><tr th:each="fila : ${facturas}">
+<td><a th:href="@{/facturas/{id}(id=${fila.idFactura})}" th:text="${fila.numeroFactura}"></a></td>
+<td><span th:text="${fila.fechaEmision}"></span></td>
+<td><span th:text="${fila.sede}"></span></td>
+<td><span th:text="${fila.estado}"></span></td>
+<td><span th:text="${fila.total == null ? '—' : '$ ' + #numbers.formatDecimal(fila.total, 1, 'POINT', 2, 'COMMA')}"></span></td>
+</tr></tbody></table></div>
+<p class="empty-state" th:if="${#lists.isEmpty(facturas)}">No hay registros para mostrar.</p>
+</section>
+
+</main>
+<footer th:replace="~{fragmentos/menu :: pie}"></footer>
+</body>
+</html>
