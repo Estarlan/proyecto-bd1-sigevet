@@ -124,7 +124,7 @@ public class FacturaDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo listarPorCliente los datos.", e);
+            throw new RuntimeException("No se pudieron consultar las facturas del cliente.", e);
         }
     }
 }

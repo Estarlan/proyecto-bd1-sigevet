@@ -74,7 +74,7 @@ public class InventarioDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo stockBajo los datos.", e);
+            throw new RuntimeException("No se pudo consultar el stock bajo.", e);
         }
     }
 }

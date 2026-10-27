@@ -13,7 +13,9 @@ como_vetdb() { mysql --defaults-extra-file=<(printf '[client]\nuser=vetdb\npassw
 
 if ! como_vetdb -e "SELECT 1" >/dev/null 2>&1; then
   echo "== Creando la base sigevet y los usuarios vetdb y vet_app (como root)"
-  como_root -e "SET @clave_vetdb = '$VETDB_PWD'; SET @clave_vet_app = '$VET_APP_PWD'; SOURCE 01_ddl/00_crear_usuarios.sql;"
+  # las claves entran por la entrada estándar, así no aparecen en la lista de procesos
+  { printf "SET @clave_vetdb = '%s'; SET @clave_vet_app = '%s';\n" "$VETDB_PWD" "$VET_APP_PWD"
+    echo "SOURCE 01_ddl/00_crear_usuarios.sql"; } | como_root
 fi
 if [ "${1:-}" = "--reiniciar" ]; then
   echo "== Borrando la base sigevet"

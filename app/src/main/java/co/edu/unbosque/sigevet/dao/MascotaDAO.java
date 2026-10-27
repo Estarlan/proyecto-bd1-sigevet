@@ -81,7 +81,7 @@ public class MascotaDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo listarPorCliente los datos.", e);
+            throw new RuntimeException("No se pudieron consultar las mascotas del cliente.", e);
         }
     }
 
@@ -106,7 +106,7 @@ public class MascotaDAO {
             return null;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo historia los datos.", e);
+            throw new RuntimeException("No se pudo consultar la historia clínica.", e);
         }
     }
 }
