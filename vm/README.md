@@ -10,7 +10,7 @@ Hay tres formas de montar la VM:
 - **A. VirtualBox**: a mano, para un equipo con Windows.
 - **B. Lima en macOS**: la usamos para hacer las pruebas en un MacBook Intel.
 
-Los scripts de `vm/scripts/` sirven para las dos formas. Ubican la carpeta del proyecto por sí solos, así que no
+Los scripts de `vm/scripts/` sirven para las tres formas. Ubican la carpeta del proyecto por sí solos, así que no
 importa en qué ruta quede dentro de la VM.
 
 ## Computador con Linux: un solo comando

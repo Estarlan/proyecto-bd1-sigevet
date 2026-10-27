@@ -1,4 +1,4 @@
-# Simulación de la VM en macOS con Lima (la VM definitiva va en VirtualBox, ver vm/README.md).
+# Simulación de la VM en macOS con Lima (la VM definitiva se crea con vm/migrar_linux.sh, ver vm/README.md).
 # Crear:   limactl start --name=sigevet --tty=false vm/sigevet-ol9.yaml
 # Entrar:  limactl shell sigevet
 minimumLimaVersion: 2.0.0

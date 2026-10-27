@@ -35,6 +35,13 @@ La FK `FK_SEDE_DIRECTOR` es circular (EMPLEADO referencia a SEDE y SEDE a EMPLEA
 director (`02_dml/03_sede.sql`) y el director se asigna con `UPDATE` después de cargar los empleados
 (`02_dml/05_sede_director.sql`).
 
+## Requisito del servidor
+
+`vetdb` crea funciones y disparadores sin ser administrador. Con el registro binario activo (MySQL 8.x lo trae así por
+defecto) eso exige `log_bin_trust_function_creators = 1` en la configuración del servidor. `vm/scripts/instalar_mysql.sh`
+ya lo escribe en `/etc/my.cnf.d/sigevet.cnf`; en cualquier otro MySQL hay que agregarlo, porque si no el script
+`01_ddl/04_programas.sql` falla con el error 1419.
+
 ## Cómo ejecutar
 
 Dentro de la máquina virtual, desde la carpeta del proyecto:
@@ -68,5 +75,5 @@ citas atendidas, facturas que cuadran con sus detalles) y de ahí sacamos los IN
 
 ## Versión anterior en Oracle
 
-El proyecto empezó en Oracle Database Free. Esa versión de los scripts quedó como respaldo en la rama
-`respaldo-oracle` del repositorio.
+El proyecto empezó en Oracle Database Free. Esa versión de los scripts sigue en el historial de Git: el último commit
+con Oracle es `2830233`, justo antes del cambio a MySQL.
