@@ -13,7 +13,8 @@ java -jar target/sigevet.jar
 ```
 
 Si el wrapper no tiene permiso de ejecución, usa `sh ./mvnw package`.
-Abre `http://localhost:5000`. El jar ya incluye el servidor web.
+Abre `http://localhost:5000`. El jar ya incluye el servidor web. Antes hay que tener la base `sigevet` cargada
+(ver `database/README.md`).
 
 ## Variables de entorno
 
@@ -24,7 +25,8 @@ Abre `http://localhost:5000`. El jar ya incluye el servidor web.
 | `SIGEVET_DB_PASSWORD` | Cadena vacía |
 | `SIGEVET_ALGEBRA` | `../database/03_varios/01_consultas_algebra_relacional.sql` |
 
-Exporta estas variables antes de ejecutar el jar. `vet_app` debe tener solo
+Exporta estas variables antes de ejecutar el jar. La clave de la base va solo en
+`SIGEVET_DB_PASSWORD`; no se escribe en ningún archivo. `vet_app` debe tener solo
 permiso de lectura. Si usas la ruta relativa de álgebra, ejecuta desde `app`.
 Para correr el jar desde otra carpeta, configura una ruta absoluta en
 `SIGEVET_ALGEBRA`. El archivo se lee línea por línea cuando se abre álgebra.

@@ -53,7 +53,7 @@ public class InicioDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo conteos los datos.", e);
+            throw new RuntimeException("No se pudieron contar los registros de las tablas.", e);
         }
     }
 
@@ -76,7 +76,7 @@ public class InicioDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo ingresos los datos.", e);
+            throw new RuntimeException("No se pudieron consultar los ingresos por sede.", e);
         }
     }
 
@@ -96,7 +96,7 @@ public class InicioDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo estadosCitas los datos.", e);
+            throw new RuntimeException("No se pudieron contar las citas por estado.", e);
         }
     }
 }

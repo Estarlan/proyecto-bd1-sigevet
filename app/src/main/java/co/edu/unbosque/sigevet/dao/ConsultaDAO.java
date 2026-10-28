@@ -46,7 +46,7 @@ public class ConsultaDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo listarPorMascota los datos.", e);
+            throw new RuntimeException("No se pudieron consultar las consultas de la mascota.", e);
         }
     }
 
@@ -79,7 +79,7 @@ public class ConsultaDAO {
             return lista;
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
-            throw new RuntimeException("No se pudo prescripciones los datos.", e);
+            throw new RuntimeException("No se pudieron consultar las prescripciones de la mascota.", e);
         }
     }
 }
