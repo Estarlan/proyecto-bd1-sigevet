@@ -16,7 +16,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 
 ## Datos que faltan (necesarios para la etapa 3)
 
-- [ ] Nombre completo de **Juan Miguel**, como aparece en su cédula → Juan David
+- [x] **Juan Miguel:** Juan Miguel Ramos Sevilla, C.C. 1025528586
 - [x] **Sergio:** Sergio Alejandro Parra Rivera, C.C. 1031653350 (rol: carga y verificación de la base e integración final)
 - [x] **Diagrama de clases:** hecho por Claude (`documentos/fase1/diagramas_drawio/28_Clases.drawio` y PNG); Sebastián lo revisa
 
@@ -44,7 +44,6 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [ ] Hacer sus commits con su usuario de GitHub
 
 ### Juan Miguel — servidor y aplicación
-- [ ] Mandar a Juan David su nombre completo (NO editar portadas ni firmas)
 - [ ] Actualizar la tabla de commits en `07_Repositorio_GitHub.docx` (comparar con `git log`)
 - [ ] Revisar `04_Implementacion_RDBMS.docx`
 - [ ] Revisar `02_Identificacion_de_Interesados.docx`
@@ -90,7 +89,6 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 ## Para preguntar y verificar (Juan David)
 
 - [ ] Subir los commits a GitHub: `git push origin HEAD:main` desde la carpeta del proyecto
-- [ ] Pedir a Juan Miguel su nombre completo, tal como aparece en su cédula
 - [ ] Responder a Sergio las preguntas de su Claude (la VM es Lima con Oracle Linux 9 sobre Fedora; los datos del servidor)
 - [ ] En el portátil: encender la VM, aplicar los 3 arreglos y verificar la base
 - [ ] Comprobar que los compañeros ya hicieron `git pull` y trabajan en su propia rama
