@@ -23,11 +23,11 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 ## Etapa 1 — Cada uno hace lo suyo (en paralelo)
 
 ### Juan David — solo el servidor
-- [ ] En el portátil Fedora, con el repositorio clonado y `vm/claves.env` puesto (modelo en `vm/claves.ejemplo`),
-      correr `bash vm/scripts/preparar_servidor_fedora.sh --aplicar`. Revisa el equipo, enciende la VM, aplica los
-      arreglos (pide sudo y confirma cada uno) y escribe `~/INFORME_SERVIDOR.md` sin claves
-- [ ] Mandar `INFORME_SERVIDOR.md` y `vm/claves.env` a Sergio por un canal privado
-- [ ] Ya no hace falta la regla de firewall del 3306: la VM publica ese puerto solo en 127.0.0.1
+- [x] Portátil Fedora preparado y verificado (31-Oct): VM Running, mysqld y app activos, 22 tablas y 6 vistas, la tapa
+      no suspende, la VM arranca sola, SSH activo. `INFORME_SERVIDOR.md` generado sin claves
+- [ ] Mandar `INFORME_SERVIDOR.md` y `vm/claves.env` a Sergio por un canal privado (nunca por GitHub)
+- [x] Puerto 3306: queda solo en 127.0.0.1 del portátil (decisión vigente). Dentro de la VM MySQL escucha en todas las
+      interfaces, pero Lima solo lo publica en 127.0.0.1; no hay regla de firewall en Fedora
 
 ### Sebastián — modelos y presentación
 - [ ] Revisar el diagrama de clases `documentos/fase1/diagramas_drawio/28_Clases.drawio` (ya hecho; arreglar lo que haga falta)
@@ -65,6 +65,25 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [ ] Cada uno sube su rama y avisa
 - [ ] Sergio une todas las ramas a `main` (sin force push) y revisa que no se hayan roto los Word
       (`pandoc archivo.docx -t plain`)
+
+## Hallazgos de la revisión del 31-Oct (hay que resolverlos antes de entregar)
+
+- [ ] **Juan David:** confirmar con el docente que se acepta un grupo de 4 (el enunciado pide 3) ANTES de tocar portadas
+- [ ] **Todos:** commits propios. Hoy hay 44 de Juan David, 1 de Sebastián y 0 de Juan Miguel y Sergio. Cada uno sube su
+      trabajo con su usuario de GitHub (`git config user.name` y `user.email` correctos)
+- [ ] **Anfitrión = Fedora (decisión):** cambiar "MacBook / macOS" por "portátil Fedora 44 con VM Lima Oracle Linux 9"
+      en `fase2/02_Implementacion_VM`, `fase2/03_Analisis_Seleccion_RDBMS`, `final/00_Documento_Final`,
+      `transversales/01_Acta_de_Constitucion` y `06_Acta_de_Cierre`. Sergio ya tiene 01 y 02 de fase 2; el resto se hace
+      en la integración con Claude
+- [ ] **Sergio:** regenerar los logs de evidencia en el portátil Fedora (`vm/scripts/evidencias.sh`), porque los actuales
+      son del Mac
+- [ ] **Sebastián:** en `05` y `06` (Barker, Crow's Foot y relacional) poner las imágenes de Workbench como principales o
+      a la par de las de Draw.io; el enunciado pide Data Modeler o Workbench y hoy dicen "Workbench queda como respaldo"
+- [ ] **Antes de entregar:** sacar del repositorio `TODO.md`, `ENCARGO_COMPANERO.md`, `PORTAFOLIO_REFERENCIA.md` y
+      `GUION_VIDEO.md` (son notas internas; se mueven a una carpeta fuera del repo y se agregan a `.gitignore`)
+- [ ] **Decisión de equipo:** revisar la política del curso sobre uso de IA y, si se usó, declararlo en el documento final
+- [ ] Opcional: `CK_VETERINARIO_ANIO_GRADUACION` tiene 2026 fijo (fallaría con graduados de 2027); la app abre una
+      conexión por consulta sin pool; el mapeo de `ResultSet` se repite en los DAO. Tener respuesta lista por si preguntan
 
 ## Etapa 3 — Integración final (Juan David con Claude)
 
