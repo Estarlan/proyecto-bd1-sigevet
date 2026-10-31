@@ -1,23 +1,45 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.Factura;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos de las facturas. Ejecuta el SQL con JDBC y {@code PreparedStatement}, sin ORM, y convierte cada
+ * fila en un objeto {@link Factura}. El total de cada factura se calcula sumando sus líneas de detalle.
+ */
 @Repository
 public class FacturaDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public FacturaDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Lista las facturas con filtros opcionales por sede y por estado.
+     *
+     * @param sede identificador de la sede, o {@code null} para todas las sedes.
+     * @param estado estado de la factura (PAGADA, PENDIENTE o ANULADA), o {@code null} para todos.
+     * @return las facturas de la más reciente a la más antigua, con su total.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Factura> listar(Integer sede, String estado) {
         ArrayList<Factura> lista = new ArrayList<Factura>();
+        // la subconsulta "t" suma las líneas de cada factura (cantidad x precio x descuento) y se une con LEFT JOIN:
+        // una factura sin líneas aparece con total 0 gracias a IFNULL. Los filtros usan "(? IS NULL OR ...)".
         String sql = "SELECT f.id_cliente,f.metodo_pago,f.id_factura, f.numero_factura, f.fecha_emision, f.estado, CONCAT(c.nombres, ' ', c.apellidos) AS cliente, s.nombre AS sede, IFNULL(t.total, 0) AS total "
                 + "FROM FACTURA f JOIN CLIENTE c ON c.id_cliente = f.id_cliente "
                 + "JOIN SEDE s ON s.id_sede = f.id_sede "
@@ -29,6 +51,7 @@ public class FacturaDAO {
                 + "ORDER BY f.fecha_emision DESC, f.id_factura DESC";
         try (Connection conexion = conexionBD.conectar();
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            // la sede ocupa los parámetros 1 y 2; el estado, los parámetros 3 y 4
             if (sede == null) {
                 sentencia.setNull(1, Types.INTEGER);
                 sentencia.setNull(2, Types.INTEGER);
@@ -60,6 +83,13 @@ public class FacturaDAO {
         }
     }
 
+    /**
+     * Busca una factura por su identificador, con el nombre del cliente, la sede y el total.
+     *
+     * @param id identificador de la factura.
+     * @return la factura, o {@code null} si no existe.
+     * @throws RuntimeException si la consulta falla.
+     */
     public Factura buscar(long id) {
         String sql = "SELECT f.*, CONCAT(c.nombres, ' ', c.apellidos) AS cliente, s.nombre AS sede, IFNULL(t.total, 0) AS total "
                 + "FROM FACTURA f JOIN CLIENTE c ON c.id_cliente = f.id_cliente "
@@ -72,6 +102,7 @@ public class FacturaDAO {
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
             sentencia.setLong(1, id);
             try (ResultSet rs = sentencia.executeQuery()) {
+                // el identificador es llave primaria: hay a lo sumo una fila, por eso se devuelve en la primera vuelta
                 while (rs.next()) {
                     Factura objeto = new Factura();
                     objeto.setIdFactura(rs.getLong("id_factura"));
@@ -93,6 +124,13 @@ public class FacturaDAO {
         }
     }
 
+    /**
+     * Lista las facturas de un cliente.
+     *
+     * @param id identificador del cliente.
+     * @return las facturas del cliente, de la más reciente a la más antigua, con su total.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Factura> listarPorCliente(int id) {
         ArrayList<Factura> lista = new ArrayList<Factura>();
         String sql = "SELECT f.id_cliente,f.metodo_pago,f.id_factura, f.numero_factura, f.fecha_emision, f.estado, CONCAT(c.nombres, ' ', c.apellidos) AS cliente, s.nombre AS sede, IFNULL(t.total, 0) AS total "

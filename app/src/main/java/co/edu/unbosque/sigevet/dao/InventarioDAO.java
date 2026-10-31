@@ -1,23 +1,43 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.ItemInventario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos del inventario de medicamentos por sede. Ejecuta el SQL con JDBC y {@code PreparedStatement}, sin
+ * ORM, y convierte cada fila en un objeto {@link ItemInventario}.
+ */
 @Repository
 public class InventarioDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public InventarioDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Lista el inventario, de todas las sedes o de una sola.
+     *
+     * @param sede identificador de la sede a filtrar, o {@code null} para listar todas.
+     * @return las existencias ordenadas por sede, medicamento y presentación.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<ItemInventario> listar(Integer sede) {
         ArrayList<ItemInventario> lista = new ArrayList<ItemInventario>();
+        // "(? IS NULL OR i.id_sede = ?)": si el filtro llega nulo, la condición se cumple en todas las filas
         String sql = "SELECT s.nombre AS sede, m.nombre AS medicamento, m.presentacion, i.stock_actual, i.stock_minimo, i.fecha_actualizacion "
                 + "FROM INVENTARIO i JOIN SEDE s ON s.id_sede = i.id_sede "
                 + "JOIN MEDICAMENTO m ON m.id_medicamento = i.id_medicamento "
@@ -25,6 +45,7 @@ public class InventarioDAO {
                 + "ORDER BY s.nombre, m.nombre, m.presentacion";
         try (Connection conexion = conexionBD.conectar();
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            // el mismo valor se envía a los dos signos de interrogación del filtro
             if (sede == null) {
                 sentencia.setNull(1, Types.INTEGER);
                 sentencia.setNull(2, Types.INTEGER);
@@ -51,6 +72,13 @@ public class InventarioDAO {
         }
     }
 
+    /**
+     * Lista los medicamentos cuyo stock actual está por debajo del mínimo, en todas las sedes. La página de inicio
+     * los muestra como alerta de reposición.
+     *
+     * @return las existencias con stock bajo, ordenadas por sede y medicamento.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<ItemInventario> stockBajo() {
         ArrayList<ItemInventario> lista = new ArrayList<ItemInventario>();
         String sql = "SELECT s.nombre AS sede,m.nombre AS medicamento,m.presentacion,i.fecha_actualizacion,i.stock_actual,i.stock_minimo "
