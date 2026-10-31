@@ -57,7 +57,7 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 
 ### Sebastián — modelos y diagramas
 1. **Diagrama de clases:** ya está hecho: `documentos/fase1/diagramas_drawio/28_Clases.drawio` y su PNG en
-   `documentos/fase1/diagramas_drawio/png/28_Clases.png` (sale de las clases Java del paquete `modelo`). Ábrelo en
+   `documentos/fase1/diagramas_drawio/png/28_Clases.png` (sale de las clases Java del paquete `model`). Ábrelo en
    draw.io y revisa que las clases, atributos y flechas sean correctos; si quieres mover algo, hazlo en draw.io y
    reexporta el PNG. Decide con el equipo si se incluye en un Word o en la presentación.
 2. **Revisión de documentos:** lee completos `01_Propuesta_del_Proyecto` y `06_Modelo_Relacional` y corrige lo que

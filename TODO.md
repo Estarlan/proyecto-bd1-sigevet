@@ -51,9 +51,9 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 
 ### Sergio — base de datos y documentos de servidor
 - [ ] Recibir `INFORME_SERVIDOR.md` y `vm/claves.env`
-- [ ] Actualizar `documentos/fase2/01_Analisis_Seleccion_SO.docx` y `02_Implementacion_VM.docx` con los datos
+- [x] Actualizar `documentos/fase2/01_Analisis_Seleccion_SO.docx` y `02_Implementacion_VM.docx` con los datos
       reales (Fedora 44 como anfitrión, VM Lima con Oracle Linux 9 y MySQL 8.4 dentro de la VM)
-- [ ] Actualizar `documentos/fase2/08_Guion_Video.docx` con el reparto de cuatro personas (el vigente está en
+- [x] Actualizar `documentos/fase2/08_Guion_Video.docx` con el reparto de cuatro personas (el vigente está en
       `GUION_VIDEO.md`)
 - [ ] Correr `bash vm/scripts/cargar_bd.sh --reiniciar` y confirmar las cifras
 - [ ] Mandar a Sebastián sus observaciones de la diapositiva 11
