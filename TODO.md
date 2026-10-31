@@ -17,7 +17,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 ## Datos que faltan (necesarios para la etapa 3)
 
 - [ ] Nombre completo de **Juan Miguel**, como aparece en su cédula → Juan David
-- [ ] Nombre completo, cédula y rol de **Sergio** → Juan David
+- [x] **Sergio:** Sergio Alejandro Parra Rivera, C.C. 1031653350 (rol: carga y verificación de la base e integración final)
 - [x] **Diagrama de clases:** hecho por Claude (`documentos/fase1/diagramas_drawio/28_Clases.drawio` y PNG); Sebastián lo revisa
 
 ## Etapa 1 — Cada uno hace lo suyo (en paralelo)
@@ -54,7 +54,6 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [ ] Hacer sus commits con su usuario de GitHub
 
 ### Sergio — base de datos y documentos de servidor
-- [ ] Mandar a Juan David su nombre completo, cédula y rol
 - [ ] Recibir `INFORME_SERVIDOR.md` y `vm/claves.env`
 - [ ] Actualizar `documentos/fase2/01_Analisis_Seleccion_SO.docx` y `02_Implementacion_VM.docx` con los datos
       reales (Fedora 44 como anfitrión, VM Lima con Oracle Linux 9 y MySQL 8.4 dentro de la VM)

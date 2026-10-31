@@ -38,8 +38,8 @@ la normalización."
 
 **Juan Miguel (10 s):** "Soy Juan Miguel Ramos. Me encargué del servidor Linux y de la aplicación web."
 
-**Sergio (10 s):** "Soy [NOMBRE COMPLETO DE SERGIO]. Me encargué de [SU PARTE: carga y verificación de la base e
-integración final]."
+**Sergio (10 s):** "Soy Sergio Alejandro Parra Rivera. Me encargué de la carga y verificación de la base de datos
+y de la integración final del proyecto."
 
 ---
 
@@ -161,7 +161,9 @@ Muestra https://github.com/Estarlan/proyecto-bd1-sigevet: las carpetas y la pest
 
 **Juan Miguel:** muestra sus commits y di una lección sobre el servidor o la aplicación.
 
-**Sergio:** muestra sus commits y di una lección sobre la integración o la carga de datos. Cierra el video:
+**Sergio:** muestra sus commits y di una lección sobre la integración o la carga de datos. Ejemplos: "Aprendí que
+un script que carga todo en orden evita errores que a mano pasan sin que uno los vea", o "Aprendí que integrar el trabajo
+de cuatro personas exige acordar quién edita cada archivo antes de empezar". Cierra el video:
 "Gracias por ver nuestro proyecto."
 
 **Importante:** antes de grabar, cada uno debe tener sus propios commits reales en el repositorio, hechos con su
