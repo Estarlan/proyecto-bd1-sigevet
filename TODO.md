@@ -56,7 +56,8 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [x] Actualizar `documentos/fase2/08_Guion_Video.docx` con el reparto de cuatro personas (el vigente está en
       `GUION_VIDEO.md`)
 - [ ] Correr `bash vm/scripts/cargar_bd.sh --reiniciar` y confirmar las cifras
-- [ ] Mandar a Sebastián sus observaciones de la diapositiva 11
+- [ ] Mandar a Sebastián sus observaciones de la diapositiva 11 (texto listo en `OBSERVACIONES_DIAPOSITIVAS_SERGIO.md`;
+      falta enviárselo)
 - [ ] Ensayar el bloque 5 y el bloque 6
 - [ ] Hacer sus commits con su usuario de GitHub
 
@@ -65,6 +66,11 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [ ] Cada uno sube su rama y avisa
 - [ ] Sergio une todas las ramas a `main` (sin force push) y revisa que no se hayan roto los Word
       (`pandoc archivo.docx -t plain`)
+- Ensayo de unión hecho en una rama temporal: `ramaDocumentos` + la rama de Sebastián
+  (`sebastian/revision-modelos-documentos`) se unen sin conflictos y los 24 archivos de `documentos/` (23 Word y la
+  presentación) abren sin daño. Falta repetirlo con las ramas de Juan Miguel y de Juan David cuando las suban.
+- No unir `revision-nube`: es una rama vieja con commits de autor "Claude", y su contenido ya está en `main` con
+  commits de Juan David. `entrega` es idéntica a `main`.
 
 ## Etapa 3 — Integración final (Juan David con Claude)
 
