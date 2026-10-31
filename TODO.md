@@ -23,14 +23,11 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 ## Etapa 1 — Cada uno hace lo suyo (en paralelo)
 
 ### Juan David — solo el servidor
-- [ ] Autorizar a Antigravity en el portátil: encender la VM (`limactl start sigevet`) y dar la clave de MySQL
-- [ ] Aplicar los 3 arreglos del servidor: no suspender al cerrar la tapa, firewall del 3306 solo para la red local,
-      arranque automático de la VM
-- [ ] Verificar la base en la VM: 22 tablas, 113 restricciones, 6 vistas, 2 funciones, 3 procedimientos,
-      9 disparadores, 1.091 registros
-- [ ] Mandar `INFORME_SERVIDOR.md` actualizado a Sergio (sin claves)
-- [ ] Pasar `vm/claves.env` a Sergio por un canal privado
-- [ ] Mandar los nombres de la lista "Datos que faltan"
+- [ ] En el portátil Fedora, con el repositorio clonado y `vm/claves.env` puesto (modelo en `vm/claves.ejemplo`),
+      correr `bash vm/scripts/preparar_servidor_fedora.sh --aplicar`. Revisa el equipo, enciende la VM, aplica los
+      arreglos (pide sudo y confirma cada uno) y escribe `~/INFORME_SERVIDOR.md` sin claves
+- [ ] Mandar `INFORME_SERVIDOR.md` y `vm/claves.env` a Sergio por un canal privado
+- [ ] Ya no hace falta la regla de firewall del 3306: la VM publica ese puerto solo en 127.0.0.1
 
 ### Sebastián — modelos y presentación
 - [ ] Revisar el diagrama de clases `documentos/fase1/diagramas_drawio/28_Clases.drawio` (ya hecho; arreglar lo que haga falta)
@@ -90,6 +87,6 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 
 - [ ] Subir los commits a GitHub: `git push origin HEAD:main` desde la carpeta del proyecto
 - [ ] Responder a Sergio las preguntas de su Claude (la VM es Lima con Oracle Linux 9 sobre Fedora; los datos del servidor)
-- [ ] En el portátil: encender la VM, aplicar los 3 arreglos y verificar la base
+- [ ] En el portátil: correr el script `preparar_servidor_fedora.sh --aplicar` (ver arriba)
 - [ ] Comprobar que los compañeros ya hicieron `git pull` y trabajan en su propia rama
 - [ ] Revisar que nadie haya editado nombres, portadas ni firmas antes de la integración final
