@@ -98,21 +98,34 @@ limactl shell sigevet systemctl status mysqld --no-pager
 
 ## Bloques 5 y 6 — Sergio: la base de datos (6:00–10:00)
 
-**Prepara:** una terminal en la raíz del repositorio del servidor, con las claves ya definidas en `vm/claves.env`
-(archivo que NO se sube a GitHub; Juan David te lo pasa por un canal privado, hay un modelo en `vm/claves.ejemplo`),
-y MySQL Workbench conectado a la base `sigevet`.
+**Prepara:** una terminal SSH al portátil del servidor y, desde ahí, entrar a la VM. `cargar_bd.sh` usa el cliente
+`mysql` de la VM, así que se corre **dentro de la VM**, no en Fedora. El proyecto está en `~/proyecto` dentro de la
+VM (es la copia que deja `vm/migrar_linux.sh`) y ahí mismo debe estar `vm/claves.env` (archivo que NO se sube a
+GitHub; Juan David te lo pasa por un canal privado, hay un modelo en `vm/claves.ejemplo`). Antes de grabar, confirma
+que esa copia tiene la última versión de `database/` (**[No verificado]**: depende de cuándo se copió). Ten también
+MySQL Workbench conectado a la base `sigevet` (el puerto 3306 está pendiente de confirmar con Juan David, ver
+`OBSERVACIONES_DIAPOSITIVAS_SERGIO.md`).
 
 **Bloque 5 (2 min) — Carga y verificación**
 ```bash
+limactl shell --workdir / sigevet
+cd ~/proyecto
 bash vm/scripts/cargar_bd.sh --reiniciar
 ```
 **Di:**
-> "Este script borra la base y la vuelve a crear desde cero, en orden: primero las tablas, luego los índices, las
-> vistas y los programas, y al final los datos. Al terminar verificamos: 22 tablas, 113 restricciones con nombre y
-> 1.091 registros. También hay 9 disparadores, que rechazan datos inválidos que un CHECK no alcanza a validar, por
-> ejemplo una cita en una fecha imposible."
+> "Este script borra la base y la vuelve a crear desde cero, en orden: primero las tablas con sus restricciones, luego
+> los índices, después las funciones, los procedimientos y los disparadores, y solo entonces los datos. Al final van
+> las vistas y la verificación. Verificamos: 22 tablas, 113 restricciones con nombre y 1.091 registros. También hay 9
+> disparadores, que rechazan datos que un CHECK no alcanza a validar, por ejemplo un veterinario asignado a una cita
+> de una sede donde no trabaja."
 
-Muestra la salida de la verificación con esas cifras.
+Muestra la salida de la verificación. **Ojo:** esa salida no imprime los totales 113 ni 1.091. Muestra las
+restricciones por tipo (22 llaves primarias, 25 únicas, 36 CHECK y 30 foráneas, que suman 113) y los registros por
+tabla (que suman 1.091), así que di el total de palabra mientras señalas esas tablas. Al final la prueba de reglas
+imprime 10 filas, una por cada regla que debe rechazar un dato.
+
+Otros ejemplos reales de disparadores, por si prefieres cambiar el de arriba: una consulta de una cita que no está
+ATENDIDA (error 20004) o un empleado que no es de tipo VET registrado como veterinario (error 20001).
 
 **Bloque 6 (2 min) — Consultas de álgebra en Workbench**
 Abre `database/03_varios/01_consultas_algebra_relacional.sql` y ejecuta tres o cuatro de estas:
@@ -124,6 +137,10 @@ Abre `database/03_varios/01_consultas_algebra_relacional.sql` y ejecuta tres o c
 **Di, para cada una:**
 > "Esta es la expresión de álgebra relacional y esta es su consulta en SQL. La división no existe en SQL, así que se
 > escribe con un doble NOT EXISTS. Son 55 ejercicios y los 55 dan el mismo resultado que en la Fase 1."
+
+Nota: las 55 consultas son idénticas a las de `documentos/fase1/08_Consultas_SQL_Algebra_Relacional.sql` (se comparó
+sin comentarios). Que den el mismo resultado lo declara el registro `vm/logs/06_algebra_mysql.log`, que lo compara
+contra una base SQLite; **[No verificado]** contra el estado actual de los archivos, porque no hay MySQL aquí.
 
 ---
 
