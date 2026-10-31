@@ -18,7 +18,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 
 - [ ] Nombre completo de **Juan Miguel**, como aparece en su cédula → Juan David
 - [ ] Nombre completo, cédula y rol de **Sergio** → Juan David
-- [ ] Archivo del **diagrama de clases** (no está en el repositorio) → de Juan David a Sebastián
+- [x] **Diagrama de clases:** hecho por Claude (`documentos/fase1/diagramas_drawio/28_Clases.drawio` y PNG); Sebastián lo revisa
 
 ## Etapa 1 — Cada uno hace lo suyo (en paralelo)
 
@@ -30,12 +30,10 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
       9 disparadores, 1.091 registros
 - [ ] Mandar `INFORME_SERVIDOR.md` actualizado a Sergio (sin claves)
 - [ ] Pasar `vm/claves.env` a Sergio por un canal privado
-- [ ] Mandar el diagrama de clases a Sebastián
 - [ ] Mandar los nombres de la lista "Datos que faltan"
 
 ### Sebastián — modelos y presentación
-- [ ] Ordenar las flechas del diagrama de clases en draw.io y guardarlo como `diagramas/drawio/28_Clases.drawio`
-      con su PNG en `diagramas/png/`
+- [ ] Revisar el diagrama de clases `documentos/fase1/diagramas_drawio/28_Clases.drawio` (ya hecho; arreglar lo que haga falta)
 - [ ] Revisar `01_Propuesta_del_Proyecto.docx`
 - [ ] Revisar `06_Modelo_Relacional.docx`
 - [ ] Preparar la explicación de los ejercicios 11 y 53 (fecha fija 2026-10-09); opcional: una línea en

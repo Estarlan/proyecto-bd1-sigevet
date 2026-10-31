@@ -56,10 +56,10 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 ## 4. Reparto
 
 ### Sebastián — modelos y diagramas
-1. **Diagrama de clases:** las clases ya están bien. Solo hay que ordenar las flechas en draw.io para que no se
-   crucen ni tapen las clases. El archivo NO está en el repositorio (la carpeta `diagramas/drawio/` solo tiene los
-   modelos de datos): pídeselo a Juan David, trabájalo en draw.io, guárdalo como `diagramas/drawio/28_Clases.drawio`
-   con su PNG en `diagramas/png/`, y revisa que el Word o la diapositiva que lo use tenga la imagen nueva.
+1. **Diagrama de clases:** ya está hecho: `documentos/fase1/diagramas_drawio/28_Clases.drawio` y su PNG en
+   `documentos/fase1/diagramas_drawio/png/28_Clases.png` (sale de las clases Java del paquete `modelo`). Ábrelo en
+   draw.io y revisa que las clases, atributos y flechas sean correctos; si quieres mover algo, hazlo en draw.io y
+   reexporta el PNG. Decide con el equipo si se incluye en un Word o en la presentación.
 2. **Revisión de documentos:** lee completos `01_Propuesta_del_Proyecto` y `06_Modelo_Relacional` y corrige lo que
    suene raro o genérico. No los alargues más de un 5 % ni quites datos, tablas o imágenes.
 3. **Ejercicios 11 y 53** (`database/03_varios/01_consultas_algebra_relacional.sql`): usan la fecha fija
