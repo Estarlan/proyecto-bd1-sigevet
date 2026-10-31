@@ -86,3 +86,12 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [ ] Subir el video y poner el enlace donde lo pida el curso
 - [ ] Firmar las tres actas (los cuatro): Supuestos, Constitución y Cierre
 - [ ] Entregar `Entrega_Final_SIGEVET.zip`
+
+## Para preguntar y verificar (Juan David)
+
+- [ ] Subir los commits a GitHub: `git push origin HEAD:main` desde la carpeta del proyecto
+- [ ] Pedir a Juan Miguel su nombre completo, tal como aparece en su cédula
+- [ ] Responder a Sergio las preguntas de su Claude (la VM es Lima con Oracle Linux 9 sobre Fedora; los datos del servidor)
+- [ ] En el portátil: encender la VM, aplicar los 3 arreglos y verificar la base
+- [ ] Comprobar que los compañeros ya hicieron `git pull` y trabajan en su propia rama
+- [ ] Revisar que nadie haya editado nombres, portadas ni firmas antes de la integración final
