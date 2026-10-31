@@ -1,23 +1,44 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.Consulta;
+import co.edu.unbosque.sigevet.model.Prescripcion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos de las consultas clínicas y de sus prescripciones. Ejecuta el SQL con JDBC y
+ * {@code PreparedStatement}, sin ORM, y convierte cada fila en un objeto {@link Consulta} o {@link Prescripcion}.
+ */
 @Repository
 public class ConsultaDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public ConsultaDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Lista las consultas de una mascota, de la más reciente a la más antigua. Cada consulta llega sin
+     * prescripciones; el servicio se las asigna después con {@link #prescripciones(int)}.
+     *
+     * @param id identificador de la mascota.
+     * @return las consultas de la mascota.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Consulta> listarPorMascota(int id) {
         ArrayList<Consulta> lista = new ArrayList<Consulta>();
+        // la consulta no guarda la mascota: se llega a ella por la cita (CONSULTA -> CITA -> MASCOTA)
         String sql = "SELECT co.*, ci.fecha_hora, CONCAT(e.nombres, ' ', e.apellidos) AS veterinario, s.nombre AS sede "
                 + "FROM CONSULTA co JOIN CITA ci ON ci.id_cita = co.id_cita "
                 + "JOIN EMPLEADO e ON e.id_empleado = ci.id_veterinario "
@@ -50,6 +71,14 @@ public class ConsultaDAO {
         }
     }
 
+    /**
+     * Lista todas las prescripciones de todas las consultas de una mascota. Cada una trae el identificador de su
+     * consulta para que el servicio pueda asignarla.
+     *
+     * @param id identificador de la mascota.
+     * @return las prescripciones de la mascota, agrupadas por consulta.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Prescripcion> prescripciones(int id) {
         ArrayList<Prescripcion> lista = new ArrayList<Prescripcion>();
         String sql = "SELECT p.*, m.nombre AS medicamento, m.presentacion "

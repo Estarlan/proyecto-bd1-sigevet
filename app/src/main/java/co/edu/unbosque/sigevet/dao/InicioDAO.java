@@ -1,23 +1,41 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.Resumen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos de los resúmenes que muestra la página de inicio (conteos, ingresos y citas por estado). Ejecuta
+ * el SQL con JDBC y {@code PreparedStatement}, sin ORM, y convierte cada fila en un objeto {@link Resumen}.
+ */
 @Repository
 public class InicioDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public InicioDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Cuenta los registros de cada una de las 22 tablas del modelo.
+     *
+     * @return un {@link Resumen} por tabla, con el nombre de la tabla y su cantidad de registros.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Resumen> conteos() {
         ArrayList<Resumen> lista = new ArrayList<Resumen>();
+        // UNION ALL junta un COUNT por cada tabla en un solo resultado de dos columnas: tabla y total
         String sql = "SELECT 'DEPARTAMENTO' AS tabla, COUNT(*) AS total FROM DEPARTAMENTO "
                 + "UNION ALL SELECT 'CIUDAD', COUNT(*) FROM CIUDAD "
                 + "UNION ALL SELECT 'SEDE', COUNT(*) FROM SEDE "
@@ -57,8 +75,15 @@ public class InicioDAO {
         }
     }
 
+    /**
+     * Calcula los ingresos por sede: la suma de las líneas de las facturas pagadas.
+     *
+     * @return un {@link Resumen} por sede, con su nombre y su total de ingresos (cero si no tiene facturas pagadas).
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Resumen> ingresos() {
         ArrayList<Resumen> lista = new ArrayList<Resumen>();
+        // LEFT JOIN: una sede sin facturas pagadas también aparece, y IFNULL convierte su suma nula en 0
         String sql = "SELECT s.nombre AS sede, IFNULL(SUM(d.cantidad*d.precio_unitario*(1-d.descuento_pct/100)),0) AS total "
                 + "FROM SEDE s LEFT JOIN FACTURA f ON f.id_sede=s.id_sede AND f.estado='PAGADA' "
                 + "LEFT JOIN DETALLE_FACTURA d ON d.id_factura=f.id_factura "
@@ -80,6 +105,12 @@ public class InicioDAO {
         }
     }
 
+    /**
+     * Cuenta las citas agrupadas por estado.
+     *
+     * @return un {@link Resumen} por estado, con el nombre del estado y la cantidad de citas.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Resumen> estadosCitas() {
         ArrayList<Resumen> lista = new ArrayList<Resumen>();
         String sql = "SELECT estado,COUNT(*) AS total FROM CITA GROUP BY estado ORDER BY estado";

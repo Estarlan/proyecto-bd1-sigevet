@@ -1,22 +1,42 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.HistoriaClinica;
+import co.edu.unbosque.sigevet.model.Mascota;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos de las mascotas y de sus historias clínicas. Ejecuta el SQL con JDBC y {@code PreparedStatement},
+ * sin ORM, y convierte cada fila en un objeto {@link Mascota} o {@link HistoriaClinica}.
+ */
 @Repository
 public class MascotaDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public MascotaDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Busca una mascota por su identificador, con el nombre de su raza, su especie y su dueño.
+     *
+     * @param id identificador de la mascota.
+     * @return la mascota, o {@code null} si no existe.
+     * @throws RuntimeException si la consulta falla.
+     */
     public Mascota buscar(int id) {
+        // la mascota solo guarda la raza; la especie se obtiene por la raza (MASCOTA -> RAZA -> ESPECIE)
         String sql = "SELECT m.*, r.nombre AS raza, e.nombre AS especie, CONCAT(c.nombres, ' ', c.apellidos) AS cliente "
                 + "FROM MASCOTA m JOIN RAZA r ON r.id_raza = m.id_raza "
                 + "JOIN ESPECIE e ON e.id_especie = r.id_especie "
@@ -26,6 +46,7 @@ public class MascotaDAO {
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
             sentencia.setInt(1, id);
             try (ResultSet rs = sentencia.executeQuery()) {
+                // el identificador es llave primaria: hay a lo sumo una fila, por eso se devuelve en la primera vuelta
                 while (rs.next()) {
                     Mascota objeto = new Mascota();
                     objeto.setIdMascota(rs.getInt("id_mascota"));
@@ -50,6 +71,13 @@ public class MascotaDAO {
         }
     }
 
+    /**
+     * Lista las mascotas de un cliente.
+     *
+     * @param id identificador del cliente dueño.
+     * @return las mascotas del cliente ordenadas por nombre.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Mascota> listarPorCliente(int id) {
         ArrayList<Mascota> lista = new ArrayList<Mascota>();
         String sql = "SELECT m.*, r.nombre AS raza, e.nombre AS especie, CONCAT(c.nombres, ' ', c.apellidos) AS cliente "
@@ -85,12 +113,20 @@ public class MascotaDAO {
         }
     }
 
+    /**
+     * Busca la historia clínica de una mascota (cada mascota tiene una sola).
+     *
+     * @param id identificador de la mascota.
+     * @return la historia clínica, o {@code null} si la mascota no tiene.
+     * @throws RuntimeException si la consulta falla.
+     */
     public HistoriaClinica historia(int id) {
         String sql = "SELECT * FROM HISTORIA_CLINICA WHERE id_mascota = ?";
         try (Connection conexion = conexionBD.conectar();
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
             sentencia.setInt(1, id);
             try (ResultSet rs = sentencia.executeQuery()) {
+                // relación uno a uno con la mascota: hay a lo sumo una fila
                 while (rs.next()) {
                     HistoriaClinica objeto = new HistoriaClinica();
                     objeto.setIdHistoria(rs.getInt("id_historia"));
