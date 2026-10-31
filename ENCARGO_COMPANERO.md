@@ -4,6 +4,13 @@ Proyecto final de Bases de Datos 1, Universidad El Bosque. Equipo: Juan David Po
 Parra, Juan Miguel Ramos y Sergio. Este archivo reparte lo que falta para cerrar el proyecto. Juan David solo
 mantiene y verifica el portátil Fedora que hace de servidor; el resto de pendientes es de los otros tres.
 
+> **Avisos importantes (cambios de último momento):**
+> - La lista de pendientes con casillas está en `TODO.md`. Úsala para marcar lo que vayas terminando.
+> - Nadie edita nombres de integrantes, portadas ni firmas. Eso se hace todo junto al final, con Claude, para que no
+>   haya choques en los Word. Solo manda tu nombre completo a Juan David.
+> - La presentación `.pptx` la edita solo Sebastián. Juan Miguel y Sergio le mandan observaciones.
+> - Sergio es el cuarto integrante; donde el texto diga "los tres", son los cuatro.
+
 ## 1. Cómo empezar
 
 ```bash
@@ -59,15 +66,14 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
    `2026-10-09`, que es la fecha de corte de los datos de prueba. Con `CURDATE()` el resultado cambiaría cada día y
    dejaría de coincidir con el Word de Fase 1. No los cambies; prepárate para explicarlo. Opcional: una línea en
    `documentos/fase1/08_Algebra_Relacional.docx` que lo diga.
-4. **Presentación, diapositivas 4 a 9** (Chen, EER, Barker, Crow's Foot, relacional, normalización): ábrelas en
-   PowerPoint y corrige texto cortado, imágenes y orden.
+4. **Presentación completa (15 diapositivas):** eres la única persona que edita el `.pptx`. Ábrela en PowerPoint y
+   corrige texto cortado, imágenes y orden. Aplica las observaciones de Juan Miguel (diapositivas 10 a 13) y de Sergio
+   (diapositiva 11). No cambies nombres de integrantes.
 5. **Video:** bloques 2 y 3.
 
 ### Juan Miguel — servidor y aplicación
-1. **Nombre completo:** en todos los documentos aparece como "Juan Miguel Ramos — 1025528586". Escribe su nombre
-   completo como aparece en su cédula (pídeselo a él, no lo adivines) en la portada ("Integrantes") y en las
-   tablas de firmas de **todos** los Word. Busca con `pandoc ... | grep "Juan Miguel"`. El texto puede estar partido
-   en fragmentos del Word: después de reemplazar vuelve a buscar para confirmar que no quedó ninguno.
+1. **Nombre completo:** mándaselo a Juan David, tal como aparece en tu cédula. No edites las portadas ni las tablas
+   de firmas: Juan David y Claude cambian tu nombre y agregan a Sergio en los 24 Word de una sola vez, al final.
 2. **Historial de commits:** `documentos/fase2/07_Repositorio_GitHub.docx` tiene una tabla. Compárala con
    `git log --reverse --format='%h | %an | %s'` y agrega las filas que falten (Spring Boot, diagramas nuevos en
    draw.io, documentos más compactos, revisión completa, presentación nueva y los commits de este reparto). La tabla
@@ -75,8 +81,8 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 3. **Revisión de documentos:** `04_Implementacion_RDBMS`, `02_Identificacion_de_Interesados` y `06_Acta_de_Cierre`.
    Revisa que las menciones de MySQL Workbench sean coherentes: se usa para administrar y consultar la base, y los
    modelos vigentes están en Draw.io (los de Workbench quedan de respaldo).
-4. **Presentación, diapositivas 10 a 13** (MySQL, infraestructura, app web, herencia y polimorfismo). La 11
-   (infraestructura) la completa Sergio con los datos del servidor.
+4. **Presentación, diapositivas 10 a 13** (MySQL, infraestructura, app web, herencia y polimorfismo): revísalas y
+   mándale tus observaciones a Sebastián, que es el único que edita el `.pptx`.
 5. **Video:** bloque 4 (servidor) y bloque 7 (app web: inicio, clientes, historia clínica, agenda, inventario,
    facturas, álgebra). El servidor es el portátil de Juan David: o él graba el bloque 4, o tú entras por SSH.
 
@@ -87,7 +93,7 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
      el portátil de Juan David con **Fedora 44** (Ryzen 3 3250U, 17 GB de RAM, 475 GB de disco), que aloja la VM
      Lima `sigevet` con Oracle Linux 9 y MySQL 8.4. MySQL NO está instalado en Fedora, sino dentro de la VM. Los
      documentos deben decir Fedora como anfitrión y Oracle Linux 9 como sistema de la VM; revisa que no se contradigan.
-   - Ajusta la diapositiva 11 y el bloque 4 de `documentos/fase2/08_Guion_Video.docx` (y la sección "Preparación").
+   - Manda tus observaciones de la diapositiva 11 a Sebastián y ajusta el bloque 4 de `documentos/fase2/08_Guion_Video.docx` (y la sección "Preparación").
 2. **Verificación de la base:** `bash vm/scripts/cargar_bd.sh --reiniciar` contra el servidor. Debe dar 22 tablas,
    113 restricciones y 1.091 registros.
 3. **Video:** bloque 5 (cargar y verificar la base) y bloque 6 (Workbench: 3 o 4 consultas de álgebra: reunión,
@@ -104,9 +110,8 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 ### Los cuatro
 - **Firmas:** firmar a mano o con firma digital la columna "Firma" de las tablas de
   `documentos/fase1/02_Documento_de_Supuestos.docx`, `documentos/transversales/01_Acta_de_Constitucion.docx` y
-  `documentos/transversales/06_Acta_de_Cierre.docx`. Claude no firma por nadie. Sergio también debe aparecer en
-  la lista de integrantes: hay que agregarlo en la portada y las tablas de firmas de esos documentos (coordínenlo
-  con quien tenga el Word abierto).
+  `documentos/transversales/06_Acta_de_Cierre.docx`. Claude no firma por nadie. Sergio se agrega a la lista de
+  integrantes y a las tablas de firmas en la integración final (Juan David con Claude); no lo hagas tú.
 - **Video (máximo 15 min):** el guion por persona, con los comandos y el texto de cada bloque, está en
   `GUION_VIDEO.md` (raíz del repositorio). El Word `documentos/fase2/08_Guion_Video.docx` es la versión formal y
   todavía tiene el reparto antiguo. Todos hablan,
@@ -130,8 +135,8 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
   documento que lo pida.
 - **Presentación** (`documentos/final/Presentacion_Sustentacion_SIGEVET.pptx`, 15 diapositivas: 1 portada, 2 problema,
   3 alcance, 4 Chen, 5 EER, 6 Barker, 7 Crow's Foot, 8 relacional, 9 normalización, 10 MySQL, 11 infraestructura,
-  12 aplicación web, 13 herencia y polimorfismo, 14 álgebra, 15 equipo y cierre): la diapositiva 15 debe incluir a
-  Sergio. Repartan quién habla en cada una y ensayen.
+  12 aplicación web, 13 herencia y polimorfismo, 14 álgebra, 15 equipo y cierre): Sergio se agrega en las
+  diapositivas 1 y 15 en la integración final (no lo hagas tú). Repartan quién habla en cada una y ensayen.
 
 ## 5. Al terminar
 - Sube tu rama y avisa al equipo. Sergio une todo a `main` y rehace los zips (se arman desde los Word de `documentos/`,
@@ -143,7 +148,7 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 ```
 Lee ENCARGO_COMPANERO.md en la raíz de este repositorio. Yo soy [TU NOMBRE]. Haz solo las tareas que el archivo
 asigna a mi nombre, en orden, más lo que dice para "Los cuatro". Antes de editar cualquier Word, dime qué vas a
-cambiar. Si necesitas un dato que no tienes (por ejemplo el nombre completo de Juan Miguel), pídemelo; no lo
+cambiar. Si necesitas un dato que no tienes (por ejemplo un nombre o una clave), pídemelo; no lo
 adivines. Después de cada edición de un .docx compruébalo con pandoc. Trabaja en la rama [tunombre]-pendientes,
 haz commits pequeños en español con el formato tipo: descripción y no los subas hasta que yo te diga. Al final
 dame un resumen en español sencillo y una lista corta de lo que me toca a mí.
