@@ -103,8 +103,10 @@ limactl shell sigevet systemctl status mysqld --no-pager
 VM (es la copia que deja `vm/migrar_linux.sh`) y ahí mismo debe estar `vm/claves.env` (archivo que NO se sube a
 GitHub; Juan David te lo pasa por un canal privado, hay un modelo en `vm/claves.ejemplo`). Antes de grabar, confirma
 que esa copia tiene la última versión de `database/` (**[No verificado]**: depende de cuándo se copió). Ten también
-MySQL Workbench conectado a la base `sigevet` (el puerto 3306 está pendiente de confirmar con Juan David, ver
-`OBSERVACIONES_DIAPOSITIVAS_SERGIO.md`).
+MySQL Workbench conectado a la base `sigevet` con el usuario `vetdb`. El informe del servidor (31-Oct-2026) dice que
+Lima publica el 3306 en todas las interfaces, así que Workbench puede conectarse a `192.168.2.40:3306` desde la red
+local. Que el puerto escuche no prueba que el cortafuegos del Fedora lo deje pasar: haz una prueba real de conexión
+antes de grabar (**[No verificado]** hasta entonces). Si falla, conecta Workbench desde el propio portátil servidor.
 
 **Bloque 5 (2 min) — Carga y verificación**
 ```bash
@@ -119,7 +121,8 @@ bash vm/scripts/cargar_bd.sh --reiniciar
 > disparadores, que rechazan datos que un CHECK no alcanza a validar, por ejemplo un veterinario asignado a una cita
 > de una sede donde no trabaja."
 
-Muestra la salida de la verificación. **Ojo:** esa salida no imprime los totales 113 ni 1.091. Muestra las
+En el servidor real el script tarda unos 9 s (corrida del 31-Oct-2026). Muestra la salida de la verificación. **Ojo:**
+esa salida no imprime los totales 113 ni 1.091. Muestra las
 restricciones por tipo (22 llaves primarias, 25 únicas, 36 CHECK y 30 foráneas, que suman 113) y los registros por
 tabla (que suman 1.091), así que di el total de palabra mientras señalas esas tablas. Al final la prueba de reglas
 imprime 10 filas, una por cada regla que debe rechazar un dato.
