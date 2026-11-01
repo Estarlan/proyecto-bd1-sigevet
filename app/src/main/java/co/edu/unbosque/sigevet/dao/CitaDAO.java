@@ -1,23 +1,44 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.Cita;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos de las citas. Ejecuta el SQL con JDBC y {@code PreparedStatement}, sin ORM, y convierte cada fila
+ * en un objeto {@link Cita}.
+ */
 @Repository
 public class CitaDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public CitaDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Lista las citas con filtros opcionales por sede y por estado.
+     *
+     * @param sede identificador de la sede, o {@code null} para todas las sedes.
+     * @param estado estado de la cita (por ejemplo PROGRAMADA), o {@code null} para todos los estados.
+     * @return las citas ordenadas por fecha y hora.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Cita> listar(Integer sede, String estado) {
         ArrayList<Cita> lista = new ArrayList<Cita>();
+        // cada filtro usa "(? IS NULL OR columna = ?)": si el filtro llega nulo, la condición se cumple en todas las filas
         String sql = "SELECT c.id_cita, c.fecha_hora, c.estado, c.id_mascota, c.motivo, m.nombre AS mascota, sv.nombre AS servicio, s.nombre AS sede, CONCAT(e.nombres, ' ', e.apellidos) AS veterinario "
                 + "FROM CITA c JOIN MASCOTA m ON m.id_mascota = c.id_mascota "
                 + "JOIN SERVICIO sv ON sv.id_servicio = c.id_servicio "
@@ -28,6 +49,7 @@ public class CitaDAO {
                 + "ORDER BY c.fecha_hora, c.id_cita";
         try (Connection conexion = conexionBD.conectar();
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            // la sede ocupa los parámetros 1 y 2; el estado, los parámetros 3 y 4
             if (sede == null) {
                 sentencia.setNull(1, Types.INTEGER);
                 sentencia.setNull(2, Types.INTEGER);
@@ -59,8 +81,15 @@ public class CitaDAO {
         }
     }
 
+    /**
+     * Lista las próximas 10 citas programadas a partir de este momento. La página de inicio las muestra.
+     *
+     * @return hasta 10 citas con estado PROGRAMADA y fecha futura, de la más cercana a la más lejana.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<Cita> proximas() {
         ArrayList<Cita> lista = new ArrayList<Cita>();
+        // NOW() es la fecha y hora actual del servidor de base de datos
         String sql = "SELECT c.id_cita,c.motivo,c.fecha_hora,c.estado,m.id_mascota,m.nombre AS mascota, sv.nombre AS servicio,CONCAT(e.nombres, ' ', e.apellidos) AS veterinario,s.nombre AS sede "
                 + "FROM CITA c JOIN MASCOTA m ON m.id_mascota=c.id_mascota "
                 + "JOIN SERVICIO sv ON sv.id_servicio=c.id_servicio "

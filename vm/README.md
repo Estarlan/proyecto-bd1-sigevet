@@ -6,7 +6,7 @@ la base.
 
 Hay tres formas de montar la VM:
 
-- **Lenovo con Linux (la definitiva)**: un solo comando, `bash vm/migrar_linux.sh`. Ver abajo.
+- **Portátil con Fedora (el servidor definitivo)**: un solo comando, `bash vm/migrar_linux.sh`. Ver abajo.
 - **A. VirtualBox**: a mano, para un equipo con Windows.
 - **B. Lima en macOS**: la usamos para hacer las pruebas en un MacBook Intel.
 
@@ -23,7 +23,7 @@ importa en qué ruta quede dentro de la VM.
    ```
 
 3. Si dice que agregó el usuario al grupo `kvm`, cerrar sesión, volver a entrar y ejecutarlo otra vez.
-4. Al final muestra las direcciones: la app en `http://127.0.0.1:5000` (o `http://<ip-del-lenovo>:5000` desde otro
+4. Al final muestra las direcciones: la app en `http://127.0.0.1:5000` (o `http://<ip-del-servidor>:5000` desde otro
    equipo de la red) y MySQL Workbench en el puerto 3306 con el usuario `vetdb`. Las claves quedan en `vm/claves.env`.
 
 El script instala QEMU y Lima, crea la VM `sigevet` con Oracle Linux 9, copia el proyecto adentro e instala MySQL,

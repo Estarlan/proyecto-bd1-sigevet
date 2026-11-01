@@ -1,23 +1,43 @@
 package co.edu.unbosque.sigevet.dao;
 
-import co.edu.unbosque.sigevet.conexion.ConexionBD;
-import co.edu.unbosque.sigevet.modelo.*;
+import co.edu.unbosque.sigevet.connection.ConexionBD;
+import co.edu.unbosque.sigevet.model.DetalleFactura;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Acceso a datos de las líneas de las facturas. Ejecuta el SQL con JDBC y {@code PreparedStatement}, sin ORM, y
+ * convierte cada fila en un objeto {@link DetalleFactura}.
+ */
 @Repository
 public class DetalleFacturaDAO {
-    @Autowired
-    private ConexionBD conexionBD;
+    /** Fábrica de conexiones a la base de datos. */
+    private final ConexionBD conexionBD;
 
+    /**
+     * Constructor con inyección de dependencias: Spring entrega la conexión al crear el DAO.
+     *
+     * @param conexionBD fábrica de conexiones a la base de datos.
+     */
+    public DetalleFacturaDAO(ConexionBD conexionBD) {
+        this.conexionBD = conexionBD;
+    }
+
+    /**
+     * Lista las líneas de una factura, ordenadas por número de línea.
+     *
+     * @param id identificador de la factura.
+     * @return las líneas de la factura; vacía si la factura no tiene líneas.
+     * @throws RuntimeException si la consulta falla.
+     */
     public ArrayList<DetalleFactura> listar(long id) {
         ArrayList<DetalleFactura> lista = new ArrayList<DetalleFactura>();
+        // cada línea cobra un servicio o un medicamento: COALESCE toma el nombre del que no sea nulo.
+        // El subtotal se calcula aquí: cantidad por precio unitario, menos el porcentaje de descuento.
         String sql = "SELECT d.num_linea, COALESCE(s.nombre, m.nombre) AS concepto, d.cantidad, d.precio_unitario, d.descuento_pct, d.cantidad * d.precio_unitario * (1 - d.descuento_pct / 100) AS subtotal "
                 + "FROM DETALLE_FACTURA d "
                 + "LEFT JOIN SERVICIO s ON s.id_servicio = d.id_servicio "
@@ -25,6 +45,7 @@ public class DetalleFacturaDAO {
                 + "WHERE d.id_factura = ? ORDER BY d.num_linea";
         try (Connection conexion = conexionBD.conectar();
              PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            // el parámetro se envía aparte del SQL, así no se puede inyectar código malicioso
             sentencia.setLong(1, id);
             try (ResultSet rs = sentencia.executeQuery()) {
                 while (rs.next()) {

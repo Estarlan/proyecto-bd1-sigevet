@@ -36,11 +36,18 @@ Para correr el jar desde otra carpeta, configura una ruta absoluta en
 Todo el código está en `src/main/java/co/edu/unbosque/sigevet`:
 
 - `SigevetApplication`: inicia Spring Boot.
-- `conexion`: `ConexionBD` lee las propiedades y abre conexiones con `DriverManager`.
-- `modelo`: objetos con atributos privados, constructor vacío, getters y setters.
+- `connection`: `ConexionBD` lee las propiedades y abre conexiones con `DriverManager`.
+- `model`: objetos con atributos privados, constructor vacío, getters y setters (y los enums de estados).
 - `dao`: consultas SQL escritas a mano, parámetros con `PreparedStatement` y lectura de `ResultSet`.
-- `controlador`: recibe las rutas, consulta los DAO y entrega los datos al `Model`.
+- `service`: clases `...Service`; reúnen los datos de varios DAO y aplican la lógica de cada página.
+- `controller`: clases `...Controller`; reciben las rutas, piden los datos al servicio y los entregan al `Model`.
+- `dto`: clases `...DTO`; agrupan los datos que necesita una página (por ejemplo `ClienteDetalleDTO`).
+- `exception`: `RecursoNoEncontradoException`, que Spring convierte en un 404.
+- `util`: `TextoUtil`, utilidades de texto para los filtros de los formularios.
 - `algebra`: lector de los 55 ejercicios agrupados del archivo SQL.
+
+El flujo de una petición es: navegador → `controller` → `service` → `dao` → MySQL, y de vuelta hasta la plantilla
+Thymeleaf (la vista).
 
 Las vistas están en `src/main/resources/templates`. El menú y el pie son
 fragmentos compartidos. El CSS original está en `src/main/resources/static`.
