@@ -20,11 +20,11 @@ Lo que no se pudo comprobar está marcado como **[No verificado]**.
 ### Cambios que propone Sergio
 
 1. **Cuadro "Servidor Linux" (`TextBox 8`).** Hoy dice `Fedora` y `KVM/QEMU con Lima`. Propuesta:
-   `Fedora 44` y `KVM/QEMU con Lima`. El dato "Fedora 44" lo dio Sergio y todavía no está respaldado por el
-   `INFORME_SERVIDOR.md` (el que genera `vm/scripts/preparar_servidor_fedora.sh`). **[No verificado]** hasta que
-   Juan David lo mande.
-2. **La IP `192.168.2.40`.** Se puede poner en ese cuadro, pero es una dirección de la red local y puede cambiar si el
-   router la reasigna. **[No verificado]**: confirmarla el día de la grabación. Si hay duda, mejor dejarla fuera de la
+   `Fedora 44` y `KVM/QEMU con Lima`. "Fedora 44" ya está respaldado por el `INFORME_SERVIDOR.md` que mandó Juan David
+   el 31-Oct-2026 (Fedora release 44, VM Lima con Oracle Linux Server release 9.8). "KVM/QEMU" sigue **[No verificado]**
+   en el informe (no lo menciona), pero `vm/migrar_linux.sh` crea la VM con `vmType: qemu` en Linux.
+2. **La IP `192.168.2.40`.** Aparece en el informe de Juan David (interfaz `wlp1s0`, 192.168.2.40/24, 31-Oct-2026).
+   Es una dirección de la red local y puede cambiar si el router la reasigna: confirmarla el día de la grabación. Si hay duda, mejor dejarla fuera de la
    diapositiva y decirla de palabra en el video.
 3. **Cuadro "Quien consulta" (`TextBox 14`), línea "MySQL Workbench".** El repositorio se contradice sobre si
    Workbench llega al puerto 3306 desde otro equipo:
@@ -45,9 +45,10 @@ Estas son de Sebastián y de Juan Miguel. Se mandan solo como aviso.
   3 procedimientos) coinciden con los archivos `database/`: se contaron en `01_crear_tablas.sql`, `02_dml/*.sql`,
   `03_vistas.sql` y `04_programas.sql`. "vet_app solo puede leer" es correcto en la práctica, pero el rol de lectura
   tiene `SELECT` y también `SHOW VIEW` (`database/01_ddl/00_crear_usuarios.sql`). Que las pruebas den "10/10 en OK" no
-  se puede comprobar sin ejecutar: hay 10 pruebas definidas (`02_verificacion.sql`, líneas 73–82) y el registro
-  `vm/logs/04_carga_bd.log` muestra 10 filas OK en una ejecución anterior. **[No verificado]** que el registro
-  corresponda a los archivos actuales.
+  se puede comprobar sin ejecutar: hay 10 pruebas definidas (`02_verificacion.sql`, líneas 73–82). El 31-Oct-2026 se
+  corrió `vm/scripts/cargar_bd.sh --reiniciar` con los archivos actuales en un MySQL 8.0.46 de prueba (no el 8.4 del
+  servidor): 22 tablas, 6 vistas, 113 restricciones, 1.091 registros y 10 pruebas en OK. **[No verificado]** en el MySQL
+  8.4.11 del servidor real.
 - **Diapositiva 14:** el ejercicio 41 de la diapositiva es idéntico al del archivo (líneas 314–321). El resultado de 8
   medicamentos sale también de contar los datos de inventario (ids 2, 7, 8, 13, 14, 15, 16 y 17) y coincide con
   `vm/logs/06_algebra_mysql.log`. "55 de 55 dan el mismo resultado que en la Fase 1": las 55 consultas son idénticas
