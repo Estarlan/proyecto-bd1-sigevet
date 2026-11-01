@@ -35,11 +35,11 @@ documentos/    documentos de la Fase 1, la Fase 2 y los transversales, los model
 
 ## Modelos editables en Draw.io
 
-La versión vigente de los modelos tiene **25 hojas**: Chen con los catálogos de atributos, EER, transformación de
-multivaluados y relaciones N:M, entidad débil, Barker, Crow's Foot, modelo relacional y normalización. Las vistas
+La versión vigente de los modelos tiene **26 hojas**: Chen con los catálogos de atributos, EER, transformación de
+multivaluados y relaciones N:M, entidad débil, Barker, Crow's Foot, modelo relacional, normalización y diagrama de clases. Las vistas
 globales se complementan con ampliaciones por área para facilitar la lectura.
 
-- [Archivo completo de Draw.io con las 25 hojas](documentos/fase1/diagramas_drawio/SIGEVET_Modelos.drawio).
+- [Archivo completo de Draw.io con las 26 hojas](documentos/fase1/diagramas_drawio/SIGEVET_Modelos.drawio).
 - [Una hoja por archivo (.drawio)](documentos/fase1/diagramas_drawio/) y sus
   [PNG](documentos/fase1/diagramas_drawio/png/).
 - [Documentos de la Fase 1](documentos/fase1/) e [informe final](documentos/final/00_Documento_Final.docx).
