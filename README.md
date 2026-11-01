@@ -69,8 +69,8 @@ sudo bash vm/scripts/instalar_app.sh       # app web en el puerto 5000
 Luego se abre `http://127.0.0.1:5000` en el equipo anfitrión, o `http://<ip-de-la-vm>:5000` si la VM está en modo
 puente. MySQL Workbench se conecta a `127.0.0.1:3306` (ver `vm/README.md`).
 
-El servidor del proyecto es un portátil con Fedora 44 que aloja la VM de Lima. Los puertos 3306 y 5000 se publican solo en
-`127.0.0.1` de ese portátil; desde otro equipo se entra por SSH. Para revisarlo o prepararlo (tapa, arranque de la VM,
+El servidor del proyecto es un portátil con Fedora 44 que aloja la VM de Lima. Los puertos 3306 (MySQL, para Workbench) y 5000
+(aplicación web) quedan abiertos a la red local; no se reenvían a Internet. Para revisarlo o prepararlo (tapa, arranque de la VM,
 SSH) está `vm/scripts/preparar_servidor_fedora.sh`.
 
 ## Probar solo la aplicación

@@ -15,8 +15,8 @@ rpm -q mysql-server
 echo "== 2/4 Configuración (/etc/my.cnf.d/sigevet.cnf)"
 cat > /etc/my.cnf.d/sigevet.cnf <<FIN
 [mysqld]
-# escuchar en todas las interfaces de la VM; el reenvío de puertos de Lima solo lo publica en
-# 127.0.0.1 del equipo anfitrión, así que desde la red local no se puede entrar al 3306
+# escuchar en todas las interfaces de la VM; vm/migrar_linux.sh publica el 3306 en la red local del
+# anfitrión (hostIP 0.0.0.0) para entrar con MySQL Workbench desde otro equipo
 bind-address = 0.0.0.0
 character-set-server = utf8mb4
 collation-server = utf8mb4_0900_ai_ci
@@ -34,7 +34,7 @@ if mysql -u root -e "SELECT 1" >/dev/null 2>&1; then
   echo "Clave de root configurada"
 fi
 
-echo "== 4/4 Firewall de la VM (puerto 3306; solo vale dentro de la VM, no abre nada en la red del portátil)"
+echo "== 4/4 Firewall de la VM (puerto 3306)"
 if systemctl is-active --quiet firewalld; then
   firewall-cmd --permanent --add-port=3306/tcp
   firewall-cmd --reload

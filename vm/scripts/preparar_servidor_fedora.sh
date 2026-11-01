@@ -65,7 +65,8 @@ tapa="$(loginctl show-logind -p HandleLidSwitch --value 2>/dev/null || grep -h '
 linea "- Al cerrar la tapa: ${tapa:-suspend (valor por defecto)}"
 linea "- Arranque de la VM al encender el equipo: $(systemctl --user is-enabled sigevet-vm.service 2>/dev/null || echo "sin configurar")"
 linea "- Servicio SSH (para conectarse de otro equipo): $(systemctl is-active sshd 2>/dev/null)"
-linea "- Puerto 3306: la VM lo publica solo en 127.0.0.1, así que no queda abierto a la red y no necesita regla de firewall."
+linea "- Puertos publicados por Lima (3306 MySQL y 5000 app): $(ss -ltn | awk '$4 ~ /:(3306|5000)$/ {printf "%s ", $4}')"
+linea "  (0.0.0.0 o * significa abiertos a la red local; vm/migrar_linux.sh los publica así a propósito)"
 
 if [ "$APLICAR" = "1" ]; then
   echo "== Arreglos (cada uno pide confirmación)"
