@@ -6,6 +6,7 @@
 // ─────────────────────────────────────────────
 // PERSONAS (herencia: Persona → Cliente / Empleado → Veterinario / Auxiliar)
 // ─────────────────────────────────────────────
+/** Datos comunes de toda persona; de aquí heredan Cliente y Empleado (tabla PERSONA). */
 export interface Persona {
   idPersona: number;
   tipoDocumento?: string;
@@ -18,6 +19,7 @@ export interface Persona {
   descripcion?: string;
 }
 
+/** Propietario de mascotas: una Persona con dirección, ciudad y fecha de registro. */
 export interface Cliente extends Persona {
   direccion?: string;
   ciudad?: string;
@@ -25,6 +27,7 @@ export interface Cliente extends Persona {
   fechaRegistro?: string;
 }
 
+/** Trabajador de una sede: una Persona con su estado, sede y los campos de su subtipo (VET, AUX o ADM). */
 export interface Empleado extends Persona {
   telefono?: string;
   estado?: string;
@@ -42,6 +45,7 @@ export interface Empleado extends Persona {
   turno?: string;
 }
 
+/** Un teléfono de un cliente (atributo multivaluado, tabla TELEFONO_CLIENTE). */
 export interface Telefono {
   telefono?: string;
   tipo?: string;
@@ -50,6 +54,7 @@ export interface Telefono {
 // ─────────────────────────────────────────────
 // MASCOTAS Y ATENCIÓN CLÍNICA
 // ─────────────────────────────────────────────
+/** Una mascota con su raza, especie y propietario. */
 export interface Mascota {
   idMascota: number;
   idCliente?: number;
@@ -65,6 +70,7 @@ export interface Mascota {
   cliente?: string;
 }
 
+/** Historia clínica de una mascota (relación 1:1 con MASCOTA). */
 export interface HistoriaClinica {
   idHistoria: number;
   numeroHistoria?: string;
@@ -75,6 +81,7 @@ export interface HistoriaClinica {
   observaciones?: string;
 }
 
+/** Medicamento recetado en una consulta, con su dosis y duración. */
 export interface Prescripcion {
   idConsulta: number;
   medicamento?: string;
@@ -86,6 +93,7 @@ export interface Prescripcion {
   indicaciones?: string;
 }
 
+/** Atención de un veterinario a una mascota, con sus prescripciones. */
 export interface Consulta {
   idConsulta: number;
   fechaHoraInicio?: string;
@@ -100,6 +108,7 @@ export interface Consulta {
   prescripciones?: Prescripcion[];
 }
 
+/** Cita agendada para una mascota; su estado es PROGRAMADA, ATENDIDA, CANCELADA o NO_ASISTIO. */
 export interface Cita {
   idCita: number;
   idMascota?: number;
@@ -115,6 +124,7 @@ export interface Cita {
 // ─────────────────────────────────────────────
 // SEDES, INVENTARIO Y FACTURACIÓN
 // ─────────────────────────────────────────────
+/** Una clínica de la red, con su dirección, teléfono y director. */
 export interface Sede {
   idSede: number;
   nombre?: string;
@@ -123,6 +133,7 @@ export interface Sede {
   director?: string;
 }
 
+/** Existencias de un medicamento en una sede; la llave es (idSede, idMedicamento). */
 export interface ItemInventario {
   idSede: number;
   idMedicamento: number;
@@ -136,6 +147,7 @@ export interface ItemInventario {
   stockBajo?: boolean;
 }
 
+/** Cabecera de una factura; el total se calcula sumando sus líneas. */
 export interface Factura {
   idFactura: number;
   idCliente?: number;
@@ -148,6 +160,7 @@ export interface Factura {
   total?: number;
 }
 
+/** Una línea de factura (entidad débil de FACTURA): cobra un servicio o un medicamento. */
 export interface DetalleFactura {
   numLinea: number;
   concepto?: string;
@@ -160,11 +173,13 @@ export interface DetalleFactura {
 // ─────────────────────────────────────────────
 // INICIO Y ÁLGEBRA RELACIONAL
 // ─────────────────────────────────────────────
+/** Par nombre-total que usa la página de inicio (conteos, ingresos y estados de citas). */
 export interface Resumen {
   nombre?: string;
   total?: number;
 }
 
+/** Un ejercicio de álgebra relacional con su enunciado y su consulta SQL. */
 export interface EjercicioAlgebra {
   numero: number;
   titulo?: string;
@@ -173,6 +188,7 @@ export interface EjercicioAlgebra {
   sql?: string;
 }
 
+/** Resultado de ejecutar una consulta: nombres de columnas y filas de texto. */
 export interface ResultadoConsulta {
   columnas: string[];
   filas: string[][];
@@ -181,6 +197,7 @@ export interface ResultadoConsulta {
 // ─────────────────────────────────────────────
 // DTO: respuestas que juntan varios datos
 // ─────────────────────────────────────────────
+/** Respuesta de GET /api/clientes/:id: el cliente con sus teléfonos, mascotas y facturas. */
 export interface ClienteDetalle {
   cliente: Cliente;
   telefonos: Telefono[];
@@ -188,17 +205,20 @@ export interface ClienteDetalle {
   facturas: Factura[];
 }
 
+/** Respuesta de GET /api/mascotas/:id: la mascota con su historia clínica y sus consultas. */
 export interface MascotaDetalle {
   mascota: Mascota;
   historia?: HistoriaClinica;
   consultas: Consulta[];
 }
 
+/** Respuesta de GET /api/facturas/:id: la factura con sus líneas. */
 export interface FacturaDetalle {
   factura: Factura;
   lineas: DetalleFactura[];
 }
 
+/** Respuesta de GET /api/inicio: los datos de la página de inicio. */
 export interface Inicio {
   conteos: Resumen[];
   ingresos: Resumen[];
@@ -207,11 +227,13 @@ export interface Inicio {
   proximas: Cita[];
 }
 
+/** Respuesta de GET /api/algebra: los grupos y la lista de ejercicios. */
 export interface AlgebraLista {
   grupos: string[];
   ejercicios: EjercicioAlgebra[];
 }
 
+/** Respuesta de GET /api/algebra/:numero: el ejercicio y el resultado de ejecutarlo. */
 export interface EjercicioDetalle {
   ejercicio: EjercicioAlgebra;
   resultado: ResultadoConsulta;
@@ -237,11 +259,13 @@ export interface OpcionCatalogo {
   valor?: number;
 }
 
+/** Teléfono dentro del formulario de un cliente. */
 export interface TelefonoForm {
   telefono: string;
   tipo: string;
 }
 
+/** Cuerpo de POST y PUT /api/clientes. */
 export interface ClienteForm {
   tipoDocumento: string;
   numDocumento: string;
@@ -253,6 +277,7 @@ export interface ClienteForm {
   telefonos: TelefonoForm[];
 }
 
+/** Cuerpo de POST y PUT /api/mascotas: la mascota junto con su historia clínica. */
 export interface MascotaForm {
   nombre: string;
   fechaNacimiento: string | null;
@@ -271,6 +296,7 @@ export interface MascotaForm {
   observaciones: string | null;
 }
 
+/** Cuerpo de POST /api/citas. */
 export interface CitaForm {
   idMascota: number | null;
   idServicio: number | null;
@@ -281,6 +307,7 @@ export interface CitaForm {
   motivo: string | null;
 }
 
+/** Línea dentro del formulario de factura: idServicio o idMedicamento (uno de los dos, arco exclusivo). */
 export interface LineaFacturaForm {
   idServicio: number | null;
   idMedicamento: number | null;
@@ -288,6 +315,7 @@ export interface LineaFacturaForm {
   descuentoPct: number;
 }
 
+/** Cuerpo de POST /api/facturas. */
 export interface FacturaForm {
   idCliente: number | null;
   idSede: number | null;
@@ -297,6 +325,7 @@ export interface FacturaForm {
   lineas: LineaFacturaForm[];
 }
 
+/** Cuerpo de POST y PUT /api/inventario. */
 export interface InventarioForm {
   idSede: number | null;
   idMedicamento: number | null;
@@ -304,6 +333,7 @@ export interface InventarioForm {
   stockMinimo: number | null;
 }
 
+/** Cuerpo de POST y PUT /api/personal; los campos VET y AUX solo se usan según el tipo de empleado. */
 export interface EmpleadoForm {
   tipoDocumento: string;
   numDocumento: string;

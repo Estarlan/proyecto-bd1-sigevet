@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
+/** Página que se muestra cuando la dirección no existe (ruta comodín '**' de app-routing-module.ts). */
 @Component({
   selector: 'app-no-encontrado',
-  standalone: true,
-  imports: [RouterLink],
+  standalone: false,
   template: `
     <div class="vacio py-5">
       <i class="bi bi-signpost-split"></i>

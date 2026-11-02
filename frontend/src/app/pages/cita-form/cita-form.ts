@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogoService, CitaService, MascotaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { CitaForm, Mascota, OpcionCatalogo, Sede } from '../../models/models';
 import { marcarInvalido } from '../../shared/validaciones';
+import { UltimaPeticion } from '../../shared/ultima-peticion';
 
 /**
  * Agendar una cita (/agenda/nueva?mascota=ID). Al elegir la sede se cargan solo los veterinarios que laboran en ella:
@@ -13,29 +13,41 @@ import { marcarInvalido } from '../../shared/validaciones';
  */
 @Component({
   selector: 'app-cita-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink, CurrencyPipe],
+  standalone: false,
   templateUrl: './cita-form.html'
 })
 export class CitaFormPage implements OnInit {
 
+  /** Datos de la cita que se está escribiendo; es lo que se envía al guardar. */
   form: CitaForm = { idMascota: null, idServicio: null, idSede: null, idVeterinario: null, fechaHora: '', motivo: null };
+  /** Mascotas ACTIVAS para el select (solo ellas pueden tener citas). */
   mascotas: Mascota[] = [];
+  /** Catálogo de servicios para el select. */
   servicios: OpcionCatalogo[] = [];
+  /** Sedes para el select. */
   sedes: Sede[] = [];
+  /** Veterinarios de la sede elegida (se llenan al elegir la sede). */
   veterinarios: OpcionCatalogo[] = [];
   /** Rango permitido aaaa-mm-ddThh:mm: desde ahora hasta dentro de un año (igual que el backend). */
   ahora = '';
+  /** Límite superior del rango: dentro de un año. */
   enUnAnio = '';
+  /** Se vuelve true al presionar Guardar: desde ahí se marcan en rojo todos los campos con error. */
   intentado = false;
 
+  /** true mientras se envía la cita (deshabilita el botón). */
   guardando = false;
+  /** Mensaje de error para mostrar arriba del formulario. */
   error = '';
+
+  /** Controla que solo cuente la lista de veterinarios de la última sede elegida. */
+  private ultimaSede = new UltimaPeticion();
 
   constructor(private route: ActivatedRoute, private router: Router, private citaService: CitaService,
               private mascotaService: MascotaService, private catalogoService: CatalogoService,
               private sedeService: SedeService) {}
 
+  /** Calcula el rango de fechas, carga los catálogos y deja elegida la mascota si llegó en la dirección. */
   ngOnInit(): void {
     const fecha = new Date();
     fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());   // hora local, no UTC
@@ -59,10 +71,13 @@ export class CitaFormPage implements OnInit {
     this.form.idVeterinario = null;
     this.veterinarios = [];
     if (this.form.idSede !== null) {
-      this.catalogoService.veterinarios(this.form.idSede).subscribe(datos => this.veterinarios = datos);
+      this.ultimaSede.lanzar(this.catalogoService.veterinarios(this.form.idSede), {
+        next: (datos) => this.veterinarios = datos
+      });
     }
   }
 
+  /** true si un campo debe verse en rojo (tiene error y ya se tocó o se intentó guardar). */
   invalido(campo: NgModel): boolean {
     return marcarInvalido(campo, this.intentado);
   }
@@ -72,6 +87,7 @@ export class CitaFormPage implements OnInit {
     return !!this.form.fechaHora && (this.form.fechaHora <= this.ahora || this.form.fechaHora > this.enUnAnio);
   }
 
+  /** Valida el formulario y, si está bien, crea la cita y vuelve a la agenda. */
   guardar(f: NgForm): void {
     this.intentado = true;
     if (f.invalid || this.fechaInvalida) {

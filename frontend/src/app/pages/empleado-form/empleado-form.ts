@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, PersonalService, SedeService, mensajeDeError } from '../../services/api.service';
 import { EmpleadoForm, IdRespuesta, OpcionCatalogo, Sede } from '../../models/models';
@@ -14,29 +14,37 @@ import { MENSAJES, PATRONES, fechaFueraDeRango, fechaISO, marcarInvalido, mensaj
  */
 @Component({
   selector: 'app-empleado-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './empleado-form.html'
 })
 export class EmpleadoFormPage implements OnInit {
 
+  /** null al crear; el id del empleado al editar. */
   id: number | null = null;
+  /** Datos del empleado que se está escribiendo; es lo que se envía al guardar. */
   form: EmpleadoForm = {
     tipoDocumento: 'CC', numDocumento: '', nombres: '', apellidos: '', fechaNacimiento: '', telefono: '', email: '',
-    tipoEmpleado: 'VET', fechaIngreso: new Date().toISOString().slice(0, 10), salario: null, idSede: null,
+    // fechaISO() da la fecha de hoy en hora local; toISOString() usa UTC y después de las 7 p. m. en Colombia ya es "mañana"
+    tipoEmpleado: 'VET', fechaIngreso: fechaISO(), salario: null, idSede: null,
     tarjetaProfesional: null, universidad: null, anioGraduacion: null, especialidades: [],
     area: null, certificacion: null, turno: null
   };
+  /** Sedes para el select. */
   sedes: Sede[] = [];
+  /** Catálogo de especialidades (para los veterinarios). */
   especialidades: OpcionCatalogo[] = [];
 
+  /** Tipos de documento permitidos (CHECK de la tabla PERSONA). */
   tiposDocumento = ['CC', 'CE', 'PA', 'PPT'];
+  /** Subtipos de empleado: código que se guarda y texto que se muestra. */
   tipos = [
     { codigo: 'VET', texto: 'Veterinario' },
     { codigo: 'AUX', texto: 'Auxiliar' },
     { codigo: 'ADM', texto: 'Administrativo' }
   ];
+  /** Áreas permitidas para un auxiliar. */
   areas = ['CLINICA', 'CIRUGIA', 'LABORATORIO', 'ESTETICA', 'HOSPITALIZACION'];
+  /** Turnos permitidos para un auxiliar. */
   turnos = [
     { valor: 'MANANA', texto: 'Mañana' },
     { valor: 'TARDE', texto: 'Tarde' },
@@ -48,21 +56,28 @@ export class EmpleadoFormPage implements OnInit {
   mensajes = MENSAJES;
   patronDocumento = patronDocumento;
   mensajeDocumento = mensajeDocumento;
+  /** Se vuelve true al presionar Guardar: desde ahí se marcan en rojo todos los campos con error. */
   intentado = false;
+  /** Fecha de hoy (hora local) en formato aaaa-mm-dd. */
   hoy = fechaISO();
   /** Edad permitida: entre 16 y 80 años. */
   nacimientoMinimo = fechaISO(80);
+  /** Fecha de nacimiento más reciente permitida (16 años cumplidos). */
   nacimientoMaximo = fechaISO(16);
   /** Año de graduación guardado al editar: si no cambia, no se le exige la regla de los 18 años (igual que el backend). */
   anioOriginal: number | null = null;
 
+  /** true mientras se carga el empleado que se edita. */
   cargando = false;
+  /** true mientras se envía el formulario (deshabilita el botón). */
   guardando = false;
+  /** Mensaje de error para mostrar arriba del formulario. */
   error = '';
 
   constructor(private route: ActivatedRoute, private router: Router, private personalService: PersonalService,
               private catalogoService: CatalogoService, private sedeService: SedeService) {}
 
+  /** Carga los catálogos y, si la dirección trae un id, los datos del empleado para editarlo. */
   ngOnInit(): void {
     this.sedeService.getAll().subscribe(datos => this.sedes = datos);
     this.catalogoService.especialidades().subscribe(datos => this.especialidades = datos);
@@ -77,6 +92,7 @@ export class EmpleadoFormPage implements OnInit {
     }
   }
 
+  /** true si el empleado ya tiene marcada esa especialidad. */
   tieneEspecialidad(id: number): boolean {
     return this.form.especialidades.includes(id);
   }
@@ -91,10 +107,12 @@ export class EmpleadoFormPage implements OnInit {
     }
   }
 
+  /** true si un campo debe verse en rojo (tiene error y ya se tocó o se intentó guardar). */
   invalido(campo: NgModel): boolean {
     return marcarInvalido(campo, this.intentado);
   }
 
+  /** true si la fecha de nacimiento está fuera del rango de 16 a 80 años. */
   get nacimientoInvalido(): boolean {
     return !!this.form.fechaNacimiento && fechaFueraDeRango(this.form.fechaNacimiento, this.nacimientoMinimo, this.nacimientoMaximo);
   }
@@ -108,6 +126,7 @@ export class EmpleadoFormPage implements OnInit {
     return anio + this.form.fechaNacimiento.slice(4);
   }
 
+  /** true si la fecha de ingreso está fuera de su rango permitido. */
   get ingresoInvalido(): boolean {
     return !!this.form.fechaIngreso && fechaFueraDeRango(this.form.fechaIngreso, this.ingresoMinimo, this.hoy);
   }
@@ -117,6 +136,7 @@ export class EmpleadoFormPage implements OnInit {
     return Math.min(2026, new Date().getFullYear());
   }
 
+  /** Año de graduación más antiguo permitido (1970, o 18 años después del nacimiento si es mayor). */
   get anioMinimo(): number {
     if (this.id !== null && this.form.anioGraduacion === this.anioOriginal) {
       return 1970;
@@ -125,6 +145,7 @@ export class EmpleadoFormPage implements OnInit {
     return Math.max(1970, nacimiento + 18);
   }
 
+  /** Valida el formulario y, si está bien, crea o actualiza el empleado y vuelve a la lista de personal. */
   guardar(f: NgForm): void {
     this.intentado = true;
     if (f.invalid || this.nacimientoInvalido || this.ingresoInvalido) {

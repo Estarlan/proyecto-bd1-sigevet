@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FacturaService, mensajeDeError } from '../../services/api.service';
 import { FacturaDetalle } from '../../models/models';
+import { UltimaPeticion } from '../../shared/ultima-peticion';
 
 /**
  * Una factura con sus líneas. DETALLE_FACTURA es entidad débil de FACTURA y cada línea cobra un servicio o un
@@ -11,22 +11,31 @@ import { FacturaDetalle } from '../../models/models';
  */
 @Component({
   selector: 'app-factura-detalle',
-  standalone: true,
-  imports: [RouterLink, CurrencyPipe, DecimalPipe],
+  standalone: false,
   templateUrl: './factura-detalle.html'
 })
 export class FacturaDetallePage implements OnInit {
 
+  /** La factura con sus líneas; null mientras carga o si falló la carga. */
   detalle: FacturaDetalle | null = null;
+  /** true mientras se espera la respuesta de la API. */
   cargando = true;
+  /** Error de la carga. */
   error = '';
 
+  /** Mensaje de éxito de la última acción (pago o anulación). */
   aviso = '';
+  /** Error de la última acción, separado del error de carga. */
   errorAccion = '';
+  /** true mientras se cambia el estado de la factura (deshabilita los botones). */
   cambiando = false;
+
+  /** Controla que solo cuente la respuesta de la factura más reciente. */
+  private ultima = new UltimaPeticion();
 
   constructor(private route: ActivatedRoute, private facturaService: FacturaService) {}
 
+  /** Carga la factura de la dirección y vuelve a cargar si el id de la dirección cambia. */
   ngOnInit(): void {
     this.route.paramMap.subscribe(parametros => {
       const id = Number(parametros.get('id'));
@@ -34,11 +43,12 @@ export class FacturaDetallePage implements OnInit {
     });
   }
 
+  /** Pide la factura con ese id y sus líneas. */
   cargar(id: number): void {
     this.cargando = true;
     this.error = '';
     this.detalle = null;
-    this.facturaService.getDetalle(id).subscribe({
+    this.ultima.lanzar(this.facturaService.getDetalle(id), {
       next: (datos) => { this.detalle = datos; this.cargando = false; },
       error: (e: HttpErrorResponse) => { this.error = mensajeDeError(e); this.cargando = false; }
     });

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SesionService } from '../../services/sesion.service';
@@ -12,19 +11,25 @@ import { LoginForm } from '../../models/models';
  */
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule],
+  standalone: false,
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
 export class Login {
+  /** Correo y documento que escribe el empleado. */
   form: LoginForm = { email: '', documento: '' };
+  /** true mientras se espera la respuesta del servidor (deshabilita el botón). */
   enviando = false;
+  /** Mensaje de error para mostrar debajo del formulario (por ejemplo, "credenciales incorrectas"). */
   error = '';
 
   constructor(private sesion: SesionService, private router: Router) {}
 
+  /** Envía el correo y el documento; si son correctos, guarda la sesión y abre la página de inicio. */
   entrar(): void {
+    if (this.enviando) {
+      return;   // un segundo clic (o Enter) mientras se espera no envía otra petición
+    }
     this.error = '';
     this.enviando = true;
     this.sesion.iniciar(this.form).subscribe({

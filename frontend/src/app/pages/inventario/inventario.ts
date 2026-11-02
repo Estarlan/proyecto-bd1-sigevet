@@ -1,70 +1,95 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CatalogoService, InventarioService, SedeService, mensajeDeError } from '../../services/api.service';
 import { InventarioForm, ItemInventario, OpcionCatalogo, Sede } from '../../models/models';
+import { UltimaPeticion } from '../../shared/ultima-peticion';
 
-/** Existencias de la tabla INVENTARIO, que resuelve la relación N:M ALMACENAR entre SEDE y MEDICAMENTO. */
+/**
+ * Existencias de la tabla INVENTARIO, que resuelve la relación N:M ALMACENAR entre SEDE y MEDICAMENTO.
+ * Permite filtrar por sede, ver solo el stock bajo, agregar un medicamento a una sede, editar las existencias
+ * y quitar un medicamento del inventario.
+ */
 @Component({
   selector: 'app-inventario',
-  standalone: true,
-  imports: [FormsModule],
+  standalone: false,
   templateUrl: './inventario.html'
 })
 export class Inventario implements OnInit {
 
+  /** Filas de inventario que devolvió la API para la sede elegida. */
   inventario: ItemInventario[] = [];
+  /** Sedes para el filtro y para el formulario de agregar. */
   sedes: Sede[] = [];
 
+  /** Filtro de sede: null significa "todas". */
   sedeSeleccionada: number | null = null;
   /** Si está activo, se muestran solo los medicamentos por debajo del mínimo (filtro en el navegador). */
   soloStockBajo = false;
 
+  /** true mientras se espera el inventario. */
   cargando = true;
+  /** Error de la carga del inventario. */
   error = '';
 
   // --- agregar un medicamento a una sede
+  /** true cuando el formulario de agregar está desplegado. */
   mostrarNuevo = false;
+  /** Catálogo de todos los medicamentos, para el select del formulario de agregar. */
   medicamentos: OpcionCatalogo[] = [];
+  /** Datos del medicamento que se va a agregar. */
   nuevo: InventarioForm = { idSede: null, idMedicamento: null, stockActual: 0, stockMinimo: 0 };
 
   // --- edición en la fila: la llave de INVENTARIO es (id_sede, id_medicamento)
+  /** Fila que se está editando, o null si ninguna. */
   editando: ItemInventario | null = null;
+  /** Existencias actuales escritas en la fila que se edita. */
   editStock = 0;
+  /** Stock mínimo escrito en la fila que se edita. */
   editMinimo = 0;
 
+  /** Mensaje de éxito de la última acción. */
   aviso = '';
+  /** Error de la última acción, separado del error de carga. */
   errorAccion = '';
+  /** true mientras se guarda un cambio (deshabilita los botones). */
   guardando = false;
+
+  /** Controla que solo cuente la respuesta de la consulta más reciente. */
+  private ultima = new UltimaPeticion();
 
   constructor(private inventarioService: InventarioService, private sedeService: SedeService,
               private catalogoService: CatalogoService) {}
 
+  /** Carga las sedes, el catálogo de medicamentos y el inventario inicial. */
   ngOnInit(): void {
     this.sedeService.getAll().subscribe(datos => this.sedes = datos);
     this.catalogoService.medicamentos(null).subscribe(datos => this.medicamentos = datos);
     this.consultar();
   }
 
+  /** Pide el inventario de la sede elegida (o de todas). */
   consultar(): void {
     this.cargando = true;
     this.error = '';
-    this.inventarioService.getAll(this.sedeSeleccionada).subscribe({
+    this.ultima.lanzar(this.inventarioService.getAll(this.sedeSeleccionada), {
       next: (datos) => { this.inventario = datos; this.cargando = false; },
       error: (e: HttpErrorResponse) => { this.error = mensajeDeError(e); this.cargando = false; }
     });
   }
 
+  /** Quita el filtro de sede y el de stock bajo, y vuelve a pedir todo el inventario. */
   limpiar(): void {
     this.sedeSeleccionada = null;
     this.soloStockBajo = false;
     this.consultar();
   }
 
+  /** Filas que se muestran en la tabla: todas, o solo las de stock bajo. */
   get itemsFiltrados(): ItemInventario[] {
     return this.soloStockBajo ? this.inventario.filter(i => i.stockBajo) : this.inventario;
   }
 
+  /** Cuántas filas del inventario cargado tienen el stock por debajo del mínimo. */
   get cantidadStockBajo(): number {
     return this.inventario.filter(i => i.stockBajo).length;
   }
@@ -100,6 +125,7 @@ export class Inventario implements OnInit {
     });
   }
 
+  /** Pone una fila en modo edición con sus valores actuales. */
   editar(item: ItemInventario): void {
     this.editando = item;
     this.editStock = item.stockActual ?? 0;
@@ -107,6 +133,7 @@ export class Inventario implements OnInit {
     this.limpiarMensajes();
   }
 
+  /** true si la fila dada es la que está en edición (se compara por la llave compuesta). */
   estaEditando(item: ItemInventario): boolean {
     return this.editando !== null && this.editando.idSede === item.idSede && this.editando.idMedicamento === item.idMedicamento;
   }
@@ -146,6 +173,7 @@ export class Inventario implements OnInit {
     });
   }
 
+  /** Borra el aviso y el error de la acción anterior antes de empezar otra. */
   private limpiarMensajes(): void {
     this.aviso = '';
     this.errorAccion = '';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, ClienteService, MascotaService, mensajeDeError } from '../../services/api.service';
 import { Cliente, IdRespuesta, MascotaForm, OpcionCatalogo } from '../../models/models';
@@ -9,7 +9,9 @@ import { MENSAJES, PATRONES, fechaFueraDeRango, fechaISO, marcarInvalido } from 
 
 /** Grupo de razas de una especie, para el <optgroup> del select. */
 interface GrupoRazas {
+  /** Nombre de la especie (perro, gato...). */
   especie: string;
+  /** Razas que pertenecen a esa especie. */
   razas: OpcionCatalogo[];
 }
 
@@ -19,34 +21,44 @@ interface GrupoRazas {
  */
 @Component({
   selector: 'app-mascota-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './mascota-form.html'
 })
 export class MascotaFormPage implements OnInit {
 
+  /** null al crear; el id de la mascota al editar. */
   id: number | null = null;
+  /** Datos de la mascota y de su historia clínica; es lo que se envía al guardar. */
   form: MascotaForm = {
     nombre: '', fechaNacimiento: null, sexo: 'M', color: null, microchip: null, esterilizado: 'N',
     idRaza: null, idCliente: null, grupoSanguineo: null, alergias: null, enfermedadesCronicas: null, observaciones: null
   };
+  /** Clientes para elegir el propietario (la API devuelve como máximo 100). */
   clientes: Cliente[] = [];
+  /** Razas agrupadas por especie para el select. */
   gruposRazas: GrupoRazas[] = [];
   /** Rango de la fecha de nacimiento: ni futura ni de hace más de 40 años (igual que el backend). */
   hoy = fechaISO();
+  /** Límite inferior del rango: hace 40 años. */
   hace40 = fechaISO(40);
 
+  // reglas de formato compartidas con el backend (shared/validaciones.ts y Validador.java)
   patrones = PATRONES;
   mensajes = MENSAJES;
+  /** Se vuelve true al presionar Guardar: desde ahí se marcan en rojo todos los campos con error. */
   intentado = false;
 
+  /** true mientras se carga la mascota que se edita. */
   cargando = false;
+  /** true mientras se envía el formulario (deshabilita el botón). */
   guardando = false;
+  /** Mensaje de error para mostrar arriba del formulario. */
   error = '';
 
   constructor(private route: ActivatedRoute, private router: Router, private mascotaService: MascotaService,
               private clienteService: ClienteService, private catalogoService: CatalogoService) {}
 
+  /** Carga clientes y razas y, si la dirección trae un id, los datos de la mascota para editarla. */
   ngOnInit(): void {
     this.clienteService.getAll('').subscribe(datos => this.clientes = datos);
     this.catalogoService.razas().subscribe(datos => this.agruparRazas(datos));
@@ -83,6 +95,7 @@ export class MascotaFormPage implements OnInit {
     this.gruposRazas = grupos;
   }
 
+  /** Dirección del botón "volver": la mascota si se edita, el cliente si se llegó desde él, o la lista. */
   get rutaVolver(): (string | number)[] {
     if (this.id !== null) {
       return ['/mascotas', this.id];
@@ -90,14 +103,17 @@ export class MascotaFormPage implements OnInit {
     return this.form.idCliente !== null ? ['/clientes', this.form.idCliente] : ['/mascotas'];
   }
 
+  /** true si un campo debe verse en rojo (tiene error y ya se tocó o se intentó guardar). */
   invalido(campo: NgModel): boolean {
     return marcarInvalido(campo, this.intentado);
   }
 
+  /** true si la fecha de nacimiento es futura o de hace más de 40 años. */
   get fechaInvalida(): boolean {
     return fechaFueraDeRango(this.form.fechaNacimiento, this.hace40, this.hoy);
   }
 
+  /** Valida el formulario y, si está bien, crea o actualiza la mascota y abre su detalle. */
   guardar(f: NgForm): void {
     this.intentado = true;
     if (f.invalid || this.fechaInvalida) {

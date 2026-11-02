@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { AlgebraService, mensajeDeError } from '../../services/api.service';
 import { EjercicioAlgebra } from '../../models/models';
 
@@ -11,23 +9,27 @@ import { EjercicioAlgebra } from '../../models/models';
  */
 @Component({
   selector: 'app-algebra',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './algebra.html',
   styleUrl: './algebra.css'
 })
 export class Algebra implements OnInit {
 
+  /** Nombres de los grupos (operaciones del álgebra relacional), en el orden en que se muestran. */
   grupos: string[] = [];
+  /** Todos los ejercicios, cada uno con su grupo. */
   ejercicios: EjercicioAlgebra[] = [];
   /** Búsqueda por número o título; se aplica en el navegador sobre la lista ya cargada. */
   buscar = '';
 
+  /** true mientras se espera la lista de ejercicios. */
   cargando = true;
+  /** Error de la carga. */
   error = '';
 
   constructor(private algebraService: AlgebraService) {}
 
+  /** Pide la lista de ejercicios al abrir la página. */
   ngOnInit(): void {
     this.algebraService.getAll().subscribe({
       next: (datos) => {
