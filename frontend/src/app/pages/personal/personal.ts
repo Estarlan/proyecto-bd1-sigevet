@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { PersonalService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Empleado, Sede } from '../../models/models';
+import { UltimaPeticion } from '../../shared/ultima-peticion';
 
 /**
  * Personal de la red. La API devuelve una lista de Empleado, pero cada elemento es en Java un objeto de su
@@ -17,27 +18,39 @@ import { Empleado, Sede } from '../../models/models';
 })
 export class Personal implements OnInit {
 
+  /** Empleados de la sede elegida (o de todas), tal como los devolvió la API. */
   empleados: Empleado[] = [];
+  /** Sedes para el filtro y para la tabla de directores. */
   sedes: Sede[] = [];
 
+  /** Filtro de sede: null significa "todas". */
   sedeSeleccionada: number | null = null;
   /** Filtro por subtipo que se aplica en el navegador sobre la lista ya cargada: '' = todos. */
   tipoSeleccionado = '';
 
+  /** Subtipos de empleado (discriminador tipo_empleado) para los botones del filtro. */
   tipos = [
     { codigo: 'VET', texto: 'Veterinarios' },
     { codigo: 'AUX', texto: 'Auxiliares' },
     { codigo: 'ADM', texto: 'Administrativos' }
   ];
 
+  /** true mientras se espera la lista de empleados. */
   cargando = true;
+  /** Error de la carga de la lista. */
   error = '';
 
+  /** Mensaje de éxito de la última acción. */
   aviso = '';
+  /** Error de la última acción, separado del error de carga. */
   errorAccion = '';
+
+  /** Controla que solo cuente la respuesta de la consulta más reciente. */
+  private ultima = new UltimaPeticion();
 
   constructor(private route: ActivatedRoute, private personalService: PersonalService, private sedeService: SedeService) {}
 
+  /** Avisa si se llegó desde el formulario de empleado, carga las sedes y pide el personal. */
   ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.get('guardado')) {
       this.aviso = 'Los datos del empleado quedaron guardados.';
@@ -50,12 +63,13 @@ export class Personal implements OnInit {
   consultar(): void {
     this.cargando = true;
     this.error = '';
-    this.personalService.getAll(this.sedeSeleccionada).subscribe({
+    this.ultima.lanzar(this.personalService.getAll(this.sedeSeleccionada), {
       next: (datos) => { this.empleados = datos; this.cargando = false; },
       error: (e: HttpErrorResponse) => { this.error = mensajeDeError(e); this.cargando = false; }
     });
   }
 
+  /** Quita los filtros de sede y de subtipo, y vuelve a pedir todo el personal. */
   limpiar(): void {
     this.sedeSeleccionada = null;
     this.tipoSeleccionado = '';

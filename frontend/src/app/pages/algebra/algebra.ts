@@ -15,16 +15,21 @@ import { EjercicioAlgebra } from '../../models/models';
 })
 export class Algebra implements OnInit {
 
+  /** Nombres de los grupos (operaciones del álgebra relacional), en el orden en que se muestran. */
   grupos: string[] = [];
+  /** Todos los ejercicios, cada uno con su grupo. */
   ejercicios: EjercicioAlgebra[] = [];
   /** Búsqueda por número o título; se aplica en el navegador sobre la lista ya cargada. */
   buscar = '';
 
+  /** true mientras se espera la lista de ejercicios. */
   cargando = true;
+  /** Error de la carga. */
   error = '';
 
   constructor(private algebraService: AlgebraService) {}
 
+  /** Pide la lista de ejercicios al abrir la página. */
   ngOnInit(): void {
     this.algebraService.getAll().subscribe({
       next: (datos) => {
