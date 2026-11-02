@@ -13,8 +13,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * Convierte las excepciones de los controladores de la API en respuestas JSON con el código HTTP correcto, para que
  * Angular reciba siempre un {@link ErrorApiDTO} en lugar de una página HTML de error.
  *
- * <p>Solo atiende el paquete {@code controller.api}: las páginas Thymeleaf siguen usando sus plantillas de error
- * mientras conviven las dos versiones.</p>
+ * <p>Atiende los controladores del paquete {@code controller.api}, que son todos los de la aplicación.</p>
  */
 @RestControllerAdvice(basePackages = "co.edu.unbosque.sigevet.controller.api")
 public class ManejadorErroresApi {

@@ -33,7 +33,9 @@ src/app/
 ## Compilar para producción
 
 ```bash
-npm run build                   # genera dist/sigevet-front/browser/
+npx ng build                    # genera dist/sigevet-front/browser/
+cd ../app && ./mvnw package     # Maven copia ese build a static/ dentro del jar
 ```
 
-Ese contenido se copia a `app/src/main/resources/static/` y Spring Boot lo sirve en el puerto 5000.
+Spring Boot sirve el frontend y la API en el mismo puerto (5000). `ConfiguracionWeb` devuelve `index.html` en las
+rutas de Angular, así que recargar `/clientes/5` o abrir un enlace directo funciona.

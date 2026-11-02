@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * API REST de clientes. A diferencia del controlador Thymeleaf, no devuelve el nombre de una vista: devuelve los
+ * API REST de clientes. A diferencia de la versión anterior con Thymeleaf, no devuelve el nombre de una vista: devuelve los
  * datos y Spring los convierte a JSON para que los muestre el frontend en Angular.
  */
 @RestController

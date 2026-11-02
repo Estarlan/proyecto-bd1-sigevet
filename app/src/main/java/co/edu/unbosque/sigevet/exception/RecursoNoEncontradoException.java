@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Excepción propia que lanza la capa de servicio cuando no existe el registro que se pidió (por ejemplo, un cliente
  * con un identificador que no está en la base de datos).
  *
- * <p>La anotación {@code @ResponseStatus} hace que Spring la convierta en una respuesta HTTP 404 y muestre la
- * plantilla {@code error/404.html}, sin que cada controlador tenga que revisar si el dato existe.</p>
+ * <p>{@code ManejadorErroresApi} la convierte en una respuesta HTTP 404 con un JSON {@code {estado, mensaje}}, sin que cada
+ * controlador tenga que revisar si el dato existe. La anotación {@code @ResponseStatus} deja el 404 como respaldo.</p>
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class RecursoNoEncontradoException extends RuntimeException {
