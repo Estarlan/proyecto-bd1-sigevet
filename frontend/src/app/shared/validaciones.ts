@@ -54,6 +54,7 @@ export function patronDocumento(tipo: string): string {
   return tipo === 'PA' ? PATRONES.pasaporte : PATRONES.documentoNumerico;
 }
 
+/** Mensaje de error del número de documento según el tipo elegido (el pasaporte admite letras). */
 export function mensajeDocumento(tipo: string): string {
   return tipo === 'PA' ? MENSAJES.pasaporte : MENSAJES.documentoNumerico;
 }

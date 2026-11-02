@@ -5,12 +5,20 @@ import { Inicio as DatosInicio, Resumen } from '../../models/models';
 
 /** Tarjeta de resumen de la parte superior. */
 interface Indicador {
+  /** Nombre de la tabla de la que sale el conteo (CLIENTE, MASCOTA...). */
   tabla: string;
+  /** Texto que se ve en la tarjeta. */
   texto: string;
+  /** Clase del icono de Bootstrap Icons. */
   icono: string;
+  /** Página a la que lleva la tarjeta. */
   ruta: string;
 }
 
+/**
+ * Página de inicio (/): tarjetas con el número de registros por tabla, ingresos por método de pago, estado de las
+ * citas, medicamentos con stock bajo y próximas citas. Todos los datos vienen de una sola llamada a la API.
+ */
 @Component({
   selector: 'app-inicio',
   standalone: false,
@@ -19,8 +27,11 @@ interface Indicador {
 })
 export class Inicio implements OnInit {
 
+  /** Resumen devuelto por la API; null mientras carga o si falló la carga. */
   datos: DatosInicio | null = null;
+  /** true mientras se espera la respuesta de la API. */
   cargando = true;
+  /** Error de la carga. */
   error = '';
 
   /** Tablas que se muestran como tarjetas; el número sale de los conteos de la API. */
@@ -34,6 +45,7 @@ export class Inicio implements OnInit {
 
   constructor(private inicioService: InicioService) {}
 
+  /** Pide el resumen a la API al abrir la página. */
   ngOnInit(): void {
     this.inicioService.getResumen().subscribe({
       next: (d) => { this.datos = d; this.cargando = false; },

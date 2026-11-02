@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+/** Página que se muestra cuando la dirección no existe (ruta comodín '**' de app-routing-module.ts). */
 @Component({
   selector: 'app-no-encontrado',
   standalone: false,

@@ -12,5 +12,6 @@ import { SesionService } from './services/sesion.service';
   styleUrl: './app.css'
 })
 export class AppComponent {
+  /** Servicio de sesión; la plantilla lo usa para saber si hay un empleado conectado (sesion.empleado()). */
   constructor(public sesion: SesionService) {}
 }
