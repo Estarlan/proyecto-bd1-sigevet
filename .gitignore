@@ -19,7 +19,6 @@ entregables/
 # Sistema y editores
 .DS_Store
 ~$*
-.claude/
 
 # Informe del servidor (se manda por privado, no va al repositorio)
 INFORME_SERVIDOR.md
