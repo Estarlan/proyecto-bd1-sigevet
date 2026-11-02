@@ -8,33 +8,37 @@
   </div>
 </div>
 
-<form (ngSubmit)="guardar()">
+<form #f="ngForm" (ngSubmit)="guardar(f)" novalidate>
   <div class="card tarjeta mb-3">
     <div class="card-header">Encabezado</div>
     <div class="card-body pt-0">
       <div class="row g-3">
         <div class="col-md-6">
           <label class="form-label small" for="cliente">Cliente</label>
-          <select id="cliente" class="form-select" name="idCliente" [(ngModel)]="idCliente" required>
+          <select id="cliente" class="form-select" name="idCliente" #cliente="ngModel" [(ngModel)]="idCliente" required [class.is-invalid]="invalido(cliente)">
             <option [ngValue]="null" disabled>Seleccione…</option>
             @for (c of clientes; track c.idPersona) {
               <option [ngValue]="c.idPersona">{{ c.apellidos }}, {{ c.nombres }} · {{ c.numDocumento }}</option>
             }
           </select>
+          <div class="invalid-feedback">Seleccione el cliente.</div>
         </div>
         <div class="col-md-3">
           <label class="form-label small" for="sede">Sede</label>
-          <select id="sede" class="form-select" name="idSede" [(ngModel)]="idSede" (ngModelChange)="cambiarSede()" required>
+          <select id="sede" class="form-select" name="idSede" #sede="ngModel" [(ngModel)]="idSede" (ngModelChange)="cambiarSede()" required [class.is-invalid]="invalido(sede)">
             <option [ngValue]="null" disabled>Seleccione…</option>
             @for (s of sedes; track s.idSede) { <option [ngValue]="s.idSede">{{ s.nombre }}</option> }
           </select>
+          <div class="invalid-feedback">Seleccione la sede.</div>
         </div>
         <div class="col-md-3">
           <label class="form-label small" for="empleado">Emite</label>
-          <select id="empleado" class="form-select" name="idEmpleado" [(ngModel)]="idEmpleado" [disabled]="idSede === null" required>
+          <select id="empleado" class="form-select" name="idEmpleado" #empleado="ngModel" [(ngModel)]="idEmpleado" [disabled]="idSede === null" required
+                  [class.is-invalid]="invalido(empleado) || (intentado && idEmpleado === null)">
             <option [ngValue]="null" disabled>{{ idSede === null ? 'Elija la sede' : 'Seleccione…' }}</option>
             @for (e of empleados; track e.id) { <option [ngValue]="e.id">{{ e.nombre }} ({{ e.detalle }})</option> }
           </select>
+          <div class="invalid-feedback">Seleccione quién emite.</div>
         </div>
         <div class="col-md-3">
           <label class="form-label small" for="metodo">Método de pago</label>
@@ -68,7 +72,7 @@
           </thead>
           <tbody>
             @for (l of lineas; track $index; let i = $index) {
-              <tr>
+              <tr [class.table-danger]="intentado && lineaInvalida(l)">
                 <td class="text-muted">{{ i + 1 }}</td>
                 <td>
                   <select class="form-select form-select-sm" [name]="'tipo' + i" [(ngModel)]="l.tipo" (ngModelChange)="l.idItem = null" aria-label="Tipo de línea">
@@ -84,8 +88,8 @@
                     @for (o of opciones(l); track o.id) { <option [ngValue]="o.id">{{ o.nombre }} ({{ o.detalle }})</option> }
                   </select>
                 </td>
-                <td><input type="number" class="form-control form-control-sm" [name]="'cantidad' + i" [(ngModel)]="l.cantidad" min="1" max="1000" required aria-label="Cantidad"></td>
-                <td><input type="number" class="form-control form-control-sm" [name]="'descuento' + i" [(ngModel)]="l.descuentoPct" min="0" max="100" step="0.01" aria-label="Descuento"></td>
+                <td><input type="number" class="form-control form-control-sm" [name]="'cantidad' + i" [(ngModel)]="l.cantidad" min="1" max="1000" step="1" required aria-label="Cantidad" title="Entero de 1 a 1000"></td>
+                <td><input type="number" class="form-control form-control-sm" [name]="'descuento' + i" [(ngModel)]="l.descuentoPct" min="0" max="100" step="0.01" aria-label="Descuento" title="De 0 a 100, máximo dos decimales"></td>
                 <td class="text-end small">{{ precio(l) | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
                 <td class="text-end fw-semibold">{{ subtotal(l) | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
                 <td>
@@ -103,6 +107,11 @@
           </tfoot>
         </table>
       </div>
+      @if (intentado && hayLineasInvalidas) {
+        <p class="text-danger small px-3 py-2 mb-0 border-top">
+          Las líneas en rojo necesitan un servicio o medicamento, una cantidad entera de 1 a 1000 y un descuento de 0 a 100.
+        </p>
+      }
     </div>
   </div>
 

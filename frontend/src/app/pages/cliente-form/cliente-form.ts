@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, ClienteService, mensajeDeError } from '../../services/api.service';
 import { ClienteForm, IdRespuesta, OpcionCatalogo } from '../../models/models';
+import { MENSAJES, PATRONES, marcarInvalido, mensajeDocumento, patronDocumento } from '../../shared/validaciones';
 
 /**
  * Formulario para crear (/clientes/nuevo) o editar (/clientes/:id/editar) un cliente con sus teléfonos.
@@ -30,6 +31,14 @@ export class ClienteFormPage implements OnInit {
   // valores permitidos por las restricciones CHECK de la base
   tiposDocumento = ['CC', 'CE', 'PA', 'PPT'];
   tiposTelefono = ['MOVIL', 'FIJO', 'TRABAJO'];
+
+  // reglas de formato compartidas con el backend (shared/validaciones.ts y Validador.java)
+  patrones = PATRONES;
+  mensajes = MENSAJES;
+  patronDocumento = patronDocumento;
+  mensajeDocumento = mensajeDocumento;
+  /** Se vuelve true al presionar Guardar: desde ahí se marcan en rojo todos los campos con error. */
+  intentado = false;
 
   cargando = false;
   guardando = false;
@@ -59,7 +68,16 @@ export class ClienteFormPage implements OnInit {
     this.form.telefonos.splice(posicion, 1);
   }
 
-  guardar(): void {
+  invalido(campo: NgModel): boolean {
+    return marcarInvalido(campo, this.intentado);
+  }
+
+  guardar(f: NgForm): void {
+    this.intentado = true;
+    if (f.invalid) {
+      this.error = 'Revise los campos marcados en rojo.';
+      return;
+    }
     this.guardando = true;
     this.error = '';
     // los teléfonos sin número no se envían

@@ -11,27 +11,30 @@
 @if (cargando) {
   <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
 } @else {
-  <form (ngSubmit)="guardar()">
+  <form #f="ngForm" (ngSubmit)="guardar(f)" novalidate>
     <div class="card tarjeta mb-3">
       <div class="card-header">Datos de la mascota</div>
       <div class="card-body pt-0">
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label small" for="cliente">Propietario</label>
-            <select id="cliente" class="form-select" name="idCliente" [(ngModel)]="form.idCliente" required>
+            <select id="cliente" class="form-select" name="idCliente" #cliente="ngModel" [(ngModel)]="form.idCliente" required [class.is-invalid]="invalido(cliente)">
               <option [ngValue]="null" disabled>Seleccione…</option>
               @for (c of clientes; track c.idPersona) {
                 <option [ngValue]="c.idPersona">{{ c.apellidos }}, {{ c.nombres }} · {{ c.numDocumento }}</option>
               }
             </select>
+            <div class="invalid-feedback">Seleccione el propietario.</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="nombre">Nombre</label>
-            <input id="nombre" class="form-control" name="nombre" [(ngModel)]="form.nombre" maxlength="40" required>
+            <input id="nombre" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="form.nombre" maxlength="40" required
+                   [pattern]="patrones.nombreMascota" [class.is-invalid]="invalido(nombre)">
+            <div class="invalid-feedback">{{ mensajes.nombreMascota }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="raza">Raza <span class="text-muted">(determina la especie)</span></label>
-            <select id="raza" class="form-select" name="idRaza" [(ngModel)]="form.idRaza" required>
+            <select id="raza" class="form-select" name="idRaza" #raza="ngModel" [(ngModel)]="form.idRaza" required [class.is-invalid]="invalido(raza)">
               <option [ngValue]="null" disabled>Seleccione…</option>
               @for (g of gruposRazas; track g.especie) {
                 <optgroup [label]="g.especie">
@@ -39,6 +42,7 @@
                 </optgroup>
               }
             </select>
+            <div class="invalid-feedback">Seleccione la raza.</div>
           </div>
           <div class="col-sm-6 col-md-3">
             <label class="form-label small" for="sexo">Sexo</label>
@@ -56,15 +60,21 @@
           </div>
           <div class="col-sm-6 col-md-4">
             <label class="form-label small" for="fechaNacimiento">Fecha de nacimiento <span class="text-muted">(opcional)</span></label>
-            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="form.fechaNacimiento" [max]="hoy">
+            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="form.fechaNacimiento"
+                   [min]="hace40" [max]="hoy" [class.is-invalid]="(intentado || form.fechaNacimiento) && fechaInvalida">
+            <div class="invalid-feedback">No puede ser futura ni de hace más de 40 años.</div>
           </div>
           <div class="col-sm-6 col-md-4">
             <label class="form-label small" for="color">Color <span class="text-muted">(opcional)</span></label>
-            <input id="color" class="form-control" name="color" [(ngModel)]="form.color" maxlength="40">
+            <input id="color" class="form-control" name="color" #color="ngModel" [(ngModel)]="form.color" maxlength="40"
+                   [pattern]="patrones.color" [class.is-invalid]="invalido(color)">
+            <div class="invalid-feedback">{{ mensajes.color }}</div>
           </div>
           <div class="col-md-4">
             <label class="form-label small" for="microchip">Microchip <span class="text-muted">(15 dígitos, opcional)</span></label>
-            <input id="microchip" class="form-control" name="microchip" [(ngModel)]="form.microchip" maxlength="15" inputmode="numeric">
+            <input id="microchip" class="form-control" name="microchip" #microchip="ngModel" [(ngModel)]="form.microchip" maxlength="15"
+                   inputmode="numeric" [pattern]="patrones.microchip" [class.is-invalid]="invalido(microchip)">
+            <div class="invalid-feedback">{{ mensajes.microchip }}</div>
           </div>
         </div>
       </div>
@@ -76,7 +86,9 @@
         <div class="row g-3">
           <div class="col-md-3">
             <label class="form-label small" for="grupo">Grupo sanguíneo</label>
-            <input id="grupo" class="form-control" name="grupoSanguineo" [(ngModel)]="form.grupoSanguineo" maxlength="10">
+            <input id="grupo" class="form-control" name="grupoSanguineo" #grupo="ngModel" [(ngModel)]="form.grupoSanguineo" maxlength="10"
+                   [pattern]="patrones.grupoSanguineo" [class.is-invalid]="invalido(grupo)">
+            <div class="invalid-feedback">{{ mensajes.grupoSanguineo }}</div>
           </div>
           <div class="col-md-9">
             <label class="form-label small" for="alergias">Alergias</label>

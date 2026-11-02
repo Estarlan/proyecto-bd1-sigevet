@@ -13,7 +13,7 @@
 @if (cargando) {
   <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
 } @else {
-  <form (ngSubmit)="guardar()">
+  <form #f="ngForm" (ngSubmit)="guardar(f)" novalidate>
     <div class="card tarjeta mb-3">
       <div class="card-header">Datos personales</div>
       <div class="card-body pt-0">
@@ -26,30 +26,42 @@
           </div>
           <div class="col-sm-8 col-md-4">
             <label class="form-label small" for="numDocumento">Número de documento</label>
-            <input id="numDocumento" class="form-control" name="numDocumento" [(ngModel)]="form.numDocumento" maxlength="15" required>
+            <input id="numDocumento" class="form-control" name="numDocumento" #numDocumento="ngModel" [(ngModel)]="form.numDocumento"
+                   required maxlength="12" [pattern]="patronDocumento(form.tipoDocumento)"
+                   [attr.inputmode]="form.tipoDocumento === 'PA' ? 'text' : 'numeric'" [class.is-invalid]="invalido(numDocumento)">
+            <div class="invalid-feedback">{{ mensajeDocumento(form.tipoDocumento) }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="email">Correo electrónico <span class="text-muted">(opcional)</span></label>
-            <input id="email" type="email" class="form-control" name="email" [(ngModel)]="form.email" maxlength="100">
+            <input id="email" type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="form.email"
+                   maxlength="100" [pattern]="patrones.correo" [class.is-invalid]="invalido(email)">
+            <div class="invalid-feedback">{{ mensajes.correo }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="nombres">Nombres</label>
-            <input id="nombres" class="form-control" name="nombres" [(ngModel)]="form.nombres" maxlength="60" required>
+            <input id="nombres" class="form-control" name="nombres" #nombres="ngModel" [(ngModel)]="form.nombres"
+                   required minlength="2" maxlength="60" [pattern]="patrones.nombrePersona" [class.is-invalid]="invalido(nombres)">
+            <div class="invalid-feedback">{{ mensajes.nombrePersona }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="apellidos">Apellidos</label>
-            <input id="apellidos" class="form-control" name="apellidos" [(ngModel)]="form.apellidos" maxlength="60" required>
+            <input id="apellidos" class="form-control" name="apellidos" #apellidos="ngModel" [(ngModel)]="form.apellidos"
+                   required minlength="2" maxlength="60" [pattern]="patrones.nombrePersona" [class.is-invalid]="invalido(apellidos)">
+            <div class="invalid-feedback">{{ mensajes.nombrePersona }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="direccion">Dirección</label>
-            <input id="direccion" class="form-control" name="direccion" [(ngModel)]="form.direccion" maxlength="120" required>
+            <input id="direccion" class="form-control" name="direccion" #direccion="ngModel" [(ngModel)]="form.direccion"
+                   required maxlength="120" [pattern]="patrones.direccion" placeholder="Cl. 26 #7-12" [class.is-invalid]="invalido(direccion)">
+            <div class="invalid-feedback">{{ mensajes.direccion }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label small" for="ciudad">Ciudad</label>
-            <select id="ciudad" class="form-select" name="idCiudad" [(ngModel)]="form.idCiudad" required>
+            <select id="ciudad" class="form-select" name="idCiudad" #ciudad="ngModel" [(ngModel)]="form.idCiudad" required [class.is-invalid]="invalido(ciudad)">
               <option [ngValue]="null" disabled>Seleccione…</option>
               @for (c of ciudades; track c.id) { <option [ngValue]="c.id">{{ c.nombre }} ({{ c.detalle }})</option> }
             </select>
+            <div class="invalid-feedback">Seleccione la ciudad.</div>
           </div>
         </div>
       </div>
@@ -62,9 +74,11 @@
       </div>
       <div class="card-body pt-0">
         @for (t of form.telefonos; track $index; let i = $index) {
-          <div class="row g-2 mb-2 align-items-center">
+          <div class="row g-2 mb-2 align-items-start">
             <div class="col-7 col-md-5">
-              <input class="form-control" [name]="'telefono' + i" [(ngModel)]="t.telefono" placeholder="Número" maxlength="20" aria-label="Teléfono">
+              <input class="form-control" [name]="'telefono' + i" #telefono="ngModel" [(ngModel)]="t.telefono" placeholder="3001234567"
+                     maxlength="10" inputmode="numeric" [pattern]="patrones.telefono" aria-label="Teléfono" [class.is-invalid]="invalido(telefono)">
+              <div class="invalid-feedback">{{ mensajes.telefono }}</div>
             </div>
             <div class="col-3 col-md-3">
               <select class="form-select" [name]="'tipoTelefono' + i" [(ngModel)]="t.tipo" aria-label="Tipo de teléfono">

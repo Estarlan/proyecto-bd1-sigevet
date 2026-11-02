@@ -81,7 +81,10 @@ public class AgendaService {
         if (!fechaHora.isAfter(LocalDateTime.now())) {
             throw new DatosInvalidosException("La cita debe ser en una fecha y hora futuras.");
         }
-        form.setMotivo(Validador.opcional(form.getMotivo(), "motivo", 200));
+        if (fechaHora.isAfter(LocalDateTime.now().plusYears(1))) {
+            throw new DatosInvalidosException("La cita no puede agendarse con más de un año de anticipación.");
+        }
+        form.setMotivo(Validador.textoLibre(form.getMotivo(), "motivo", 200));
         Mascota mascota = mascotaDAO.buscar(form.getIdMascota());
         if (mascota == null) {
             throw new DatosInvalidosException("La mascota seleccionada no existe.");

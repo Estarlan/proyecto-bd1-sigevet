@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CatalogoService, CitaService, MascotaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { CitaForm, Mascota, OpcionCatalogo, Sede } from '../../models/models';
+import { marcarInvalido } from '../../shared/validaciones';
 
 /**
  * Agendar una cita (/agenda/nueva?mascota=ID). Al elegir la sede se cargan solo los veterinarios que laboran en ella:
@@ -23,8 +24,10 @@ export class CitaFormPage implements OnInit {
   servicios: OpcionCatalogo[] = [];
   sedes: Sede[] = [];
   veterinarios: OpcionCatalogo[] = [];
-  /** Ahora en formato aaaa-mm-ddThh:mm, para no permitir fechas pasadas en el calendario. */
+  /** Rango permitido aaaa-mm-ddThh:mm: desde ahora hasta dentro de un año (igual que el backend). */
   ahora = '';
+  enUnAnio = '';
+  intentado = false;
 
   guardando = false;
   error = '';
@@ -37,6 +40,8 @@ export class CitaFormPage implements OnInit {
     const fecha = new Date();
     fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());   // hora local, no UTC
     this.ahora = fecha.toISOString().slice(0, 16);
+    fecha.setFullYear(fecha.getFullYear() + 1);
+    this.enUnAnio = fecha.toISOString().slice(0, 16);
 
     // solo las mascotas ACTIVAS pueden tener citas
     this.mascotaService.getAll('').subscribe(datos => this.mascotas = datos.filter(m => m.estado === 'ACTIVA'));
@@ -58,7 +63,21 @@ export class CitaFormPage implements OnInit {
     }
   }
 
-  guardar(): void {
+  invalido(campo: NgModel): boolean {
+    return marcarInvalido(campo, this.intentado);
+  }
+
+  /** aaaa-mm-ddThh:mm se puede comparar como texto. */
+  get fechaInvalida(): boolean {
+    return !!this.form.fechaHora && (this.form.fechaHora <= this.ahora || this.form.fechaHora > this.enUnAnio);
+  }
+
+  guardar(f: NgForm): void {
+    this.intentado = true;
+    if (f.invalid || this.fechaInvalida) {
+      this.error = 'Revise los campos marcados en rojo.';
+      return;
+    }
     this.guardando = true;
     this.error = '';
     this.citaService.crear(this.form).subscribe({

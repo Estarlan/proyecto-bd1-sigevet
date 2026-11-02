@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CatalogoService, ClienteService, FacturaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Cliente, FacturaForm, LineaFacturaForm, OpcionCatalogo, Sede } from '../../models/models';
+import { marcarInvalido } from '../../shared/validaciones';
 
 /** Una línea mientras se edita: se elige primero si es servicio o medicamento. */
 interface LineaEdicion {
@@ -48,6 +49,7 @@ export class FacturaFormPage implements OnInit {
     { valor: 'TRANSFERENCIA', texto: 'Transferencia' }
   ];
 
+  intentado = false;
   guardando = false;
   error = '';
 
@@ -112,7 +114,28 @@ export class FacturaFormPage implements OnInit {
     return suma;
   }
 
-  guardar(): void {
+  invalido(campo: NgModel): boolean {
+    return marcarInvalido(campo, this.intentado);
+  }
+
+  /** Cantidad entera de 1 a 1000 y descuento de 0 a 100 con máximo dos decimales (igual que el backend). */
+  lineaInvalida(linea: LineaEdicion): boolean {
+    const cantidadMala = !Number.isInteger(linea.cantidad) || linea.cantidad < 1 || linea.cantidad > 1000;
+    const descuento = linea.descuentoPct ?? 0;
+    const descuentoMalo = descuento < 0 || descuento > 100 || Math.round(descuento * 100) !== descuento * 100;
+    return linea.idItem === null || cantidadMala || descuentoMalo;
+  }
+
+  get hayLineasInvalidas(): boolean {
+    return this.lineas.some(l => this.lineaInvalida(l));
+  }
+
+  guardar(f: NgForm): void {
+    this.intentado = true;
+    if (f.invalid || this.hayLineasInvalidas) {
+      this.error = 'Revise los campos marcados en rojo.';
+      return;
+    }
     this.guardando = true;
     this.error = '';
     const lineas: LineaFacturaForm[] = this.lineas.map(l => ({

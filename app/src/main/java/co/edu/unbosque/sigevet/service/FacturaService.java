@@ -102,10 +102,8 @@ public class FacturaService {
             if (linea.getDescuentoPct() == null) {
                 linea.setDescuentoPct(BigDecimal.ZERO);
             }
-            if (linea.getDescuentoPct().compareTo(BigDecimal.ZERO) < 0
-                    || linea.getDescuentoPct().compareTo(new BigDecimal("100")) > 0) {
-                throw new DatosInvalidosException("El descuento de la línea " + numero + " debe estar entre 0 y 100.");
-            }
+            // DECIMAL(5,2) y CK_DETALLE_FACTURA_DESCUENTO_PCT: de 0 a 100 con máximo dos decimales
+            Validador.decimalEntre(linea.getDescuentoPct(), "descuento de la línea " + numero, BigDecimal.ZERO, new BigDecimal("100"));
             numero++;
         }
         return facturaDAO.insertar(form);

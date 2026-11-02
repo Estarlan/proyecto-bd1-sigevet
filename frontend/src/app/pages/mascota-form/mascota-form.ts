@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, ClienteService, MascotaService, mensajeDeError } from '../../services/api.service';
 import { Cliente, IdRespuesta, MascotaForm, OpcionCatalogo } from '../../models/models';
+import { MENSAJES, PATRONES, fechaFueraDeRango, fechaISO, marcarInvalido } from '../../shared/validaciones';
 
 /** Grupo de razas de una especie, para el <optgroup> del select. */
 interface GrupoRazas {
@@ -31,8 +32,13 @@ export class MascotaFormPage implements OnInit {
   };
   clientes: Cliente[] = [];
   gruposRazas: GrupoRazas[] = [];
-  /** Hoy en formato aaaa-mm-dd, para que el calendario no deje elegir una fecha futura. */
-  hoy = new Date().toISOString().slice(0, 10);
+  /** Rango de la fecha de nacimiento: ni futura ni de hace más de 40 años (igual que el backend). */
+  hoy = fechaISO();
+  hace40 = fechaISO(40);
+
+  patrones = PATRONES;
+  mensajes = MENSAJES;
+  intentado = false;
 
   cargando = false;
   guardando = false;
@@ -84,7 +90,20 @@ export class MascotaFormPage implements OnInit {
     return this.form.idCliente !== null ? ['/clientes', this.form.idCliente] : ['/mascotas'];
   }
 
-  guardar(): void {
+  invalido(campo: NgModel): boolean {
+    return marcarInvalido(campo, this.intentado);
+  }
+
+  get fechaInvalida(): boolean {
+    return fechaFueraDeRango(this.form.fechaNacimiento, this.hace40, this.hoy);
+  }
+
+  guardar(f: NgForm): void {
+    this.intentado = true;
+    if (f.invalid || this.fechaInvalida) {
+      this.error = 'Revise los campos marcados en rojo.';
+      return;
+    }
     this.guardando = true;
     this.error = '';
     const peticion: Observable<IdRespuesta | void> = this.id === null

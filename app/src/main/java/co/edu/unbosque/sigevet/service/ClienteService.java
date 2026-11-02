@@ -122,22 +122,21 @@ public class ClienteService {
     /** Revisa cada campo con los mismos límites de la tabla CLIENTE y deja los valores limpios en el formulario. */
     private void validar(ClienteFormDTO form) {
         form.setTipoDocumento(Validador.unoDe(form.getTipoDocumento(), "tipo de documento", "CC", "CE", "PA", "PPT"));
-        form.setNumDocumento(Validador.obligatorio(form.getNumDocumento(), "número de documento", 15));
-        if (!form.getNumDocumento().matches("^[A-Za-z0-9]+$")) {
-            throw new DatosInvalidosException("El número de documento solo puede tener letras y números.");
-        }
-        form.setNombres(Validador.obligatorio(form.getNombres(), "nombres", 60));
-        form.setApellidos(Validador.obligatorio(form.getApellidos(), "apellidos", 60));
-        form.setEmail(Validador.correo(form.getEmail(), "correo"));
-        form.setDireccion(Validador.obligatorio(form.getDireccion(), "dirección", 120));
+        // CC, CE y PPT solo dígitos; el pasaporte admite letras (Validador.documento)
+        form.setNumDocumento(Validador.documento(form.getTipoDocumento(), form.getNumDocumento()));
+        form.setNombres(Validador.nombrePersona(form.getNombres(), "nombres"));
+        form.setApellidos(Validador.nombrePersona(form.getApellidos(), "apellidos"));
+        form.setEmail(Validador.correo(form.getEmail(), "correo", false));
+        String direccion = Validador.obligatorio(Validador.espacios(form.getDireccion()), "dirección", 120);
+        form.setDireccion(Validador.formato(direccion, "dirección", Validador.PATRON_DIRECCION,
+                "use letras, números y # . , - e incluya el número de la casa (por ejemplo Cl. 26 #7-12)"));
         Validador.id(form.getIdCiudad(), "la ciudad");
         if (form.getTelefonos() == null) {
             form.setTelefonos(new ArrayList<TelefonoFormDTO>());
         }
         HashSet<String> vistos = new HashSet<String>();
         for (TelefonoFormDTO telefono : form.getTelefonos()) {
-            String numero = telefono.getTelefono() == null ? "" : telefono.getTelefono().replaceAll("[\\s-]", "");
-            telefono.setTelefono(Validador.digitos(numero, "teléfono", 7, 20));
+            telefono.setTelefono(Validador.telefono(telefono.getTelefono(), "teléfono"));
             telefono.setTipo(Validador.unoDe(telefono.getTipo(), "tipo de teléfono", "MOVIL", "FIJO", "TRABAJO"));
             if (!vistos.add(telefono.getTelefono())) {
                 throw new DatosInvalidosException("El teléfono " + telefono.getTelefono() + " está repetido.");

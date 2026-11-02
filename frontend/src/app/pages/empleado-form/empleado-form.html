@@ -11,7 +11,7 @@
 @if (cargando) {
   <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
 } @else {
-  <form (ngSubmit)="guardar()">
+  <form #f="ngForm" (ngSubmit)="guardar(f)" novalidate>
     <div class="card tarjeta mb-3">
       <div class="card-header">Datos del empleado</div>
       <div class="card-body pt-0">
@@ -25,14 +25,17 @@
           </div>
           <div class="col-md-4">
             <label class="form-label small" for="sede">Sede donde labora</label>
-            <select id="sede" class="form-select" name="idSede" [(ngModel)]="form.idSede" required>
+            <select id="sede" class="form-select" name="idSede" #sede="ngModel" [(ngModel)]="form.idSede" required [class.is-invalid]="invalido(sede)">
               <option [ngValue]="null" disabled>Seleccione…</option>
               @for (s of sedes; track s.idSede) { <option [ngValue]="s.idSede">{{ s.nombre }}</option> }
             </select>
+            <div class="invalid-feedback">Seleccione la sede.</div>
           </div>
           <div class="col-md-4">
             <label class="form-label small" for="salario">Salario mensual</label>
-            <input id="salario" type="number" class="form-control" name="salario" [(ngModel)]="form.salario" min="1" step="1000" required>
+            <input id="salario" type="number" class="form-control" name="salario" #salario="ngModel" [(ngModel)]="form.salario"
+                   min="1" max="50000000" step="1000" required [class.is-invalid]="invalido(salario)">
+            <div class="invalid-feedback">Entre $1 y $50.000.000.</div>
           </div>
           <div class="col-sm-4 col-md-2">
             <label class="form-label small" for="tipoDocumento">Documento</label>
@@ -42,31 +45,46 @@
           </div>
           <div class="col-sm-8 col-md-4">
             <label class="form-label small" for="numDocumento">Número</label>
-            <input id="numDocumento" class="form-control" name="numDocumento" [(ngModel)]="form.numDocumento" maxlength="15" required>
+            <input id="numDocumento" class="form-control" name="numDocumento" #numDocumento="ngModel" [(ngModel)]="form.numDocumento"
+                   maxlength="12" required [pattern]="patronDocumento(form.tipoDocumento)"
+                   [attr.inputmode]="form.tipoDocumento === 'PA' ? 'text' : 'numeric'" [class.is-invalid]="invalido(numDocumento)">
+            <div class="invalid-feedback">{{ mensajeDocumento(form.tipoDocumento) }}</div>
           </div>
           <div class="col-md-3">
             <label class="form-label small" for="nombres">Nombres</label>
-            <input id="nombres" class="form-control" name="nombres" [(ngModel)]="form.nombres" maxlength="60" required>
+            <input id="nombres" class="form-control" name="nombres" #nombres="ngModel" [(ngModel)]="form.nombres" minlength="2" maxlength="60"
+                   required [pattern]="patrones.nombrePersona" [class.is-invalid]="invalido(nombres)">
+            <div class="invalid-feedback">{{ mensajes.nombrePersona }}</div>
           </div>
           <div class="col-md-3">
             <label class="form-label small" for="apellidos">Apellidos</label>
-            <input id="apellidos" class="form-control" name="apellidos" [(ngModel)]="form.apellidos" maxlength="60" required>
+            <input id="apellidos" class="form-control" name="apellidos" #apellidos="ngModel" [(ngModel)]="form.apellidos" minlength="2" maxlength="60"
+                   required [pattern]="patrones.nombrePersona" [class.is-invalid]="invalido(apellidos)">
+            <div class="invalid-feedback">{{ mensajes.nombrePersona }}</div>
           </div>
           <div class="col-sm-6 col-md-3">
             <label class="form-label small" for="nacimiento">Fecha de nacimiento</label>
-            <input id="nacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="form.fechaNacimiento" required>
+            <input id="nacimiento" type="date" class="form-control" name="fechaNacimiento" #nacimiento="ngModel" [(ngModel)]="form.fechaNacimiento"
+                   required [min]="nacimientoMinimo" [max]="nacimientoMaximo" [class.is-invalid]="invalido(nacimiento) || nacimientoInvalido">
+            <div class="invalid-feedback">Obligatoria; el empleado debe tener entre 16 y 80 años.</div>
           </div>
           <div class="col-sm-6 col-md-3">
             <label class="form-label small" for="ingreso">Fecha de ingreso</label>
-            <input id="ingreso" type="date" class="form-control" name="fechaIngreso" [(ngModel)]="form.fechaIngreso" required>
+            <input id="ingreso" type="date" class="form-control" name="fechaIngreso" #ingreso="ngModel" [(ngModel)]="form.fechaIngreso"
+                   required [min]="ingresoMinimo" [max]="hoy" [class.is-invalid]="invalido(ingreso) || ingresoInvalido">
+            <div class="invalid-feedback">No puede ser futura ni de antes de que cumpliera 16 años.</div>
           </div>
           <div class="col-md-3">
             <label class="form-label small" for="telefono">Teléfono</label>
-            <input id="telefono" class="form-control" name="telefono" [(ngModel)]="form.telefono" maxlength="20" required>
+            <input id="telefono" class="form-control" name="telefono" #telefono="ngModel" [(ngModel)]="form.telefono" maxlength="10"
+                   inputmode="numeric" required [pattern]="patrones.telefono" [class.is-invalid]="invalido(telefono)">
+            <div class="invalid-feedback">{{ mensajes.telefono }}</div>
           </div>
           <div class="col-md-3">
             <label class="form-label small" for="email">Correo corporativo</label>
-            <input id="email" type="email" class="form-control" name="email" [(ngModel)]="form.email" maxlength="100" required>
+            <input id="email" type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="form.email" maxlength="100"
+                   required [pattern]="patrones.correo" [class.is-invalid]="invalido(email)">
+            <div class="invalid-feedback">{{ mensajes.correo }}</div>
           </div>
         </div>
       </div>
@@ -80,15 +98,21 @@
           <div class="row g-3">
             <div class="col-md-4">
               <label class="form-label small" for="tarjeta">Tarjeta profesional</label>
-              <input id="tarjeta" class="form-control" name="tarjetaProfesional" [(ngModel)]="form.tarjetaProfesional" maxlength="20" required>
+              <input id="tarjeta" class="form-control" name="tarjetaProfesional" #tarjeta="ngModel" [(ngModel)]="form.tarjetaProfesional"
+                     maxlength="20" required [pattern]="patrones.tarjeta" placeholder="TP-20037" [class.is-invalid]="invalido(tarjeta)">
+              <div class="invalid-feedback">{{ mensajes.tarjeta }}</div>
             </div>
             <div class="col-md-5">
               <label class="form-label small" for="universidad">Universidad</label>
-              <input id="universidad" class="form-control" name="universidad" [(ngModel)]="form.universidad" maxlength="100" required>
+              <input id="universidad" class="form-control" name="universidad" #universidad="ngModel" [(ngModel)]="form.universidad"
+                     maxlength="100" required [pattern]="patrones.institucion" [class.is-invalid]="invalido(universidad)">
+              <div class="invalid-feedback">{{ mensajes.institucion }}</div>
             </div>
             <div class="col-md-3">
               <label class="form-label small" for="anio">Año de graduación</label>
-              <input id="anio" type="number" class="form-control" name="anioGraduacion" [(ngModel)]="form.anioGraduacion" min="1970" max="2026" required>
+              <input id="anio" type="number" class="form-control" name="anioGraduacion" #anio="ngModel" [(ngModel)]="form.anioGraduacion"
+                     [min]="anioMinimo" [max]="anioMaximo" step="1" required [class.is-invalid]="invalido(anio)">
+              <div class="invalid-feedback">Entre {{ anioMinimo }} y {{ anioMaximo }} (graduado con al menos 18 años).</div>
             </div>
             <div class="col-12">
               <span class="form-label small d-block">Especialidades (VETERINARIO_ESPECIALIDAD)</span>
@@ -115,21 +139,25 @@
           <div class="row g-3">
             <div class="col-md-4">
               <label class="form-label small" for="area">Área</label>
-              <select id="area" class="form-select" name="area" [(ngModel)]="form.area" required>
+              <select id="area" class="form-select" name="area" #area="ngModel" [(ngModel)]="form.area" required [class.is-invalid]="invalido(area)">
                 <option [ngValue]="null" disabled>Seleccione…</option>
                 @for (a of areas; track a) { <option [value]="a">{{ a }}</option> }
               </select>
+              <div class="invalid-feedback">Seleccione el área.</div>
             </div>
             <div class="col-md-4">
               <label class="form-label small" for="turno">Turno</label>
-              <select id="turno" class="form-select" name="turno" [(ngModel)]="form.turno" required>
+              <select id="turno" class="form-select" name="turno" #turno="ngModel" [(ngModel)]="form.turno" required [class.is-invalid]="invalido(turno)">
                 <option [ngValue]="null" disabled>Seleccione…</option>
                 @for (t of turnos; track t.valor) { <option [value]="t.valor">{{ t.texto }}</option> }
               </select>
+              <div class="invalid-feedback">Seleccione el turno.</div>
             </div>
             <div class="col-md-4">
               <label class="form-label small" for="certificacion">Certificación <span class="text-muted">(opcional)</span></label>
-              <input id="certificacion" class="form-control" name="certificacion" [(ngModel)]="form.certificacion" maxlength="100">
+              <input id="certificacion" class="form-control" name="certificacion" #certificacion="ngModel" [(ngModel)]="form.certificacion"
+                     maxlength="100" [pattern]="patrones.institucion" [class.is-invalid]="invalido(certificacion)">
+              <div class="invalid-feedback">{{ mensajes.institucion }}</div>
             </div>
           </div>
         </div>

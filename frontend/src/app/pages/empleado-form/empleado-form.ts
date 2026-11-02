@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, PersonalService, SedeService, mensajeDeError } from '../../services/api.service';
 import { EmpleadoForm, IdRespuesta, OpcionCatalogo, Sede } from '../../models/models';
+import { MENSAJES, PATRONES, fechaFueraDeRango, fechaISO, marcarInvalido, mensajeDocumento, patronDocumento } from '../../shared/validaciones';
 
 /**
  * Crear (/personal/nuevo) o editar (/personal/:id/editar) un empleado. Según el tipo se muestran los campos del
@@ -42,6 +43,19 @@ export class EmpleadoFormPage implements OnInit {
     { valor: 'NOCHE', texto: 'Noche' }
   ];
 
+  // reglas compartidas con el backend (shared/validaciones.ts y Validador.java)
+  patrones = PATRONES;
+  mensajes = MENSAJES;
+  patronDocumento = patronDocumento;
+  mensajeDocumento = mensajeDocumento;
+  intentado = false;
+  hoy = fechaISO();
+  /** Edad permitida: entre 16 y 80 años. */
+  nacimientoMinimo = fechaISO(80);
+  nacimientoMaximo = fechaISO(16);
+  /** Año de graduación guardado al editar: si no cambia, no se le exige la regla de los 18 años (igual que el backend). */
+  anioOriginal: number | null = null;
+
   cargando = false;
   guardando = false;
   error = '';
@@ -57,7 +71,7 @@ export class EmpleadoFormPage implements OnInit {
       this.id = Number(parametro);
       this.cargando = true;
       this.personalService.getFormulario(this.id).subscribe({
-        next: (datos) => { this.form = datos; this.cargando = false; },
+        next: (datos) => { this.form = datos; this.anioOriginal = datos.anioGraduacion; this.cargando = false; },
         error: (e: HttpErrorResponse) => { this.error = mensajeDeError(e); this.cargando = false; }
       });
     }
@@ -77,7 +91,46 @@ export class EmpleadoFormPage implements OnInit {
     }
   }
 
-  guardar(): void {
+  invalido(campo: NgModel): boolean {
+    return marcarInvalido(campo, this.intentado);
+  }
+
+  get nacimientoInvalido(): boolean {
+    return !!this.form.fechaNacimiento && fechaFueraDeRango(this.form.fechaNacimiento, this.nacimientoMinimo, this.nacimientoMaximo);
+  }
+
+  /** La fecha de ingreso no puede ser futura ni de antes de que el empleado cumpliera 16 años. */
+  get ingresoMinimo(): string {
+    if (!this.form.fechaNacimiento) {
+      return '1900-01-01';
+    }
+    const anio = Number(this.form.fechaNacimiento.slice(0, 4)) + 16;
+    return anio + this.form.fechaNacimiento.slice(4);
+  }
+
+  get ingresoInvalido(): boolean {
+    return !!this.form.fechaIngreso && fechaFueraDeRango(this.form.fechaIngreso, this.ingresoMinimo, this.hoy);
+  }
+
+  /** Rango del año de graduación: CHECK 1970–2026, no futuro y con al menos 18 años (salvo que no cambie al editar). */
+  get anioMaximo(): number {
+    return Math.min(2026, new Date().getFullYear());
+  }
+
+  get anioMinimo(): number {
+    if (this.id !== null && this.form.anioGraduacion === this.anioOriginal) {
+      return 1970;
+    }
+    const nacimiento = this.form.fechaNacimiento ? Number(this.form.fechaNacimiento.slice(0, 4)) : 1952;
+    return Math.max(1970, nacimiento + 18);
+  }
+
+  guardar(f: NgForm): void {
+    this.intentado = true;
+    if (f.invalid || this.nacimientoInvalido || this.ingresoInvalido) {
+      this.error = 'Revise los campos marcados en rojo.';
+      return;
+    }
     this.guardando = true;
     this.error = '';
     const peticion: Observable<IdRespuesta | void> = this.id === null

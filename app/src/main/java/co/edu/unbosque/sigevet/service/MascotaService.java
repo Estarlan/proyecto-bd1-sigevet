@@ -11,7 +11,6 @@ import co.edu.unbosque.sigevet.model.Prescripcion;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import co.edu.unbosque.sigevet.dto.MascotaFormDTO;
-import co.edu.unbosque.sigevet.exception.DatosInvalidosException;
 import co.edu.unbosque.sigevet.util.Validador;
 import java.time.LocalDate;
 
@@ -122,24 +121,27 @@ public class MascotaService {
 
     /** Revisa cada campo con los límites y restricciones CHECK de MASCOTA e HISTORIA_CLINICA. */
     private void validar(MascotaFormDTO form) {
-        form.setNombre(Validador.obligatorio(form.getNombre(), "nombre", 40));
+        String nombre = Validador.obligatorio(Validador.espacios(form.getNombre()), "nombre", 40);
+        form.setNombre(Validador.formato(nombre, "nombre", Validador.PATRON_NOMBRE_MASCOTA, "solo letras, sin números ni símbolos"));
         if (form.getFechaNacimiento() == null || form.getFechaNacimiento().isBlank()) {
             form.setFechaNacimiento(null);
-        } else if (Validador.fecha(form.getFechaNacimiento(), "fecha de nacimiento").isAfter(LocalDate.now())) {
-            throw new DatosInvalidosException("La fecha de nacimiento no puede ser futura.");
+        } else {
+            // ni futura ni de hace más de 40 años
+            Validador.fechaEntre(form.getFechaNacimiento(), "fecha de nacimiento", LocalDate.now().minusYears(40), LocalDate.now());
         }
         form.setSexo(Validador.unoDe(form.getSexo(), "sexo", "M", "H"));
-        form.setColor(Validador.opcional(form.getColor(), "color", 40));
-        form.setMicrochip(Validador.opcional(form.getMicrochip(), "microchip", 15));
-        if (form.getMicrochip() != null) {
-            Validador.digitos(form.getMicrochip(), "microchip", 15, 15);
-        }
+        String color = Validador.opcional(Validador.espacios(form.getColor()), "color", 40);
+        form.setColor(Validador.formato(color, "color", Validador.PATRON_COLOR, "solo letras (por ejemplo Negro y blanco)"));
+        String microchip = form.getMicrochip() == null ? null : form.getMicrochip().replaceAll("\\s", "");
+        microchip = Validador.opcional(microchip, "microchip", 15);
+        form.setMicrochip(Validador.formato(microchip, "microchip", Validador.PATRON_MICROCHIP, "exactamente 15 dígitos"));
         form.setEsterilizado(Validador.unoDe(form.getEsterilizado(), "esterilizado", "S", "N"));
         Validador.id(form.getIdRaza(), "la raza");
         Validador.id(form.getIdCliente(), "el propietario");
-        form.setGrupoSanguineo(Validador.opcional(form.getGrupoSanguineo(), "grupo sanguíneo", 10));
-        form.setAlergias(Validador.opcional(form.getAlergias(), "alergias", 200));
-        form.setEnfermedadesCronicas(Validador.opcional(form.getEnfermedadesCronicas(), "enfermedades crónicas", 200));
-        form.setObservaciones(Validador.opcional(form.getObservaciones(), "observaciones", 400));
+        String grupo = Validador.opcional(form.getGrupoSanguineo(), "grupo sanguíneo", 10);
+        form.setGrupoSanguineo(Validador.formato(grupo, "grupo sanguíneo", Validador.PATRON_GRUPO_SANGUINEO, "letras, números y + - . / (por ejemplo DEA 1.1+)"));
+        form.setAlergias(Validador.textoLibre(form.getAlergias(), "alergias", 200));
+        form.setEnfermedadesCronicas(Validador.textoLibre(form.getEnfermedadesCronicas(), "enfermedades crónicas", 200));
+        form.setObservaciones(Validador.textoLibre(form.getObservaciones(), "observaciones", 400));
     }
 }

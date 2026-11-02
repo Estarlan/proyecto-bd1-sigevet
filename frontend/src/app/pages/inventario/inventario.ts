@@ -75,8 +75,18 @@ export class Inventario implements OnInit {
     this.nuevo = { idSede: this.sedeSeleccionada, idMedicamento: null, stockActual: 0, stockMinimo: 0 };
   }
 
+  /** Existencias: enteros de 0 a 1.000.000 (CK_INVENTARIO_STOCK_ACTUAL y CK_INVENTARIO_STOCK_MINIMO). */
+  existenciaValida(valor: number | null): boolean {
+    return valor !== null && Number.isInteger(valor) && valor >= 0 && valor <= 1000000;
+  }
+
   /** INSERT en INVENTARIO. Si la sede ya tenía el medicamento, la llave primaria lo impide (409). */
   agregar(): void {
+    if (this.nuevo.idSede === null || this.nuevo.idMedicamento === null
+        || !this.existenciaValida(this.nuevo.stockActual) || !this.existenciaValida(this.nuevo.stockMinimo)) {
+      this.errorAccion = 'Elija la sede y el medicamento; las existencias deben ser números enteros de 0 en adelante.';
+      return;
+    }
     this.guardando = true;
     this.limpiarMensajes();
     this.inventarioService.agregar(this.nuevo).subscribe({
@@ -107,6 +117,10 @@ export class Inventario implements OnInit {
       return;
     }
     const item = this.editando;
+    if (!this.existenciaValida(this.editStock) || !this.existenciaValida(this.editMinimo)) {
+      this.errorAccion = 'Las existencias deben ser números enteros de 0 en adelante.';
+      return;
+    }
     const form: InventarioForm = { idSede: item.idSede, idMedicamento: item.idMedicamento, stockActual: this.editStock, stockMinimo: this.editMinimo };
     this.guardando = true;
     this.inventarioService.actualizar(item.idSede, item.idMedicamento, form).subscribe({
