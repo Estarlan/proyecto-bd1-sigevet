@@ -27,6 +27,8 @@ src/app/
   services/api.service.ts   un servicio por recurso (HttpClient → Observable)
   shared/components/navbar  menú superior
   pages/                    una carpeta por página
+  guards/                   sesionGuard (exige sesión) e interceptor que lleva a /login con un 401
+  pages/login               inicio de sesión del personal
   app.routes.ts             rutas con carga diferida (loadComponent)
 ```
 

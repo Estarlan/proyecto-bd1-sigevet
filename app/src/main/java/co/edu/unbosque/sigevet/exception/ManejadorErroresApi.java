@@ -31,6 +31,18 @@ public class ManejadorErroresApi {
     }
 
     /**
+     * No hay sesión o el correo y el documento no corresponden a un empleado activo: responde 401.
+     *
+     * @param e excepción lanzada por el inicio de sesión.
+     * @return respuesta 401 con el mensaje de la excepción.
+     */
+    @ExceptionHandler(NoAutorizadoException.class)
+    public ResponseEntity<ErrorApiDTO> noAutorizado(NoAutorizadoException e) {
+        ErrorApiDTO error = new ErrorApiDTO(HttpStatus.UNAUTHORIZED.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+    }
+
+    /**
      * Un parámetro de la dirección no tiene el tipo esperado (por ejemplo {@code /api/clientes/abc}): responde 400.
      *
      * @param e excepción que lanza Spring al no poder convertir el parámetro.

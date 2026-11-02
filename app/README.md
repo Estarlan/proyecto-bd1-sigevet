@@ -63,6 +63,10 @@ Todo el código está en `src/main/java/co/edu/unbosque/sigevet`:
 - `util`: `Validador` (reglas de los formularios), `ErroresSQL` (traduce los errores de MySQL) y `TextoUtil`.
 - `algebra`: lector de los 55 ejercicios agrupados del archivo SQL.
 
+Toda la API, menos `/api/sesion`, exige haber iniciado sesión: `config/FiltroSesion` responde 401 si la sesión HTTP
+no tiene un empleado. El empleado entra con su correo corporativo y su número de documento (`SesionDAO` los busca en
+EMPLEADO, solo activos).
+
 El flujo de una petición es: Angular → `controller/api` → `service` → `dao` → MySQL, y de vuelta como JSON.
 
 ## JDBC sin ORM
@@ -88,6 +92,7 @@ lista sea de empleados.
 
 | Recurso | Lectura | Escritura |
 | --- | --- | --- |
+| Sesión | `GET /api/sesion` | `POST` (correo y documento de un empleado activo), `DELETE` (salir) |
 | Inicio | `GET /api/inicio` | — |
 | Clientes | `GET /api/clientes?buscar=`, `GET /api/clientes/{id}` | `POST`, `PUT /{id}`, `DELETE /{id}` (solo sin historial) |
 | Mascotas | `GET /api/mascotas?buscar=`, `GET /api/mascotas/{id}` | `POST`, `PUT /{id}`, `PATCH /{id}/estado` |

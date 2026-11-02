@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
+import { sesionGuard } from './guards/sesion.guard';
 
 // Cada página se carga solo cuando se visita (loadComponent), igual que en el proyecto base.
-export const routes: Routes = [
+const paginas: Routes = [
   { path: '', loadComponent: () => import('./pages/inicio/inicio').then(m => m.Inicio) },
 
   { path: 'clientes',            loadComponent: () => import('./pages/clientes/clientes').then(m => m.Clientes) },
@@ -29,4 +30,10 @@ export const routes: Routes = [
 
   // Cualquier otra dirección
   { path: '**', loadComponent: () => import('./pages/no-encontrado/no-encontrado').then(m => m.NoEncontrado) }
+];
+
+// El inicio de sesión es la única página libre; todas las demás exigen sesión (sesionGuard).
+export const routes: Routes = [
+  { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.Login) },
+  ...paginas.map(pagina => ({ ...pagina, canActivate: [sesionGuard] }))
 ];

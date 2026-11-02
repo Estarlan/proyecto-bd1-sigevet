@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { SesionService } from '../../../services/sesion.service';
 
 /** Opción del menú superior. */
 interface OpcionMenu {
@@ -29,7 +30,18 @@ export class NavbarComponent {
     { texto: 'Álgebra relacional', ruta: '/algebra',    icono: 'bi-diagram-3' }
   ];
 
+  constructor(public sesion: SesionService, private router: Router) {}
+
   cerrarMenu(): void {
     this.menuAbierto = false;
+  }
+
+  /** Cierra la sesión en el servidor y vuelve al inicio de sesión. */
+  salir(): void {
+    this.cerrarMenu();
+    this.sesion.cerrar().subscribe({
+      next: () => this.router.navigate(['/login']),
+      error: () => this.router.navigate(['/login'])
+    });
   }
 }

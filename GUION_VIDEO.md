@@ -1,5 +1,6 @@
 <!-- Created: [unknown] -->
 <!-- Updated: 11:05 02-Nov-2026 -->
+<!-- Updated: 12:40 02-Nov-2026 -->
 # SIGEVET — guion del video por persona
 
 Video de demostración de máximo 15 minutos (este guion dura 13:30). Todos hablan, con cámara y audio. Cada persona
@@ -149,6 +150,8 @@ contra una base SQLite; **[No verificado]** contra el estado actual de los archi
 ## Bloque 7 — Juan Miguel: aplicación web (10:00–12:30)
 
 Abre `http://192.168.2.40:5000` (o `http://127.0.0.1:5000` en el portátil). Recorre en este orden (unos 20 s cada paso):
+0. **Inicio de sesión**: primero un documento equivocado (sale el error en rojo) y luego el correo y el documento
+   correctos de un empleado activo; arriba aparece su nombre y el botón Salir.
 1. **Inicio**: los indicadores de la red.
 2. **Clientes**: busca uno y entra a su detalle (teléfonos, mascotas y facturas).
 3. **Crear un cliente** con el formulario y guardarlo: aparece en la lista (CRUD).
@@ -161,7 +164,7 @@ Abre `http://192.168.2.40:5000` (o `http://127.0.0.1:5000` en el portátil). Rec
 8. **Álgebra**: abre un ejercicio y muestra el resultado en vivo.
 
 **Di:**
-> "La interfaz está hecha en Angular y le pide los datos a una API REST en Java 21 con Spring Boot. Todo el SQL está
+> "Solo entra el personal activo: el correo y el documento se comprueban contra la tabla EMPLEADO. La interfaz está hecha en Angular y le pide los datos a una API REST en Java 21 con Spring Boot. Todo el SQL está
 > escrito a mano con JDBC y PreparedStatement; no usamos ORM. La aplicación se conecta con el usuario vet_app, que lee
 > toda la base y solo puede escribir en las tablas que usa, sin borrar tablas ni cambiar catálogos. Las reglas viven en
 > la base: cuando metemos un documento repetido, es MySQL el que lo rechaza y la aplicación muestra la restricción. La

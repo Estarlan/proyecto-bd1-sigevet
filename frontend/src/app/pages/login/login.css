@@ -1,0 +1,15 @@
+.login-fondo {
+  min-height: calc(100vh - 48px - 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-tarjeta {
+  width: 100%;
+  max-width: 380px;
+  border: 0;
+  border-radius: 14px;
+}
+.login-logo {
+  font-size: 2.4rem;
+}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
@@ -24,6 +25,28 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
  */
 @Configuration
 public class ConfiguracionWeb implements WebMvcConfigurer {
+    /** Filtro que exige haber iniciado sesión para usar la API. */
+    private final FiltroSesion filtroSesion;
+
+    /**
+     * Constructor con inyección de dependencias.
+     *
+     * @param filtroSesion filtro de sesión de la API.
+     */
+    public ConfiguracionWeb(FiltroSesion filtroSesion) {
+        this.filtroSesion = filtroSesion;
+    }
+
+    /**
+     * Toda la API exige sesión, menos {@code /api/sesion} (iniciar, consultar y cerrar sesión). Las páginas de Angular
+     * no pasan por el filtro: Angular muestra el inicio de sesión cuando la API responde 401.
+     *
+     * @param registry registro de filtros de Spring MVC.
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(filtroSesion).addPathPatterns("/api/**").excludePathPatterns("/api/sesion");
+    }
 
     /**
      * Registra la carpeta {@code static/} del jar (donde Maven copia el build de Angular) con la regla de respaldo.

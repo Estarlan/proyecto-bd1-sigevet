@@ -337,3 +337,17 @@ export interface IdRespuesta {
 export interface Mensaje {
   mensaje: string;
 }
+
+/** Empleado que inició sesión (GET y POST /api/sesion). */
+export interface Sesion {
+  idEmpleado: number;
+  nombreCompleto: string;
+  cargo: string;
+  sede: string;
+}
+
+/** Formulario de inicio de sesión: correo corporativo y número de documento del empleado. */
+export interface LoginForm {
+  email: string;
+  documento: string;
+}

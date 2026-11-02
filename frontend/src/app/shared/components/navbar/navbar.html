@@ -26,9 +26,14 @@
         }
       </ul>
 
-      <span class="badge-lectura">
-        <i class="bi bi-database-fill me-1"></i>MySQL · JDBC sin ORM
-      </span>
+      @if (sesion.empleado(); as empleado) {
+        <span class="usuario-conectado me-2" [title]="empleado.cargo + ' · ' + empleado.sede">
+          <i class="bi bi-person-circle me-1"></i>{{ empleado.nombreCompleto }}
+        </span>
+      }
+      <button type="button" class="btn btn-sm btn-outline-light text-nowrap" (click)="salir()">
+        <i class="bi bi-box-arrow-right me-1"></i>Salir
+      </button>
     </div>
   </div>
 </nav>

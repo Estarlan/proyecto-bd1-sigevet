@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar';
+import { SesionService } from './services/sesion.service';
 
 /**
- * Componente raíz. SIGEVET no tiene inicio de sesión ni roles de usuario,
- * así que el menú se pone una sola vez aquí y cada página se dibuja dentro del router-outlet.
+ * Componente raíz. El menú se pone una sola vez aquí y solo aparece cuando hay un empleado conectado;
+ * cada página se dibuja dentro del router-outlet.
  */
 @Component({
   selector: 'app-root',
@@ -13,4 +14,6 @@ import { NavbarComponent } from './shared/components/navbar/navbar';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(public sesion: SesionService) {}
+}
