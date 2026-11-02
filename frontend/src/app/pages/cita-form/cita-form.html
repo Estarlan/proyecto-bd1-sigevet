@@ -1,0 +1,74 @@
+<a routerLink="/agenda" class="d-inline-block mb-3 small"><i class="bi bi-arrow-left me-1"></i>Volver a la agenda</a>
+
+<div class="d-flex align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-calendar-plus-fill text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Agendar cita</h4>
+    <p class="text-muted mb-0 small">La cita queda PROGRAMADA</p>
+  </div>
+</div>
+
+<form #f="ngForm" (ngSubmit)="guardar(f)" novalidate>
+  <div class="card tarjeta mb-3">
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label small" for="mascota">Mascota</label>
+          <select id="mascota" class="form-select" name="idMascota" #mascota="ngModel" [(ngModel)]="form.idMascota" required [class.is-invalid]="invalido(mascota)">
+            <option [ngValue]="null" disabled>Seleccione…</option>
+            @for (m of mascotas; track m.idMascota) {
+              <option [ngValue]="m.idMascota">{{ m.nombre }} · {{ m.especie }} · {{ m.cliente }}</option>
+            }
+          </select>
+          <div class="invalid-feedback">Seleccione la mascota.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small" for="servicio">Servicio</label>
+          <select id="servicio" class="form-select" name="idServicio" #servicio="ngModel" [(ngModel)]="form.idServicio" required [class.is-invalid]="invalido(servicio)">
+            <option [ngValue]="null" disabled>Seleccione…</option>
+            @for (s of servicios; track s.id) {
+              <option [ngValue]="s.id">{{ s.nombre }} ({{ s.detalle }}) · {{ s.valor | currency:'COP':'symbol-narrow':'1.0-0' }}</option>
+            }
+          </select>
+          <div class="invalid-feedback">Seleccione el servicio.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small" for="sede">Sede</label>
+          <select id="sede" class="form-select" name="idSede" #sede="ngModel" [(ngModel)]="form.idSede" (ngModelChange)="cambiarSede()" required [class.is-invalid]="invalido(sede)">
+            <option [ngValue]="null" disabled>Seleccione…</option>
+            @for (s of sedes; track s.idSede) { <option [ngValue]="s.idSede">{{ s.nombre }}</option> }
+          </select>
+          <div class="invalid-feedback">Seleccione la sede.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small" for="veterinario">Veterinario <span class="text-muted">(solo los de la sede: RN-08)</span></label>
+          <select id="veterinario" class="form-select" name="idVeterinario" #veterinario="ngModel" [(ngModel)]="form.idVeterinario"
+                  [disabled]="form.idSede === null" required [class.is-invalid]="invalido(veterinario) || (intentado && form.idVeterinario === null)">
+            <option [ngValue]="null" disabled>{{ form.idSede === null ? 'Elija primero la sede' : 'Seleccione…' }}</option>
+            @for (v of veterinarios; track v.id) { <option [ngValue]="v.id">{{ v.nombre }}</option> }
+          </select>
+          <div class="invalid-feedback">Seleccione el veterinario de la sede.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small" for="fechaHora">Fecha y hora</label>
+          <input id="fechaHora" type="datetime-local" class="form-control" name="fechaHora" #fechaHora="ngModel" [(ngModel)]="form.fechaHora"
+                 [min]="ahora" [max]="enUnAnio" required [class.is-invalid]="invalido(fechaHora) || fechaInvalida">
+          <div class="invalid-feedback">Obligatoria: una fecha y hora futuras, máximo dentro de un año.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small" for="motivo">Motivo <span class="text-muted">(opcional)</span></label>
+          <input id="motivo" class="form-control" name="motivo" [(ngModel)]="form.motivo" maxlength="200">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (error) { <div class="alert alert-danger">{{ error }}</div> }
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-dark" [disabled]="guardando">
+      @if (guardando) { <span class="spinner-border spinner-border-sm me-1"></span> }
+      Agendar
+    </button>
+    <a routerLink="/agenda" class="btn btn-link">Cancelar</a>
+  </div>
+</form>

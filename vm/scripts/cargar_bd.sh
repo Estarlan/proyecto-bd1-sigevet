@@ -25,3 +25,7 @@ echo "== Instalando el esquema SIGEVET"
 inicio=$(date +%s)
 como_vetdb --default-character-set=utf8mb4 -t < instalar_esquema.sql
 echo "Tiempo: $(( $(date +%s) - inicio )) s"
+
+# Los permisos de escritura de vet_app son de tabla: se conceden como root cuando las tablas ya existen
+echo "== Permisos de escritura de la aplicación (como root)"
+como_root -t < 01_ddl/05_permisos_app.sql

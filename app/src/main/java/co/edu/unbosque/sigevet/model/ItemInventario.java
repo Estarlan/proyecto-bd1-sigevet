@@ -6,6 +6,10 @@ import java.util.Objects;
  * Existencia de un medicamento en el inventario de una sede.
  */
 public class ItemInventario {
+    /** Identificador de la sede (parte de la llave primaria de INVENTARIO). */
+    private int idSede;
+    /** Identificador del medicamento (parte de la llave primaria de INVENTARIO). */
+    private int idMedicamento;
     /** Nombre de la sede donde está el inventario. */
     private String sede;
     /** Nombre del medicamento. */
@@ -101,6 +105,24 @@ public class ItemInventario {
     /** @param fechaActualizacion nueva fecha de actualización. */
     public void setFechaActualizacion(String fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    /** @return el identificador de la sede. */
+    public int getIdSede() {
+        return idSede;
+    }
+
+    public void setIdSede(int idSede) {
+        this.idSede = idSede;
+    }
+
+    /** @return el identificador del medicamento. */
+    public int getIdMedicamento() {
+        return idMedicamento;
+    }
+
+    public void setIdMedicamento(int idMedicamento) {
+        this.idMedicamento = idMedicamento;
     }
 
     /**

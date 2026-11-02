@@ -1,0 +1,139 @@
+<div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-capsule text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Inventario por sede</h4>
+    <p class="text-muted mb-0 small">Medicamentos y existencias de cada sede (relación N:M ALMACENAR)</p>
+  </div>
+  <button type="button" class="btn btn-dark ms-auto" (click)="abrirNuevo()">
+    <i class="bi {{ mostrarNuevo ? 'bi-x-lg' : 'bi-plus-lg' }} me-1"></i>{{ mostrarNuevo ? 'Cerrar' : 'Agregar medicamento' }}
+  </button>
+</div>
+
+@if (aviso) { <div class="alert alert-success"><i class="bi bi-check-circle me-1"></i>{{ aviso }}</div> }
+@if (errorAccion) { <div class="alert alert-warning">{{ errorAccion }}</div> }
+
+@if (mostrarNuevo) {
+  <div class="card tarjeta mb-3">
+    <div class="card-header">Agregar medicamento a una sede</div>
+    <div class="card-body pt-0">
+      <form class="row g-2 align-items-end" (ngSubmit)="agregar()">
+        <div class="col-md-3">
+          <label class="form-label small" for="nuevaSede">Sede</label>
+          <select id="nuevaSede" class="form-select" name="idSede" [(ngModel)]="nuevo.idSede" required>
+            <option [ngValue]="null" disabled>Seleccione…</option>
+            @for (s of sedes; track s.idSede) { <option [ngValue]="s.idSede">{{ s.nombre }}</option> }
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label small" for="nuevoMedicamento">Medicamento</label>
+          <select id="nuevoMedicamento" class="form-select" name="idMedicamento" [(ngModel)]="nuevo.idMedicamento" required>
+            <option [ngValue]="null" disabled>Seleccione…</option>
+            @for (m of medicamentos; track m.id) { <option [ngValue]="m.id">{{ m.nombre }} ({{ m.detalle }})</option> }
+          </select>
+        </div>
+        <div class="col-6 col-md-2">
+          <label class="form-label small" for="nuevoStock">Stock actual</label>
+          <input id="nuevoStock" type="number" class="form-control" name="stockActual" [(ngModel)]="nuevo.stockActual" min="0" required>
+        </div>
+        <div class="col-6 col-md-2">
+          <label class="form-label small" for="nuevoMinimo">Stock mínimo</label>
+          <input id="nuevoMinimo" type="number" class="form-control" name="stockMinimo" [(ngModel)]="nuevo.stockMinimo" min="0" required>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-dark w-100" [disabled]="guardando">Agregar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+<div class="card tarjeta">
+  <div class="card-header">
+    <div class="row g-2 align-items-end">
+      <div class="col-sm-6 col-md-4">
+        <label for="sede" class="form-label small text-muted mb-1">Sede</label>
+        <select id="sede" class="form-select" [(ngModel)]="sedeSeleccionada" (ngModelChange)="consultar()">
+          <option [ngValue]="null">Todas las sedes</option>
+          @for (s of sedes; track s.idSede) {
+            <option [ngValue]="s.idSede">{{ s.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-auto">
+        <div class="form-check form-switch mb-2">
+          <input class="form-check-input" type="checkbox" role="switch" id="soloBajo" [(ngModel)]="soloStockBajo">
+          <label class="form-check-label small" for="soloBajo">Solo stock bajo ({{ cantidadStockBajo }})</label>
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-link" (click)="limpiar()">Limpiar</button>
+      </div>
+      <div class="col-auto ms-auto">
+        <span class="text-muted small">{{ itemsFiltrados.length }} registros</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    @if (cargando) {
+      <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+    } @else if (error) {
+      <div class="alert alert-danger m-3">{{ error }}</div>
+    } @else if (itemsFiltrados.length === 0) {
+      <div class="vacio"><i class="bi bi-box-seam"></i>No hay registros para mostrar.</div>
+    } @else {
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Sede</th>
+              <th scope="col">Medicamento</th>
+              <th scope="col">Presentación</th>
+              <th scope="col" class="text-end">Stock actual</th>
+              <th scope="col" class="text-end">Stock mínimo</th>
+              <th scope="col">Disponibilidad</th>
+              <th scope="col">Actualización</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (i of itemsFiltrados; track i.idSede + '-' + i.idMedicamento) {
+              <!-- stockBajo viene de isStockBajo() en Java -->
+              <tr [class.table-warning]="i.stockBajo">
+                <td>{{ i.sede }}</td>
+                <td class="fw-semibold">{{ i.medicamento }}</td>
+                <td class="small">{{ i.presentacion }}</td>
+                @if (estaEditando(i)) {
+                  <td class="text-end"><input type="number" class="form-control form-control-sm text-end ms-auto" style="max-width:6rem"
+                         [(ngModel)]="editStock" min="0" aria-label="Stock actual"></td>
+                  <td class="text-end"><input type="number" class="form-control form-control-sm text-end ms-auto" style="max-width:6rem"
+                         [(ngModel)]="editMinimo" min="0" aria-label="Stock mínimo"></td>
+                } @else {
+                  <td class="text-end">{{ i.stockActual }}</td>
+                  <td class="text-end">{{ i.stockMinimo }}</td>
+                }
+                <td>
+                  @if (i.stockBajo) {
+                    <span class="estado estado-PENDIENTE"><i class="bi bi-exclamation-triangle me-1"></i>Stock bajo</span>
+                  } @else {
+                    <span class="estado estado-ACTIVO">Suficiente</span>
+                  }
+                </td>
+                <td class="small text-muted">{{ i.fechaActualizacion }}</td>
+                <td class="text-nowrap text-end pe-3">
+                  @if (estaEditando(i)) {
+                    <button type="button" class="btn btn-sm btn-dark me-1" (click)="guardarEdicion()" [disabled]="guardando">Guardar</button>
+                    <button type="button" class="btn btn-sm btn-link" (click)="editando = null">Cancelar</button>
+                  } @else {
+                    <button type="button" class="btn btn-sm btn-outline-dark me-1" (click)="editar(i)" title="Editar existencias" aria-label="Editar existencias"><i class="bi bi-pencil"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="quitar(i)" title="Quitar de la sede" aria-label="Quitar de la sede"><i class="bi bi-trash"></i></button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

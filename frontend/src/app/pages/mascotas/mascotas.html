@@ -1,0 +1,59 @@
+<div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-heart-pulse-fill text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Mascotas</h4>
+    <p class="text-muted mb-0 small">Pacientes de la red; se muestran como máximo 200</p>
+  </div>
+  <a routerLink="/mascotas/nueva" class="btn btn-dark ms-auto"><i class="bi bi-plus-lg me-1"></i>Nueva mascota</a>
+</div>
+
+<div class="card tarjeta">
+  <div class="card-header">
+    <form class="row g-2 align-items-center" (ngSubmit)="consultar()">
+      <div class="col-md-5">
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+          <input type="search" class="form-control bg-light border-start-0" name="buscar"
+                 placeholder="Nombre, apellido del propietario o microchip" aria-label="Buscar mascota"
+                 [(ngModel)]="buscar">
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-outline-dark">Buscar</button>
+        <button type="button" class="btn btn-link" (click)="limpiar()">Limpiar</button>
+      </div>
+      <div class="col-auto ms-auto"><span class="text-muted small">{{ mascotas.length }} mascotas</span></div>
+    </form>
+  </div>
+  <div class="card-body p-0">
+    @if (cargando) {
+      <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+    } @else if (error) {
+      <div class="alert alert-danger m-3">{{ error }}</div>
+    } @else if (mascotas.length === 0) {
+      <div class="vacio"><i class="bi bi-heart"></i>No hay registros para mostrar.</div>
+    } @else {
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr><th scope="col">Nombre</th><th scope="col">Especie</th><th scope="col">Raza</th><th scope="col">Sexo</th>
+                <th scope="col">Propietario</th><th scope="col">Microchip</th><th scope="col">Estado</th></tr>
+          </thead>
+          <tbody>
+            @for (m of mascotas; track m.idMascota) {
+              <tr>
+                <td><a [routerLink]="['/mascotas', m.idMascota]" class="fw-semibold">{{ m.nombre }}</a></td>
+                <td>{{ m.especie }}</td>
+                <td>{{ m.raza }}</td>
+                <td>{{ m.sexo === 'M' ? 'Macho' : 'Hembra' }}</td>
+                <td><a [routerLink]="['/clientes', m.idCliente]">{{ m.cliente }}</a></td>
+                <td class="small text-muted">{{ m.microchip ?? '—' }}</td>
+                <td><span class="estado estado-{{ m.estado }}">{{ m.estado }}</span></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>
