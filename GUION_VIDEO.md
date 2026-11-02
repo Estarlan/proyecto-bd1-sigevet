@@ -2,25 +2,26 @@
 <!-- Updated: 11:05 02-Nov-2026 -->
 <!-- Updated: 12:40 02-Nov-2026 -->
 <!-- Updated: 15:43 02-Nov-2026 -->
+<!-- Updated: 18:10 02-Nov-2026 -->
 # SIGEVET — guion del video por persona
 
 > **Versión para grabar la voz:** el equipo tiene un guion por persona con los tiempos exactos de cada clip.
 > Ahí el bloque 6 se muestra en la aplicación, no en Workbench.
 
-Video de demostración de máximo 15 minutos (este guion dura 13:30). Todos hablan, con cámara y audio. Cada persona
+Video de demostración de máximo 15 minutos (este guion dura unos 14:15). Todos hablan, con cámara y audio. Cada persona
 lee solo su parte; el texto está pensado para decirse con sus palabras, no para leerlo de corrido. Los tiempos son
 aproximados: ensayen y midan.
 
 | # | Tiempo | Quién | Qué se muestra |
 |---|---|---|---|
 | 1 | 0:00–1:00 | Los cuatro | Cámaras y portada de la presentación |
-| 2 | 1:00–3:00 | Sebastián | Chen, EER, documento de supuestos |
-| 3 | 3:00–4:30 | Sebastián | Barker, Crow's Foot, relacional, normalización |
-| 4 | 4:30–6:00 | Juan Miguel | Servidor Fedora y VM Oracle Linux 9 |
-| 5 | 6:00–8:00 | Sergio | Cargar la base y verificarla |
-| 6 | 8:00–10:00 | Sergio | Consultas de álgebra en Workbench |
-| 7 | 10:00–12:30 | Juan Miguel | Aplicación web |
-| 8 | 12:30–13:30 | Los cuatro | GitHub y cierre |
+| 2 | 1:00–3:00 | Sebastián | Chen y EER con atributos |
+| 3 | 3:00–5:00 | Sebastián | Barker, Crow's Foot, relacional, normalización |
+| 4 | 5:00–6:30 | Juan David | Servidor Fedora (su portátil) y VM Oracle Linux 9 |
+| 5 | 6:30–8:20 | Sergio | Cargar la base y verificarla |
+| 6 | 8:20–10:20 | Sergio y Juan David | Consultas de álgebra en la aplicación (Sergio 21 y 41; Juan David 46 y 26) |
+| 7 | 10:20–13:00 | Juan Miguel | Aplicación web |
+| 8 | 13:00–14:00 | Los cuatro | GitHub y cierre |
 
 Antes de grabar: resolución 1920×1080, letra de terminal y editor en 16 pt o más, cámara visible de quien habla,
 las ventanas ya abiertas en el orden del guion. Exportar en MP4. Si se pasan de 14 minutos, recorten el bloque 6 a
@@ -50,7 +51,7 @@ y de la integración final del proyecto."
 
 ---
 
-## Bloques 2 y 3 — Sebastián (1:00–4:30)
+## Bloques 2 y 3 — Sebastián (1:00–5:00)
 
 **Prepara abiertas:** `diagramas/drawio/04_Chen_Global.drawio` (o su PNG), `14_EER_Completo`, `15_Barker_Global`,
 `19_CrowsFoot_Global`, `23_Relacional_Global`, `27_Normalizacion`, y el Word `02_Documento_de_Supuestos`.
@@ -78,9 +79,9 @@ y de la integración final del proyecto."
 
 ---
 
-## Bloque 4 — Juan Miguel: servidor (4:30–6:00)
+## Bloque 4 — Juan David: servidor (5:00–6:30)
 
-Conéctate al portátil Fedora de Juan David (SSH o en persona). El servidor es un portátil con Fedora que aloja una
+Juan David lo presenta desde su portátil Fedora. El servidor es un portátil con Fedora que aloja una
 máquina virtual Lima llamada `sigevet` (Oracle Linux 9), y MySQL corre dentro de la VM, no en Fedora. Los datos
 reales están en `INFORME_SERVIDOR.md` (Sergio lo tiene); usa esos valores al hablar. La VM debe estar encendida
 antes de grabar.
@@ -103,15 +104,13 @@ limactl shell sigevet systemctl status mysqld --no-pager
 
 ---
 
-## Bloques 5 y 6 — Sergio: la base de datos (6:00–10:00)
+## Bloques 5 y 6 — Sergio y Juan David: la base de datos (6:30–10:20)
 
 **Prepara:** una terminal SSH al portátil del servidor y, desde ahí, entrar a la VM. `cargar_bd.sh` usa el cliente
 `mysql` de la VM, así que se corre **dentro de la VM**, no en Fedora. El proyecto está en `~/proyecto` dentro de la
 VM (es la copia que deja `vm/migrar_linux.sh`) y ahí mismo debe estar `vm/claves.env` (archivo que NO se sube a
 GitHub; Juan David te lo pasa por un canal privado, hay un modelo en `vm/claves.ejemplo`). Antes de grabar, confirma
-que esa copia tiene la última versión de `database/` (**[No verificado]**: depende de cuándo se copió). Ten también
-MySQL Workbench conectado a la base `sigevet` (el puerto 3306 está pendiente de confirmar con Juan David, ver
-`OBSERVACIONES_DIAPOSITIVAS_SERGIO.md`).
+que esa copia tiene la última versión de `database/`. El puerto 3306 está abierto en el firewall del Fedora.
 
 **Bloque 5 (2 min) — Carga y verificación**
 ```bash
@@ -134,8 +133,8 @@ imprime 10 filas, una por cada regla que debe rechazar un dato.
 Otros ejemplos reales de disparadores, por si prefieres cambiar el de arriba: una consulta de una cita que no está
 ATENDIDA (error 20004) o un empleado que no es de tipo VET registrado como veterinario (error 20001).
 
-**Bloque 6 (2 min) — Consultas de álgebra en Workbench**
-Abre `database/03_varios/01_consultas_algebra_relacional.sql` y ejecuta tres o cuatro de estas:
+**Bloque 6 (2 min) — Consultas de álgebra en la aplicación**
+En la página Álgebra de la aplicación se abren estos ejercicios, que se ejecutan en vivo contra MySQL (Sergio el 21 y el 41; Juan David el 46 y el 26):
 - **Ejercicio 21:** sedes con su ciudad, departamento y director (reunión de cuatro tablas).
 - **Ejercicio 41:** medicamentos que están en las 5 sedes (división). Resultado: 8 medicamentos.
 - **Ejercicio 46:** ingresos por sede (agregación).
@@ -147,11 +146,11 @@ Abre `database/03_varios/01_consultas_algebra_relacional.sql` y ejecuta tres o c
 
 Nota: las 55 consultas son idénticas a las de `documentos/fase1/08_Consultas_SQL_Algebra_Relacional.sql` (se comparó
 sin comentarios). Que den el mismo resultado lo declara el registro `vm/logs/06_algebra_mysql.log`, que lo compara
-contra una base SQLite; **[No verificado]** contra el estado actual de los archivos, porque no hay MySQL aquí.
+contra una base SQLite, y en la aplicación los 55 se ejecutan sin error contra MySQL.
 
 ---
 
-## Bloque 7 — Juan Miguel: aplicación web (10:00–12:30)
+## Bloque 7 — Juan Miguel: aplicación web (10:20–13:00)
 
 Abre `http://192.168.2.40:5000` (o `http://127.0.0.1:5000` en el portátil). Recorre en este orden (unos 20 s cada paso):
 0. **Inicio de sesión**: primero un documento equivocado (sale el error en rojo) y luego el correo y el documento
@@ -178,7 +177,7 @@ Abre `http://192.168.2.40:5000` (o `http://127.0.0.1:5000` en el portátil). Rec
 
 ---
 
-## Bloque 8 — Cierre en GitHub (12:30–13:30) · los cuatro
+## Bloque 8 — Cierre en GitHub (13:00–14:00) · los cuatro
 
 Muestra https://github.com/Estarlan/proyecto-bd1-sigevet: las carpetas y la pestaña de commits. Cada uno en 15 s:
 
