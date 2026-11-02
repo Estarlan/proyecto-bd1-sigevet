@@ -1,7 +1,11 @@
 <!-- Created: [unknown] -->
 <!-- Updated: 11:05 02-Nov-2026 -->
 <!-- Updated: 12:40 02-Nov-2026 -->
+<!-- Updated: 15:43 02-Nov-2026 -->
 # SIGEVET — guion del video por persona
+
+> **Versión para grabar la voz:** el equipo tiene un guion por persona con los tiempos exactos de cada clip.
+> Ahí el bloque 6 se muestra en la aplicación, no en Workbench.
 
 Video de demostración de máximo 15 minutos (este guion dura 13:30). Todos hablan, con cámara y audio. Cada persona
 lee solo su parte; el texto está pensado para decirse con sus palabras, no para leerlo de corrido. Los tiempos son
