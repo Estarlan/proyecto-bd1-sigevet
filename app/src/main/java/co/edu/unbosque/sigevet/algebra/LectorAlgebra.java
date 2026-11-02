@@ -1,13 +1,15 @@
 package co.edu.unbosque.sigevet.algebra;
 
-import co.edu.unbosque.sigevet.model.EjercicioAlgebra;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
 import org.springframework.stereotype.Component;
+
+import co.edu.unbosque.sigevet.model.EjercicioAlgebra;
 
 /**
  * Lee los ejercicios de álgebra relacional desde el script SQL del proyecto
@@ -40,7 +42,12 @@ public class LectorAlgebra {
         // ruta del script: variable de entorno o, si no está definida, la ruta por defecto del repositorio
         String archivo = System.getenv("SIGEVET_ALGEBRA");
         if (archivo == null || archivo.isBlank()) {
+            // la ruta relativa depende de la carpeta desde donde se arranca la app:
+            // desde app/ (./mvnw spring-boot:run) o desde la raíz del repositorio (botón Run de VS Code)
             archivo = "../database/03_varios/01_consultas_algebra_relacional.sql";
+            if (!Files.exists(Path.of(archivo))) {
+                archivo = "database/03_varios/01_consultas_algebra_relacional.sql";
+            }
         }
         ArrayList<EjercicioAlgebra> ejercicios = new ArrayList<EjercicioAlgebra>();
         // ejercicio que se está armando; vale null cuando no hay ninguno en curso

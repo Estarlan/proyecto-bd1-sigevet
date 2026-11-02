@@ -1,0 +1,156 @@
+<div class="d-flex align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-house-fill text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Huella Sana · Inicio</h4>
+    <p class="text-muted mb-0 small">Resumen de citas, ingresos e inventario de la red</p>
+  </div>
+</div>
+
+@if (cargando) {
+  <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+} @else if (error) {
+  <div class="alert alert-danger">{{ error }}</div>
+} @else if (datos) {
+  <!-- Tarjetas de resumen -->
+  <div class="row g-3 mb-4">
+    @for (ind of indicadores; track ind.tabla) {
+      <div class="col-6 col-md-4 col-xl">
+        <a class="metric-card" [routerLink]="ind.ruta">
+          <div class="metric-icon"><i class="bi {{ ind.icono }} text-warning fs-5"></i></div>
+          <div class="metric-num">{{ conteo(ind.tabla) | number }}</div>
+          <div class="metric-lbl">{{ ind.texto }}</div>
+        </a>
+      </div>
+    }
+  </div>
+
+  <!-- Próximas citas (V_AGENDA / CitaDAO, LIMIT 10) -->
+  <div class="card tarjeta mb-3">
+    <div class="card-header d-flex justify-content-between">
+      <span>Próximas 10 citas programadas</span>
+      <a routerLink="/agenda" class="small fw-normal">Ver agenda</a>
+    </div>
+    <div class="card-body p-0">
+      @if (datos.proximas.length === 0) {
+        <div class="vacio">No hay citas programadas.</div>
+      } @else {
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead><tr><th scope="col">Fecha y hora</th><th scope="col">Mascota</th><th scope="col">Servicio</th><th scope="col">Veterinario</th><th scope="col">Sede</th><th scope="col">Estado</th></tr></thead>
+            <tbody>
+              @for (c of datos.proximas; track c.idCita) {
+                <tr>
+                  <td class="text-nowrap">{{ c.fechaHora }}</td>
+                  <td><a [routerLink]="['/mascotas', c.idMascota]" class="fw-semibold">{{ c.mascota }}</a></td>
+                  <td>{{ c.servicio }}</td>
+                  <td>{{ c.veterinario }}</td>
+                  <td>{{ c.sede }}</td>
+                  <td><span class="estado estado-{{ c.estado }}">{{ c.estado }}</span></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <!-- Ingresos por sede (V_INGRESOS_SEDE_MES) -->
+    <div class="col-lg-6">
+      <div class="card tarjeta h-100">
+        <div class="card-header">Ingresos por sede <span class="text-muted fw-normal small">· facturas pagadas, con descuentos</span></div>
+        <div class="card-body pt-1">
+          @for (fila of datos.ingresos; track fila.nombre) {
+            <div class="barra-fila">
+              <div class="d-flex justify-content-between small">
+                <span>{{ fila.nombre }}</span>
+                <span class="fw-semibold">{{ fila.total != null ? (fila.total | currency:'COP':'symbol-narrow':'1.0-0') : '—' }}</span>
+              </div>
+              <div class="barra"><div class="barra-valor" [style.width.%]="porcentaje(fila.total, datos.ingresos)"></div></div>
+            </div>
+          } @empty {
+            <div class="vacio">No hay registros para mostrar.</div>
+          }
+          <div class="d-flex justify-content-between border-top pt-2 mt-2 fw-semibold">
+            <span>Total</span><span>{{ suma(datos.ingresos) | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Citas por estado -->
+    <div class="col-lg-6">
+      <div class="card tarjeta h-100">
+        <div class="card-header">Citas por estado</div>
+        <div class="card-body pt-1">
+          @for (fila of datos.estadosCitas; track fila.nombre) {
+            <div class="barra-fila">
+              <div class="d-flex justify-content-between small">
+                <span class="estado estado-{{ fila.nombre }}">{{ fila.nombre }}</span>
+                <span class="fw-semibold">{{ fila.total }} <span class="text-muted fw-normal">({{ porcentaje(fila.total, datos.estadosCitas) }} %)</span></span>
+              </div>
+              <div class="barra"><div class="barra-valor" [style.width.%]="porcentaje(fila.total, datos.estadosCitas)"></div></div>
+            </div>
+          } @empty {
+            <div class="vacio">No hay registros para mostrar.</div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <!-- V_STOCK_BAJO -->
+    <div class="col-lg-7">
+      <div class="card tarjeta h-100">
+        <div class="card-header d-flex justify-content-between">
+          <span>Medicamentos por debajo del mínimo</span>
+          <a routerLink="/inventario" class="small fw-normal">Ver inventario</a>
+        </div>
+        <div class="card-body p-0">
+          @if (datos.stockBajo.length === 0) {
+            <div class="vacio"><i class="bi bi-check-circle"></i>Todas las sedes tienen stock suficiente.</div>
+          } @else {
+            <div class="table-responsive">
+              <table class="table mb-0">
+                <thead><tr><th scope="col">Sede</th><th scope="col">Medicamento</th><th scope="col" class="text-end">Actual</th><th scope="col" class="text-end pe-4">Mínimo</th></tr></thead>
+                <tbody>
+                  @for (i of datos.stockBajo; track $index) {
+                    <tr class="table-warning">
+                      <td>{{ i.sede }}</td>
+                      <td>{{ i.medicamento }}</td>
+                      <td class="text-end fw-semibold">{{ i.stockActual }}</td>
+                      <td class="text-end pe-4">{{ i.stockMinimo }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteo de las 22 tablas -->
+    <div class="col-lg-5">
+      <div class="card tarjeta h-100">
+        <div class="card-header d-flex justify-content-between">
+          <span>Registros de las {{ datos.conteos.length }} tablas</span>
+          <span class="fw-semibold">{{ suma(datos.conteos) | number }}</span>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive tabla-conteos">
+            <table class="table table-sm mb-0">
+              <tbody>
+                @for (c of datos.conteos; track c.nombre) {
+                  <tr><td class="small">{{ c.nombre }}</td><td class="text-end pe-4 small fw-semibold">{{ c.total }}</td></tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,78 @@
+<div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-receipt text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Facturas</h4>
+    <p class="text-muted mb-0 small">Filtra por sede y por estado</p>
+  </div>
+  <a routerLink="/facturas/nueva" class="btn btn-dark ms-auto"><i class="bi bi-plus-lg me-1"></i>Nueva factura</a>
+</div>
+
+<div class="card tarjeta">
+  <div class="card-header">
+    <div class="row g-2 align-items-end">
+      <div class="col-sm-6 col-md-4">
+        <label for="sede" class="form-label small text-muted mb-1">Sede</label>
+        <!-- [ngValue] conserva el número; con [value] llegaría como texto -->
+        <select id="sede" class="form-select" [(ngModel)]="sedeSeleccionada" (ngModelChange)="consultar()">
+          <option [ngValue]="null">Todas las sedes</option>
+          @for (s of sedes; track s.idSede) {
+            <option [ngValue]="s.idSede">{{ s.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <label for="estado" class="form-label small text-muted mb-1">Estado</label>
+        <select id="estado" class="form-select" [(ngModel)]="estadoSeleccionado" (ngModelChange)="consultar()">
+          <option value="">Todos los estados</option>
+          @for (e of estados; track e) {
+            <option [value]="e">{{ e }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-link" (click)="limpiar()">Limpiar</button>
+      </div>
+      <div class="col-auto ms-auto text-end">
+        <div class="text-muted small">{{ facturas.length }} facturas</div>
+        <div class="fw-semibold">{{ totalMostrado | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    @if (cargando) {
+      <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+    } @else if (error) {
+      <div class="alert alert-danger m-3">{{ error }}</div>
+    } @else if (facturas.length === 0) {
+      <div class="vacio"><i class="bi bi-receipt"></i>No hay registros para mostrar.</div>
+    } @else {
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Número</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Sede</th>
+              <th scope="col">Estado</th>
+              <th scope="col" class="text-end pe-4">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (f of facturas; track f.idFactura) {
+              <tr>
+                <td><a [routerLink]="['/facturas', f.idFactura]" class="fw-semibold">{{ f.numeroFactura }}</a></td>
+                <td>{{ f.fechaEmision }}</td>
+                <td><a [routerLink]="['/clientes', f.idCliente]">{{ f.cliente }}</a></td>
+                <td>{{ f.sede }}</td>
+                <td><span class="estado estado-{{ f.estado }}">{{ f.estado }}</span></td>
+                <td class="text-end pe-4">{{ f.total != null ? (f.total | currency:'COP':'symbol-narrow':'1.0-0') : '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

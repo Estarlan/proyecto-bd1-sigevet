@@ -6,8 +6,8 @@ Docente: Ing., Esp., M.Ed. Christian Felipe Duarte Arévalo.
 Hicimos la base de datos de una red de clínicas veterinarias que nos inventamos, *Huella Sana S.A.S.*, con 5 sedes.
 Cubre clientes, mascotas con su historia clínica, citas, consultas y fórmulas, inventario de medicamentos por sede y
 facturación. La base corre en **MySQL 8.4** sobre una máquina virtual con **Oracle Linux 9** y se administra con
-**MySQL Workbench**. Encima hay una aplicación web sencilla en **Java con Spring Boot** que solo lee datos, sin ORM
-(SQL escrito a mano con JDBC).
+**MySQL Workbench**. Encima hay una aplicación web: una API en **Java con Spring Boot** (SQL escrito a mano con JDBC, sin
+ORM) y una interfaz en **Angular**, que consultan y modifican clientes, mascotas, citas, facturas, inventario y personal.
 
 | Integrante | Rol |
 |---|---|
@@ -20,7 +20,8 @@ facturación. La base corre en **MySQL 8.4** sobre una máquina virtual con **Or
 
 ```text
 database/      scripts SQL: creación de objetos, inserción de registros y varios (ver database/README.md)
-app/           aplicación web en Java (Spring Boot); el SQL está escrito a mano con JDBC, sin ORM (ver app/README.md)
+app/           API REST en Java (Spring Boot); el SQL está escrito a mano con JDBC, sin ORM (ver app/README.md)
+frontend/      interfaz web en Angular 21 con Bootstrap; habla con la API y nunca con MySQL (ver frontend/README.md)
 vm/            scripts de la máquina virtual: instalar MySQL, cargar la base, instalar la app (ver vm/README.md)
 documentos/    documentos de la Fase 1, la Fase 2 y los transversales, los modelos de MySQL Workbench y los diagramas
 ```
@@ -73,14 +74,17 @@ El servidor del proyecto es un portátil con Fedora 44 que aloja la VM de Lima. 
 (aplicación web) quedan abiertos a la red local; no se reenvían a Internet. Para revisarlo o prepararlo (tapa, arranque de la VM,
 SSH) está `vm/scripts/preparar_servidor_fedora.sh`.
 
-## Probar solo la aplicación
+## Probar la aplicación sin la VM
 
-Con la base ya cargada y Java 21 instalado, desde la carpeta `app/`:
+Con la base ya cargada (y `database/01_ddl/05_permisos_app.sql` ejecutado como root), Java 21 y Node.js 22:
 
 ```bash
-./mvnw package
-export SIGEVET_DB_PASSWORD='<clave de vet_app>'   # la clave va solo en esta variable de entorno
-java -jar target/sigevet.jar                      # http://localhost:5000
+cd frontend && npm ci && npx ng build && cd ..     # compila Angular
+cd app && ./mvnw package                           # arma el jar con Angular adentro
+export SIGEVET_DB_PASSWORD='<clave de vet_app>'    # o ponerla en app/.env
+java -jar target/sigevet.jar                       # http://localhost:5000
 ```
 
-Las demás variables y las páginas de la aplicación están en `app/README.md`.
+Para desarrollar es más cómodo correr la API (`./mvnw spring-boot:run` en `app/`) y Angular (`npm start` en
+`frontend/`, puerto 4200) por separado; ver `frontend/README.md`.
+Las demás variables y la lista de rutas de la API están en `app/README.md`.

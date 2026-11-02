@@ -1,0 +1,93 @@
+<div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-calendar-week-fill text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Agenda de citas</h4>
+    <p class="text-muted mb-0 small">Filtra por sede y por estado</p>
+  </div>
+  <a routerLink="/agenda/nueva" class="btn btn-dark ms-auto"><i class="bi bi-calendar-plus me-1"></i>Nueva cita</a>
+</div>
+@if (aviso) { <div class="alert alert-success"><i class="bi bi-check-circle me-1"></i>{{ aviso }}</div> }
+@if (errorAccion) { <div class="alert alert-warning">{{ errorAccion }}</div> }
+
+<div class="card tarjeta">
+  <div class="card-header">
+    <div class="row g-2 align-items-end">
+      <div class="col-sm-6 col-md-4">
+        <label for="sede" class="form-label small text-muted mb-1">Sede</label>
+        <select id="sede" class="form-select" [(ngModel)]="sedeSeleccionada" (ngModelChange)="consultar()">
+          <option [ngValue]="null">Todas las sedes</option>
+          @for (s of sedes; track s.idSede) {
+            <option [ngValue]="s.idSede">{{ s.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <label for="estado" class="form-label small text-muted mb-1">Estado</label>
+        <select id="estado" class="form-select" [(ngModel)]="estadoSeleccionado" (ngModelChange)="consultar()">
+          <option value="">Todos los estados</option>
+          @for (e of estados; track e) {
+            <option [value]="e">{{ e }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-link" (click)="limpiar()">Limpiar</button>
+      </div>
+      <div class="col-auto ms-auto">
+        <span class="text-muted small">{{ citas.length }} citas</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    @if (cargando) {
+      <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+    } @else if (error) {
+      <div class="alert alert-danger m-3">{{ error }}</div>
+    } @else if (citas.length === 0) {
+      <div class="vacio"><i class="bi bi-calendar-x"></i>No hay registros para mostrar.</div>
+    } @else {
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Fecha y hora</th>
+              <th scope="col">Mascota</th>
+              <th scope="col">Servicio</th>
+              <th scope="col">Veterinario</th>
+              <th scope="col">Sede</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Motivo</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of citas; track c.idCita) {
+              <tr>
+                <td class="text-nowrap">{{ c.fechaHora }}</td>
+                <td><a [routerLink]="['/mascotas', c.idMascota]" class="fw-semibold">{{ c.mascota }}</a></td>
+                <td>{{ c.servicio }}</td>
+                <td>{{ c.veterinario }}</td>
+                <td>{{ c.sede }}</td>
+                <td><span class="estado estado-{{ c.estado }}">{{ c.estado }}</span></td>
+                <td class="text-muted small">{{ c.motivo ?? '—' }}</td>
+                <td class="text-nowrap">
+                  @if (c.estado === 'PROGRAMADA') {
+                    <div class="btn-group btn-group-sm">
+                      @for (a of acciones; track a.estado) {
+                        <button type="button" class="btn {{ a.clase }}" (click)="cambiarEstado(c, a.estado)"
+                                [disabled]="cambiando === c.idCita" [title]="a.texto">
+                          <i class="bi {{ a.icono }}"></i><span class="d-none d-xl-inline ms-1">{{ a.texto }}</span>
+                        </button>
+                      }
+                    </div>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

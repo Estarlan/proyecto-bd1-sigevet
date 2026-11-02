@@ -1,0 +1,16 @@
+.contenido-pagina {
+  background: #f4f6fb;
+  min-height: calc(100vh - 56px - 48px);
+  padding: 1.5rem;
+}
+.pie-pagina {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .9rem 1.5rem;
+  font-size: 12px;
+  color: #6c7a89;
+  background: #fff;
+  border-top: 1px solid #e6e9f0;
+}

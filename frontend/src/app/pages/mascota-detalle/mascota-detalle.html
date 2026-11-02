@@ -1,0 +1,134 @@
+@if (cargando) {
+  <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+} @else if (error) {
+  <a routerLink="/clientes" class="d-inline-block mb-3 small"><i class="bi bi-arrow-left me-1"></i>Volver a clientes</a>
+  <div class="alert alert-danger">{{ error }}</div>
+} @else if (detalle) {
+  <a [routerLink]="['/clientes', detalle.mascota.idCliente]" class="d-inline-block mb-3 small">
+    <i class="bi bi-arrow-left me-1"></i>Volver al cliente: {{ detalle.mascota.cliente }}
+  </a>
+
+  @if (aviso) { <div class="alert alert-success"><i class="bi bi-check-circle me-1"></i>{{ aviso }}</div> }
+  @if (errorAccion) { <div class="alert alert-warning">{{ errorAccion }}</div> }
+
+  <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+    <div class="icon-box"><i class="bi bi-heart-pulse-fill text-warning fs-4"></i></div>
+    <div>
+      <h4 class="fw-bold mb-0">{{ detalle.mascota.nombre }}</h4>
+      <p class="text-muted mb-0 small">{{ detalle.mascota.especie }} · {{ detalle.mascota.raza }}
+        <span class="estado estado-{{ detalle.mascota.estado }} ms-2">{{ detalle.mascota.estado }}</span>
+      </p>
+    </div>
+    <div class="ms-auto d-flex flex-wrap align-items-center gap-2">
+      @if (detalle.mascota.estado === 'ACTIVA') {
+        <a routerLink="/agenda/nueva" [queryParams]="{ mascota: detalle.mascota.idMascota }" class="btn btn-dark btn-sm"><i class="bi bi-calendar-plus me-1"></i>Agendar cita</a>
+      }
+      <a [routerLink]="['/mascotas', detalle.mascota.idMascota, 'editar']" class="btn btn-outline-dark btn-sm"><i class="bi bi-pencil me-1"></i>Editar</a>
+      <!-- borrado lógico: cambiar el estado en lugar de borrar la fila -->
+      <div class="input-group input-group-sm" style="width:auto">
+        <select class="form-select" [(ngModel)]="nuevoEstado" aria-label="Estado de la mascota">
+          @for (e of estados; track e) { <option [value]="e">{{ e }}</option> }
+        </select>
+        <button type="button" class="btn btn-outline-secondary" (click)="cambiarEstado()"
+                [disabled]="cambiando || nuevoEstado === detalle.mascota.estado">Cambiar estado</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <!-- Datos de la tabla MASCOTA (con RAZA y ESPECIE unidas en el DAO) -->
+    <div class="col-lg-6">
+      <div class="card tarjeta h-100">
+        <div class="card-header">Datos de la mascota</div>
+        <div class="card-body pt-0">
+          <dl class="datos row mb-0">
+            <div class="col-sm-6"><dt>Sexo</dt><dd>{{ textoSexo(detalle.mascota.sexo) }}</dd></div>
+            <div class="col-sm-6"><dt>Fecha de nacimiento</dt><dd>{{ detalle.mascota.fechaNacimiento ?? '—' }}</dd></div>
+            <div class="col-sm-6"><dt>Color</dt><dd>{{ detalle.mascota.color ?? '—' }}</dd></div>
+            <div class="col-sm-6"><dt>Microchip</dt><dd>{{ detalle.mascota.microchip ?? '—' }}</dd></div>
+            <div class="col-sm-6"><dt>Esterilizado</dt><dd>{{ textoSiNo(detalle.mascota.esterilizado) }}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORIA_CLINICA: relación 1:1 TENER, puede no existir -->
+    <div class="col-lg-6">
+      <div class="card tarjeta h-100">
+        <div class="card-header">Historia clínica</div>
+        <div class="card-body pt-0">
+          @if (detalle.historia; as historia) {
+            <dl class="datos row mb-0">
+              <div class="col-sm-6"><dt>Número de historia</dt><dd>{{ historia.numeroHistoria }}</dd></div>
+              <div class="col-sm-6"><dt>Fecha de apertura</dt><dd>{{ historia.fechaApertura }}</dd></div>
+              <div class="col-sm-6"><dt>Grupo sanguíneo</dt><dd>{{ historia.grupoSanguineo ?? '—' }}</dd></div>
+              <div class="col-sm-6"><dt>Alergias</dt><dd>{{ historia.alergias ?? 'Ninguna registrada' }}</dd></div>
+              <div class="col-12"><dt>Enfermedades crónicas</dt><dd>{{ historia.enfermedadesCronicas ?? 'Ninguna registrada' }}</dd></div>
+              <div class="col-12"><dt>Observaciones</dt><dd>{{ historia.observaciones ?? '—' }}</dd></div>
+            </dl>
+          } @else {
+            <div class="vacio">No hay historia clínica registrada.</div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSULTA: una tarjeta por consulta; dentro, la tabla PRESCRIPCION (relación N:M con MEDICAMENTO) -->
+  <h5 class="fw-bold mb-3">Consultas <span class="text-muted fw-normal small">({{ detalle.consultas.length }})</span></h5>
+
+  @for (consulta of detalle.consultas; track consulta.idConsulta) {
+    <div class="card tarjeta mb-3">
+      <div class="card-header d-flex flex-wrap justify-content-between gap-2">
+        <span>Consulta {{ consulta.idConsulta }} · {{ consulta.fechaHoraInicio }}</span>
+        <span class="text-muted fw-normal small">{{ consulta.veterinario }} · {{ consulta.sede }}</span>
+      </div>
+      <div class="card-body pt-0">
+        <dl class="datos row mb-3">
+          <div class="col-6 col-md-3"><dt>Peso</dt><dd>@if (consulta.pesoKg != null) { {{ consulta.pesoKg | number:'1.1-2' }} kg } @else { — }</dd></div>
+          <div class="col-6 col-md-3"><dt>Temperatura</dt><dd>@if (consulta.temperaturaC != null) { {{ consulta.temperaturaC | number:'1.1-1' }} °C } @else { — }</dd></div>
+          <div class="col-6 col-md-3"><dt>Frecuencia cardíaca</dt><dd>{{ consulta.frecuenciaCardiaca ? consulta.frecuenciaCardiaca + ' lpm' : '—' }}</dd></div>
+          <div class="col-12"><dt>Síntomas</dt><dd>{{ consulta.sintomas ?? '—' }}</dd></div>
+          <div class="col-12"><dt>Diagnóstico</dt><dd class="fw-semibold">{{ consulta.diagnostico }}</dd></div>
+          <div class="col-12"><dt>Observaciones</dt><dd>{{ consulta.observaciones ?? '—' }}</dd></div>
+        </dl>
+
+        <h6 class="fw-semibold small text-muted mb-2">Prescripciones</h6>
+        @if (!consulta.prescripciones || consulta.prescripciones.length === 0) {
+          <p class="text-muted small mb-0">No se formularon medicamentos.</p>
+        } @else {
+          <div class="table-responsive border rounded">
+            <table class="table table-sm mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Medicamento</th>
+                  <th scope="col">Presentación</th>
+                  <th scope="col">Dosis</th>
+                  <th scope="col">Cada</th>
+                  <th scope="col">Duración</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Indicaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of consulta.prescripciones; track p.medicamento) {
+                  <tr>
+                    <td class="fw-semibold">{{ p.medicamento }}</td>
+                    <td>{{ p.presentacion }}</td>
+                    <td>{{ p.dosis }}</td>
+                    <td>{{ p.frecuenciaHoras }} h</td>
+                    <td>{{ p.duracionDias }} días</td>
+                    <td>{{ p.cantidad }}</td>
+                    <td class="text-muted small">{{ p.indicaciones ?? '—' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+  } @empty {
+    <div class="card tarjeta"><div class="vacio"><i class="bi bi-clipboard2-pulse"></i>No hay consultas registradas para esta mascota.</div></div>
+  }
+}
