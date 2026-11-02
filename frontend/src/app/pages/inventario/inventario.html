@@ -1,0 +1,81 @@
+<div class="d-flex align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-capsule text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Inventario por sede</h4>
+    <p class="text-muted mb-0 small">Medicamentos y existencias de cada sede</p>
+  </div>
+</div>
+
+<div class="card tarjeta">
+  <div class="card-header">
+    <div class="row g-2 align-items-end">
+      <div class="col-sm-6 col-md-4">
+        <label for="sede" class="form-label small text-muted mb-1">Sede</label>
+        <select id="sede" class="form-select" [(ngModel)]="sedeSeleccionada" (ngModelChange)="consultar()">
+          <option [ngValue]="null">Todas las sedes</option>
+          @for (s of sedes; track s.idSede) {
+            <option [ngValue]="s.idSede">{{ s.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-auto">
+        <div class="form-check form-switch mb-2">
+          <input class="form-check-input" type="checkbox" role="switch" id="soloBajo" [(ngModel)]="soloStockBajo">
+          <label class="form-check-label small" for="soloBajo">Solo stock bajo ({{ cantidadStockBajo }})</label>
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-link" (click)="limpiar()">Limpiar</button>
+      </div>
+      <div class="col-auto ms-auto">
+        <span class="text-muted small">{{ itemsFiltrados.length }} registros</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    @if (cargando) {
+      <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+    } @else if (error) {
+      <div class="alert alert-danger m-3">{{ error }}</div>
+    } @else if (itemsFiltrados.length === 0) {
+      <div class="vacio"><i class="bi bi-box-seam"></i>No hay registros para mostrar.</div>
+    } @else {
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Sede</th>
+              <th scope="col">Medicamento</th>
+              <th scope="col">Presentación</th>
+              <th scope="col" class="text-end">Stock actual</th>
+              <th scope="col" class="text-end">Stock mínimo</th>
+              <th scope="col">Disponibilidad</th>
+              <th scope="col">Actualización</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (i of itemsFiltrados; track $index) {
+              <!-- stockBajo viene de isStockBajo() en Java -->
+              <tr [class.table-warning]="i.stockBajo">
+                <td>{{ i.sede }}</td>
+                <td class="fw-semibold">{{ i.medicamento }}</td>
+                <td class="small">{{ i.presentacion }}</td>
+                <td class="text-end">{{ i.stockActual }}</td>
+                <td class="text-end">{{ i.stockMinimo }}</td>
+                <td>
+                  @if (i.stockBajo) {
+                    <span class="estado estado-PENDIENTE"><i class="bi bi-exclamation-triangle me-1"></i>Stock bajo</span>
+                  } @else {
+                    <span class="estado estado-ACTIVO">Suficiente</span>
+                  }
+                </td>
+                <td class="small text-muted">{{ i.fechaActualizacion }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>
