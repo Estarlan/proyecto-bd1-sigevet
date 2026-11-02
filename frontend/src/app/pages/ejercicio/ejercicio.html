@@ -1,0 +1,76 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <a routerLink="/algebra" class="small"><i class="bi bi-arrow-left me-1"></i>Volver a álgebra relacional</a>
+  <div class="btn-group btn-group-sm">
+    @if (anterior !== null) {
+      <a class="btn btn-outline-dark" [routerLink]="['/algebra', anterior]"><i class="bi bi-chevron-left"></i> Ejercicio {{ anterior }}</a>
+    }
+    @if (siguiente !== null) {
+      <a class="btn btn-outline-dark" [routerLink]="['/algebra', siguiente]">Ejercicio {{ siguiente }} <i class="bi bi-chevron-right"></i></a>
+    }
+  </div>
+</div>
+
+@if (cargando) {
+  <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+} @else if (error) {
+  <div class="alert alert-danger">{{ error }}</div>
+} @else if (detalle) {
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <div class="icon-box"><span class="text-warning fw-bold fs-5">{{ detalle.ejercicio.numero }}</span></div>
+    <div>
+      <h4 class="fw-bold mb-0">{{ detalle.ejercicio.titulo }}</h4>
+      <p class="text-muted mb-0 small">{{ detalle.ejercicio.grupo }}</p>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-lg-5">
+      <div class="card tarjeta h-100">
+        <div class="card-header">Enunciado</div>
+        <div class="card-body pt-0">{{ detalle.ejercicio.enunciado }}</div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="card tarjeta h-100">
+        <div class="card-header">Consulta SQL equivalente</div>
+        <div class="card-body pt-0">
+          <pre class="sql mb-0"><code>{{ detalle.ejercicio.sql }}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card tarjeta">
+    <div class="card-header d-flex justify-content-between">
+      <span>Resultado en MySQL</span>
+      <span class="text-muted fw-normal small">{{ detalle.resultado.filas.length }} filas · {{ detalle.resultado.columnas.length }} columnas</span>
+    </div>
+    <div class="card-body p-0">
+      @if (detalle.resultado.filas.length === 0) {
+        <div class="vacio"><i class="bi bi-inbox"></i>La consulta no devolvió registros.</div>
+      } @else {
+        <div class="table-responsive">
+          <table class="table table-sm table-hover mb-0">
+            <thead>
+              <tr>
+                <!-- Las columnas no son fijas: salen de los metadatos del ResultSet de cada consulta -->
+                @for (columna of detalle.resultado.columnas; track $index) {
+                  <th scope="col">{{ columna }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (fila of detalle.resultado.filas; track $index) {
+                <tr>
+                  @for (valor of fila; track $index) {
+                    <td [class.text-muted]="valor === 'NULL'">{{ valor }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+}

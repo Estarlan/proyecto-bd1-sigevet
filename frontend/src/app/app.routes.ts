@@ -14,9 +14,9 @@ export const routes: Routes = [
   // { path: 'inventario',     loadComponent: () => import('./pages/inventario/inventario').then(m => m.Inventario) },
   { path: 'facturas',       loadComponent: () => import('./pages/facturas/facturas').then(m => m.Facturas) },
   // { path: 'facturas/:id',   loadComponent: () => import('./pages/factura-detalle/factura-detalle').then(m => m.FacturaDetallePage) },
-  // { path: 'personal',       loadComponent: () => import('./pages/personal/personal').then(m => m.Personal) },
-  // { path: 'algebra',        loadComponent: () => import('./pages/algebra/algebra').then(m => m.Algebra) },
-  // { path: 'algebra/:numero', loadComponent: () => import('./pages/ejercicio/ejercicio').then(m => m.Ejercicio) },
+  { path: 'personal',       loadComponent: () => import('./pages/personal/personal').then(m => m.Personal) },
+  { path: 'algebra',        loadComponent: () => import('./pages/algebra/algebra').then(m => m.Algebra) },
+  { path: 'algebra/:numero', loadComponent: () => import('./pages/ejercicio/ejercicio').then(m => m.Ejercicio) },
 
   // Cualquier otra dirección
   { path: '**', loadComponent: () => import('./pages/no-encontrado/no-encontrado').then(m => m.NoEncontrado) }
