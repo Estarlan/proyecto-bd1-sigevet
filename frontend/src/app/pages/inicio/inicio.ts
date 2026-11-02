@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { InicioService, mensajeDeError } from '../../services/api.service';
 import { Inicio as DatosInicio, Resumen } from '../../models/models';
 
@@ -15,8 +13,7 @@ interface Indicador {
 
 @Component({
   selector: 'app-inicio',
-  standalone: true,
-  imports: [RouterLink, CurrencyPipe, DecimalPipe],
+  standalone: false,
   templateUrl: './inicio.html',
   styleUrl: './inicio.css'
 })

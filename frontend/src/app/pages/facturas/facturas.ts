@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { FacturaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Factura, Sede } from '../../models/models';
 
 @Component({
   selector: 'app-facturas',
-  standalone: true,
-  imports: [FormsModule, RouterLink, CurrencyPipe],
+  standalone: false,
   templateUrl: './facturas.html'
 })
 export class Facturas implements OnInit {

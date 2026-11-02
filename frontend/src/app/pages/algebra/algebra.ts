@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { AlgebraService, mensajeDeError } from '../../services/api.service';
 import { EjercicioAlgebra } from '../../models/models';
 
@@ -11,8 +9,7 @@ import { EjercicioAlgebra } from '../../models/models';
  */
 @Component({
   selector: 'app-algebra',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './algebra.html',
   styleUrl: './algebra.css'
 })

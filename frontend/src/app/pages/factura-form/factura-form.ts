@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogoService, ClienteService, FacturaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Cliente, FacturaForm, LineaFacturaForm, OpcionCatalogo, Sede } from '../../models/models';
 import { marcarInvalido } from '../../shared/validaciones';
@@ -22,8 +21,7 @@ interface LineaEdicion {
  */
 @Component({
   selector: 'app-factura-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink, CurrencyPipe],
+  standalone: false,
   templateUrl: './factura-form.html'
 })
 export class FacturaFormPage implements OnInit {

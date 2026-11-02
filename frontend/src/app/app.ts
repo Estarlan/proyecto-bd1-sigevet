@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './shared/components/navbar/navbar';
 import { SesionService } from './services/sesion.service';
 
 /**
@@ -9,8 +7,7 @@ import { SesionService } from './services/sesion.service';
  */
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, NavbarComponent],
+  standalone: false,
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

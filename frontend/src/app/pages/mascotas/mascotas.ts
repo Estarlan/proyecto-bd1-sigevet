@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { MascotaService, mensajeDeError } from '../../services/api.service';
 import { Mascota } from '../../models/models';
 
 @Component({
   selector: 'app-mascotas',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './mascotas.html'
 })
 export class Mascotas implements OnInit {

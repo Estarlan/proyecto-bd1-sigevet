@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, ClienteService, mensajeDeError } from '../../services/api.service';
 import { ClienteForm, IdRespuesta, OpcionCatalogo } from '../../models/models';
@@ -14,8 +14,7 @@ import { MENSAJES, PATRONES, marcarInvalido, mensajeDocumento, patronDocumento }
  */
 @Component({
   selector: 'app-cliente-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './cliente-form.html'
 })
 export class ClienteFormPage implements OnInit {

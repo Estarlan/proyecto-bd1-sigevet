@@ -29,7 +29,8 @@ src/app/
   pages/                    una carpeta por página
   guards/                   sesionGuard (exige sesión) e interceptor que lleva a /login con un 401
   pages/login               inicio de sesión del personal
-  app.routes.ts             rutas con carga diferida (loadComponent)
+  app-module.ts             módulo raíz (NgModule): declara todos los componentes, HttpClient e interceptor
+  app-routing-module.ts     rutas de la aplicación (RouterModule.forRoot) con sesionGuard
 ```
 
 ## Compilar para producción

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, ClienteService, MascotaService, mensajeDeError } from '../../services/api.service';
 import { Cliente, IdRespuesta, MascotaForm, OpcionCatalogo } from '../../models/models';
@@ -19,8 +19,7 @@ interface GrupoRazas {
  */
 @Component({
   selector: 'app-mascota-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './mascota-form.html'
 })
 export class MascotaFormPage implements OnInit {
