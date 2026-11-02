@@ -1,0 +1,90 @@
+/* Estilos compartidos por todas las páginas de SIGEVET (Bootstrap 5 se carga desde angular.json). */
+body {
+  font-size: 14px;
+  color: #1f2a37;
+}
+
+/* Encabezado de página: ícono + título + subtítulo */
+.icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0A2342;
+  flex-shrink: 0;
+}
+
+/* Tarjetas con tabla */
+.tarjeta {
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+}
+.tarjeta .card-header {
+  background: #fff;
+  border: 0;
+  padding: 1.1rem 1.25rem .5rem;
+  font-weight: 600;
+}
+.tarjeta thead {
+  background: #f8f9fa;
+}
+.tarjeta th {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+.tarjeta td {
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+}
+.tarjeta th:first-child,
+.tarjeta td:first-child {
+  padding-left: 1.25rem;
+}
+
+/* Lista de datos (dt/dd) en las fichas de detalle */
+.datos dt {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+  margin-top: .6rem;
+}
+.datos dd {
+  margin-bottom: 0;
+}
+
+/* Estado vacío y carga */
+.vacio {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #6c757d;
+}
+.vacio i {
+  font-size: 2.5rem;
+  color: #d5d9e0;
+  display: block;
+  margin-bottom: .4rem;
+}
+
+/* Insignias de estado (citas, facturas, mascotas, empleados) */
+.estado {
+  display: inline-block;
+  padding: .2rem .7rem;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #eef1f6;
+  color: #4a5568;
+}
+.estado-ATENDIDA, .estado-PAGADA, .estado-ACTIVA, .estado-ACTIVO { background: #e6f6ee; color: #0f6e56; }
+.estado-PROGRAMADA, .estado-PENDIENTE { background: #fff6dc; color: #8a6100; }
+.estado-CANCELADA, .estado-ANULADA, .estado-NO_ASISTIO, .estado-FALLECIDA, .estado-INACTIVO { background: #fdecea; color: #993c1d; }
+
+a {
+  color: #0d3b6e;
+}

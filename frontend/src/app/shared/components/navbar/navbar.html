@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background:linear-gradient(135deg,#0A2342,#0d3b6e)">
+  <div class="container-fluid px-4">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" routerLink="/" (click)="cerrarMenu()">
+      <i class="bi bi-heart-pulse-fill text-warning fs-5"></i>
+      <span class="text-white">SIGEVET</span>
+      <span class="marca-sub d-none d-sm-inline">Huella Sana</span>
+    </a>
+
+    <!-- Botón del menú en celulares -->
+    <button class="navbar-toggler border-0" type="button" aria-label="Abrir el menú"
+            [attr.aria-expanded]="menuAbierto" (click)="menuAbierto = !menuAbierto">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" [class.show]="menuAbierto">
+      <ul class="navbar-nav me-auto gap-1">
+        @for (opcion of opciones; track opcion.ruta) {
+          <li class="nav-item">
+            <a class="nav-link px-3 rounded" [routerLink]="opcion.ruta" routerLinkActive="active-link"
+               [routerLinkActiveOptions]="{ exact: opcion.ruta === '/' }" (click)="cerrarMenu()">
+              <i class="bi {{ opcion.icono }} me-1"></i>{{ opcion.texto }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <span class="badge-lectura">
+        <i class="bi bi-lock-fill me-1"></i>Solo lectura
+      </span>
+    </div>
+  </div>
+</nav>

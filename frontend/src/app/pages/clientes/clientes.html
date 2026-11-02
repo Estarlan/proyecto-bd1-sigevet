@@ -1,0 +1,65 @@
+<div class="d-flex align-items-center gap-3 mb-4">
+  <div class="icon-box"><i class="bi bi-people-fill text-warning fs-4"></i></div>
+  <div>
+    <h4 class="fw-bold mb-0">Clientes</h4>
+    <p class="text-muted mb-0 small">Se muestran como máximo 100 clientes</p>
+  </div>
+</div>
+
+<div class="card tarjeta">
+  <div class="card-header">
+    <!-- (ngSubmit) evita que el formulario recargue la página -->
+    <form class="row g-2 align-items-center" (ngSubmit)="consultar()">
+      <div class="col-md-5">
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+          <input type="search" class="form-control bg-light border-start-0" name="buscar"
+                 placeholder="Documento o apellido" aria-label="Documento o apellido"
+                 [(ngModel)]="buscar">
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-dark">Buscar</button>
+        <button type="button" class="btn btn-link" (click)="limpiar()">Limpiar</button>
+      </div>
+      <div class="col-auto ms-auto">
+        <span class="text-muted small">{{ clientes.length }} clientes</span>
+      </div>
+    </form>
+  </div>
+
+  <div class="card-body p-0">
+    @if (cargando) {
+      <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
+    } @else if (error) {
+      <div class="alert alert-danger m-3">{{ error }}</div>
+    } @else if (clientes.length === 0) {
+      <div class="vacio"><i class="bi bi-people"></i>No hay registros para mostrar.</div>
+    } @else {
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Documento</th>
+              <th scope="col">Correo</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of clientes; track c.idPersona) {
+              <tr>
+                <td><a [routerLink]="['/clientes', c.idPersona]" class="fw-semibold">{{ c.idPersona }}</a></td>
+                <td>{{ c.nombres }}</td>
+                <td>{{ c.apellidos }}</td>
+                <td>{{ c.tipoDocumento }} {{ c.numDocumento }}</td>
+                <td class="text-muted small">{{ c.email ?? '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>
