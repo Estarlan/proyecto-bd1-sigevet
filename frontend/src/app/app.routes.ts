@@ -9,10 +9,10 @@ export const routes: Routes = [
   { path: 'clientes',     loadComponent: () => import('./pages/clientes/clientes').then(m => m.Clientes) },
   { path: 'clientes/:id', loadComponent: () => import('./pages/cliente-detalle/cliente-detalle').then(m => m.ClienteDetallePage) },
 
-  // { path: 'mascotas/:id',   loadComponent: () => import('./pages/mascota-detalle/mascota-detalle').then(m => m.MascotaDetallePage) },
+  { path: 'mascotas/:id',   loadComponent: () => import('./pages/mascota-detalle/mascota-detalle').then(m => m.MascotaDetallePage) },
   // { path: 'agenda',         loadComponent: () => import('./pages/agenda/agenda').then(m => m.Agenda) },
   // { path: 'inventario',     loadComponent: () => import('./pages/inventario/inventario').then(m => m.Inventario) },
-  // { path: 'facturas',       loadComponent: () => import('./pages/facturas/facturas').then(m => m.Facturas) },
+  { path: 'facturas',       loadComponent: () => import('./pages/facturas/facturas').then(m => m.Facturas) },
   // { path: 'facturas/:id',   loadComponent: () => import('./pages/factura-detalle/factura-detalle').then(m => m.FacturaDetallePage) },
   // { path: 'personal',       loadComponent: () => import('./pages/personal/personal').then(m => m.Personal) },
   // { path: 'algebra',        loadComponent: () => import('./pages/algebra/algebra').then(m => m.Algebra) },
