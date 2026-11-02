@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CatalogoService, InventarioService, SedeService, mensajeDeError } from '../../services/api.service';
 import { InventarioForm, ItemInventario, OpcionCatalogo, Sede } from '../../models/models';
@@ -7,8 +6,7 @@ import { InventarioForm, ItemInventario, OpcionCatalogo, Sede } from '../../mode
 /** Existencias de la tabla INVENTARIO, que resuelve la relación N:M ALMACENAR entre SEDE y MEDICAMENTO. */
 @Component({
   selector: 'app-inventario',
-  standalone: true,
-  imports: [FormsModule],
+  standalone: false,
   templateUrl: './inventario.html'
 })
 export class Inventario implements OnInit {

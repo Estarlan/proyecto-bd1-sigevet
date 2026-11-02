@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PersonalService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Empleado, Sede } from '../../models/models';
 
@@ -13,8 +11,7 @@ import { Empleado, Sede } from '../../models/models';
  */
 @Component({
   selector: 'app-personal',
-  standalone: true,
-  imports: [FormsModule, CurrencyPipe, RouterLink],
+  standalone: false,
   templateUrl: './personal.html',
   styleUrl: './personal.css'
 })

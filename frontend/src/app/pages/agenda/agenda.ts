@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CitaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Cita, Sede } from '../../models/models';
 
 @Component({
   selector: 'app-agenda',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './agenda.html'
 })
 export class Agenda implements OnInit {

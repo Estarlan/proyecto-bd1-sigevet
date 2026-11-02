@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MascotaService, mensajeDeError } from '../../services/api.service';
 import { MascotaDetalle } from '../../models/models';
 
 @Component({
   selector: 'app-mascota-detalle',
-  standalone: true,
-  imports: [RouterLink, DecimalPipe, FormsModule],
+  standalone: false,
   templateUrl: './mascota-detalle.html'
 })
 export class MascotaDetallePage implements OnInit {

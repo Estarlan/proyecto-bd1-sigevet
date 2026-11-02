@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 import { SesionService } from '../../../services/sesion.service';
 
 /** Opción del menú superior. */
@@ -11,8 +11,7 @@ interface OpcionMenu {
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  standalone: false,
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })

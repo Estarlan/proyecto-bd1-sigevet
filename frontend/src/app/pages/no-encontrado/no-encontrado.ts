@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-no-encontrado',
-  standalone: true,
-  imports: [RouterLink],
+  standalone: false,
   template: `
     <div class="vacio py-5">
       <i class="bi bi-signpost-split"></i>

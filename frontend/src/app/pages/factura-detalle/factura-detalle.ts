@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FacturaService, mensajeDeError } from '../../services/api.service';
 import { FacturaDetalle } from '../../models/models';
 
@@ -11,8 +10,7 @@ import { FacturaDetalle } from '../../models/models';
  */
 @Component({
   selector: 'app-factura-detalle',
-  standalone: true,
-  imports: [RouterLink, CurrencyPipe, DecimalPipe],
+  standalone: false,
   templateUrl: './factura-detalle.html'
 })
 export class FacturaDetallePage implements OnInit {

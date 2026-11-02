@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CatalogoService, PersonalService, SedeService, mensajeDeError } from '../../services/api.service';
 import { EmpleadoForm, IdRespuesta, OpcionCatalogo, Sede } from '../../models/models';
@@ -14,8 +14,7 @@ import { MENSAJES, PATRONES, fechaFueraDeRango, fechaISO, marcarInvalido, mensaj
  */
 @Component({
   selector: 'app-empleado-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './empleado-form.html'
 })
 export class EmpleadoFormPage implements OnInit {

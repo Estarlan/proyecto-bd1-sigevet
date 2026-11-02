@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AlgebraService, mensajeDeError } from '../../services/api.service';
 import { EjercicioDetalle } from '../../models/models';
 
@@ -10,8 +10,7 @@ import { EjercicioDetalle } from '../../models/models';
  */
 @Component({
   selector: 'app-ejercicio',
-  standalone: true,
-  imports: [RouterLink],
+  standalone: false,
   templateUrl: './ejercicio.html',
   styleUrl: './ejercicio.css'
 })

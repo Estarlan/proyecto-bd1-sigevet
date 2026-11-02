@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService, mensajeDeError } from '../../services/api.service';
 import { ClienteDetalle } from '../../models/models';
 
 @Component({
   selector: 'app-cliente-detalle',
-  standalone: true,
-  imports: [RouterLink, CurrencyPipe],
+  standalone: false,
   templateUrl: './cliente-detalle.html'
 })
 export class ClienteDetallePage implements OnInit {

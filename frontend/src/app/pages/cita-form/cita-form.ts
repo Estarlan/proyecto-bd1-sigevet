@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogoService, CitaService, MascotaService, SedeService, mensajeDeError } from '../../services/api.service';
 import { CitaForm, Mascota, OpcionCatalogo, Sede } from '../../models/models';
 import { marcarInvalido } from '../../shared/validaciones';
@@ -13,8 +12,7 @@ import { marcarInvalido } from '../../shared/validaciones';
  */
 @Component({
   selector: 'app-cita-form',
-  standalone: true,
-  imports: [FormsModule, RouterLink, CurrencyPipe],
+  standalone: false,
   templateUrl: './cita-form.html'
 })
 export class CitaFormPage implements OnInit {
