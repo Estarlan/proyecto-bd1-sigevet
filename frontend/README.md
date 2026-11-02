@@ -26,6 +26,8 @@ src/app/
   models/models.ts          interfaces TypeScript con los mismos campos que el JSON de la API
   services/api.service.ts   un servicio por recurso (HttpClient → Observable)
   shared/components/navbar  menú superior
+  shared/validaciones.ts    validaciones de formato de los formularios
+  shared/ultima-peticion.ts cancela la consulta anterior cuando llega una nueva
   pages/                    una carpeta por página
   guards/                   sesionGuard (exige sesión) e interceptor que lleva a /login con un 401
   pages/login               inicio de sesión del personal
