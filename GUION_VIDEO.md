@@ -1,3 +1,5 @@
+<!-- Created: [unknown] -->
+<!-- Updated: 11:05 02-Nov-2026 -->
 # SIGEVET — guion del video por persona
 
 Video de demostración de máximo 15 minutos (este guion dura 13:30). Todos hablan, con cámara y audio. Cada persona
@@ -146,21 +148,26 @@ contra una base SQLite; **[No verificado]** contra el estado actual de los archi
 
 ## Bloque 7 — Juan Miguel: aplicación web (10:00–12:30)
 
-Abre la aplicación en el puerto 5000 del servidor. Recorre en este orden:
-1. **Inicio** (`/`).
-2. **Clientes** (`/clientes`) y entra a uno.
-3. **Historia clínica** de una mascota (`/mascotas/{id}`).
-4. **Agenda** (`/agenda`).
-5. **Inventario** (`/inventario`).
-6. **Facturas** (`/facturas`) y abre una.
-7. **Personal** (`/personal`): aquí se ve el polimorfismo (cada tipo de empleado describe su cargo distinto).
-8. **Álgebra** (`/algebra`) y abre un ejercicio.
+Abre `http://192.168.2.40:5000` (o `http://127.0.0.1:5000` en el portátil). Recorre en este orden (unos 20 s cada paso):
+1. **Inicio**: los indicadores de la red.
+2. **Clientes**: busca uno y entra a su detalle (teléfonos, mascotas y facturas).
+3. **Crear un cliente** con el formulario y guardarlo: aparece en la lista (CRUD).
+4. **Dato inválido**: crea otro cliente con **el mismo tipo y número de documento**. La base lo rechaza y la página
+   muestra "Ya existe un cliente con ese tipo y número de documento" (restricción UNIQUE de MySQL, no de Java).
+5. **Inventario** de una sede: mira las existencias de un medicamento.
+6. **Nueva factura** en esa sede con una línea de ese medicamento: al guardarla, vuelve a **Inventario** y muestra que
+   las existencias bajaron. Abre la factura creada.
+7. **Personal**: el polimorfismo (cada tipo de empleado describe su cargo distinto).
+8. **Álgebra**: abre un ejercicio y muestra el resultado en vivo.
 
 **Di:**
-> "La aplicación está hecha en Java 21 con Spring Boot y Thymeleaf. Todo el SQL está escrito a mano con JDBC y
-> PreparedStatement; no usamos ORM. Se conecta con el usuario vet_app, que solo puede leer, así que la aplicación no
-> puede modificar nada. En la página de personal hay herencia y polimorfismo: Empleado tiene dos subclases,
-> Veterinario y Auxiliar, y la misma lista muestra tres descripciones distintas."
+> "La interfaz está hecha en Angular y le pide los datos a una API REST en Java 21 con Spring Boot. Todo el SQL está
+> escrito a mano con JDBC y PreparedStatement; no usamos ORM. La aplicación se conecta con el usuario vet_app, que lee
+> toda la base y solo puede escribir en las tablas que usa, sin borrar tablas ni cambiar catálogos. Las reglas viven en
+> la base: cuando metemos un documento repetido, es MySQL el que lo rechaza y la aplicación muestra la restricción. La
+> factura se guarda en una transacción: el encabezado, las líneas y el descuento del inventario se confirman juntos con
+> COMMIT, y si algo falla se deshace todo con ROLLBACK. En la página de personal hay herencia y polimorfismo: Empleado
+> tiene dos subclases, Veterinario y Auxiliar, y la misma lista muestra descripciones distintas."
 
 ---
 
@@ -183,5 +190,5 @@ un script que carga todo en orden evita errores que a mano pasan sin que uno los
 de cuatro personas exige acordar quién edita cada archivo antes de empezar". Cierra el video:
 "Gracias por ver nuestro proyecto."
 
-**Importante:** antes de grabar, cada uno debe tener sus propios commits reales en el repositorio, hechos con su
-usuario de GitHub.
+**Nota:** si alguien no tiene commits propios, muestra en su lugar la parte del repositorio que trabajó (sus ramas,
+pull requests o archivos).
