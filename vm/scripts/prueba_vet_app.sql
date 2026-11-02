@@ -1,4 +1,5 @@
--- Prueba del usuario de la aplicación (vet_app): puede leer pero no modificar.
+-- Prueba del usuario de la aplicación (vet_app): lee toda la base y solo escribe en las tablas que la app
+-- modifica (01_ddl/05_permisos_app.sql). No puede borrar mascotas, cambiar catálogos ni alterar tablas.
 -- mysql -u vet_app -p -t < vm/scripts/prueba_vet_app.sql
 SELECT CURRENT_USER() AS usuario, CURRENT_ROLE() AS rol;
 SELECT (SELECT COUNT(*) FROM sigevet.MASCOTA) AS mascotas,

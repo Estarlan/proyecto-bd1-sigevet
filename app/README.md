@@ -1,7 +1,7 @@
 # SIGEVET
 
 Aplicación de consulta para el proyecto de Bases de Datos 1. Usa Java 21,
-Spring Boot 3.5.14, Thymeleaf y MySQL. Escucha en el puerto 5000 y solo lee datos.
+Spring Boot 3.5.14, Thymeleaf y MySQL. Escucha en el puerto 5000; expone una API REST (`/api`) de lectura y escritura con SQL escrito a mano (JDBC).
 
 ## Compilar y ejecutar
 

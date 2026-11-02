@@ -4,7 +4,8 @@
 -- (vm/scripts/cargar_bd.sh lo hace solo con las claves de vm/claves.env)
 --
 --   vetdb    dueño de la base sigevet: crea tablas, vistas, funciones, procedimientos y disparadores.
---   vet_app  usuario de la aplicación web: solo puede leer (rol rol_sigevet_lectura).
+--   vet_app  usuario de la aplicación web: lee toda la base (rol rol_sigevet_lectura) y escribe solo en las
+--            tablas que modifica la app (rol rol_sigevet_escritura, en 05_permisos_app.sql).
 -- Los dos usuarios pueden conectarse desde otro equipo ('%'), por ejemplo desde MySQL Workbench.
 
 CREATE DATABASE IF NOT EXISTS sigevet CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;

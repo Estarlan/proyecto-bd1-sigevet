@@ -89,7 +89,7 @@ En el equipo anfitrión, en MySQL Workbench: **Database → Manage Connections �
 | Connection Name | SIGEVET (VM) |
 | Hostname | `127.0.0.1` con NAT, o la IP de la VM con adaptador puente |
 | Port | 3306 |
-| Username | `vetdb` (dueño de la base) o `vet_app` (solo lectura) |
+| Username | `vetdb` (dueño de la base) o `vet_app` (aplicación: lee todo y escribe solo en las tablas de la app) |
 | Default Schema | `sigevet` |
 
 La clave es la de `vm/claves.env`. Desde ahí se ven las tablas, vistas, procedimientos y disparadores, y se pueden

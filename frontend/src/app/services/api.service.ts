@@ -3,8 +3,9 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
-  AlgebraLista, Cita, Cliente, ClienteDetalle, EjercicioDetalle, Empleado, ErrorApi,
-  Factura, FacturaDetalle, Inicio, ItemInventario, MascotaDetalle, Sede
+  AlgebraLista, Cita, CitaForm, Cliente, ClienteDetalle, ClienteForm, EjercicioDetalle, Empleado, EmpleadoForm,
+  ErrorApi, Factura, FacturaDetalle, FacturaForm, IdRespuesta, Inicio, InventarioForm, ItemInventario, Mascota,
+  MascotaDetalle, MascotaForm, Mensaje, OpcionCatalogo, Sede
 } from '../models/models';
 
 const API = environment.apiUrl;
@@ -64,6 +65,18 @@ export class ClienteService {
   getDetalle(id: number): Observable<ClienteDetalle> {
     return this.http.get<ClienteDetalle>(`${API}/clientes/${id}`);
   }
+  getFormulario(id: number): Observable<ClienteForm> {
+    return this.http.get<ClienteForm>(`${API}/clientes/${id}/formulario`);
+  }
+  crear(form: ClienteForm): Observable<IdRespuesta> {
+    return this.http.post<IdRespuesta>(`${API}/clientes`, form);
+  }
+  actualizar(id: number, form: ClienteForm): Observable<void> {
+    return this.http.put<void>(`${API}/clientes/${id}`, form);
+  }
+  eliminar(id: number): Observable<void> {
+    return this.http.delete<void>(`${API}/clientes/${id}`);
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -75,6 +88,22 @@ export class MascotaService {
 
   getDetalle(id: number): Observable<MascotaDetalle> {
     return this.http.get<MascotaDetalle>(`${API}/mascotas/${id}`);
+  }
+  getAll(buscar: string): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>(`${API}/mascotas`, { params: filtros({ buscar: buscar.trim() }) });
+  }
+  getFormulario(id: number): Observable<MascotaForm> {
+    return this.http.get<MascotaForm>(`${API}/mascotas/${id}/formulario`);
+  }
+  crear(form: MascotaForm): Observable<IdRespuesta> {
+    return this.http.post<IdRespuesta>(`${API}/mascotas`, form);
+  }
+  actualizar(id: number, form: MascotaForm): Observable<void> {
+    return this.http.put<void>(`${API}/mascotas/${id}`, form);
+  }
+  /** Borrado lógico: ACTIVA, FALLECIDA o TRASLADADA. */
+  cambiarEstado(id: number, estado: string): Observable<Mensaje> {
+    return this.http.patch<Mensaje>(`${API}/mascotas/${id}/estado`, { estado });
   }
 }
 
@@ -90,6 +119,13 @@ export class CitaService {
   }
   getEstados(): Observable<string[]> {
     return this.http.get<string[]>(`${API}/citas/estados`);
+  }
+  crear(form: CitaForm): Observable<IdRespuesta> {
+    return this.http.post<IdRespuesta>(`${API}/citas`, form);
+  }
+  /** ATENDIDA, CANCELADA o NO_ASISTIO (solo para citas PROGRAMADAS). */
+  cambiarEstado(id: number, estado: string): Observable<void> {
+    return this.http.patch<void>(`${API}/citas/${id}/estado`, { estado });
   }
 }
 
@@ -109,6 +145,13 @@ export class FacturaService {
   getDetalle(id: number): Observable<FacturaDetalle> {
     return this.http.get<FacturaDetalle>(`${API}/facturas/${id}`);
   }
+  crear(form: FacturaForm): Observable<IdRespuesta> {
+    return this.http.post<IdRespuesta>(`${API}/facturas`, form);
+  }
+  /** PAGADA (registrar pago de una PENDIENTE) o ANULADA. */
+  cambiarEstado(id: number, estado: string): Observable<void> {
+    return this.http.patch<void>(`${API}/facturas/${id}/estado`, { estado });
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -121,6 +164,15 @@ export class InventarioService {
   getAll(sede: number | null): Observable<ItemInventario[]> {
     return this.http.get<ItemInventario[]>(`${API}/inventario`, { params: filtros({ sede }) });
   }
+  agregar(form: InventarioForm): Observable<void> {
+    return this.http.post<void>(`${API}/inventario`, form);
+  }
+  actualizar(idSede: number, idMedicamento: number, form: InventarioForm): Observable<void> {
+    return this.http.put<void>(`${API}/inventario/${idSede}/${idMedicamento}`, form);
+  }
+  eliminar(idSede: number, idMedicamento: number): Observable<void> {
+    return this.http.delete<void>(`${API}/inventario/${idSede}/${idMedicamento}`);
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -132,6 +184,19 @@ export class PersonalService {
 
   getAll(sede: number | null): Observable<Empleado[]> {
     return this.http.get<Empleado[]>(`${API}/personal`, { params: filtros({ sede }) });
+  }
+  getFormulario(id: number): Observable<EmpleadoForm> {
+    return this.http.get<EmpleadoForm>(`${API}/personal/${id}/formulario`);
+  }
+  crear(form: EmpleadoForm): Observable<IdRespuesta> {
+    return this.http.post<IdRespuesta>(`${API}/personal`, form);
+  }
+  actualizar(id: number, form: EmpleadoForm): Observable<void> {
+    return this.http.put<void>(`${API}/personal/${id}`, form);
+  }
+  /** Borrado lógico: ACTIVO o INACTIVO. */
+  cambiarEstado(id: number, estado: string): Observable<void> {
+    return this.http.patch<void>(`${API}/personal/${id}/estado`, { estado });
   }
 }
 
@@ -159,5 +224,38 @@ export class AlgebraService {
   }
   getDetalle(numero: number): Observable<EjercicioDetalle> {
     return this.http.get<EjercicioDetalle>(`${API}/algebra/${numero}`);
+  }
+}
+
+// ─────────────────────────────────────────────
+// CATÁLOGOS (opciones de los <select> de los formularios)
+// ─────────────────────────────────────────────
+@Injectable({ providedIn: 'root' })
+export class CatalogoService {
+  constructor(private http: HttpClient) {}
+
+  ciudades(): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/ciudades`);
+  }
+  razas(): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/razas`);
+  }
+  servicios(): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/servicios`);
+  }
+  /** Todos los medicamentos, o solo los que tiene una sede (con sus existencias en el detalle). */
+  medicamentos(sede: number | null): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/medicamentos`, { params: filtros({ sede }) });
+  }
+  especialidades(): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/especialidades`);
+  }
+  /** Veterinarios activos de una sede (regla RN-08). */
+  veterinarios(sede: number): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/veterinarios`, { params: filtros({ sede }) });
+  }
+  /** Empleados activos de una sede (quien emite una factura). */
+  empleados(sede: number): Observable<OpcionCatalogo[]> {
+    return this.http.get<OpcionCatalogo[]>(`${API}/catalogos/empleados`, { params: filtros({ sede }) });
   }
 }

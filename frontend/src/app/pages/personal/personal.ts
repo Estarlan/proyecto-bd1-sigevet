@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PersonalService, SedeService, mensajeDeError } from '../../services/api.service';
 import { Empleado, Sede } from '../../models/models';
 
@@ -13,7 +14,7 @@ import { Empleado, Sede } from '../../models/models';
 @Component({
   selector: 'app-personal',
   standalone: true,
-  imports: [FormsModule, CurrencyPipe],
+  imports: [FormsModule, CurrencyPipe, RouterLink],
   templateUrl: './personal.html',
   styleUrl: './personal.css'
 })
@@ -35,9 +36,15 @@ export class Personal implements OnInit {
   cargando = true;
   error = '';
 
-  constructor(private personalService: PersonalService, private sedeService: SedeService) {}
+  aviso = '';
+  errorAccion = '';
+
+  constructor(private route: ActivatedRoute, private personalService: PersonalService, private sedeService: SedeService) {}
 
   ngOnInit(): void {
+    if (this.route.snapshot.queryParamMap.get('guardado')) {
+      this.aviso = 'Los datos del empleado quedaron guardados.';
+    }
     this.sedeService.getAll().subscribe(datos => this.sedes = datos);
     this.consultar();
   }
@@ -87,5 +94,22 @@ export class Personal implements OnInit {
       return this.sedes;
     }
     return this.sedes.filter(s => s.idSede === this.sedeSeleccionada);
+  }
+
+  /**
+   * Borrado lógico de un empleado: ACTIVO o INACTIVO. El backend no deja inactivar a un director de sede ni a un
+   * veterinario con citas programadas.
+   */
+  cambiarEstado(e: Empleado): void {
+    const nuevo = e.estado === 'ACTIVO' ? 'INACTIVO' : 'ACTIVO';
+    if (nuevo === 'INACTIVO' && !confirm('¿Inactivar a ' + e.nombreCompleto + '?')) {
+      return;
+    }
+    this.aviso = '';
+    this.errorAccion = '';
+    this.personalService.cambiarEstado(e.idPersona, nuevo).subscribe({
+      next: () => { this.aviso = e.nombreCompleto + ' quedó ' + nuevo + '.'; this.consultar(); },
+      error: (err: HttpErrorResponse) => { this.errorAccion = mensajeDeError(err); }
+    });
   }
 }

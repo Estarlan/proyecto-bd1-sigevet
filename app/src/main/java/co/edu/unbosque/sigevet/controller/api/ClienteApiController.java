@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import co.edu.unbosque.sigevet.dto.ClienteFormDTO;
+import co.edu.unbosque.sigevet.dto.IdDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * API REST de clientes. A diferencia del controlador Thymeleaf, no devuelve el nombre de una vista: devuelve los
@@ -49,5 +57,32 @@ public class ClienteApiController {
     @GetMapping("/{id}")
     public ClienteDetalleDTO detalle(@PathVariable int id) {
         return clienteService.detalle(id);
+    }
+
+    /** {@code GET /api/clientes/{id}/formulario}: datos con identificadores, para editar. */
+    @GetMapping("/{id}/formulario")
+    public ClienteFormDTO formulario(@PathVariable int id) {
+        return clienteService.formulario(id);
+    }
+
+    /** {@code POST /api/clientes}: crea un cliente con sus teléfonos. Responde 201 con el id generado. */
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public IdDTO crear(@RequestBody ClienteFormDTO form) {
+        return new IdDTO(clienteService.crear(form));
+    }
+
+    /** {@code PUT /api/clientes/{id}}: actualiza el cliente y reemplaza sus teléfonos. Responde 204. */
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void actualizar(@PathVariable int id, @RequestBody ClienteFormDTO form) {
+        clienteService.actualizar(id, form);
+    }
+
+    /** {@code DELETE /api/clientes/{id}}: borra un cliente sin historial (409 si tiene mascotas o facturas). */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable int id) {
+        clienteService.eliminar(id);
     }
 }

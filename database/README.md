@@ -8,11 +8,12 @@ Scripts que llevan el modelo lógico de SIGEVET (Red de Clínicas Veterinarias *
 
 | Carpeta / archivo | Contenido |
 |---|---|
-| `01_ddl/00_crear_usuarios.sql` | Base `sigevet`, usuarios `vetdb` (dueño) y `vet_app` (solo lectura) y rol `rol_sigevet_lectura`. Se ejecuta como root. |
+| `01_ddl/00_crear_usuarios.sql` | Base `sigevet`, usuarios `vetdb` (dueño) y `vet_app` (aplicación) y rol `rol_sigevet_lectura`. Se ejecuta como root. |
 | `01_ddl/01_crear_tablas.sql` | **Creación de objetos:** 22 tablas con 113 restricciones con nombre (PK, FK, UNIQUE, CHECK), la FK circular SEDE→EMPLEADO y el comentario de cada tabla y columna (diccionario de datos dentro de la base). |
 | `01_ddl/02_indices.sql` | Índices de búsqueda (InnoDB ya indexa las PK, UNIQUE y FK). |
 | `01_ddl/03_vistas.sql` | 6 vistas: total de factura, detalle de mascota con edad, historial clínico, agenda, stock bajo e ingresos por sede y mes. |
 | `01_ddl/04_programas.sql` | Funciones `FN_EDAD_MASCOTA` y `FN_TOTAL_FACTURA`, 3 procedimientos y 9 disparadores con las reglas de negocio (RN-08, RN-09, consulta solo de citas atendidas). |
+| `01_ddl/05_permisos_app.sql` | Rol `rol_sigevet_escritura`: `vet_app` puede escribir solo en las tablas que modifica la aplicación (clientes, mascotas, citas, facturas, inventario y personal), sin `DROP`, `ALTER` ni acceso a los catálogos. Se ejecuta **como root** después de crear las tablas. |
 | `02_dml/01_…sql` a `23_…sql` | **Inserción de registros:** 1.091 registros de prueba, un archivo por tabla en orden de dependencias. |
 | `03_varios/01_consultas_algebra_relacional.sql` | **Scripts varios:** las 55 consultas SQL equivalentes a los ejercicios de álgebra relacional. |
 | `03_varios/02_verificacion.sql` | Conteo de objetos, restricciones y registros, y prueba de que las reglas rechazan datos inválidos. |
@@ -29,6 +30,7 @@ Scripts que llevan el modelo lógico de SIGEVET (Red de Clínicas Veterinarias *
 5. 02_dml/01_departamento.sql … 23_detalle_factura.sql
 6. 01_ddl/03_vistas.sql
 7. 03_varios/02_verificacion.sql
+8. 01_ddl/05_permisos_app.sql        (como root: los permisos de tabla exigen que las tablas existan)
 ```
 
 La FK `FK_SEDE_DIRECTOR` es circular (EMPLEADO referencia a SEDE y SEDE a EMPLEADO): las sedes se insertan sin

@@ -3,6 +3,8 @@ package co.edu.unbosque.sigevet.exception;
 import co.edu.unbosque.sigevet.dto.ErrorApiDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -39,6 +41,57 @@ public class ManejadorErroresApi {
     public ResponseEntity<ErrorApiDTO> parametroInvalido(MethodArgumentTypeMismatchException e) {
         ErrorApiDTO error = new ErrorApiDTO(HttpStatus.BAD_REQUEST.value(),
                 "El parámetro '" + e.getName() + "' no es válido.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    /**
+     * Un formulario llegó con datos incompletos o mal escritos (validación del servicio): responde 400.
+     *
+     * @param e excepción con el mensaje que nombra el campo.
+     * @return respuesta 400 con ese mensaje.
+     */
+    @ExceptionHandler(DatosInvalidosException.class)
+    public ResponseEntity<ErrorApiDTO> datosInvalidos(DatosInvalidosException e) {
+        ErrorApiDTO error = new ErrorApiDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    /**
+     * La base o una regla de negocio rechazó la operación (UNIQUE, CHECK, FK, disparador, borrado con historial,
+     * existencias insuficientes): responde 409.
+     *
+     * @param e excepción con el mensaje del conflicto.
+     * @return respuesta 409 con ese mensaje.
+     */
+    @ExceptionHandler(ConflictoDatosException.class)
+    public ResponseEntity<ErrorApiDTO> conflicto(ConflictoDatosException e) {
+        ErrorApiDTO error = new ErrorApiDTO(HttpStatus.CONFLICT.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    /**
+     * El cuerpo de la petición no es un JSON válido o un valor no tiene el tipo esperado: responde 400.
+     *
+     * @param e excepción que lanza Jackson al leer el cuerpo.
+     * @return respuesta 400.
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorApiDTO> cuerpoInvalido(HttpMessageNotReadableException e) {
+        ErrorApiDTO error = new ErrorApiDTO(HttpStatus.BAD_REQUEST.value(),
+                "Los datos enviados no tienen el formato esperado (revise números y fechas).");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    /**
+     * Falta un parámetro obligatorio de la dirección (por ejemplo {@code ?sede=}): responde 400.
+     *
+     * @param e excepción de Spring.
+     * @return respuesta 400 que nombra el parámetro.
+     */
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ErrorApiDTO> parametroFaltante(MissingServletRequestParameterException e) {
+        ErrorApiDTO error = new ErrorApiDTO(HttpStatus.BAD_REQUEST.value(),
+                "Falta el parámetro '" + e.getParameterName() + "'.");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 

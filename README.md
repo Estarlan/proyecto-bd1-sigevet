@@ -6,7 +6,7 @@ Docente: Ing., Esp., M.Ed. Christian Felipe Duarte Arévalo.
 Hicimos la base de datos de una red de clínicas veterinarias que nos inventamos, *Huella Sana S.A.S.*, con 5 sedes.
 Cubre clientes, mascotas con su historia clínica, citas, consultas y fórmulas, inventario de medicamentos por sede y
 facturación. La base corre en **MySQL 8.4** sobre una máquina virtual con **Oracle Linux 9** y se administra con
-**MySQL Workbench**. Encima hay una aplicación web sencilla en **Java con Spring Boot** que solo lee datos, sin ORM
+**MySQL Workbench**. Encima hay una aplicación web sencilla en **Java con Spring Boot** que consulta y modifica los datos (clientes, mascotas, citas, facturas, inventario y personal) sin ORM
 (SQL escrito a mano con JDBC).
 
 | Integrante | Rol |

@@ -1,10 +1,13 @@
-<div class="d-flex align-items-center gap-3 mb-4">
+<div class="d-flex flex-wrap align-items-center gap-3 mb-4">
   <div class="icon-box"><i class="bi bi-person-badge-fill text-warning fs-4"></i></div>
   <div>
     <h4 class="fw-bold mb-0">Personal</h4>
     <p class="text-muted mb-0 small">Especialización de EMPLEADO en VETERINARIO y AUXILIAR</p>
   </div>
+  <a routerLink="/personal/nuevo" class="btn btn-dark ms-auto"><i class="bi bi-person-plus me-1"></i>Nuevo empleado</a>
 </div>
+@if (aviso) { <div class="alert alert-success"><i class="bi bi-check-circle me-1"></i>{{ aviso }}</div> }
+@if (errorAccion) { <div class="alert alert-warning">{{ errorAccion }}</div> }
 
 <!-- Filtros -->
 <div class="card tarjeta mb-3">
@@ -87,6 +90,7 @@
                 <th scope="col" class="text-end">Salario</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Contacto</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -123,6 +127,13 @@
                   <td class="small">
                     <div>{{ e.telefono }}</div>
                     <div class="text-muted">{{ e.email }}</div>
+                  </td>
+                  <td class="text-nowrap">
+                    <a [routerLink]="['/personal', e.idPersona, 'editar']" class="btn btn-sm btn-outline-dark me-1" title="Editar" aria-label="Editar"><i class="bi bi-pencil"></i></a>
+                    <button type="button" class="btn btn-sm" [class.btn-outline-danger]="e.estado === 'ACTIVO'" [class.btn-outline-success]="e.estado !== 'ACTIVO'"
+                            (click)="cambiarEstado(e)" [title]="e.estado === 'ACTIVO' ? 'Inactivar' : 'Activar'">
+                      <i class="bi {{ e.estado === 'ACTIVO' ? 'bi-person-dash' : 'bi-person-check' }}"></i>
+                    </button>
                   </td>
                 </tr>
               }

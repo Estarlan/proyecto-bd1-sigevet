@@ -1,4 +1,6 @@
 <a routerLink="/facturas" class="d-inline-block mb-3 small"><i class="bi bi-arrow-left me-1"></i>Volver a facturas</a>
+@if (aviso) { <div class="alert alert-success"><i class="bi bi-check-circle me-1"></i>{{ aviso }}</div> }
+@if (errorAccion) { <div class="alert alert-warning">{{ errorAccion }}</div> }
 
 @if (cargando) {
   <div class="vacio"><div class="spinner-border" style="color:#0A2342"></div></div>
@@ -13,7 +15,15 @@
         <span class="estado estado-{{ detalle.factura.estado }} ms-2">{{ detalle.factura.estado }}</span>
       </p>
     </div>
-    <div class="ms-auto text-end">
+    <div class="ms-auto d-flex flex-wrap gap-2">
+      @if (detalle.factura.estado === 'PENDIENTE') {
+        <button type="button" class="btn btn-success btn-sm" (click)="cambiarEstado('PAGADA')" [disabled]="cambiando"><i class="bi bi-cash-coin me-1"></i>Registrar pago</button>
+      }
+      @if (detalle.factura.estado !== 'ANULADA') {
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="cambiarEstado('ANULADA')" [disabled]="cambiando"><i class="bi bi-x-circle me-1"></i>Anular</button>
+      }
+    </div>
+    <div class="text-end">
       <div class="text-muted small">Total</div>
       <div class="fs-4 fw-bold" style="color:#0A2342">
         {{ detalle.factura.total != null ? (detalle.factura.total | currency:'COP':'symbol-narrow':'1.0-0') : '—' }}
@@ -72,7 +82,7 @@
           </table>
         </div>
         <p class="text-muted small px-3 py-2 mb-0 border-top">
-          Subtotal = cantidad × precio unitario × (1 − descuento / 100). El total lo calcula la vista V_FACTURA_TOTAL.
+          Subtotal = cantidad × precio unitario × (1 − descuento / 100). El total no se guarda en FACTURA: es un atributo derivado (vista V_FACTURA_TOTAL y función FN_TOTAL_FACTURA).
         </p>
       }
     </div>

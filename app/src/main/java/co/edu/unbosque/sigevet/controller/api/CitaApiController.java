@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import co.edu.unbosque.sigevet.dto.CitaFormDTO;
+import co.edu.unbosque.sigevet.dto.EstadoDTO;
+import co.edu.unbosque.sigevet.dto.IdDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * API REST de la agenda de citas, con filtros por sede y por estado.
@@ -48,5 +57,19 @@ public class CitaApiController {
     @GetMapping("/estados")
     public String[] estados() {
         return agendaService.estados();
+    }
+
+    /** {@code POST /api/citas}: agenda una cita PROGRAMADA. Responde 201 con el id. */
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public IdDTO crear(@RequestBody CitaFormDTO form) {
+        return new IdDTO(agendaService.crear(form));
+    }
+
+    /** {@code PATCH /api/citas/{id}/estado}: ATENDIDA, CANCELADA o NO_ASISTIO. Responde 204. */
+    @PatchMapping("/{id}/estado")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cambiarEstado(@PathVariable long id, @RequestBody EstadoDTO cuerpo) {
+        agendaService.cambiarEstado(id, cuerpo.getEstado());
     }
 }

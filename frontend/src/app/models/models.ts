@@ -124,6 +124,8 @@ export interface Sede {
 }
 
 export interface ItemInventario {
+  idSede: number;
+  idMedicamento: number;
   sede?: string;
   medicamento?: string;
   presentacion?: string;
@@ -218,5 +220,120 @@ export interface EjercicioDetalle {
 /** Cuerpo JSON que envía ManejadorErroresApi cuando algo falla (404, 400 o 500). */
 export interface ErrorApi {
   estado: number;
+  mensaje: string;
+}
+
+// ─────────────────────────────────────────────
+// FORMULARIOS (lo que se envía en POST y PUT)
+// Los nombres coinciden con los setters de los *FormDTO del backend.
+// ─────────────────────────────────────────────
+
+/** Opción de un <select>: ciudad, raza, servicio, medicamento, especialidad o empleado. */
+export interface OpcionCatalogo {
+  id: number;
+  nombre: string;
+  detalle?: string;
+  /** Precio del servicio o del medicamento, cuando aplica. */
+  valor?: number;
+}
+
+export interface TelefonoForm {
+  telefono: string;
+  tipo: string;
+}
+
+export interface ClienteForm {
+  tipoDocumento: string;
+  numDocumento: string;
+  nombres: string;
+  apellidos: string;
+  email: string | null;
+  direccion: string;
+  idCiudad: number | null;
+  telefonos: TelefonoForm[];
+}
+
+export interface MascotaForm {
+  nombre: string;
+  fechaNacimiento: string | null;
+  sexo: string;
+  color: string | null;
+  microchip: string | null;
+  esterilizado: string;
+  idRaza: number | null;
+  idCliente: number | null;
+  /** Solo lectura: lo envía el backend al editar. */
+  estado?: string;
+  // historia clínica (relación 1:1)
+  grupoSanguineo: string | null;
+  alergias: string | null;
+  enfermedadesCronicas: string | null;
+  observaciones: string | null;
+}
+
+export interface CitaForm {
+  idMascota: number | null;
+  idServicio: number | null;
+  idSede: number | null;
+  idVeterinario: number | null;
+  /** Formato aaaa-mm-ddThh:mm (input datetime-local). */
+  fechaHora: string;
+  motivo: string | null;
+}
+
+export interface LineaFacturaForm {
+  idServicio: number | null;
+  idMedicamento: number | null;
+  cantidad: number;
+  descuentoPct: number;
+}
+
+export interface FacturaForm {
+  idCliente: number | null;
+  idSede: number | null;
+  idEmpleado: number | null;
+  metodoPago: string;
+  estado: string;
+  lineas: LineaFacturaForm[];
+}
+
+export interface InventarioForm {
+  idSede: number | null;
+  idMedicamento: number | null;
+  stockActual: number | null;
+  stockMinimo: number | null;
+}
+
+export interface EmpleadoForm {
+  tipoDocumento: string;
+  numDocumento: string;
+  nombres: string;
+  apellidos: string;
+  fechaNacimiento: string;
+  telefono: string;
+  email: string;
+  tipoEmpleado: string;
+  fechaIngreso: string;
+  salario: number | null;
+  idSede: number | null;
+  estado?: string;
+  // VET
+  tarjetaProfesional: string | null;
+  universidad: string | null;
+  anioGraduacion: number | null;
+  especialidades: number[];
+  // AUX
+  area: string | null;
+  certificacion: string | null;
+  turno: string | null;
+}
+
+/** Respuesta de un POST: el id que generó AUTO_INCREMENT. */
+export interface IdRespuesta {
+  id: number;
+}
+
+/** Respuesta con un mensaje para mostrar (por ejemplo al cambiar el estado de una mascota). */
+export interface Mensaje {
   mensaje: string;
 }

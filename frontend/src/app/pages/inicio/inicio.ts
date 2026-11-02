@@ -29,7 +29,7 @@ export class Inicio implements OnInit {
   /** Tablas que se muestran como tarjetas; el número sale de los conteos de la API. */
   indicadores: Indicador[] = [
     { tabla: 'CLIENTE',  texto: 'Clientes',  icono: 'bi-people-fill',       ruta: '/clientes' },
-    { tabla: 'MASCOTA',  texto: 'Mascotas',  icono: 'bi-heart-pulse-fill',  ruta: '/clientes' },
+    { tabla: 'MASCOTA',  texto: 'Mascotas',  icono: 'bi-heart-pulse-fill',  ruta: '/mascotas' },
     { tabla: 'CITA',     texto: 'Citas',     icono: 'bi-calendar-week-fill', ruta: '/agenda' },
     { tabla: 'FACTURA',  texto: 'Facturas',  icono: 'bi-receipt',           ruta: '/facturas' },
     { tabla: 'EMPLEADO', texto: 'Empleados', icono: 'bi-person-badge-fill', ruta: '/personal' }

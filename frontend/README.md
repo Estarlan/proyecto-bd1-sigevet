@@ -1,7 +1,7 @@
 # SIGEVET · Frontend en Angular
 
-Interfaz web de SIGEVET en **Angular 21** con **Bootstrap 5** y **Bootstrap Icons**. Solo muestra datos: los pide a
-la API REST de Spring Boot (`/api/*`) y nunca se conecta a MySQL. El SQL sigue escrito a mano en los DAO del backend.
+Interfaz web de SIGEVET en **Angular 21** con **Bootstrap 5** y **Bootstrap Icons**. Consulta y modifica datos a través de la
+API REST de Spring Boot (`/api/*`) y nunca se conecta a MySQL. El SQL sigue escrito a mano en los DAO del backend.
 
 ## Desarrollo
 

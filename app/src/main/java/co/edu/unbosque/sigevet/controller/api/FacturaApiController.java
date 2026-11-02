@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import co.edu.unbosque.sigevet.dto.EstadoDTO;
+import co.edu.unbosque.sigevet.dto.FacturaFormDTO;
+import co.edu.unbosque.sigevet.dto.IdDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * API REST de facturas: lista con filtros y detalle de una factura con sus líneas.
@@ -61,5 +69,19 @@ public class FacturaApiController {
     @GetMapping("/{id}")
     public FacturaDetalleDTO detalle(@PathVariable long id) {
         return facturaService.detalle(id);
+    }
+
+    /** {@code POST /api/facturas}: crea la factura con sus líneas en una transacción. Responde 201 con el id. */
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public IdDTO crear(@RequestBody FacturaFormDTO form) {
+        return new IdDTO(facturaService.crear(form));
+    }
+
+    /** {@code PATCH /api/facturas/{id}/estado}: PAGADA (registrar pago) o ANULADA. Responde 204. */
+    @PatchMapping("/{id}/estado")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cambiarEstado(@PathVariable long id, @RequestBody EstadoDTO cuerpo) {
+        facturaService.cambiarEstado(id, cuerpo.getEstado());
     }
 }

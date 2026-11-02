@@ -6,7 +6,7 @@ import { EjercicioDetalle } from '../../models/models';
 
 /**
  * Un ejercicio de álgebra relacional: enunciado, consulta SQL equivalente y el resultado de ejecutarla en MySQL
- * con el usuario de solo lectura vet_app. La tabla de resultados se arma con las columnas que devuelve la consulta.
+ * con el usuario de la aplicación vet_app (el lector solo acepta consultas SELECT). La tabla de resultados se arma con las columnas que devuelve la consulta.
  */
 @Component({
   selector: 'app-ejercicio',

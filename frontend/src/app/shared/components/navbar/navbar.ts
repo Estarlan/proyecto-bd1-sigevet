@@ -21,6 +21,7 @@ export class NavbarComponent {
   opciones: OpcionMenu[] = [
     { texto: 'Inicio',             ruta: '/',           icono: 'bi-house' },
     { texto: 'Clientes',           ruta: '/clientes',   icono: 'bi-people' },
+    { texto: 'Mascotas',           ruta: '/mascotas',   icono: 'bi-heart-pulse' },
     { texto: 'Agenda',             ruta: '/agenda',     icono: 'bi-calendar-week' },
     { texto: 'Inventario',         ruta: '/inventario', icono: 'bi-capsule' },
     { texto: 'Facturas',           ruta: '/facturas',   icono: 'bi-receipt' },
