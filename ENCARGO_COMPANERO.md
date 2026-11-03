@@ -1,4 +1,6 @@
-# SIGEVET — encargo para el equipo (para usar con Claude Code)
+<!-- Created: [unknown] -->
+<!-- Updated: 21:41 02-Nov-2026 -->
+# SIGEVET — encargo para el equipo
 
 Proyecto final de Bases de Datos 1, Universidad El Bosque. Equipo: Juan David Polo Herrera, Sebastián Castellanos
 Parra, Juan Miguel Ramos y Sergio. Este archivo reparte lo que falta para cerrar el proyecto. Juan David solo
@@ -6,7 +8,7 @@ mantiene y verifica el portátil Fedora que hace de servidor; el resto de pendie
 
 > **Avisos importantes (cambios de último momento):**
 > - La lista de pendientes con casillas está en `TODO.md`. Úsala para marcar lo que vayas terminando.
-> - Nadie edita nombres de integrantes, portadas ni firmas. Eso se hace todo junto al final, con Claude, para que no
+> - Nadie edita nombres de integrantes, portadas ni firmas. Eso se hace todo junto al final para que no
 >   haya choques en los Word. Solo manda tu nombre completo a Juan David.
 > - La presentación `.pptx` la edita solo Sebastián. Juan Miguel y Sergio le mandan observaciones.
 > - Sergio es el cuarto integrante; donde el texto diga "los tres", son los cuatro.
@@ -16,7 +18,6 @@ mantiene y verifica el portátil Fedora que hace de servidor; el resto de pendie
 ```bash
 git clone https://github.com/Estarlan/proyecto-bd1-sigevet.git
 cd proyecto-bd1-sigevet
-claude
 ```
 
 - Juan David te agrega como colaborador en GitHub (Settings → Collaborators). Acepta la invitación que llega al correo.
@@ -73,7 +74,7 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 
 ### Juan Miguel — servidor y aplicación
 1. **Nombre completo:** mándaselo a Juan David, tal como aparece en tu cédula. No edites las portadas ni las tablas
-   de firmas: Juan David y Claude cambian tu nombre y agregan a Sergio en los 24 Word de una sola vez, al final.
+   de firmas: Juan David cambia tu nombre y agrega a Sergio en los 24 Word de una sola vez, al final.
 2. **Historial de commits:** `documentos/fase2/07_Repositorio_GitHub.docx` tiene una tabla. Compárala con
    `git log --reverse --format='%h | %an | %s'` y agrega las filas que falten (Spring Boot, diagramas nuevos en
    draw.io, documentos más compactos, revisión completa, presentación nueva y los commits de este reparto). La tabla
@@ -103,15 +104,15 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
    carpeta privada `docs/` de Juan David, pídeselo) y entrega `Entrega_Final_SIGEVET.zip`.
 
 ### Juan David — solo el servidor
-- Verifica que el portátil Fedora funcione como servidor (ver el prompt de la sección 6) y le entrega
+- Verifica que el portátil Fedora funcione como servidor y le entrega
   `INFORME_SERVIDOR.md` a Sergio.
 - Aparece en el video y firma las actas (ver abajo).
 
 ### Los cuatro
 - **Firmas:** firmar a mano o con firma digital la columna "Firma" de las tablas de
   `documentos/fase1/02_Documento_de_Supuestos.docx`, `documentos/transversales/01_Acta_de_Constitucion.docx` y
-  `documentos/transversales/06_Acta_de_Cierre.docx`. Claude no firma por nadie. Sergio se agrega a la lista de
-  integrantes y a las tablas de firmas en la integración final (Juan David con Claude); no lo hagas tú.
+  `documentos/transversales/06_Acta_de_Cierre.docx`. Sergio se agrega a la lista de
+  integrantes y a las tablas de firmas en la integración final (Juan David); no lo hagas tú.
 - **Video (máximo 15 min):** el guion por persona, con los comandos y el texto de cada bloque, está en
   `GUION_VIDEO.md` (raíz del repositorio). El Word `documentos/fase2/08_Guion_Video.docx` es la versión formal y
   todavía tiene el reparto antiguo. Todos hablan,
@@ -130,8 +131,8 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
 | 8 | 12:30–13:30 | Todos | GitHub: estructura y commits de cada integrante; lecciones aprendidas |
 
   El guion del Word todavía tiene el reparto de tres personas: hay que actualizarlo con este (lo hace Sergio junto
-  con los datos del servidor). Claude Code puede escribir el texto de cada bloque, preparar el paso a paso de
-  comandos y ventanas, y medir tiempos; no puede grabar. El video se sube donde pida el curso y su enlace va en el
+  con los datos del servidor). Preparen el texto de cada bloque, el paso a paso de comandos y ventanas,
+  y midan los tiempos. El video se sube donde pida el curso y su enlace va en el
   documento que lo pida.
 - **Presentación** (`documentos/final/Presentacion_Sustentacion_SIGEVET.pptx`, 15 diapositivas: 1 portada, 2 problema,
   3 alcance, 4 Chen, 5 EER, 6 Barker, 7 Crow's Foot, 8 relacional, 9 normalización, 10 MySQL, 11 infraestructura,
@@ -143,13 +144,6 @@ Cifras del proyecto (están en los documentos, no las cambies): 22 tablas, 138 c
   por eso los cambios tienen que estar ahí).
 - Entrega final: `Entrega_Final_SIGEVET.zip` (documentos, presentación y repositorio).
 
-## 6. Prompt para pegar en Claude Code (cada uno)
+## 6. Recordatorio para cada integrante
 
-```
-Lee ENCARGO_COMPANERO.md en la raíz de este repositorio. Yo soy [TU NOMBRE]. Haz solo las tareas que el archivo
-asigna a mi nombre, en orden, más lo que dice para "Los cuatro". Antes de editar cualquier Word, dime qué vas a
-cambiar. Si necesitas un dato que no tienes (por ejemplo un nombre o una clave), pídemelo; no lo
-adivines. Después de cada edición de un .docx compruébalo con pandoc. Trabaja en la rama [tunombre]-pendientes,
-haz commits pequeños en español con el formato tipo: descripción y no los subas hasta que yo te diga. Al final
-dame un resumen en español sencillo y una lista corta de lo que me toca a mí.
-```
+Revisa las tareas asignadas a tu nombre y las que corresponden a los cuatro. Antes de editar un Word, coordina el cambio y pide los datos que falten. Comprueba cada archivo `.docx` con pandoc. Trabaja en tu propia rama, haz commits pequeños en español y coordina con el equipo antes de subirlos.
