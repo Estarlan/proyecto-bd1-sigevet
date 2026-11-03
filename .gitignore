@@ -1,3 +1,5 @@
+# Created: [unknown]
+# Updated: 21:41 02-Nov-2026
 # Java / Maven
 app/target/
 *.class
@@ -19,4 +21,3 @@ entregables/
 # Sistema y editores
 .DS_Store
 ~$*
-.claude/
