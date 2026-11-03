@@ -3,25 +3,26 @@
 <!-- Updated: 12:40 02-Nov-2026 -->
 <!-- Updated: 15:43 02-Nov-2026 -->
 <!-- Updated: 18:10 02-Nov-2026 -->
+<!-- Updated: 19:45 02-Nov-2026 -->
 # SIGEVET — guion del video por persona
 
 > **Versión para grabar la voz:** el equipo tiene un guion por persona con los tiempos exactos de cada clip.
 > Ahí el bloque 6 se muestra en la aplicación, no en Workbench.
 
-Video de demostración de máximo 15 minutos (este guion dura unos 14:15). Todos hablan, con cámara y audio. Cada persona
+Video de demostración de máximo 15 minutos (dura unos 12:30). Todos hablan, con cámara y audio. Cada persona
 lee solo su parte; el texto está pensado para decirse con sus palabras, no para leerlo de corrido. Los tiempos son
 aproximados: ensayen y midan.
 
 | # | Tiempo | Quién | Qué se muestra |
 |---|---|---|---|
 | 1 | 0:00–1:00 | Los cuatro | Cámaras y portada de la presentación |
-| 2 | 1:00–3:00 | Sebastián | Chen y EER con atributos |
-| 3 | 3:00–5:00 | Sebastián | Barker, Crow's Foot, relacional, normalización |
-| 4 | 5:00–6:30 | Juan David | Servidor Fedora (su portátil) y VM Oracle Linux 9 |
-| 5 | 6:30–8:20 | Sergio | Cargar la base y verificarla |
-| 6 | 8:20–10:20 | Sergio y Juan David | Consultas de álgebra en la aplicación (Sergio 21 y 41; Juan David 46 y 26) |
-| 7 | 10:20–13:00 | Juan Miguel | Aplicación web |
-| 8 | 13:00–14:00 | Los cuatro | GitHub y cierre |
+| 2 | 1:00–2:15 | Sebastián | Chen, entidad débil, EER y supuestos |
+| 3 | 2:15–3:10 | Sebastián | Barker, Crow's Foot, relacional, normalización |
+| 4 | 3:10–4:40 | Juan David | Servidor Fedora (su portátil) y VM Oracle Linux 9 |
+| 5 | 4:40–6:35 | Sergio | Cargar la base y verificarla |
+| 6 | 6:35–8:35 | Sergio y Juan David | Consultas de álgebra en la aplicación (Sergio 21 y 41; Juan David 46 y 26) |
+| 7 | 8:35–11:20 | Juan Miguel | Aplicación web |
+| 8 | 11:20–12:20 | Juan David, Juan Miguel y Sergio | GitHub y cierre |
 
 Antes de grabar: resolución 1920×1080, letra de terminal y editor en 16 pt o más, cámara visible de quien habla,
 las ventanas ya abiertas en el orden del guion. Exportar en MP4. Si se pasan de 14 minutos, recorten el bloque 6 a
