@@ -1,3 +1,5 @@
+<!-- Created: [unknown] -->
+<!-- Updated: 21:41 02-Nov-2026 -->
 # SIGEVET — lista de pendientes (TO-DO)
 
 Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO.md`; textos del video en
@@ -9,7 +11,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - **Un Word o la presentación los edita una sola persona.** Los `.docx` y el `.pptx` no se pueden combinar si dos
   personas los cambian a la vez.
 - **Nadie cambia nombres ni portadas.** Los nombres de los integrantes (portada de los 24 Word, firmas, diapositivas 1
-  y 15, README) se cambian todos juntos en la etapa 3, con Claude, para que no haya choques. Solo manden los datos
+  y 15, README) se cambian todos juntos en la etapa 3 para que no haya choques. Solo manden los datos
   (ver "Datos que faltan").
 - **La presentación (`.pptx`) la edita solo Sebastián.** Juan Miguel y Sergio le mandan sus observaciones.
 - Nunca subir claves ni `vm/claves.env`. Nunca force push.
@@ -18,7 +20,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 
 - [x] **Juan Miguel:** Juan Miguel Ramos Sevilla, C.C. 1025528586
 - [x] **Sergio:** Sergio Alejandro Parra Rivera, C.C. 1031653350 (rol: carga y verificación de la base e integración final)
-- [x] **Diagrama de clases:** hecho por Claude (`documentos/fase1/diagramas_drawio/28_Clases.drawio` y PNG); Sebastián lo revisa
+- [x] **Diagrama de clases:** terminado (`documentos/fase1/diagramas_drawio/28_Clases.drawio` y PNG); Sebastián lo revisa
 
 ## Etapa 1 — Cada uno hace lo suyo (en paralelo)
 
@@ -66,7 +68,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 - [ ] Sergio une todas las ramas a `main` (sin force push) y revisa que no se hayan roto los Word
       (`pandoc archivo.docx -t plain`)
 
-## Etapa 3 — Integración final (Juan David con Claude)
+## Etapa 3 — Integración final (Juan David)
 
 - [ ] Cambiar el nombre de Juan Miguel y agregar a Sergio en la portada de los 24 Word, con script
 - [ ] Agregar a Sergio en las tablas de firmas (Supuestos, Acta de Constitución, Acta de Cierre)
@@ -86,7 +88,7 @@ Marca `[x]` cuando algo esté hecho. Detalle de cada tarea en `ENCARGO_COMPANERO
 ## Para preguntar y verificar (Juan David)
 
 - [ ] Subir los commits a GitHub: `git push origin HEAD:main` desde la carpeta del proyecto
-- [ ] Responder a Sergio las preguntas de su Claude (la VM es Lima con Oracle Linux 9 sobre Fedora; los datos del servidor)
+- [ ] Responder a Sergio sus preguntas (la VM es Lima con Oracle Linux 9 sobre Fedora; los datos del servidor)
 - [ ] En el portátil: correr el script `preparar_servidor_fedora.sh --aplicar` (ver arriba)
 - [ ] Comprobar que los compañeros ya hicieron `git pull` y trabajan en su propia rama
 - [ ] Revisar que nadie haya editado nombres, portadas ni firmas antes de la integración final
