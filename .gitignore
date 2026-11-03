@@ -1,3 +1,5 @@
+# Created: [unknown]
+# Updated: 21:41 02-Nov-2026
 # Java / Maven
 app/target/
 *.class
@@ -19,7 +21,6 @@ entregables/
 # Sistema y editores
 .DS_Store
 ~$*
-.claude/
 
 # Informe del servidor (se manda por privado, no va al repositorio)
 INFORME_SERVIDOR.md
