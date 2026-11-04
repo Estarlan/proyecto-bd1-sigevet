@@ -9,27 +9,27 @@ import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app';
 import { sesionInterceptor } from './guards/sesion.interceptor';
 
-import { NavbarComponent } from './components/navbar-component/navbar-component';
-import { FooterComponent } from './components/footer-component/footer-component';
-import { LoginComponent } from './components/login-component/login-component';
-import { InicioComponent } from './components/inicio-component/inicio-component';
-import { ClientesComponent } from './components/clientes-component/clientes-component';
-import { ClienteFormComponent } from './components/cliente-form-component/cliente-form-component';
-import { ClienteDetalleComponent } from './components/cliente-detalle-component/cliente-detalle-component';
-import { MascotasComponent } from './components/mascotas-component/mascotas-component';
-import { MascotaFormComponent } from './components/mascota-form-component/mascota-form-component';
-import { MascotaDetalleComponent } from './components/mascota-detalle-component/mascota-detalle-component';
-import { AgendaComponent } from './components/agenda-component/agenda-component';
-import { CitaFormComponent } from './components/cita-form-component/cita-form-component';
-import { InventarioComponent } from './components/inventario-component/inventario-component';
-import { FacturasComponent } from './components/facturas-component/facturas-component';
-import { FacturaFormComponent } from './components/factura-form-component/factura-form-component';
-import { FacturaDetalleComponent } from './components/factura-detalle-component/factura-detalle-component';
-import { PersonalComponent } from './components/personal-component/personal-component';
-import { EmpleadoFormComponent } from './components/empleado-form-component/empleado-form-component';
-import { AlgebraComponent } from './components/algebra-component/algebra-component';
-import { EjercicioComponent } from './components/ejercicio-component/ejercicio-component';
-import { NoEncontradoComponent } from './components/no-encontrado-component/no-encontrado-component';
+import { Navbarcomponent } from './components/navbarcomponent/navbarcomponent';
+import { Footercomponent } from './components/footercomponent/footercomponent';
+import { Logincomponent } from './components/logincomponent/logincomponent';
+import { Iniciocomponent } from './components/iniciocomponent/iniciocomponent';
+import { Clientescomponent } from './components/clientescomponent/clientescomponent';
+import { Clienteformcomponent } from './components/clienteformcomponent/clienteformcomponent';
+import { Clientedetallecomponent } from './components/clientedetallecomponent/clientedetallecomponent';
+import { Mascotascomponent } from './components/mascotascomponent/mascotascomponent';
+import { Mascotaformcomponent } from './components/mascotaformcomponent/mascotaformcomponent';
+import { Mascotadetallecomponent } from './components/mascotadetallecomponent/mascotadetallecomponent';
+import { Agendacomponent } from './components/agendacomponent/agendacomponent';
+import { Citaformcomponent } from './components/citaformcomponent/citaformcomponent';
+import { Inventariocomponent } from './components/inventariocomponent/inventariocomponent';
+import { Facturascomponent } from './components/facturascomponent/facturascomponent';
+import { Facturaformcomponent } from './components/facturaformcomponent/facturaformcomponent';
+import { Facturadetallecomponent } from './components/facturadetallecomponent/facturadetallecomponent';
+import { Personalcomponent } from './components/personalcomponent/personalcomponent';
+import { Empleadoformcomponent } from './components/empleadoformcomponent/empleadoformcomponent';
+import { Algebracomponent } from './components/algebracomponent/algebracomponent';
+import { Ejerciciocomponent } from './components/ejerciciocomponent/ejerciciocomponent';
+import { Noencontradocomponent } from './components/noencontradocomponent/noencontradocomponent';
 
 // Formato colombiano para los pipes de números y moneda: $ 364.000
 registerLocaleData(localeEsCo);
@@ -41,27 +41,27 @@ registerLocaleData(localeEsCo);
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    LoginComponent,
-    InicioComponent,
-    ClientesComponent,
-    ClienteFormComponent,
-    ClienteDetalleComponent,
-    MascotasComponent,
-    MascotaFormComponent,
-    MascotaDetalleComponent,
-    AgendaComponent,
-    CitaFormComponent,
-    InventarioComponent,
-    FacturasComponent,
-    FacturaFormComponent,
-    FacturaDetalleComponent,
-    PersonalComponent,
-    EmpleadoFormComponent,
-    AlgebraComponent,
-    EjercicioComponent,
-    NoEncontradoComponent
+    Navbarcomponent,
+    Footercomponent,
+    Logincomponent,
+    Iniciocomponent,
+    Clientescomponent,
+    Clienteformcomponent,
+    Clientedetallecomponent,
+    Mascotascomponent,
+    Mascotaformcomponent,
+    Mascotadetallecomponent,
+    Agendacomponent,
+    Citaformcomponent,
+    Inventariocomponent,
+    Facturascomponent,
+    Facturaformcomponent,
+    Facturadetallecomponent,
+    Personalcomponent,
+    Empleadoformcomponent,
+    Algebracomponent,
+    Ejerciciocomponent,
+    Noencontradocomponent
   ],
   imports: [
     BrowserModule,      // también trae CommonModule: pipes currency y number
