@@ -27,12 +27,12 @@ src/app/
   services/api.service.ts   un servicio por recurso (HttpClient → Observable)
   shared/validaciones.ts    validaciones de formato de los formularios
   shared/ultima-peticion.ts cancela la consulta anterior cuando llega una nueva
-  components/                una carpeta por componente; cada página es un componente con el nombre <nombre>-component
-  components/navbar-component menú superior
-  components/footer-component pie de página
-  components/login-component  inicio de sesión del personal
+  components/                una carpeta por componente; cada página es un componente con el nombre <nombre>component
+  components/navbarcomponent menú superior
+  components/footercomponent pie de página
+  components/logincomponent  inicio de sesión del personal
   guards/                   sesionGuard (exige sesión) e interceptor que lleva a /login con un 401
-  app.html                  navbar-component, router-outlet y footer-component, en ese orden
+  app.html                  navbarcomponent, router-outlet y footercomponent, en ese orden
   app-module.ts             módulo raíz (NgModule): declara todos los componentes, HttpClient e interceptor
   app-routing-module.ts     rutas de la aplicación (RouterModule.forRoot) con sesionGuard
 ```
