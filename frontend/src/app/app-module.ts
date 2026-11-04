@@ -9,26 +9,27 @@ import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app';
 import { sesionInterceptor } from './guards/sesion.interceptor';
 
-import { NavbarComponent } from './shared/components/navbar/navbar';
-import { Login } from './pages/login/login';
-import { Inicio } from './pages/inicio/inicio';
-import { Clientes } from './pages/clientes/clientes';
-import { ClienteFormPage } from './pages/cliente-form/cliente-form';
-import { ClienteDetallePage } from './pages/cliente-detalle/cliente-detalle';
-import { Mascotas } from './pages/mascotas/mascotas';
-import { MascotaFormPage } from './pages/mascota-form/mascota-form';
-import { MascotaDetallePage } from './pages/mascota-detalle/mascota-detalle';
-import { Agenda } from './pages/agenda/agenda';
-import { CitaFormPage } from './pages/cita-form/cita-form';
-import { Inventario } from './pages/inventario/inventario';
-import { Facturas } from './pages/facturas/facturas';
-import { FacturaFormPage } from './pages/factura-form/factura-form';
-import { FacturaDetallePage } from './pages/factura-detalle/factura-detalle';
-import { Personal } from './pages/personal/personal';
-import { EmpleadoFormPage } from './pages/empleado-form/empleado-form';
-import { Algebra } from './pages/algebra/algebra';
-import { Ejercicio } from './pages/ejercicio/ejercicio';
-import { NoEncontrado } from './pages/no-encontrado/no-encontrado';
+import { NavbarComponent } from './components/navbar-component/navbar-component';
+import { FooterComponent } from './components/footer-component/footer-component';
+import { LoginComponent } from './components/login-component/login-component';
+import { InicioComponent } from './components/inicio-component/inicio-component';
+import { ClientesComponent } from './components/clientes-component/clientes-component';
+import { ClienteFormComponent } from './components/cliente-form-component/cliente-form-component';
+import { ClienteDetalleComponent } from './components/cliente-detalle-component/cliente-detalle-component';
+import { MascotasComponent } from './components/mascotas-component/mascotas-component';
+import { MascotaFormComponent } from './components/mascota-form-component/mascota-form-component';
+import { MascotaDetalleComponent } from './components/mascota-detalle-component/mascota-detalle-component';
+import { AgendaComponent } from './components/agenda-component/agenda-component';
+import { CitaFormComponent } from './components/cita-form-component/cita-form-component';
+import { InventarioComponent } from './components/inventario-component/inventario-component';
+import { FacturasComponent } from './components/facturas-component/facturas-component';
+import { FacturaFormComponent } from './components/factura-form-component/factura-form-component';
+import { FacturaDetalleComponent } from './components/factura-detalle-component/factura-detalle-component';
+import { PersonalComponent } from './components/personal-component/personal-component';
+import { EmpleadoFormComponent } from './components/empleado-form-component/empleado-form-component';
+import { AlgebraComponent } from './components/algebra-component/algebra-component';
+import { EjercicioComponent } from './components/ejercicio-component/ejercicio-component';
+import { NoEncontradoComponent } from './components/no-encontrado-component/no-encontrado-component';
 
 // Formato colombiano para los pipes de números y moneda: $ 364.000
 registerLocaleData(localeEsCo);
@@ -40,26 +41,27 @@ registerLocaleData(localeEsCo);
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    Login,
-    Inicio,
-    Clientes,
-    ClienteFormPage,
-    ClienteDetallePage,
-    Mascotas,
-    MascotaFormPage,
-    MascotaDetallePage,
-    Agenda,
-    CitaFormPage,
-    Inventario,
-    Facturas,
-    FacturaFormPage,
-    FacturaDetallePage,
-    Personal,
-    EmpleadoFormPage,
-    Algebra,
-    Ejercicio,
-    NoEncontrado
+    NavbarComponent,
+    FooterComponent,
+    LoginComponent,
+    InicioComponent,
+    ClientesComponent,
+    ClienteFormComponent,
+    ClienteDetalleComponent,
+    MascotasComponent,
+    MascotaFormComponent,
+    MascotaDetalleComponent,
+    AgendaComponent,
+    CitaFormComponent,
+    InventarioComponent,
+    FacturasComponent,
+    FacturaFormComponent,
+    FacturaDetalleComponent,
+    PersonalComponent,
+    EmpleadoFormComponent,
+    AlgebraComponent,
+    EjercicioComponent,
+    NoEncontradoComponent
   ],
   imports: [
     BrowserModule,      // también trae CommonModule: pipes currency y number

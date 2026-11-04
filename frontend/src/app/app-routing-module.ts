@@ -2,63 +2,63 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { sesionGuard } from './guards/sesion.guard';
 
-import { Login } from './pages/login/login';
-import { Inicio } from './pages/inicio/inicio';
-import { Clientes } from './pages/clientes/clientes';
-import { ClienteFormPage } from './pages/cliente-form/cliente-form';
-import { ClienteDetallePage } from './pages/cliente-detalle/cliente-detalle';
-import { Mascotas } from './pages/mascotas/mascotas';
-import { MascotaFormPage } from './pages/mascota-form/mascota-form';
-import { MascotaDetallePage } from './pages/mascota-detalle/mascota-detalle';
-import { Agenda } from './pages/agenda/agenda';
-import { CitaFormPage } from './pages/cita-form/cita-form';
-import { Inventario } from './pages/inventario/inventario';
-import { Facturas } from './pages/facturas/facturas';
-import { FacturaFormPage } from './pages/factura-form/factura-form';
-import { FacturaDetallePage } from './pages/factura-detalle/factura-detalle';
-import { Personal } from './pages/personal/personal';
-import { EmpleadoFormPage } from './pages/empleado-form/empleado-form';
-import { Algebra } from './pages/algebra/algebra';
-import { Ejercicio } from './pages/ejercicio/ejercicio';
-import { NoEncontrado } from './pages/no-encontrado/no-encontrado';
+import { LoginComponent } from './components/login-component/login-component';
+import { InicioComponent } from './components/inicio-component/inicio-component';
+import { ClientesComponent } from './components/clientes-component/clientes-component';
+import { ClienteFormComponent } from './components/cliente-form-component/cliente-form-component';
+import { ClienteDetalleComponent } from './components/cliente-detalle-component/cliente-detalle-component';
+import { MascotasComponent } from './components/mascotas-component/mascotas-component';
+import { MascotaFormComponent } from './components/mascota-form-component/mascota-form-component';
+import { MascotaDetalleComponent } from './components/mascota-detalle-component/mascota-detalle-component';
+import { AgendaComponent } from './components/agenda-component/agenda-component';
+import { CitaFormComponent } from './components/cita-form-component/cita-form-component';
+import { InventarioComponent } from './components/inventario-component/inventario-component';
+import { FacturasComponent } from './components/facturas-component/facturas-component';
+import { FacturaFormComponent } from './components/factura-form-component/factura-form-component';
+import { FacturaDetalleComponent } from './components/factura-detalle-component/factura-detalle-component';
+import { PersonalComponent } from './components/personal-component/personal-component';
+import { EmpleadoFormComponent } from './components/empleado-form-component/empleado-form-component';
+import { AlgebraComponent } from './components/algebra-component/algebra-component';
+import { EjercicioComponent } from './components/ejercicio-component/ejercicio-component';
+import { NoEncontradoComponent } from './components/no-encontrado-component/no-encontrado-component';
 
 /**
  * Rutas de la aplicación. El inicio de sesión es la única página libre; todas las demás exigen sesión (sesionGuard).
  * Las rutas fijas ('nuevo', 'nueva') van antes de las que tienen parámetro (':id'), y la ruta '**' va al final.
  */
 const routes: Routes = [
-  { path: 'login', component: Login },
+  { path: 'login', component: LoginComponent },
 
-  { path: '', component: Inicio, canActivate: [sesionGuard] },
+  { path: '', component: InicioComponent,         canActivate: [sesionGuard] },
 
-  { path: 'clientes',            component: Clientes,           canActivate: [sesionGuard] },
-  { path: 'clientes/nuevo',      component: ClienteFormPage,    canActivate: [sesionGuard] },
-  { path: 'clientes/:id/editar', component: ClienteFormPage,    canActivate: [sesionGuard] },
-  { path: 'clientes/:id',        component: ClienteDetallePage, canActivate: [sesionGuard] },
+  { path: 'clientes',            component: ClientesComponent,       canActivate: [sesionGuard] },
+  { path: 'clientes/nuevo',      component: ClienteFormComponent,    canActivate: [sesionGuard] },
+  { path: 'clientes/:id/editar', component: ClienteFormComponent,    canActivate: [sesionGuard] },
+  { path: 'clientes/:id',        component: ClienteDetalleComponent, canActivate: [sesionGuard] },
 
-  { path: 'mascotas',            component: Mascotas,           canActivate: [sesionGuard] },
-  { path: 'mascotas/nueva',      component: MascotaFormPage,    canActivate: [sesionGuard] },
-  { path: 'mascotas/:id/editar', component: MascotaFormPage,    canActivate: [sesionGuard] },
-  { path: 'mascotas/:id',        component: MascotaDetallePage, canActivate: [sesionGuard] },
+  { path: 'mascotas',            component: MascotasComponent,       canActivate: [sesionGuard] },
+  { path: 'mascotas/nueva',      component: MascotaFormComponent,    canActivate: [sesionGuard] },
+  { path: 'mascotas/:id/editar', component: MascotaFormComponent,    canActivate: [sesionGuard] },
+  { path: 'mascotas/:id',        component: MascotaDetalleComponent, canActivate: [sesionGuard] },
 
-  { path: 'agenda/nueva',        component: CitaFormPage,       canActivate: [sesionGuard] },
-  { path: 'agenda',              component: Agenda,             canActivate: [sesionGuard] },
+  { path: 'agenda/nueva',        component: CitaFormComponent,       canActivate: [sesionGuard] },
+  { path: 'agenda',              component: AgendaComponent,         canActivate: [sesionGuard] },
 
-  { path: 'inventario',          component: Inventario,         canActivate: [sesionGuard] },
+  { path: 'inventario',          component: InventarioComponent,     canActivate: [sesionGuard] },
 
-  { path: 'facturas',            component: Facturas,           canActivate: [sesionGuard] },
-  { path: 'facturas/nueva',      component: FacturaFormPage,    canActivate: [sesionGuard] },
-  { path: 'facturas/:id',        component: FacturaDetallePage, canActivate: [sesionGuard] },
+  { path: 'facturas',            component: FacturasComponent,       canActivate: [sesionGuard] },
+  { path: 'facturas/nueva',      component: FacturaFormComponent,    canActivate: [sesionGuard] },
+  { path: 'facturas/:id',        component: FacturaDetalleComponent, canActivate: [sesionGuard] },
 
-  { path: 'personal/nuevo',      component: EmpleadoFormPage,   canActivate: [sesionGuard] },
-  { path: 'personal/:id/editar', component: EmpleadoFormPage,   canActivate: [sesionGuard] },
-  { path: 'personal',            component: Personal,           canActivate: [sesionGuard] },
+  { path: 'personal/nuevo',      component: EmpleadoFormComponent,   canActivate: [sesionGuard] },
+  { path: 'personal/:id/editar', component: EmpleadoFormComponent,   canActivate: [sesionGuard] },
+  { path: 'personal',            component: PersonalComponent,       canActivate: [sesionGuard] },
 
-  { path: 'algebra',             component: Algebra,            canActivate: [sesionGuard] },
-  { path: 'algebra/:numero',     component: Ejercicio,          canActivate: [sesionGuard] },
+  { path: 'algebra',             component: AlgebraComponent,        canActivate: [sesionGuard] },
+  { path: 'algebra/:numero',     component: EjercicioComponent,      canActivate: [sesionGuard] },
 
   // Cualquier otra dirección
-  { path: '**',                  component: NoEncontrado,       canActivate: [sesionGuard] }
+  { path: '**',                  component: NoEncontradoComponent,   canActivate: [sesionGuard] }
 ];
 
 @NgModule({
