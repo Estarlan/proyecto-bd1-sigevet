@@ -41,7 +41,7 @@ registerLocaleData(localeEsCo);
 @NgModule({
   declarations: [
     AppComponent,
-    Navbarcomponent,
+    Navbarcomponent,
     Footercomponent,
     Logincomponent,
     Iniciocomponent,
