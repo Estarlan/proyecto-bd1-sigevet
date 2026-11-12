@@ -15,7 +15,6 @@ Scripts que llevan el modelo lógico de SIGEVET (Red de Clínicas Veterinarias *
 | `01_ddl/04_programas.sql` | Funciones `FN_EDAD_MASCOTA` y `FN_TOTAL_FACTURA`, 3 procedimientos y 9 disparadores con las reglas de negocio (RN-08, RN-09, consulta solo de citas atendidas). |
 | `01_ddl/05_permisos_app.sql` | Rol `rol_sigevet_escritura`: `vet_app` puede escribir solo en las tablas que modifica la aplicación (clientes, mascotas, citas, facturas, inventario y personal), sin `DROP`, `ALTER` ni acceso a los catálogos. Se ejecuta **como root** después de crear las tablas. |
 | `02_dml/01_…sql` a `23_…sql` | **Inserción de registros:** 1.091 registros de prueba, un archivo por tabla en orden de dependencias. |
-| `03_varios/01_consultas_algebra_relacional.sql` | **Scripts varios:** las 55 consultas SQL equivalentes a los ejercicios de álgebra relacional. |
 | `03_varios/02_verificacion.sql` | Conteo de objetos, restricciones y registros, y prueba de que las reglas rechazan datos inválidos. |
 | `03_varios/03_reiniciar_base.sql` | Borra la base `sigevet` y la crea vacía para reinstalar desde cero. |
 | `instalar_esquema.sql` | Script maestro: ejecuta todo en el orden correcto y termina con la verificación. |

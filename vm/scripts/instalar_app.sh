@@ -41,8 +41,7 @@ echo "== 4/6 Compilando la API y armando el jar con el frontend (la primera vez 
 cd /opt/sigevet/fuente/app
 sh ./mvnw -q package
 cp target/sigevet.jar /opt/sigevet/sigevet.jar
-cp "$RAIZ/database/03_varios/01_consultas_algebra_relacional.sql" /opt/sigevet/algebra.sql
-chmod 644 /opt/sigevet/sigevet.jar /opt/sigevet/algebra.sql
+chmod 644 /opt/sigevet/sigevet.jar
 
 echo "== 5/6 Servicio sigevet-web (Spring Boot)"
 umask 077
@@ -50,7 +49,6 @@ cat > /opt/sigevet/app.env <<FIN
 SIGEVET_DB_URL=jdbc:mysql://localhost:3306/sigevet
 SIGEVET_DB_USER=vet_app
 SIGEVET_DB_PASSWORD=$VET_APP_PWD
-SIGEVET_ALGEBRA=/opt/sigevet/algebra.sql
 FIN
 chmod 600 /opt/sigevet/app.env
 chown root:root /opt/sigevet/app.env

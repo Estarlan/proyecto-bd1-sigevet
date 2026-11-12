@@ -32,7 +32,6 @@ documentos/    documentos de la Fase 1, la Fase 2 y los transversales, los model
   EMPLEADO en VETERINARIO y AUXILIAR.
 - **Modelo físico:** 22 tablas en 3FN, 113 restricciones con nombre, 6 vistas, 2 funciones, 3 procedimientos,
   9 disparadores y 1.091 registros de prueba.
-- **Álgebra relacional:** 55 ejercicios. Los probamos en MySQL y dan el mismo resultado que en la Fase 1.
 
 ## Modelos editables en Draw.io
 

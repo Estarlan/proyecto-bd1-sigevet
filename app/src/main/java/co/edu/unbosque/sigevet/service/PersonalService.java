@@ -122,8 +122,8 @@ public class PersonalService {
      *
      * @param form datos del formulario.
      * @param anioGuardado año de graduación que ya tiene el veterinario en la base (null al crear). Si no cambia, no
-     *                     se le exige la regla de los 18 años: algunos datos de prueba no la cumplen y el ejercicio 15
-     *                     de álgebra depende de ellos, así que se pueden editar sin tocar ese año.
+     *                     se le exige la regla de los 18 años: algunos datos de prueba no la cumplen, así que se
+     *                     pueden editar sin tocar ese año.
      */
     private void validar(EmpleadoFormDTO form, Integer anioGuardado) {
         form.setTipoDocumento(Validador.unoDe(form.getTipoDocumento(), "tipo de documento", "CC", "CE", "PA", "PPT"));

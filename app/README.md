@@ -36,7 +36,6 @@ cargada y los permisos de `vet_app` (ver `database/README.md`).
 | `SIGEVET_DB_URL` | `jdbc:mysql://localhost:3306/sigevet` |
 | `SIGEVET_DB_USER` | `vet_app` |
 | `SIGEVET_DB_PASSWORD` | Cadena vacía |
-| `SIGEVET_ALGEBRA` | `../database/03_varios/01_consultas_algebra_relacional.sql` (o `database/...` si se arranca desde la raíz) |
 
 La clave de la base va solo en `SIGEVET_DB_PASSWORD`. Para desarrollo se puede poner en `app/.env`
 (`SIGEVET_DB_PASSWORD=...`), que Spring lee al arrancar y que el `.gitignore` deja fuera de GitHub. `vet_app` lee toda
@@ -61,7 +60,6 @@ Todo el código está en `src/main/java/co/edu/unbosque/sigevet`:
 - `exception`: `RecursoNoEncontradoException` (404), `DatosInvalidosException` (400), `ConflictoDatosException` (409)
   y `ManejadorErroresApi`, que las convierte en JSON `{estado, mensaje}`.
 - `util`: `Validador` (reglas de los formularios), `ErroresSQL` (traduce los errores de MySQL) y `TextoUtil`.
-- `algebra`: lector de los 55 ejercicios agrupados del archivo SQL.
 
 Toda la API, menos `/api/sesion`, exige haber iniciado sesión: `config/FiltroSesion` responde 401 si la sesión HTTP
 no tiene un empleado. El empleado entra con su correo corporativo y su número de documento (`SesionDAO` los busca en
@@ -100,7 +98,6 @@ lista sea de empleados.
 | Facturas | `GET /api/facturas?sede=&estado=`, `GET /api/facturas/{id}` | `POST` (con líneas), `PATCH /{id}/estado` |
 | Inventario | `GET /api/inventario?sede=` | `POST`, `PUT /{idSede}/{idMedicamento}`, `DELETE /{idSede}/{idMedicamento}` |
 | Personal | `GET /api/personal?sede=` | `POST`, `PUT /{id}`, `PATCH /{id}/estado` |
-| Álgebra | `GET /api/algebra`, `GET /api/algebra/{numero}` | — |
 | Catálogos | `GET /api/catalogos/{ciudades, razas, servicios, medicamentos, especialidades, veterinarios, empleados}` | — |
 
 Cada recurso editable tiene además `GET /{id}/formulario`, con los identificadores que necesita el formulario de

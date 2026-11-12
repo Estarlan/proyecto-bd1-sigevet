@@ -18,8 +18,6 @@ import { FacturaFormPage } from './pages/factura-form/factura-form';
 import { FacturaDetallePage } from './pages/factura-detalle/factura-detalle';
 import { Personal } from './pages/personal/personal';
 import { EmpleadoFormPage } from './pages/empleado-form/empleado-form';
-import { Algebra } from './pages/algebra/algebra';
-import { Ejercicio } from './pages/ejercicio/ejercicio';
 import { NoEncontrado } from './pages/no-encontrado/no-encontrado';
 
 /**
@@ -54,8 +52,6 @@ const routes: Routes = [
   { path: 'personal/:id/editar', component: EmpleadoFormPage,   canActivate: [sesionGuard] },
   { path: 'personal',            component: Personal,           canActivate: [sesionGuard] },
 
-  { path: 'algebra',             component: Algebra,            canActivate: [sesionGuard] },
-  { path: 'algebra/:numero',     component: Ejercicio,          canActivate: [sesionGuard] },
 
   // Cualquier otra dirección
   { path: '**',                  component: NoEncontrado,       canActivate: [sesionGuard] }

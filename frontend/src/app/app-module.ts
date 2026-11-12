@@ -26,8 +26,6 @@ import { FacturaFormPage } from './pages/factura-form/factura-form';
 import { FacturaDetallePage } from './pages/factura-detalle/factura-detalle';
 import { Personal } from './pages/personal/personal';
 import { EmpleadoFormPage } from './pages/empleado-form/empleado-form';
-import { Algebra } from './pages/algebra/algebra';
-import { Ejercicio } from './pages/ejercicio/ejercicio';
 import { NoEncontrado } from './pages/no-encontrado/no-encontrado';
 
 // Formato colombiano para los pipes de números y moneda: $ 364.000
@@ -57,8 +55,6 @@ registerLocaleData(localeEsCo);
     FacturaDetallePage,
     Personal,
     EmpleadoFormPage,
-    Algebra,
-    Ejercicio,
     NoEncontrado
   ],
   imports: [

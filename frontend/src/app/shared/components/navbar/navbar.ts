@@ -34,8 +34,7 @@ export class NavbarComponent {
     { texto: 'Agenda',             ruta: '/agenda',     icono: 'bi-calendar-week' },
     { texto: 'Inventario',         ruta: '/inventario', icono: 'bi-capsule' },
     { texto: 'Facturas',           ruta: '/facturas',   icono: 'bi-receipt' },
-    { texto: 'Personal',           ruta: '/personal',   icono: 'bi-person-badge' },
-    { texto: 'Álgebra relacional', ruta: '/algebra',    icono: 'bi-diagram-3' }
+    { texto: 'Personal',           ruta: '/personal',   icono: 'bi-person-badge' }
   ];
 
   constructor(public sesion: SesionService, private router: Router) {}

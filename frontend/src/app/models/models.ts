@@ -179,21 +179,6 @@ export interface Resumen {
   total?: number;
 }
 
-/** Un ejercicio de álgebra relacional con su enunciado y su consulta SQL. */
-export interface EjercicioAlgebra {
-  numero: number;
-  titulo?: string;
-  grupo?: string;
-  enunciado?: string;
-  sql?: string;
-}
-
-/** Resultado de ejecutar una consulta: nombres de columnas y filas de texto. */
-export interface ResultadoConsulta {
-  columnas: string[];
-  filas: string[][];
-}
-
 // ─────────────────────────────────────────────
 // DTO: respuestas que juntan varios datos
 // ─────────────────────────────────────────────
@@ -225,18 +210,6 @@ export interface Inicio {
   estadosCitas: Resumen[];
   stockBajo: ItemInventario[];
   proximas: Cita[];
-}
-
-/** Respuesta de GET /api/algebra: los grupos y la lista de ejercicios. */
-export interface AlgebraLista {
-  grupos: string[];
-  ejercicios: EjercicioAlgebra[];
-}
-
-/** Respuesta de GET /api/algebra/:numero: el ejercicio y el resultado de ejecutarlo. */
-export interface EjercicioDetalle {
-  ejercicio: EjercicioAlgebra;
-  resultado: ResultadoConsulta;
 }
 
 /** Cuerpo JSON que envía ManejadorErroresApi cuando algo falla (404, 400 o 500). */

@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
-  AlgebraLista, Cita, CitaForm, Cliente, ClienteDetalle, ClienteForm, EjercicioDetalle, Empleado, EmpleadoForm,
+  Cita, CitaForm, Cliente, ClienteDetalle, ClienteForm, Empleado, EmpleadoForm,
   ErrorApi, Factura, FacturaDetalle, FacturaForm, IdRespuesta, Inicio, InventarioForm, ItemInventario, Mascota,
   MascotaDetalle, MascotaForm, Mensaje, OpcionCatalogo, Sede
 } from '../models/models';
@@ -250,24 +250,6 @@ export class SedeService {
   /** GET /api/sedes: todas las sedes, con su director. */
   getAll(): Observable<Sede[]> {
     return this.http.get<Sede[]>(`${API}/sedes`);
-  }
-}
-
-// ─────────────────────────────────────────────
-// ÁLGEBRA RELACIONAL
-// ─────────────────────────────────────────────
-/** Ejercicios de álgebra relacional con su SQL y su resultado. */
-@Injectable({ providedIn: 'root' })
-export class AlgebraService {
-  constructor(private http: HttpClient) {}
-
-  /** GET /api/algebra: los grupos y la lista de los 55 ejercicios. */
-  getAll(): Observable<AlgebraLista> {
-    return this.http.get<AlgebraLista>(`${API}/algebra`);
-  }
-  /** GET /api/algebra/:numero: un ejercicio con el resultado de ejecutarlo en MySQL. */
-  getDetalle(numero: number): Observable<EjercicioDetalle> {
-    return this.http.get<EjercicioDetalle>(`${API}/algebra/${numero}`);
   }
 }
 

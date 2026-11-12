@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * <p>{@code @SpringBootApplication} activa la configuración automática de Spring Boot y el escaneo de todos los
  * paquetes que cuelgan de {@code co.edu.unbosque.sigevet}: {@code controller}, {@code service}, {@code dao},
- * {@code connection}, {@code algebra}, etc. Cada clase marcada con {@code @Controller}, {@code @Service},
+ * {@code connection}, {@code config}, etc. Cada clase marcada con {@code @Controller}, {@code @Service},
  * {@code @Repository} o {@code @Component} se registra sola como un bean.</p>
  *
  * <p>La aplicación sigue el patrón Modelo-Vista-Controlador sin ORM:
