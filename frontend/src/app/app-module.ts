@@ -9,24 +9,25 @@ import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app';
 import { sesionInterceptor } from './guards/sesion.interceptor';
 
-import { NavbarComponent } from './shared/components/navbar/navbar';
-import { Login } from './pages/login/login';
-import { Inicio } from './pages/inicio/inicio';
-import { Clientes } from './pages/clientes/clientes';
-import { ClienteFormPage } from './pages/cliente-form/cliente-form';
-import { ClienteDetallePage } from './pages/cliente-detalle/cliente-detalle';
-import { Mascotas } from './pages/mascotas/mascotas';
-import { MascotaFormPage } from './pages/mascota-form/mascota-form';
-import { MascotaDetallePage } from './pages/mascota-detalle/mascota-detalle';
-import { Agenda } from './pages/agenda/agenda';
-import { CitaFormPage } from './pages/cita-form/cita-form';
-import { Inventario } from './pages/inventario/inventario';
-import { Facturas } from './pages/facturas/facturas';
-import { FacturaFormPage } from './pages/factura-form/factura-form';
-import { FacturaDetallePage } from './pages/factura-detalle/factura-detalle';
-import { Personal } from './pages/personal/personal';
-import { EmpleadoFormPage } from './pages/empleado-form/empleado-form';
-import { NoEncontrado } from './pages/no-encontrado/no-encontrado';
+import { Navbarcomponent } from './components/navbarcomponent/navbarcomponent';
+import { Footercomponent } from './components/footercomponent/footercomponent';
+import { Logincomponent } from './components/logincomponent/logincomponent';
+import { Iniciocomponent } from './components/iniciocomponent/iniciocomponent';
+import { Clientescomponent } from './components/clientescomponent/clientescomponent';
+import { Clienteformcomponent } from './components/clienteformcomponent/clienteformcomponent';
+import { Clientedetallecomponent } from './components/clientedetallecomponent/clientedetallecomponent';
+import { Mascotascomponent } from './components/mascotascomponent/mascotascomponent';
+import { Mascotaformcomponent } from './components/mascotaformcomponent/mascotaformcomponent';
+import { Mascotadetallecomponent } from './components/mascotadetallecomponent/mascotadetallecomponent';
+import { Agendacomponent } from './components/agendacomponent/agendacomponent';
+import { Citaformcomponent } from './components/citaformcomponent/citaformcomponent';
+import { Inventariocomponent } from './components/inventariocomponent/inventariocomponent';
+import { Facturascomponent } from './components/facturascomponent/facturascomponent';
+import { Facturaformcomponent } from './components/facturaformcomponent/facturaformcomponent';
+import { Facturadetallecomponent } from './components/facturadetallecomponent/facturadetallecomponent';
+import { Personalcomponent } from './components/personalcomponent/personalcomponent';
+import { Empleadoformcomponent } from './components/empleadoformcomponent/empleadoformcomponent';
+import { Noencontradocomponent } from './components/noencontradocomponent/noencontradocomponent';
 
 // Formato colombiano para los pipes de números y moneda: $ 364.000
 registerLocaleData(localeEsCo);
@@ -38,24 +39,25 @@ registerLocaleData(localeEsCo);
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    Login,
-    Inicio,
-    Clientes,
-    ClienteFormPage,
-    ClienteDetallePage,
-    Mascotas,
-    MascotaFormPage,
-    MascotaDetallePage,
-    Agenda,
-    CitaFormPage,
-    Inventario,
-    Facturas,
-    FacturaFormPage,
-    FacturaDetallePage,
-    Personal,
-    EmpleadoFormPage,
-    NoEncontrado
+    Navbarcomponent,
+    Footercomponent,
+    Logincomponent,
+    Iniciocomponent,
+    Clientescomponent,
+    Clienteformcomponent,
+    Clientedetallecomponent,
+    Mascotascomponent,
+    Mascotaformcomponent,
+    Mascotadetallecomponent,
+    Agendacomponent,
+    Citaformcomponent,
+    Inventariocomponent,
+    Facturascomponent,
+    Facturaformcomponent,
+    Facturadetallecomponent,
+    Personalcomponent,
+    Empleadoformcomponent,
+    Noencontradocomponent
   ],
   imports: [
     BrowserModule,      // también trae CommonModule: pipes currency y number

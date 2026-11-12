@@ -25,10 +25,14 @@ navegador cree que todo viene del mismo servidor y no hace falta configurar CORS
 src/app/
   models/models.ts          interfaces TypeScript con los mismos campos que el JSON de la API
   services/api.service.ts   un servicio por recurso (HttpClient → Observable)
-  shared/components/navbar  menú superior
-  pages/                    una carpeta por página
+  shared/validaciones.ts    validaciones de formato de los formularios
+  shared/ultima-peticion.ts cancela la consulta anterior cuando llega una nueva
+  components/                una carpeta por componente; cada página es un componente con el nombre <nombre>component
+  components/navbarcomponent menú superior
+  components/footercomponent pie de página
+  components/logincomponent  inicio de sesión del personal
   guards/                   sesionGuard (exige sesión) e interceptor que lleva a /login con un 401
-  pages/login               inicio de sesión del personal
+  app.html                  navbarcomponent, router-outlet y footercomponent, en ese orden
   app-module.ts             módulo raíz (NgModule): declara todos los componentes, HttpClient e interceptor
   app-routing-module.ts     rutas de la aplicación (RouterModule.forRoot) con sesionGuard
 ```
